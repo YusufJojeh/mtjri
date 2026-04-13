@@ -1,0 +1,12 @@
+{
+  "slug": "dashboard-overview",
+  "title": "Aperçu du Tableau de Bord",
+  "category": "getting-started",
+  "description": "Apprenez à naviguer dans le tableau de bord Matjrii et comprenez ses principales fonctionnalités et sections.",
+  "content": "<h1>Aperçu du Tableau de Bord</h1><p>Le tableau de bord Matjrii est votre centre de commande pour gérer toutes vos boutiques, produits, commandes et paramètres. Ce guide vous aidera à comprendre les sections et fonctionnalités principales.</p><h2>Navigation Principale</h2><p>Le tableau de bord est organisé en plusieurs sections principales accessibles depuis la barre latérale:</p><h3>Tableau de Bord</h3><p>La page principale du tableau de bord affiche:</p><ul><li>Métriques clés (commandes, produits, clients, revenus)</li><li>Commandes récentes</li><li>Produits les plus vendus</li><li>Accès rapide aux tâches courantes</li></ul><h3>Gestion des Boutiques</h3><p>Créez et gérez plusieurs boutiques depuis cette section:</p><ul><li>Voir toutes vos boutiques</li><li>Créer de nouvelles boutiques</li><li>Modifier les paramètres de la boutique</li><li>Basculer entre les boutiques</li></ul><h3>Produits</h3><p>Gérez votre catalogue de produits:</p><ul><li>Ajouter de nouveaux produits</li><li>Modifier les produits existants</li><li>Organiser les produits par catégories</li><li>Gérer les stocks</li></ul><h3>Commandes</h3><p>Voir et gérer les commandes clients:</p><ul><li>Traiter les commandes</li><li>Mettre à jour le statut de la commande</li><li>Suivre les expéditions</li><li>Générer des factures</li></ul><h3>Clients</h3><p>Gérez votre base de données clients:</p><ul><li>Voir les profils clients</li><li>Voir l'historique des commandes</li><li>Gérer les comptes clients</li></ul><h2>Sélecteur de Boutique</h2><p>Si vous avez plusieurs boutiques, utilisez le sélecteur de boutique dans l'en-tête pour basculer rapidement entre les boutiques sans vous déconnecter.</p><h2>Menu Utilisateur</h2><p>Cliquez sur votre photo de profil ou votre nom en haut à droite pour accéder à:</p><ul><li>Paramètres du profil</li><li>Paramètres du compte</li><li>Déconnexion</li></ul><h2>Prochaines Étapes</h2><p>Maintenant que vous comprenez le tableau de bord, apprenez comment <a href=\"/docs/creating-store\">créer votre première boutique</a>.</p>",
+  "meta_description": "Apprenez à naviguer dans le tableau de bord Matjrii, comprendre les sections clés et accéder aux fonctionnalités principales.",
+  "order": 3,
+  "updated_at": "2026-01-11",
+  "reading_time": 4
+}
+

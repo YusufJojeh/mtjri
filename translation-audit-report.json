@@ -1,0 +1,228 @@
+{
+    "generated_at": "2025-12-16 11:14:02",
+    "master_locale": "en",
+    "master_key_count": 2505,
+    "locales": {
+        "he": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/he.json",
+            "keyCount": 2492,
+            "missingKeys": {
+                "148": "All-time earnings",
+                "221": "Awaiting approval",
+                "278": "Call Us",
+                "545": "Currently enabled subscription plans",
+                "649": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+                "702": "Email Us",
+                "960": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+                "1259": "Mon-Fri from 8am to 5pm",
+                "1735": "Registered companies",
+                "1952": "Send us an email anytime!",
+                "2034": "Stay Updated with MTJRii",
+                "2277": "Uncategorized",
+                "2371": "Visit Us",
+                "2372": "Visit our office location",
+                "2388": "We're here to help and answer any question you might have. We look forward to hearing from you.",
+                "2403": "Why Choose MTJRii?",
+                "2477": "landing"
+            },
+            "extraKeys": {
+                "645": "Don't just take our word for it. Here's what merchants around the world are saying about StoreGo.",
+                "955": "Get the latest e-commerce tips, StoreGo updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+                "2028": "Stay Updated with StoreGo",
+                "2392": "Why Choose StoreGo?"
+            },
+            "missingCount": 17,
+            "extraCount": 4,
+            "coverage": 99.32
+        },
+        "ar": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/ar.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "da": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/da.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "de": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/de.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "es": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/es.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "et": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/et.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "fa": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/fa.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "fr": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/fr.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "id": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/id.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "it": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/it.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "ja": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/ja.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "nl": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/nl.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "pl": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/pl.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "pt-BR": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/pt-BR.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "pt": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/pt.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "ro": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/ro.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "ru": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/ru.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "th": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/th.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "tr": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/tr.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "zh-CN": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/zh-CN.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "zh-TW": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/zh-TW.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        },
+        "zh": {
+            "file": "C:\\xampp\\htdocs\/resources\/lang\/zh.json",
+            "keyCount": 2505,
+            "missingKeys": [],
+            "extraKeys": [],
+            "missingCount": 0,
+            "extraCount": 0,
+            "coverage": 100
+        }
+    }
+}

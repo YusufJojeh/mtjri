@@ -1,0 +1,12 @@
+{
+  "slug": "dashboard-overview",
+  "title": "Resumen del Panel de Control",
+  "category": "getting-started",
+  "description": "Aprende a navegar por el panel de control de Matjrii y comprende sus características y secciones principales.",
+  "content": "<h1>Resumen del Panel de Control</h1><p>El panel de control de Matjrii es tu centro de comando para gestionar todas tus tiendas, productos, pedidos y configuraciones. Esta guía te ayudará a entender las secciones y características principales.</p><h2>Navegación Principal</h2><p>El panel de control está organizado en varias secciones principales accesibles desde la barra lateral:</p><h3>Panel de Control</h3><p>La página principal del panel muestra:</p><ul><li>Métricas clave (pedidos, productos, clientes, ingresos)</li><li>Pedidos recientes</li><li>Productos más vendidos</li><li>Acceso rápido a tareas comunes</li></ul><h3>Gestión de Tiendas</h3><p>Crea y gestiona múltiples tiendas desde esta sección:</p><ul><li>Ver todas tus tiendas</li><li>Crear nuevas tiendas</li><li>Editar configuraciones de tienda</li><li>Cambiar entre tiendas</li></ul><h3>Productos</h3><p>Gestiona tu catálogo de productos:</p><ul><li>Agregar nuevos productos</li><li>Editar productos existentes</li><li>Organizar productos por categorías</li><li>Gestionar inventario</li></ul><h3>Pedidos</h3><p>Ver y gestionar pedidos de clientes:</p><ul><li>Procesar pedidos</li><li>Actualizar estado del pedido</li><li>Rastrear envíos</li><li>Generar facturas</li></ul><h3>Clientes</h3><p>Gestiona tu base de datos de clientes:</p><ul><li>Ver perfiles de clientes</li><li>Ver historial de pedidos</li><li>Gestionar cuentas de clientes</li></ul><h2>Selector de Tienda</h2><p>Si tienes múltiples tiendas, usa el selector de tienda en el encabezado para cambiar rápidamente entre tiendas sin cerrar sesión.</p><h2>Menú de Usuario</h2><p>Haz clic en tu foto de perfil o nombre en la esquina superior derecha para acceder a:</p><ul><li>Configuración de perfil</li><li>Configuración de cuenta</li><li>Cerrar sesión</li></ul><h2>Próximos Pasos</h2><p>Ahora que entiendes el panel de control, aprende cómo <a href=\"/docs/creating-store\">crear tu primera tienda</a>.</p>",
+  "meta_description": "Aprende a navegar por el panel de control de Matjrii, entender las secciones clave y acceder a las características principales.",
+  "order": 3,
+  "updated_at": "2026-01-11",
+  "reading_time": 4
+}
+

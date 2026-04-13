@@ -1,0 +1,247 @@
+/* Public marketing — premium depth + motion. Scoped to [data-landing-page] and [data-public-shell]. */
+
+:root :is([data-landing-page], [data-public-shell]) {
+    --landing-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-hero-mesh {
+    background-image:
+        radial-gradient(ellipse 88% 58% at 14% -8%, rgba(30, 144, 255, 0.18), transparent 56%),
+        radial-gradient(ellipse 72% 52% at 86% 12%, color-mix(in srgb, var(--primary-color, #1e90ff) 22%, transparent), transparent 52%),
+        radial-gradient(ellipse 52% 42% at 50% 100%, rgba(56, 189, 248, 0.1), transparent 46%),
+        radial-gradient(ellipse 40% 30% at 70% 40%, color-mix(in srgb, var(--accent-color, #ffc107) 10%, transparent), transparent 55%);
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-noise {
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Logo palette: primary blue + accent gold — single static wash, no pulse */
+:is([data-landing-page], [data-public-shell]) .landing-hero-brand-glow {
+    position: absolute;
+    inset: -18% -12% auto -12%;
+    height: min(62vh, 500px);
+    pointer-events: none;
+    z-index: -18;
+    background:
+        radial-gradient(ellipse 52% 58% at 40% 32%, color-mix(in srgb, var(--primary-color, #1e90ff) 26%, transparent), transparent 72%),
+        radial-gradient(ellipse 42% 48% at 70% 26%, color-mix(in srgb, var(--accent-color, #ffc107) 11%, transparent), transparent 68%);
+    opacity: 0.82;
+}
+
+/* Optional ambient strip for inner pages — same language as hero */
+:is([data-landing-page], [data-public-shell]) .landing-page-ambient-top {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: min(48vh, 420px);
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse 70% 55% at 50% -10%, color-mix(in srgb, var(--primary-color, #1e90ff) 14%, transparent), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 20%, color-mix(in srgb, var(--accent-color, #ffc107) 6%, transparent), transparent 65%);
+    opacity: 0.75;
+}
+
+/* Subtle perspective — restrained tilt only on large viewports */
+:is([data-landing-page], [data-public-shell]) .landing-mockup-frame {
+    transform: perspective(1400px) rotateX(3deg) rotateY(-5deg);
+    transform-style: preserve-3d;
+    transition: transform 0.7s var(--landing-ease-out);
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-mockup-frame:hover {
+    transform: perspective(1400px) rotateX(2.5deg) rotateY(-4deg) translateY(-2px);
+}
+
+[dir='rtl'] :is([data-landing-page], [data-public-shell]) .landing-mockup-frame {
+    transform: perspective(1400px) rotateX(3deg) rotateY(5deg);
+}
+
+[dir='rtl'] :is([data-landing-page], [data-public-shell]) .landing-mockup-frame:hover {
+    transform: perspective(1400px) rotateX(2.5deg) rotateY(4deg) translateY(-2px);
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    :is([data-landing-page], [data-public-shell]) .landing-mock-stack-back {
+        transform: translateZ(-12px) translateY(8px) scale(0.98);
+        opacity: 0.94;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-mock-stack-front {
+        transform: translateZ(0);
+    }
+}
+
+@media (max-width: 1023px) {
+    :is([data-landing-page], [data-public-shell]) .landing-mockup-frame,
+    :is([data-landing-page], [data-public-shell]) .landing-mockup-frame:hover {
+        transform: none;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-mockup-frame:hover {
+        transform: translateY(-2px);
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-mock-stack-back,
+    :is([data-landing-page], [data-public-shell]) .landing-mock-stack-front {
+        transform: none;
+        opacity: 1;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-noise {
+        opacity: 0.022;
+    }
+}
+
+@keyframes landing-live-dot-breathe {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.55;
+    }
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-live-dot {
+    animation: landing-live-dot-breathe 3.2s ease-in-out infinite;
+}
+
+/* Light cards — depth from shadow + lift; single compositing layer */
+:is([data-landing-page], [data-public-shell]) .landing-card-depth {
+    transition:
+        transform 0.32s var(--landing-ease-out),
+        box-shadow 0.32s var(--landing-ease-out),
+        border-color 0.24s ease;
+    transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :is([data-landing-page], [data-public-shell]) .landing-card-depth:hover {
+        transform: translateY(-3px) translateZ(0);
+        box-shadow:
+            0 26px 52px -24px rgba(15, 23, 42, 0.14),
+            0 0 0 1px color-mix(in srgb, var(--primary-color, #1e90ff) 7%, transparent);
+        border-color: color-mix(in srgb, var(--primary-color, #1e90ff) 20%, rgb(226 232 240));
+    }
+}
+
+/* Dark section cards */
+:is([data-landing-page], [data-public-shell]) .landing-card-depth-dark {
+    transition:
+        transform 0.32s var(--landing-ease-out),
+        box-shadow 0.32s var(--landing-ease-out),
+        border-color 0.24s ease;
+    transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :is([data-landing-page], [data-public-shell]) .landing-card-depth-dark:hover {
+        transform: translateY(-3px) translateZ(0);
+        box-shadow: 0 34px 78px -30px rgba(0, 0, 0, 0.58);
+        border-color: rgba(255, 255, 255, 0.24);
+    }
+}
+
+/* Pricing — column lift; inner card handles depth */
+:is([data-landing-page], [data-public-shell]) .landing-pricing-lift {
+    transition: transform 0.3s var(--landing-ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :is([data-landing-page], [data-public-shell]) .landing-pricing-lift:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* Primary / filled CTAs */
+:is([data-landing-page], [data-public-shell]) .landing-cta-depth {
+    transition:
+        transform 0.26s var(--landing-ease-out),
+        box-shadow 0.26s var(--landing-ease-out),
+        filter 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :is([data-landing-page], [data-public-shell]) .landing-cta-depth:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.02);
+        box-shadow: 0 16px 40px -18px color-mix(in srgb, var(--primary-color, #1e90ff) 42%, transparent);
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-cta-depth:active {
+        transform: translateY(0);
+    }
+
+    :is([data-landing-page], [data-public-shell]) footer .landing-cta-depth:hover {
+        filter: brightness(1.04);
+        box-shadow: 0 14px 36px -16px color-mix(in srgb, var(--primary-color, #1e90ff) 38%, transparent);
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-cta-depth-outline:hover {
+        box-shadow: 0 12px 32px -20px rgba(15, 23, 42, 0.12);
+    }
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-workflow-icon {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+:is([data-landing-page], [data-public-shell]) .group:hover .landing-workflow-icon {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary-color, #1e90ff) 45%, transparent);
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-workflow-accent-line {
+    transition: opacity 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :is([data-landing-page], [data-public-shell]) .landing-mockup-frame,
+    :is([data-landing-page], [data-public-shell]) .landing-mockup-frame:hover,
+    [dir='rtl'] :is([data-landing-page], [data-public-shell]) .landing-mockup-frame,
+    [dir='rtl'] :is([data-landing-page], [data-public-shell]) .landing-mockup-frame:hover {
+        transform: none;
+        transition: none;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-mock-stack-back,
+    :is([data-landing-page], [data-public-shell]) .landing-mock-stack-front {
+        transform: none;
+        opacity: 1;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-live-dot {
+        animation: none;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-card-depth,
+    :is([data-landing-page], [data-public-shell]) .landing-card-depth-dark,
+    :is([data-landing-page], [data-public-shell]) .landing-pricing-lift,
+    :is([data-landing-page], [data-public-shell]) .landing-cta-depth {
+        transition: none;
+    }
+
+    :is([data-landing-page], [data-public-shell]) .landing-workflow-accent-line {
+        transition: none;
+    }
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-cta-primary:focus-visible {
+    outline: 2px solid var(--primary-color, #1e90ff);
+    outline-offset: 3px;
+}
+
+:is([data-landing-page], [data-public-shell]) .landing-cta-secondary:focus-visible {
+    outline: 2px solid var(--primary-color, #1e90ff);
+    outline-offset: 3px;
+}
+
+:is([data-landing-page], [data-public-shell]) footer .landing-cta-primary:focus-visible,
+:is([data-landing-page], [data-public-shell]) footer .landing-cta-secondary:focus-visible {
+    outline-offset: 4px;
+}

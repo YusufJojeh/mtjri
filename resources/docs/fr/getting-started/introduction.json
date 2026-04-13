@@ -1,0 +1,12 @@
+{
+  "slug": "introduction",
+  "title": "Introduction à Matjrii",
+  "category": "getting-started",
+  "description": "Découvrez Matjrii, une plateforme SaaS e-commerce multi-boutiques complète qui vous permet de créer et gérer des boutiques en ligne illimitées.",
+  "content": "<h1>Bienvenue sur Matjrii</h1><p>Matjrii est une plateforme SaaS e-commerce multi-boutiques puissante conçue pour vous aider à créer et gérer des boutiques en ligne illimitées depuis un seul tableau de bord. Que vous soyez un petit propriétaire d'entreprise ou une entreprise, Matjrii fournit tous les outils dont vous avez besoin pour réussir dans le e-commerce.</p><h2>Caractéristiques Principales</h2><ul><li><strong>Gestion Multi-Boutiques:</strong> Créez et gérez plusieurs boutiques en ligne depuis un compte</li><li><strong>10+ Thèmes Professionnels:</strong> Choisissez parmi des designs de boutique spécifiques à l'industrie</li><li><strong>27+ Passerelles de Paiement:</strong> Acceptez les paiements des clients du monde entier</li><li><strong>E-Commerce Complet:</strong> Produits, commandes, clients et gestion des stocks</li><li><strong>Génération de Contenu IA:</strong> Générez automatiquement des descriptions de produits et du contenu</li><li><strong>Support Multi-Langues:</strong> Atteignez les clients dans 22+ langues</li></ul><h2>Pour Commencer</h2><p>Pour commencer à utiliser Matjrii, vous devrez:</p><ol><li>Créer un compte</li><li>Choisir un plan d'abonnement</li><li>Créer votre première boutique</li><li>Ajouter des produits</li><li>Configurer les méthodes de paiement</li><li>Lancer votre boutique!</li></ol><p>Prêt à commencer? Continuez avec le guide suivant sur <a href=\"/docs/account-creation\">Création de Compte et Inscription</a>.</p>",
+  "meta_description": "Introduction à la plateforme e-commerce Matjrii - Apprenez-en plus sur la gestion multi-boutiques, les thèmes, les passerelles de paiement et plus encore.",
+  "order": 1,
+  "updated_at": "2026-01-11",
+  "reading_time": 3
+}
+

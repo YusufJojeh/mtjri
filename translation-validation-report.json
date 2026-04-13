@@ -1,0 +1,70 @@
+{
+    "summary": {
+        "valid": 120,
+        "invalid": 13,
+        "warnings": 0
+    },
+    "errors": {
+        "ar": [
+            {
+                "file": "ar/content-design/blog-system.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "ar/orders-customers/shipping-configuration.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "ar/product-management/product-categories.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "ar/store-management/multi-store-management.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            }
+        ],
+        "es": [
+            {
+                "file": "es/orders-customers/shipping-configuration.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "es/product-management/product-categories.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "es/store-management/multi-store-management.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            }
+        ],
+        "fr": [
+            {
+                "file": "fr/orders-customers/shipping-configuration.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "fr/product-management/product-categories.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "fr/store-management/multi-store-management.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            }
+        ],
+        "de": [
+            {
+                "file": "de/orders-customers/shipping-configuration.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "de/product-management/product-categories.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            },
+            {
+                "file": "de/store-management/multi-store-management.json",
+                "error": "Invalid JSON: Control character error, possibly incorrectly encoded"
+            }
+        ]
+    },
+    "warnings": []
+}

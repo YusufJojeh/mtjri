@@ -1,0 +1,65 @@
+/* Public marketing + landing — logo-led tokens, blue ambient, reduced-motion safe. */
+
+[data-public-shell],
+[data-landing-page] {
+    /* Logo primary #1E90FF — soft ambient only */
+    --public-ambient-blue: rgba(30, 144, 255, 0.16);
+    --public-ambient-blue-soft: rgba(30, 144, 255, 0.09);
+    --public-surface-glass: rgba(255, 255, 255, 0.72);
+    --public-border-soft: rgba(15, 23, 42, 0.08);
+}
+
+[data-public-shell] .public-ambient-mesh {
+    background-image:
+        radial-gradient(ellipse 85% 55% at 12% -5%, var(--public-ambient-blue), transparent 58%),
+        radial-gradient(ellipse 65% 48% at 88% 8%, color-mix(in srgb, var(--primary-color, #1e90ff) 18%, transparent), transparent 52%),
+        radial-gradient(ellipse 55% 42% at 50% 105%, var(--public-ambient-blue-soft), transparent 48%);
+}
+
+[data-public-shell] .public-noise {
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-public-shell] .public-legal-hero {
+    position: relative;
+    isolation: isolate;
+}
+
+[data-public-shell] .public-legal-hero::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: 1.5rem;
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--primary-color, #1e90ff) 12%, transparent),
+        transparent 40%,
+        var(--public-ambient-blue-soft)
+    );
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+[data-public-shell] .public-focus-ring:focus-visible {
+    outline: 2px solid var(--primary-color, #1e90ff);
+    outline-offset: 3px;
+}
+
+[data-public-shell] .doc-prose-content a {
+    color: var(--primary-color, #1e90ff);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+[data-public-shell] .doc-prose-content a:hover {
+    opacity: 0.88;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-public-shell] *,
+    [data-landing-page] * {
+        scroll-behavior: auto !important;
+    }
+}

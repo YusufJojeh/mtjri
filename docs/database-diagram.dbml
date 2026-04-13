@@ -1,0 +1,1122 @@
+// Matjri / StoreGo — schema derived from Laravel migrations under database/migrations/
+// Import at https://dbdiagram.io — database_type matches typical Laravel + MySQL deployment.
+// Foreign keys: only where migrations declare ->foreign(), ->constrained(), foreignId()->constrained(), etc.
+// Polymorphic and undocumented columns are tables/fields without Ref: lines (see docs/database-schema-report.md).
+
+Project matjri {
+  database_type: 'MySQL'
+  Note: 'Generated from migrations; relationships follow explicit DB foreign keys only.'
+}
+
+// --- Framework & session ---
+Table cache {
+  key varchar [pk]
+  value mediumtext [not null]
+  expiration int [not null]
+}
+
+Table cache_locks {
+  key varchar [pk]
+  owner varchar [not null]
+  expiration int [not null]
+}
+
+Table jobs {
+  id bigint [pk, increment]
+  queue varchar [not null, note: 'indexed']
+  payload longtext [not null]
+  attempts tinyint [not null]
+  reserved_at int [null]
+  available_at int [not null]
+  created_at int [not null]
+}
+
+Table job_batches {
+  id varchar [pk]
+  name varchar [not null]
+  total_jobs int [not null]
+  pending_jobs int [not null]
+  failed_jobs int [not null]
+  failed_job_ids longtext [not null]
+  options mediumtext [null]
+  cancelled_at int [null]
+  created_at int [not null]
+  finished_at int [null]
+}
+
+Table failed_jobs {
+  id bigint [pk, increment]
+  uuid varchar [not null, unique]
+  connection text [not null]
+  queue text [not null]
+  payload longtext [not null]
+  exception longtext [not null]
+  failed_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+}
+
+Table password_reset_tokens {
+  email varchar [pk]
+  token varchar [not null]
+  created_at timestamp [null]
+}
+
+Table sessions {
+  id varchar [pk]
+  user_id bigint [null, note: 'indexed; no FK in migrations']
+  ip_address varchar(45) [null]
+  user_agent text [null]
+  payload longtext [not null]
+  last_activity int [not null, note: 'indexed']
+}
+
+// --- Users & auth-related ---
+Table users {
+  id bigint [pk, increment]
+  name varchar [not null]
+  email varchar [not null, unique]
+  phone_number varchar(20) [null]
+  email_verified_at timestamp [null]
+  password varchar [null]
+  remember_token varchar [null]
+  lang varchar [null, default: 'en']
+  current_store bigint [null, note: 'no FK; app may treat as stores.id']
+  avatar varchar [null]
+  type varchar(20) [not null, default: 'company']
+  plan_id bigint [null]
+  plan_expire_date date [null]
+  requested_plan int [not null, default: 0]
+  created_by int [not null, default: 0, note: 'no FK in migrations']
+  mode varchar [not null, default: 'light']
+  plan_is_active int [not null, default: 1]
+  storage_limit float [not null, default: 0]
+  is_enable_login int [not null, default: 1]
+  google2fa_enable int [not null, default: 0]
+  google2fa_secret text [null]
+  status varchar [not null, default: 'active']
+  is_trial varchar [null]
+  trial_day int [not null, default: 0]
+  trial_expire_date date [null]
+  active_module text [null]
+  referral_code int [not null, default: 0]
+  used_referral_code int [not null, default: 0]
+  commission_amount int [not null, default: 0]
+  ai_stores_count int [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table plans {
+  id bigint [pk, increment]
+  name varchar(100) [not null, unique]
+  price double [not null, default: 0]
+  yearly_price double [null]
+  duration varchar(100) [not null]
+  themes text [null]
+  max_stores int [not null, default: 0, note: 'renamed from business']
+  max_users_per_store int [not null, default: 0, note: 'renamed from max_users']
+  max_products_per_store int [not null, default: 0]
+  description text [null]
+  enable_custdomain varchar [not null, default: 'off']
+  enable_custsubdomain varchar [not null, default: 'off']
+  enable_branding varchar(255) [not null, default: 'on']
+  pwa_business varchar [not null, default: 'off']
+  enable_chatgpt varchar(255) [not null, default: 'on']
+  enable_custom_pages varchar [not null, default: 'off']
+  enable_blog varchar [not null, default: 'off']
+  enable_shipping_method varchar [not null, default: 'off']
+  storage_limit float [not null, default: 0]
+  is_trial varchar [null]
+  trial_day int [not null, default: 0]
+  is_plan_enable varchar [not null, default: 'on']
+  is_default boolean [not null, default: false, note: 'data cleared by migration 2026_01_04_214526']
+  module text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// --- Spatie permission (config permission.php: teams => false) ---
+Table permissions {
+  id bigint [pk, increment]
+  module varchar [null]
+  name varchar [not null]
+  guard_name varchar [not null]
+  label varchar [null]
+  description text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (name, guard_name) [unique]
+  }
+}
+
+Table roles {
+  id bigint [pk, increment]
+  name varchar [not null]
+  guard_name varchar [not null]
+  label varchar [null]
+  description text [null]
+  created_by bigint [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (name, guard_name) [unique, note: 'fixed by 2025_06_26_000000_fix_roles_unique_constraint']
+  }
+}
+
+Table model_has_permissions {
+  permission_id bigint [not null]
+  model_type varchar [not null]
+  model_id bigint [not null, note: 'polymorphic; no single Ref target']
+
+  indexes {
+    (permission_id, model_id, model_type) [pk]
+    (model_id, model_type) [note: 'model_has_permissions_model_id_model_type_index']
+  }
+}
+
+Table model_has_roles {
+  role_id bigint [not null]
+  model_type varchar [not null]
+  model_id bigint [not null, note: 'polymorphic']
+
+  indexes {
+    (role_id, model_id, model_type) [pk]
+    (model_id, model_type) [note: 'model_has_roles_model_id_model_type_index']
+  }
+}
+
+Table role_has_permissions {
+  permission_id bigint [not null]
+  role_id bigint [not null]
+
+  indexes {
+    (permission_id, role_id) [pk]
+  }
+}
+
+// --- Core commerce ---
+Table stores {
+  id bigint [pk, increment]
+  name varchar [null, note: 'nullable after 2026_01_01 migration']
+  name_ar varchar [null]
+  name_en varchar [null]
+  industry varchar [null]
+  logo varchar [null]
+  color varchar [null]
+  pay_with_whatsapp boolean [not null, default: false]
+  whatsapp_number varchar [null]
+  slug varchar [not null, unique]
+  description text [null]
+  theme varchar [not null, default: 'modern']
+  user_id bigint [not null]
+  custom_domain varchar [null]
+  custom_subdomain varchar [null]
+  enable_custom_domain boolean [not null, default: false]
+  enable_custom_subdomain boolean [not null, default: false]
+  email varchar [null]
+  is_active boolean [not null, default: true]
+  is_featured boolean [not null, default: false]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table customers {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  first_name varchar [not null]
+  last_name varchar [not null]
+  email varchar [not null]
+  email_verified_at timestamp [null]
+  password varchar [null]
+  remember_token varchar [null]
+  phone varchar [null]
+  date_of_birth date [null]
+  gender varchar [null, note: 'enum male|female|other|prefer_not_to_say']
+  notes text [null]
+  avatar varchar [null]
+  is_active boolean [not null, default: true]
+  preferred_language varchar [not null, default: 'en']
+  customer_group varchar [not null, default: 'regular']
+  email_marketing boolean [not null, default: true]
+  sms_notifications boolean [not null, default: false]
+  order_updates boolean [not null, default: true]
+  total_orders int [not null, default: 0]
+  total_spent decimal(10,2) [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, email) [unique]
+  }
+}
+
+Table customer_addresses {
+  id bigint [pk, increment]
+  customer_id bigint [not null]
+  type varchar [not null, note: 'enum billing|shipping']
+  address varchar [not null]
+  city varchar [not null]
+  state varchar [null]
+  postal_code varchar [not null]
+  country varchar [not null]
+  is_default boolean [not null, default: false]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table categories {
+  id bigint [pk, increment]
+  name varchar [not null]
+  slug varchar [not null]
+  description text [null]
+  image varchar [null]
+  parent_id bigint [null]
+  store_id bigint [not null]
+  sort_order int [not null, default: 0]
+  is_active boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (slug, store_id) [unique]
+  }
+}
+
+Table taxes {
+  id bigint [pk, increment]
+  name varchar [not null]
+  rate decimal(8,2) [not null]
+  type varchar [not null, default: 'percentage', note: 'enum percentage|fixed']
+  region varchar [null]
+  priority int [not null, default: 1]
+  compound boolean [not null, default: false]
+  is_active boolean [not null, default: true]
+  store_id bigint [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (name, store_id) [unique]
+  }
+}
+
+Table products {
+  id bigint [pk, increment]
+  name varchar [not null]
+  sku varchar [null]
+  description text [null]
+  specifications text [null]
+  details text [null]
+  price decimal(10,2) [not null, default: 0]
+  sale_price decimal(10,2) [null]
+  stock int [not null, default: 0]
+  cover_image varchar [null]
+  images text [null]
+  variants text [null]
+  custom_fields text [null]
+  category_id bigint [null]
+  tax_id bigint [null]
+  store_id bigint [not null]
+  is_active boolean [not null, default: true]
+  is_downloadable boolean [not null, default: false]
+  downloadable_file varchar [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table shippings {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  name varchar [not null]
+  type varchar [not null]
+  description text [null]
+  cost decimal(10,2) [not null, default: 0]
+  min_order_amount decimal(10,2) [not null, default: 0]
+  delivery_time varchar [null]
+  sort_order int [not null, default: 0]
+  is_active boolean [not null, default: true]
+  zone_type varchar [null]
+  countries text [null]
+  postal_codes varchar [null]
+  max_distance decimal(10,2) [null]
+  max_weight decimal(10,2) [null]
+  max_dimensions varchar [null]
+  require_signature boolean [not null, default: false]
+  insurance_required boolean [not null, default: false]
+  tracking_available boolean [not null, default: true]
+  handling_fee decimal(10,2) [not null, default: 0]
+  views int [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table orders {
+  id bigint [pk, increment]
+  order_number varchar [not null, unique]
+  store_id bigint [not null]
+  customer_id bigint [null]
+  session_id varchar [null]
+  status varchar [not null, default: 'pending', note: 'enum pending|confirmed|processing|shipped|delivered|cancelled|refunded']
+  payment_status varchar [not null, default: 'pending', note: 'enum pending|paid|failed|refunded|partially_refunded']
+  customer_email varchar [not null]
+  customer_phone varchar [null]
+  customer_first_name varchar [not null]
+  customer_last_name varchar [not null]
+  shipping_address varchar [not null]
+  shipping_city varchar [not null]
+  shipping_state varchar [not null]
+  shipping_postal_code varchar [not null]
+  shipping_country varchar [not null]
+  billing_address varchar [not null]
+  billing_city varchar [not null]
+  billing_state varchar [not null]
+  billing_postal_code varchar [not null]
+  billing_country varchar [not null]
+  subtotal decimal(10,2) [not null]
+  tax_amount decimal(10,2) [not null, default: 0]
+  shipping_amount decimal(10,2) [not null, default: 0]
+  discount_amount decimal(10,2) [not null, default: 0]
+  total_amount decimal(10,2) [not null]
+  payment_method varchar [not null]
+  payment_gateway varchar [null]
+  payment_transaction_id varchar [null]
+  payment_details json [null]
+  shipping_method_id bigint [null]
+  tracking_number varchar [null]
+  shipped_at timestamp [null]
+  delivered_at timestamp [null]
+  notes text [null]
+  coupon_code varchar [null]
+  coupon_discount decimal(10,2) [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, status) [name: 'orders_store_id_status_index']
+    (customer_id) [name: 'orders_customer_id_index']
+    (order_number) [name: 'orders_order_number_index']
+  }
+}
+
+Table order_items {
+  id bigint [pk, increment]
+  order_id bigint [not null]
+  product_id bigint [not null]
+  product_name varchar [not null]
+  product_sku varchar [null]
+  product_price decimal(10,2) [not null]
+  quantity int [not null]
+  product_variants json [null]
+  unit_price decimal(10,2) [not null]
+  total_price decimal(10,2) [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (order_id) [name: 'order_items_order_id_index']
+    (product_id) [name: 'order_items_product_id_index']
+  }
+}
+
+Table cart_items {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  customer_id bigint [null]
+  session_id varchar [null]
+  product_id bigint [not null]
+  quantity int [not null, default: 1]
+  variants json [null]
+  price decimal(10,2) [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, customer_id) [name: 'cart_items_store_id_customer_id_index']
+    (store_id, session_id) [name: 'cart_items_store_id_session_id_index']
+  }
+}
+
+Table wishlist_items {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  customer_id bigint [null]
+  session_id varchar [null]
+  product_id bigint [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, customer_id, product_id) [unique, name: 'wishlist_customer_unique']
+    (store_id, session_id, product_id) [unique, name: 'wishlist_session_unique']
+  }
+}
+
+Table product_reviews {
+  id bigint [pk, increment]
+  product_id bigint [not null]
+  customer_id bigint [not null]
+  store_id bigint [not null]
+  rating int [not null, note: 'unsigned in migration']
+  title varchar [not null]
+  content text [not null]
+  is_approved boolean [not null, default: true]
+  store_response text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (product_id, customer_id) [unique, name: 'unique_customer_product_review']
+    (product_id, is_approved) [note: 'from create migration']
+  }
+}
+
+// --- Store config & content ---
+Table store_settings {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  theme varchar [not null, default: 'default']
+  content json [not null]
+  content_generation_status varchar [not null, default: 'pending']
+  content_generated_at timestamp [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, theme) [unique]
+  }
+}
+
+Table store_configurations {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  key varchar [not null]
+  value text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, key) [unique]
+  }
+}
+
+Table settings {
+  id bigint [pk, increment]
+  user_id bigint [null, note: 'nullable after 2025_12_30 migration']
+  store_id bigint [null]
+  key varchar [not null]
+  value text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (user_id, store_id, key) [unique]
+  }
+}
+
+Table payment_settings {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  store_id bigint [null]
+  key varchar [not null]
+  value text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (user_id, key, store_id) [unique]
+    (user_id, key)
+  }
+}
+
+Table landing_page_settings {
+  id bigint [pk, increment]
+  company_name varchar [null, default: 'StoreGo']
+  contact_email varchar [null, default: 'support@storego.com']
+  contact_phone varchar [null, default: '+1 (555) 123-4567']
+  contact_address varchar [null, default: 'San Francisco, CA']
+  config_sections json [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table landing_page_custom_pages {
+  id bigint [pk, increment]
+  title varchar [not null]
+  slug varchar [not null, unique]
+  content longtext [not null]
+  meta_title varchar [null]
+  meta_description text [null]
+  is_active boolean [not null, default: true]
+  sort_order int [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table custom_pages {
+  id bigint [pk, increment]
+  title varchar [not null]
+  slug varchar [not null, unique]
+  content longtext [null]
+  store_id bigint [not null]
+  template varchar [not null, default: 'default']
+  status varchar [not null, default: 'draft', note: 'enum draft|published|private']
+  parent_id bigint [null]
+  "order" int [not null, default: 0, note: 'column name is order']
+  show_in_navigation boolean [not null, default: false]
+  allow_comments boolean [not null, default: false]
+  views int [not null, default: 0]
+  meta_title varchar [null]
+  meta_description text [null]
+  meta_keywords varchar [null]
+  canonical_url varchar [null]
+  index_in_search boolean [not null, default: true]
+  follow_links boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table webhooks {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  module varchar [not null, note: 'enum New User only']
+  method varchar [not null, note: 'enum GET|POST']
+  url varchar [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table newsletter_subscriptions {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  email varchar [not null]
+  is_active boolean [not null, default: true]
+  subscribed_at timestamp [not null, default: `CURRENT_TIMESTAMP`]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (store_id, email) [unique]
+    (store_id, is_active) [name: 'newsletter_subscriptions_store_id_is_active_index']
+  }
+}
+
+Table newsletters {
+  id bigint [pk, increment]
+  email varchar [not null, unique]
+  status varchar [not null, default: 'active', note: 'enum active|unsubscribed']
+  subscribed_at timestamp [null]
+  unsubscribed_at timestamp [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (status, created_at) [name: 'newsletters_status_created_at_index']
+    (email) [name: 'newsletters_email_index']
+  }
+}
+
+// --- Geography (reference data) ---
+Table countries {
+  id bigint [pk, increment]
+  name varchar [not null]
+  code varchar(3) [not null, unique]
+  status boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table states {
+  id bigint [pk, increment]
+  country_id bigint [not null]
+  name varchar [not null]
+  code varchar(10) [null]
+  status boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table cities {
+  id bigint [pk, increment]
+  state_id bigint [not null]
+  name varchar [not null]
+  status boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table currencies {
+  id bigint [pk, increment]
+  name varchar [not null]
+  code varchar(10) [not null, unique]
+  symbol varchar(10) [null]
+  description text [null]
+  is_default boolean [not null, default: false]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// --- Billing & referrals ---
+Table coupons {
+  id bigint [pk, increment]
+  name varchar [not null]
+  type varchar [not null, note: 'enum percentage|flat']
+  minimum_spend decimal(10,2) [null]
+  maximum_spend decimal(10,2) [null]
+  discount_amount decimal(10,2) [not null]
+  use_limit_per_coupon int [null]
+  use_limit_per_user int [null]
+  expiry_date date [null]
+  code varchar [not null, unique]
+  code_type varchar [not null, default: 'manual', note: 'enum manual|auto']
+  status boolean [not null, default: true]
+  created_by bigint [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table store_coupons {
+  id bigint [pk, increment]
+  name varchar [not null]
+  code varchar [not null, unique]
+  description text [null]
+  code_type varchar [not null, default: 'manual']
+  type varchar [not null, default: 'percentage', note: 'enum percentage|flat']
+  discount_amount decimal(10,2) [not null]
+  minimum_spend decimal(10,2) [null]
+  maximum_spend decimal(10,2) [null]
+  use_limit_per_coupon int [null]
+  use_limit_per_user int [null]
+  used_count int [not null, default: 0]
+  start_date date [null]
+  expiry_date date [null]
+  status boolean [not null, default: true]
+  store_id bigint [not null]
+  created_by bigint [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table plan_requests {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  plan_id bigint [not null]
+  duration varchar [not null, default: 'monthly']
+  status varchar [not null, default: 'pending']
+  message text [null]
+  approved_at timestamp [null]
+  rejected_at timestamp [null]
+  approved_by bigint [null]
+  rejected_by bigint [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table plan_orders {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  plan_id bigint [not null]
+  coupon_id bigint [null]
+  billing_cycle varchar [null]
+  order_number varchar [not null, unique]
+  original_price decimal(10,2) [not null]
+  discount_amount decimal(10,2) [not null, default: 0]
+  final_price decimal(10,2) [not null]
+  coupon_code varchar [null]
+  payment_method varchar [null]
+  payment_id text [null]
+  status varchar [not null, default: 'pending', note: 'enum pending|approved|rejected|cancelled']
+  ordered_at timestamp [not null]
+  processed_at timestamp [null]
+  processed_by bigint [null]
+  notes text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table referral_settings {
+  id bigint [pk, increment]
+  is_enabled boolean [not null, default: true]
+  commission_percentage decimal(5,2) [not null, default: 10]
+  threshold_amount decimal(10,2) [not null, default: 50]
+  guidelines text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table referrals {
+  id bigint [pk, increment]
+  user_id bigint [not null]
+  company_id bigint [not null, note: 'FK to users']
+  commission_percentage decimal(5,2) [not null]
+  amount decimal(10,2) [not null]
+  plan_id bigint [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table payout_requests {
+  id bigint [pk, increment]
+  company_id bigint [not null, note: 'FK to users']
+  amount decimal(10,2) [not null]
+  status varchar [not null, default: 'pending', note: 'enum pending|approved|rejected']
+  notes text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// --- Media (Spatie-style) ---
+Table media {
+  id bigint [pk, increment]
+  model_type varchar [not null]
+  model_id bigint [not null, note: 'polymorphic owner']
+  uuid char(36) [null, unique]
+  collection_name varchar [not null]
+  name varchar [not null]
+  file_name varchar [not null]
+  mime_type varchar [null]
+  disk varchar [not null]
+  conversions_disk varchar [null]
+  size bigint [not null]
+  manipulations json [not null]
+  custom_properties json [not null]
+  generated_conversions json [not null]
+  responsive_images json [not null]
+  order_column int [null, note: 'unsigned in migration']
+  user_id bigint [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (model_id, model_type)
+  }
+}
+
+Table media_items {
+  id bigint [pk, increment]
+  name varchar [not null]
+  description text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// --- Email templates ---
+Table email_templates {
+  id bigint [pk, increment]
+  name varchar [not null]
+  from varchar [null]
+  user_id bigint [not null, default: 1, note: 'no FK in migrations']
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table email_template_langs {
+  id bigint [pk, increment]
+  parent_id bigint [not null]
+  lang varchar [not null]
+  subject varchar [not null]
+  content longtext [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table user_email_templates {
+  id bigint [pk, increment]
+  template_id bigint [not null]
+  user_id bigint [not null, note: 'no FK in migrations']
+  is_active boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// --- Blog ---
+Table blog_categories {
+  id bigint [pk, increment]
+  name varchar [not null]
+  slug varchar [not null, unique]
+  description text [null]
+  is_active boolean [not null, default: true]
+  store_id bigint [not null]
+  created_by bigint [not null]
+  post_count int [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table blogs {
+  id bigint [pk, increment]
+  title varchar [not null]
+  slug varchar [not null, unique]
+  excerpt text [null]
+  content longtext [null]
+  featured_image varchar [null]
+  category_id bigint [null]
+  author_id bigint [not null]
+  store_id bigint [not null]
+  status varchar [not null, default: 'draft', note: 'enum draft|published|scheduled']
+  published_at timestamp [null]
+  is_featured boolean [not null, default: false]
+  allow_comments boolean [not null, default: true]
+  views int [not null, default: 0]
+  meta_title varchar [null]
+  meta_description text [null]
+  focus_keyword varchar [null]
+  index_in_search boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table blog_tags {
+  id bigint [pk, increment]
+  name varchar [not null]
+  slug varchar [not null]
+  store_id bigint [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+
+  indexes {
+    (slug, store_id) [unique]
+  }
+}
+
+Table blog_blog_tag {
+  blog_id bigint [not null]
+  blog_tag_id bigint [not null]
+
+  indexes {
+    (blog_id, blog_tag_id) [pk]
+  }
+}
+
+Table blog_comments {
+  id bigint [pk, increment]
+  blog_id bigint [not null]
+  user_id bigint [null]
+  author_name varchar [null]
+  author_email varchar [null]
+  content text [not null]
+  is_approved boolean [not null, default: false]
+  parent_id bigint [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// --- POS & express ---
+Table express_checkouts {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  name varchar [not null]
+  type varchar [not null]
+  description text [null]
+  button_text varchar [not null, default: 'Buy Now']
+  button_color varchar [not null, default: '#000000']
+  is_active boolean [not null, default: true]
+  payment_methods json [null]
+  default_payment_method varchar [null]
+  skip_cart boolean [not null, default: true]
+  auto_fill_customer_data boolean [not null, default: true]
+  guest_checkout_allowed boolean [not null, default: false]
+  mobile_optimized boolean [not null, default: true]
+  save_payment_methods boolean [not null, default: false]
+  success_redirect_url varchar [null]
+  cancel_redirect_url varchar [null]
+  conversions int [not null, default: 0]
+  revenue decimal(10,2) [not null, default: 0]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table pos_settings {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  currency varchar [not null, default: 'usd', note: 'string code; app relates to currencies.code without DB FK']
+  tax_rate decimal(5,2) [not null, default: 10]
+  default_discount decimal(5,2) [not null, default: 0]
+  enable_guest_checkout boolean [not null, default: true]
+  low_stock_alerts boolean [not null, default: true]
+  auto_sync_online_orders boolean [not null, default: false]
+  receipt_header text [null]
+  receipt_footer text [null]
+  show_logo_on_receipt boolean [not null, default: true]
+  show_tax_details boolean [not null, default: true]
+  show_cashier_name boolean [not null, default: true]
+  email_receipt boolean [not null, default: true]
+  receipt_printer varchar [not null, default: 'thermal']
+  barcode_scanner varchar [not null, default: 'usb']
+  cash_drawer varchar [not null, default: 'manual']
+  card_reader varchar [not null, default: 'integrated']
+  auto_open_cash_drawer boolean [not null, default: true]
+  auto_print_receipt boolean [not null, default: true]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table pos_transactions {
+  id bigint [pk, increment]
+  store_id bigint [not null]
+  transaction_number varchar [not null, note: 'not unique in migrations']
+  customer_id bigint [null]
+  cashier_id bigint [not null]
+  subtotal decimal(10,2) [not null, default: 0]
+  tax decimal(10,2) [not null, default: 0]
+  discount decimal(10,2) [not null, default: 0]
+  total decimal(10,2) [not null, default: 0]
+  status varchar [not null, default: 'completed']
+  notes text [null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table pos_transaction_items {
+  id bigint [pk, increment]
+  transaction_id bigint [not null]
+  product_id bigint [not null]
+  product_name varchar [not null]
+  variant_name varchar [null]
+  quantity int [not null]
+  price decimal(10,2) [not null]
+  tax decimal(10,2) [not null, default: 0]
+  discount decimal(10,2) [not null, default: 0]
+  total decimal(10,2) [not null]
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+Table pos_payments {
+  id bigint [pk, increment]
+  transaction_id bigint [not null]
+  payment_method varchar [not null]
+  amount decimal(10,2) [not null]
+  change_amount decimal(10,2) [not null, default: 0]
+  reference_number varchar [null]
+  status varchar [not null, default: 'completed']
+  created_at timestamp [null]
+  updated_at timestamp [null]
+}
+
+// ========== Foreign keys (migration-declared only) ==========
+
+Ref: users.plan_id > plans.id [delete: set null]
+
+Ref: stores.user_id > users.id [delete: cascade]
+
+Ref: webhooks.user_id > users.id [delete: cascade]
+
+Ref: customers.store_id > stores.id [delete: cascade]
+
+Ref: customer_addresses.customer_id > customers.id [delete: cascade]
+
+Ref: categories.parent_id > categories.id [delete: set null]
+Ref: categories.store_id > stores.id [delete: cascade]
+
+Ref: taxes.store_id > stores.id [delete: cascade]
+
+Ref: products.category_id > categories.id [delete: set null]
+Ref: products.tax_id > taxes.id [delete: set null]
+Ref: products.store_id > stores.id [delete: cascade]
+
+Ref: shippings.store_id > stores.id [delete: cascade]
+
+Ref: orders.store_id > stores.id [delete: cascade]
+Ref: orders.customer_id > customers.id [delete: set null]
+Ref: orders.shipping_method_id > shippings.id [delete: set null]
+
+Ref: order_items.order_id > orders.id [delete: cascade]
+Ref: order_items.product_id > products.id [delete: cascade]
+
+Ref: cart_items.store_id > stores.id [delete: cascade]
+Ref: cart_items.customer_id > customers.id [delete: cascade]
+Ref: cart_items.product_id > products.id [delete: cascade]
+
+Ref: wishlist_items.store_id > stores.id [delete: cascade]
+Ref: wishlist_items.customer_id > customers.id [delete: cascade]
+Ref: wishlist_items.product_id > products.id [delete: cascade]
+
+Ref: product_reviews.product_id > products.id [delete: cascade]
+Ref: product_reviews.customer_id > customers.id [delete: cascade]
+Ref: product_reviews.store_id > stores.id [delete: cascade]
+
+Ref: store_settings.store_id > stores.id [delete: cascade]
+
+Ref: store_configurations.store_id > stores.id [delete: cascade]
+
+Ref: settings.user_id > users.id [delete: cascade]
+Ref: settings.store_id > stores.id [delete: cascade]
+
+Ref: payment_settings.user_id > users.id [delete: cascade]
+Ref: payment_settings.store_id > stores.id [delete: cascade]
+
+Ref: newsletter_subscriptions.store_id > stores.id [delete: cascade]
+
+Ref: custom_pages.store_id > stores.id [delete: cascade]
+Ref: custom_pages.parent_id > custom_pages.id [delete: set null]
+
+Ref: states.country_id > countries.id [delete: cascade]
+
+Ref: cities.state_id > states.id [delete: cascade]
+
+Ref: coupons.created_by > users.id [delete: cascade]
+
+Ref: store_coupons.store_id > stores.id [delete: cascade]
+Ref: store_coupons.created_by > users.id [delete: set null]
+
+Ref: plan_requests.user_id > users.id [delete: cascade]
+Ref: plan_requests.plan_id > plans.id [delete: cascade]
+Ref: plan_requests.approved_by > users.id [delete: set null]
+Ref: plan_requests.rejected_by > users.id [delete: set null]
+
+Ref: plan_orders.user_id > users.id [delete: cascade]
+Ref: plan_orders.plan_id > plans.id [delete: cascade]
+Ref: plan_orders.coupon_id > coupons.id [delete: set null]
+Ref: plan_orders.processed_by > users.id [delete: set null]
+
+Ref: referrals.user_id > users.id [delete: cascade]
+Ref: referrals.company_id > users.id [delete: cascade]
+Ref: referrals.plan_id > plans.id [delete: set null]
+
+Ref: payout_requests.company_id > users.id [delete: cascade]
+
+Ref: media.user_id > users.id [delete: set null]
+
+Ref: email_template_langs.parent_id > email_templates.id [delete: cascade]
+
+Ref: user_email_templates.template_id > email_templates.id [delete: cascade]
+
+Ref: blog_categories.store_id > stores.id [delete: cascade]
+Ref: blog_categories.created_by > users.id [delete: cascade]
+
+Ref: blogs.category_id > blog_categories.id [delete: set null]
+Ref: blogs.author_id > users.id [delete: cascade]
+Ref: blogs.store_id > stores.id [delete: cascade]
+
+Ref: blog_tags.store_id > stores.id [delete: cascade]
+
+Ref: blog_blog_tag.blog_id > blogs.id [delete: cascade]
+Ref: blog_blog_tag.blog_tag_id > blog_tags.id [delete: cascade]
+
+Ref: blog_comments.blog_id > blogs.id [delete: cascade]
+Ref: blog_comments.user_id > users.id [delete: set null]
+Ref: blog_comments.parent_id > blog_comments.id [delete: cascade]
+
+Ref: express_checkouts.store_id > stores.id [delete: cascade]
+
+Ref: pos_settings.store_id > stores.id [delete: cascade]
+
+Ref: pos_transactions.store_id > stores.id [delete: cascade]
+Ref: pos_transactions.customer_id > customers.id [delete: set null]
+Ref: pos_transactions.cashier_id > users.id [delete: cascade]
+
+Ref: pos_transaction_items.transaction_id > pos_transactions.id [delete: cascade]
+Ref: pos_transaction_items.product_id > products.id [delete: cascade]
+
+Ref: pos_payments.transaction_id > pos_transactions.id [delete: cascade]
+
+Ref: model_has_permissions.permission_id > permissions.id [delete: cascade]
+
+Ref: model_has_roles.role_id > roles.id [delete: cascade]
+
+Ref: role_has_permissions.permission_id > permissions.id [delete: cascade]
+Ref: role_has_permissions.role_id > roles.id [delete: cascade]
+
+Ref: roles.created_by > users.id [delete: set null]

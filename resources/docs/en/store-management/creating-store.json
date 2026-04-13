@@ -1,0 +1,12 @@
+{
+  "slug": "creating-store",
+  "title": "Creating Your First Store",
+  "category": "store-management",
+  "description": "Step-by-step guide to creating your first online store in Matjrii.",
+  "content": "<h1>Creating Your First Store</h1><p>Creating a store in Matjrii is quick and easy. Follow these steps to get your store up and running.</p><h2>Step 1: Navigate to Stores</h2><p>From the dashboard sidebar, click on <strong>\"Stores\"</strong> in the navigation menu.</p><h2>Step 2: Click Create Store</h2><p>Click the <strong>\"Create Store\"</strong> or <strong>\"New Store\"</strong> button at the top of the stores page.</p><h2>Step 3: Fill in Store Information</h2><p>You'll need to provide:</p><ul><li><strong>Store Name:</strong> The name of your store (e.g., \"My Fashion Store\")</li><li><strong>Store Slug:</strong> A URL-friendly version of your store name (e.g., \"my-fashion-store\")</li><li><strong>Description:</strong> A brief description of your store</li><li><strong>Theme:</strong> Choose from 10+ professional themes</li><li><strong>Logo:</strong> Upload your store logo</li></ul><h2>Step 4: Configure Store Settings</h2><p>After creating the basic information, you can configure:</p><ul><li>Store status (active/inactive)</li><li>Featured status</li><li>Contact information</li><li>Social media links</li></ul><h2>Step 5: Save and Continue</h2><p>Click <strong>\"Save\"</strong> to create your store. You'll be redirected to the store management page where you can further customize your store.</p><h2>Next Steps</h2><p>After creating your store, you may want to:</p><ul><li><a href=\"/docs/store-settings\">Configure store settings</a></li><li><a href=\"/docs/adding-products\">Add products</a></li><li><a href=\"/docs/store-themes\">Customize your store theme</a></li></ul>",
+  "meta_description": "Learn how to create your first online store in Matjrii with step-by-step instructions.",
+  "order": 1,
+  "updated_at": "2026-01-11",
+  "reading_time": 6
+}
+

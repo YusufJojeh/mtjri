@@ -1,0 +1,12 @@
+{
+  "slug": "introduction",
+  "title": "Introduction to Matjrii",
+  "category": "getting-started",
+  "description": "Learn about Matjrii, a comprehensive multi-store e-commerce SaaS platform that enables you to create and manage unlimited online stores.",
+  "content": "<h1>Welcome to Matjrii</h1><p>Matjrii is a powerful multi-store e-commerce SaaS platform designed to help you create and manage unlimited online stores from a single dashboard. Whether you're a small business owner or an enterprise, Matjrii provides all the tools you need to succeed in e-commerce.</p><h2>Key Features</h2><ul><li><strong>Multi-Store Management:</strong> Create and manage multiple online stores from one account</li><li><strong>10+ Professional Themes:</strong> Choose from industry-specific store designs</li><li><strong>27+ Payment Gateways:</strong> Accept payments from customers worldwide</li><li><strong>Complete E-Commerce:</strong> Products, orders, customers, and inventory management</li><li><strong>AI Content Generation:</strong> Automatically generate product descriptions and content</li><li><strong>Multi-Language Support:</strong> Reach customers in 22+ languages</li></ul><h2>Getting Started</h2><p>To begin using Matjrii, you'll need to:</p><ol><li>Create an account</li><li>Choose a subscription plan</li><li>Create your first store</li><li>Add products</li><li>Configure payment methods</li><li>Launch your store!</li></ol><p>Ready to start? Continue to the next guide on <a href=\"/docs/account-creation\">Account Creation & Registration</a>.</p>",
+  "meta_description": "Introduction to Matjrii e-commerce platform - Learn about multi-store management, themes, payment gateways, and more.",
+  "order": 1,
+  "updated_at": "2026-01-11",
+  "reading_time": 3
+}
+

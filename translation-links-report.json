@@ -1,0 +1,316 @@
+{
+    "summary": {
+        "total_links": 264,
+        "broken_links": 44
+    },
+    "issues": [
+        {
+            "language": "ar",
+            "file": "ar/orders-customers/customer-management.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/orders-customers/order-processing-workflow.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/orders-customers/order-tracking.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/product-management/adding-products.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/product-management/product-attributes.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/product-management/product-images-media.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/product-management/product-import-export.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/store-management/store-content-management.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/store-management/store-customization.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/store-management/store-domain-setup.json",
+            "link": "/docs/custom-domain-setup",
+            "target_slug": "custom-domain-setup",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "ar",
+            "file": "ar/store-management/store-seo-settings.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/orders-customers/customer-management.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/orders-customers/order-processing-workflow.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/orders-customers/order-tracking.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/product-management/adding-products.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/product-management/product-attributes.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/product-management/product-images-media.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/product-management/product-import-export.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/store-management/store-content-management.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/store-management/store-customization.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/store-management/store-domain-setup.json",
+            "link": "/docs/custom-domain-setup",
+            "target_slug": "custom-domain-setup",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "es",
+            "file": "es/store-management/store-seo-settings.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/orders-customers/customer-management.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/orders-customers/order-processing-workflow.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/orders-customers/order-tracking.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/product-management/adding-products.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/product-management/product-attributes.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/product-management/product-images-media.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/product-management/product-import-export.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/store-management/store-content-management.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/store-management/store-customization.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/store-management/store-domain-setup.json",
+            "link": "/docs/custom-domain-setup",
+            "target_slug": "custom-domain-setup",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "fr",
+            "file": "fr/store-management/store-seo-settings.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/orders-customers/customer-management.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/orders-customers/order-processing-workflow.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/orders-customers/order-tracking.json",
+            "link": "/docs/shipping-configuration",
+            "target_slug": "shipping-configuration",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/product-management/adding-products.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/product-management/product-attributes.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/product-management/product-images-media.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/product-management/product-import-export.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/store-management/store-content-management.json",
+            "link": "/docs/product-categories",
+            "target_slug": "product-categories",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/store-management/store-customization.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/store-management/store-domain-setup.json",
+            "link": "/docs/custom-domain-setup",
+            "target_slug": "custom-domain-setup",
+            "issue": "Target article not found in language"
+        },
+        {
+            "language": "de",
+            "file": "de/store-management/store-seo-settings.json",
+            "link": "/docs/seo-settings",
+            "target_slug": "seo-settings",
+            "issue": "Target article not found in language"
+        }
+    ]
+}

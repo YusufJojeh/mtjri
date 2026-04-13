@@ -1,0 +1,12 @@
+{
+  "slug": "dashboard-overview",
+  "title": "Dashboard-Übersicht",
+  "category": "getting-started",
+  "description": "Erfahren Sie, wie Sie im Matjrii-Dashboard navigieren und dessen Hauptfunktionen und Bereiche verstehen.",
+  "content": "<h1>Dashboard-Übersicht</h1><p>Das Matjrii-Dashboard ist Ihr Kommandozentrale zur Verwaltung aller Ihrer Shops, Produkte, Bestellungen und Einstellungen. Dieser Leitfaden hilft Ihnen, die Hauptbereiche und Funktionen zu verstehen.</p><h2>Hauptnavigation</h2><p>Das Dashboard ist in mehrere Hauptbereiche organisiert, die über die Seitenleiste zugänglich sind:</p><h3>Dashboard</h3><p>Die Hauptseite des Dashboards zeigt:</p><ul><li>Schlüsselmetriken (Bestellungen, Produkte, Kunden, Umsatz)</li><li>Aktuelle Bestellungen</li><li>Bestseller-Produkte</li><li>Schnellzugriff auf häufige Aufgaben</li></ul><h3>Shop-Verwaltung</h3><p>Erstellen und verwalten Sie mehrere Shops aus diesem Bereich:</p><ul><li>Alle Ihre Shops anzeigen</li><li>Neue Shops erstellen</li><li>Shop-Einstellungen bearbeiten</li><li>Zwischen Shops wechseln</li></ul><h3>Produkte</h3><p>Verwalten Sie Ihren Produktkatalog:</p><ul><li>Neue Produkte hinzufügen</li><li>Bestehende Produkte bearbeiten</li><li>Produkte nach Kategorien organisieren</li><li>Lagerbestand verwalten</li></ul><h3>Bestellungen</h3><p>Kundenbestellungen anzeigen und verwalten:</p><ul><li>Bestellungen bearbeiten</li><li>Bestellstatus aktualisieren</li><li>Sendungen verfolgen</li><li>Rechnungen erstellen</li></ul><h3>Kunden</h3><p>Verwalten Sie Ihre Kundendatenbank:</p><ul><li>Kundenprofile anzeigen</li><li>Bestellhistorie ansehen</li><li>Kundenkonten verwalten</li></ul><h2>Shop-Wechsler</h2><p>Wenn Sie mehrere Shops haben, verwenden Sie den Shop-Wechsler in der Kopfzeile, um schnell zwischen Shops zu wechseln, ohne sich abzumelden.</p><h2>Benutzermenü</h2><p>Klicken Sie auf Ihr Profilbild oder Ihren Namen oben rechts, um auf Folgendes zuzugreifen:</p><ul><li>Profileinstellungen</li><li>Kontoeinstellungen</li><li>Abmelden</li></ul><h2>Nächste Schritte</h2><p>Jetzt, da Sie das Dashboard verstehen, erfahren Sie, wie Sie <a href=\"/docs/creating-store\">Ihren ersten Shop erstellen</a>.</p>",
+  "meta_description": "Erfahren Sie, wie Sie im Matjrii-Dashboard navigieren, wichtige Bereiche verstehen und auf Hauptfunktionen zugreifen.",
+  "order": 3,
+  "updated_at": "2026-01-11",
+  "reading_time": 4
+}
+

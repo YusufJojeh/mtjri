@@ -1,0 +1,12 @@
+{
+  "slug": "first-store-setup",
+  "title": "Creating Your First Store",
+  "category": "getting-started",
+  "description": "Complete guide to setting up your first online store in Matjrii, from creation to going live.",
+  "content": "<h1>Creating Your First Store</h1><p>After completing your account setup, the next step is to create your first online store. This guide will walk you through the entire process.</p><h2>Prerequisites</h2><p>Before creating a store, ensure you have:</p><ul><li>Completed your account registration</li><li>Selected a subscription plan</li><li>Decided on your store name and niche</li></ul><h2>Step 1: Access Store Creation</h2><p>Navigate to your dashboard and click on <strong>\"Stores\"</strong> in the sidebar menu. Click the <strong>\"Create Store\"</strong> button.</p><h2>Step 2: Basic Store Information</h2><p>Fill in your store details:</p><ul><li><strong>Store Name:</strong> Choose a unique name for your store</li><li><strong>Store Slug:</strong> This will be used in your store URL (e.g., yourstore.matjrii.com)</li><li><strong>Description:</strong> Brief description of what your store sells</li><li><strong>Category:</strong> Select the industry or category your store belongs to</li></ul><h2>Step 3: Store Theme Selection</h2><p>Choose from 10+ professional themes designed for different industries. You can preview themes before selecting and change them later.</p><h2>Step 4: Initial Configuration</h2><p>Configure basic settings:</p><ul><li>Currency selection</li><li>Timezone</li><li>Language preferences</li><li>Store status (Active/Inactive)</li></ul><h2>Step 5: Save and Continue</h2><p>Click <strong>\"Create Store\"</strong> to save your store. You'll be redirected to the store settings page where you can further customize your store.</p><h2>Next Steps</h2><p>Now that your store is created, learn about:</p><ul><li><a href=\"/docs/store-settings\">Store Settings & Configuration</a></li><li><a href=\"/docs/adding-products\">Adding Your First Products</a></li><li><a href=\"/docs/store-themes\">Customizing Your Store Theme</a></li></ul>",
+  "meta_description": "Step-by-step guide to creating your first online store in Matjrii, including theme selection and initial configuration.",
+  "order": 5,
+  "updated_at": "2026-01-11",
+  "reading_time": 4
+}
+

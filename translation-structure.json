@@ -1,0 +1,702 @@
+{
+    "categories": {
+        "account-settings": {
+            "company-settings": {
+                "slug": "company-settings",
+                "category": "account-settings",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Company Settings",
+                    "description": "Learn how to configure company information, branding, and account-level settings for your Matjrii account.",
+                    "meta_description": "Guide to configuring company information, branding, and account-level settings for your Matjrii account.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "language-settings": {
+                "slug": "language-settings",
+                "category": "account-settings",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Language Settings",
+                    "description": "Learn how to configure language preferences for your account, stores, and interface to support multiple languages.",
+                    "meta_description": "Guide to configuring language preferences for your account, stores, and interface to support multiple languages.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "notification-settings": {
+                "slug": "notification-settings",
+                "category": "account-settings",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Notification Settings",
+                    "description": "Learn how to configure email, SMS, and push notifications to stay informed about important events in your store.",
+                    "meta_description": "Guide to configuring email, SMS, and push notifications to stay informed about important events in your store.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "roles-permissions": {
+                "slug": "roles-permissions",
+                "category": "account-settings",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Roles & Permissions",
+                    "description": "Learn how to create custom roles, assign permissions, and control what users can access and modify in your account.",
+                    "meta_description": "Guide to creating custom roles, assigning permissions, and controlling user access in your Matjrii account.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "security-settings": {
+                "slug": "security-settings",
+                "category": "account-settings",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Security Settings",
+                    "description": "Learn how to configure security settings, enable two-factor authentication, and protect your Matjrii account.",
+                    "meta_description": "Guide to configuring security settings, enabling two-factor authentication, and protecting your Matjrii account.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "user-management": {
+                "slug": "user-management",
+                "category": "account-settings",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "User Management",
+                    "description": "Learn how to manage users, create accounts, assign roles, and control access to your Matjrii platform.",
+                    "meta_description": "Guide to managing users, creating accounts, assigning roles, and controlling access to your Matjrii platform.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "advanced-features": {
+            "ai-content-generation": {
+                "slug": "ai-content-generation",
+                "category": "advanced-features",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "AI Content Generation",
+                    "description": "Learn how to use AI-powered content generation to create product descriptions, blog posts, and marketing content automatically.",
+                    "meta_description": "Guide to using AI-powered content generation to create product descriptions, blog posts, and marketing content automatically.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "analytics-reports": {
+                "slug": "analytics-reports",
+                "category": "advanced-features",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Analytics & Reports",
+                    "description": "Learn how to use analytics and reports to track store performance, sales metrics, and customer behavior.",
+                    "meta_description": "Complete guide to using analytics and reports to track store performance, sales metrics, and customer behavior.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "api-integrations": {
+                "slug": "api-integrations",
+                "category": "advanced-features",
+                "order": 7,
+                "fields_to_translate": {
+                    "title": "API Integrations",
+                    "description": "Learn how to integrate Matjrii with third-party services using APIs, webhooks, and integration tools.",
+                    "meta_description": "Guide to integrating Matjrii with third-party services using APIs, webhooks, and integration tools.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "custom-domain-setup": {
+                "slug": "custom-domain-setup",
+                "category": "advanced-features",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Custom Domain Setup",
+                    "description": "Complete guide to setting up a custom domain for your store, including DNS configuration and SSL certificate setup.",
+                    "meta_description": "Complete guide to setting up a custom domain for your store, including DNS configuration, SSL setup, and troubleshooting.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "multi-language-stores": {
+                "slug": "multi-language-stores",
+                "category": "advanced-features",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Multi-Language Stores",
+                    "description": "Learn how to create multi-language stores, translate content, and serve customers in their preferred language.",
+                    "meta_description": "Guide to creating multi-language stores, translating content, and serving customers in their preferred language.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "pos-system": {
+                "slug": "pos-system",
+                "category": "advanced-features",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "POS System",
+                    "description": "Learn how to use the Point of Sale (POS) system for in-store sales, inventory management, and offline transactions.",
+                    "meta_description": "Complete guide to using the Point of Sale (POS) system for in-store sales, inventory management, and offline transactions.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "pwa-configuration": {
+                "slug": "pwa-configuration",
+                "category": "advanced-features",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "PWA Configuration",
+                    "description": "Learn how to configure Progressive Web App (PWA) features to make your store installable and work offline.",
+                    "meta_description": "Guide to configuring Progressive Web App (PWA) features to make your store installable and work offline.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "webhooks": {
+                "slug": "webhooks",
+                "category": "advanced-features",
+                "order": 8,
+                "fields_to_translate": {
+                    "title": "Webhooks",
+                    "description": "Learn how to set up and use webhooks to receive real-time notifications about events in your store.",
+                    "meta_description": "Guide to setting up and using webhooks to receive real-time notifications about events in your store.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "content-design": {
+            "custom-pages": {
+                "slug": "custom-pages",
+                "category": "content-design",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Custom Pages",
+                    "description": "Learn how to create custom pages for your store, including About Us, Terms & Conditions, Privacy Policy, and more.",
+                    "meta_description": "Guide to creating custom pages for your store, including About Us, Terms & Conditions, Privacy Policy, and other content pages.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "seo-settings": {
+                "slug": "seo-settings",
+                "category": "content-design",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "SEO Settings",
+                    "description": "Complete guide to SEO settings for improving your store's search engine visibility and organic traffic.",
+                    "meta_description": "Complete guide to SEO settings for improving your store's search engine visibility, rankings, and organic traffic.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-themes-overview": {
+                "slug": "store-themes-overview",
+                "category": "content-design",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Store Themes Overview",
+                    "description": "Overview of all available store themes in Matjrii, including industry-specific designs and customization options.",
+                    "meta_description": "Overview of all available store themes in Matjrii, including industry-specific designs, features, and customization options.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "theme-customization": {
+                "slug": "theme-customization",
+                "category": "content-design",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Theme Customization",
+                    "description": "Learn how to customize your store theme, including colors, fonts, layouts, and advanced customization options.",
+                    "meta_description": "Complete guide to customizing your store theme including colors, fonts, layouts, and advanced customization options.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "getting-started": {
+            "account-creation": {
+                "slug": "account-creation",
+                "category": "getting-started",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Account Creation & Registration",
+                    "description": "Step-by-step guide to creating your Matjrii account and completing the registration process.",
+                    "meta_description": "Learn how to create your Matjrii account, verify your email, and complete the registration process.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "dashboard-overview": {
+                "slug": "dashboard-overview",
+                "category": "getting-started",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Dashboard Overview",
+                    "description": "Learn how to navigate the Matjrii dashboard and understand its main features and sections.",
+                    "meta_description": "Learn how to navigate the Matjrii dashboard, understand key sections, and access main features.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "first-store-setup": {
+                "slug": "first-store-setup",
+                "category": "getting-started",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Creating Your First Store",
+                    "description": "Complete guide to setting up your first online store in Matjrii, from creation to going live.",
+                    "meta_description": "Step-by-step guide to creating your first online store in Matjrii, including theme selection and initial configuration.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "introduction": {
+                "slug": "introduction",
+                "category": "getting-started",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Introduction to Matjrii",
+                    "description": "Learn about Matjrii, a comprehensive multi-store e-commerce SaaS platform that enables you to create and manage unlimited online stores.",
+                    "meta_description": "Introduction to Matjrii e-commerce platform - Learn about multi-store management, themes, payment gateways, and more.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "platform-navigation": {
+                "slug": "platform-navigation",
+                "category": "getting-started",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Platform Navigation Guide",
+                    "description": "Learn how to navigate the Matjrii platform, understand the dashboard layout, and find the features you need.",
+                    "meta_description": "Learn how to navigate the Matjrii platform, understand the dashboard, sidebar menu, and find all features quickly.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "subscription-plans": {
+                "slug": "subscription-plans",
+                "category": "getting-started",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Understanding Subscription Plans",
+                    "description": "Learn about Matjrii subscription plans, features, and how to choose the right plan for your business.",
+                    "meta_description": "Learn about Matjrii subscription plans, features, pricing, and how to choose the right plan for your business needs.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "marketing-sales": {
+            "coupon-system": {
+                "slug": "coupon-system",
+                "category": "marketing-sales",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Coupon System",
+                    "description": "Learn how to create and manage discount coupons, promotional codes, and special offers for your store.",
+                    "meta_description": "Complete guide to creating and managing discount coupons, promotional codes, and special offers for your store.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "customer-engagement": {
+                "slug": "customer-engagement",
+                "category": "marketing-sales",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Customer Engagement",
+                    "description": "Learn strategies and tools for engaging customers, building relationships, and increasing customer loyalty.",
+                    "meta_description": "Strategies and tools for engaging customers, building relationships, and increasing customer loyalty.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "express-checkout": {
+                "slug": "express-checkout",
+                "category": "marketing-sales",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Express Checkout",
+                    "description": "Learn how to set up and use express checkout options like one-click checkout and quick buy buttons.",
+                    "meta_description": "Guide to setting up express checkout options including one-click checkout, quick buy buttons, and guest checkout.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "newsletter-management": {
+                "slug": "newsletter-management",
+                "category": "marketing-sales",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Newsletter Management",
+                    "description": "Learn how to manage newsletter subscribers, send email campaigns, and build your email marketing list.",
+                    "meta_description": "Guide to managing newsletter subscribers, sending email campaigns, and building your email marketing list.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "promotions-discounts": {
+                "slug": "promotions-discounts",
+                "category": "marketing-sales",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Promotions & Discounts",
+                    "description": "Learn how to create promotional campaigns, flash sales, seasonal discounts, and special offers to boost sales.",
+                    "meta_description": "Guide to creating promotional campaigns, flash sales, seasonal discounts, and special offers to boost sales.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "reviews-ratings": {
+                "slug": "reviews-ratings",
+                "category": "marketing-sales",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Reviews & Ratings",
+                    "description": "Learn how to manage product reviews and ratings, moderate customer feedback, and build trust with social proof.",
+                    "meta_description": "Guide to managing product reviews and ratings, moderating customer feedback, and building trust with social proof.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "orders-customers": {
+            "customer-accounts": {
+                "slug": "customer-accounts",
+                "category": "orders-customers",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Customer Accounts Management",
+                    "description": "Learn how to manage customer accounts, enable guest checkout, and configure account features.",
+                    "meta_description": "Guide to managing customer accounts, configuring registration settings, and enabling account features for your store.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "customer-management": {
+                "slug": "customer-management",
+                "category": "orders-customers",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Customer Management",
+                    "description": "Learn how to manage customers, view customer profiles, and track customer activity in Matjrii.",
+                    "meta_description": "Complete guide to managing customers in Matjrii including profiles, addresses, order history, and customer analytics.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "order-management": {
+                "slug": "order-management",
+                "category": "orders-customers",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Order Management",
+                    "description": "Learn how to manage customer orders, update order status, and process shipments in Matjrii.",
+                    "meta_description": "Complete guide to managing orders in Matjrii, including status updates, tracking, and invoicing.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "order-processing-workflow": {
+                "slug": "order-processing-workflow",
+                "category": "orders-customers",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Order Processing Workflow",
+                    "description": "Complete guide to processing orders from receipt to fulfillment, including status management and shipping.",
+                    "meta_description": "Complete guide to processing orders from receipt to fulfillment, including status management, shipping, and customer communication.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "order-tracking": {
+                "slug": "order-tracking",
+                "category": "orders-customers",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Order Tracking",
+                    "description": "Learn how to track orders, add tracking numbers, and provide customers with order tracking information.",
+                    "meta_description": "Guide to adding tracking numbers to orders, enabling customer order tracking, and managing shipping status.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "payment-checkout": {
+            "checkout-process": {
+                "slug": "checkout-process",
+                "category": "payment-checkout",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Checkout Process",
+                    "description": "Learn about the checkout process and how customers complete purchases on your Matjrii store.",
+                    "meta_description": "Complete guide to the checkout process in Matjrii including guest checkout, payment methods, and checkout optimization.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "order-payments": {
+                "slug": "order-payments",
+                "category": "payment-checkout",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Order Payments Management",
+                    "description": "Learn how to manage order payments, process refunds, handle payment issues, and track payment status.",
+                    "meta_description": "Guide to managing order payments, processing refunds, handling payment issues, and tracking payment status.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "payment-configuration": {
+                "slug": "payment-configuration",
+                "category": "payment-checkout",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Payment Configuration",
+                    "description": "Learn how to configure payment gateways, set up payment methods, and manage payment settings for your store.",
+                    "meta_description": "Complete guide to configuring payment gateways, setting up payment methods, and managing payment settings for your Matjrii store.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "payment-gateway-setup": {
+                "slug": "payment-gateway-setup",
+                "category": "payment-checkout",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Payment Gateway Setup",
+                    "description": "Learn how to configure payment gateways in Matjrii to accept payments from customers worldwide.",
+                    "meta_description": "Learn how to configure payment gateways in Matjrii, including Stripe, PayPal, and 25+ other payment methods.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "payment-methods-overview": {
+                "slug": "payment-methods-overview",
+                "category": "payment-checkout",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Payment Methods Overview",
+                    "description": "Overview of all available payment methods in Matjrii, including supported gateways and regional payment options.",
+                    "meta_description": "Overview of all available payment methods in Matjrii, including 27+ payment gateways and regional payment options.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "product-management": {
+            "adding-products": {
+                "slug": "adding-products",
+                "category": "product-management",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Adding Products to Your Store",
+                    "description": "Learn how to add products to your Matjrii store with detailed information, images, and variants.",
+                    "meta_description": "Step-by-step guide to adding products to your Matjrii store with images, pricing, and inventory management.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "bulk-product-operations": {
+                "slug": "bulk-product-operations",
+                "category": "product-management",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Bulk Product Operations",
+                    "description": "Learn how to perform bulk operations on multiple products at once, including bulk edit, delete, and status updates.",
+                    "meta_description": "Guide to performing bulk operations on multiple products including bulk edit, delete, status updates, and price changes.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "inventory-management": {
+                "slug": "inventory-management",
+                "category": "product-management",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Inventory Management",
+                    "description": "Learn how to track inventory, set stock levels, and manage product availability in Matjrii.",
+                    "meta_description": "Complete guide to inventory management in Matjrii including stock tracking, low stock alerts, and inventory reports.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "product-attributes": {
+                "slug": "product-attributes",
+                "category": "product-management",
+                "order": 7,
+                "fields_to_translate": {
+                    "title": "Product Attributes",
+                    "description": "Learn how to define and use product attributes to organize and filter products effectively.",
+                    "meta_description": "Guide to creating and managing product attributes for organizing products, enabling filtering, and creating product variants.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "product-images-media": {
+                "slug": "product-images-media",
+                "category": "product-management",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Product Images & Media",
+                    "description": "Learn how to upload, manage, and optimize product images for your Matjrii store.",
+                    "meta_description": "Complete guide to uploading and managing product images in Matjrii, including image optimization and media library usage.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "product-import-export": {
+                "slug": "product-import-export",
+                "category": "product-management",
+                "order": 8,
+                "fields_to_translate": {
+                    "title": "Product Import & Export",
+                    "description": "Learn how to import products from CSV files and export products for backup or migration purposes.",
+                    "meta_description": "Complete guide to importing and exporting products using CSV files for bulk product management and data migration.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "product-variants": {
+                "slug": "product-variants",
+                "category": "product-management",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Product Variants",
+                    "description": "Learn how to create product variants for size, color, and other attributes, with individual pricing and inventory.",
+                    "meta_description": "Complete guide to creating and managing product variants with different sizes, colors, and attributes, each with individual pricing and inventory.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "store-management": {
+            "creating-store": {
+                "slug": "creating-store",
+                "category": "store-management",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Creating Your First Store",
+                    "description": "Step-by-step guide to creating your first online store in Matjrii.",
+                    "meta_description": "Learn how to create your first online store in Matjrii with step-by-step instructions.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-content-management": {
+                "slug": "store-content-management",
+                "category": "store-management",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Store Content Management",
+                    "description": "Learn how to manage store content including homepage sections, product descriptions, and store pages using AI-powered content generation.",
+                    "meta_description": "Learn how to manage store content including homepage sections, AI content generation, custom pages, and SEO optimization in Matjrii.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-customization": {
+                "slug": "store-customization",
+                "category": "store-management",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Store Customization",
+                    "description": "Learn how to customize your store's appearance, branding, and layout to match your brand identity.",
+                    "meta_description": "Guide to customizing your store's branding, colors, typography, layout, and appearance to match your brand identity.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-domain-setup": {
+                "slug": "store-domain-setup",
+                "category": "store-management",
+                "order": 8,
+                "fields_to_translate": {
+                    "title": "Custom Domain Setup",
+                    "description": "Learn how to set up a custom domain for your store, including DNS configuration and SSL certificate setup.",
+                    "meta_description": "Step-by-step guide to setting up a custom domain for your Matjrii store, including DNS configuration and SSL setup.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-seo-settings": {
+                "slug": "store-seo-settings",
+                "category": "store-management",
+                "order": 7,
+                "fields_to_translate": {
+                    "title": "Store SEO Settings",
+                    "description": "Configure SEO settings to improve your store's visibility in search engines and drive organic traffic.",
+                    "meta_description": "Complete guide to configuring SEO settings for your Matjrii store to improve search engine visibility and organic traffic.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-settings": {
+                "slug": "store-settings",
+                "category": "store-management",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Store Settings & Configuration",
+                    "description": "Learn how to configure store settings including contact information, social media links, and store preferences.",
+                    "meta_description": "Complete guide to configuring store settings including contact info, social media, SEO, and store preferences in Matjrii.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-themes": {
+                "slug": "store-themes",
+                "category": "store-management",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Store Themes & Customization",
+                    "description": "Learn how to choose and customize store themes to match your brand and industry.",
+                    "meta_description": "Guide to choosing and customizing store themes in Matjrii, including color customization, branding, and responsive design.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        },
+        "troubleshooting": {
+            "common-issues": {
+                "slug": "common-issues",
+                "category": "troubleshooting",
+                "order": 1,
+                "fields_to_translate": {
+                    "title": "Common Issues and Solutions",
+                    "description": "Solutions to common issues you might encounter while using Matjrii.",
+                    "meta_description": "Solutions to common issues in Matjrii including payment, store, order, and account problems.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "contact-support": {
+                "slug": "contact-support",
+                "category": "troubleshooting",
+                "order": 6,
+                "fields_to_translate": {
+                    "title": "Contact Support",
+                    "description": "Learn how to contact Matjrii support, get help with issues, and find resources for troubleshooting problems.",
+                    "meta_description": "Learn how to contact Matjrii support, get help with issues, and find resources for troubleshooting problems.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "payment-issues": {
+                "slug": "payment-issues",
+                "category": "troubleshooting",
+                "order": 2,
+                "fields_to_translate": {
+                    "title": "Payment Issues",
+                    "description": "Common payment issues and solutions, including failed payments, refund problems, and payment gateway errors.",
+                    "meta_description": "Common payment issues and solutions including failed payments, refund problems, and payment gateway errors.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "product-import-issues": {
+                "slug": "product-import-issues",
+                "category": "troubleshooting",
+                "order": 4,
+                "fields_to_translate": {
+                    "title": "Product Import Issues",
+                    "description": "Common product import problems and solutions, including CSV format errors, data validation issues, and import failures.",
+                    "meta_description": "Common product import problems and solutions including CSV format errors, data validation issues, and import failures.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "store-setup-issues": {
+                "slug": "store-setup-issues",
+                "category": "troubleshooting",
+                "order": 3,
+                "fields_to_translate": {
+                    "title": "Store Setup Issues",
+                    "description": "Troubleshoot common store setup issues including theme problems, domain configuration, and store activation.",
+                    "meta_description": "Troubleshoot common store setup issues including theme problems, domain configuration, and store activation.",
+                    "content": "HTML content (preserve structure)"
+                }
+            },
+            "theme-customization-issues": {
+                "slug": "theme-customization-issues",
+                "category": "troubleshooting",
+                "order": 5,
+                "fields_to_translate": {
+                    "title": "Theme Customization Issues",
+                    "description": "Troubleshoot theme customization problems including CSS issues, layout problems, and customization not saving.",
+                    "meta_description": "Troubleshoot theme customization problems including CSS issues, layout problems, and customization not saving.",
+                    "content": "HTML content (preserve structure)"
+                }
+            }
+        }
+    },
+    "total_articles": 60,
+    "guidelines": {
+        "preserve_fields": [
+            "slug",
+            "category",
+            "order"
+        ],
+        "translate_fields": [
+            "title",
+            "description",
+            "content",
+            "meta_description"
+        ],
+        "optional_fields": [
+            "updated_at",
+            "reading_time"
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "slug": "introduction",
+  "title": "Introducción a Matjrii",
+  "category": "getting-started",
+  "description": "Conoce Matjrii, una plataforma SaaS de comercio electrónico multi-tienda completa que te permite crear y gestionar tiendas online ilimitadas.",
+  "content": "<h1>Bienvenido a Matjrii</h1><p>Matjrii es una potente plataforma SaaS de comercio electrónico multi-tienda diseñada para ayudarte a crear y gestionar tiendas online ilimitadas desde un solo panel de control. Ya seas un pequeño empresario o una empresa, Matjrii proporciona todas las herramientas que necesitas para tener éxito en el comercio electrónico.</p><h2>Características Principales</h2><ul><li><strong>Gestión Multi-Tienda:</strong> Crea y gestiona múltiples tiendas online desde una cuenta</li><li><strong>10+ Temas Profesionales:</strong> Elige entre diseños de tienda específicos para la industria</li><li><strong>27+ Pasarelas de Pago:</strong> Acepta pagos de clientes de todo el mundo</li><li><strong>Comercio Electrónico Completo:</strong> Productos, pedidos, clientes y gestión de inventario</li><li><strong>Generación de Contenido con IA:</strong> Genera automáticamente descripciones de productos y contenido</li><li><strong>Soporte Multi-Idioma:</strong> Llega a clientes en 22+ idiomas</li></ul><h2>Primeros Pasos</h2><p>Para comenzar a usar Matjrii, necesitarás:</p><ol><li>Crear una cuenta</li><li>Elegir un plan de suscripción</li><li>Crear tu primera tienda</li><li>Agregar productos</li><li>Configurar métodos de pago</li><li>¡Lanzar tu tienda!</li></ol><p>¿Listo para comenzar? Continúa con la siguiente guía sobre <a href=\"/docs/account-creation\">Creación de Cuenta y Registro</a>.</p>",
+  "meta_description": "Introducción a la plataforma de comercio electrónico Matjrii - Aprende sobre gestión multi-tienda, temas, pasarelas de pago y más.",
+  "order": 1,
+  "updated_at": "2026-01-11",
+  "reading_time": 3
+}
+

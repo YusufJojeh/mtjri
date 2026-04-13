@@ -1,0 +1,29 @@
+=== QUALITY ANALYSIS ===
+Untranslated (EN = AR): 30
+Machine translation markers: 13
+HTML tag inconsistency: 0
+Placeholder inconsistency: 0
+Poor quality markers: 0
+
+=== UNTRANSLATED STRINGS ===
+"AuthorizeNet": "AuthorizeNet"
+"AWS S3": "AWS S3"
+"Cashfree": "Cashfree"
+"CinetPay": "CinetPay"
+"Flutterwave": "Flutterwave"
+"Midtrans": "Midtrans"
+"Paystack": "Paystack"
+"PayTR": "PayTR"
+"SSPay": "SSPay"
+"0.00": "0.00"
+
+=== MACHINE TRANSLATION MARKERS (parentheses around brands) ===
+Aamarpay:
+  EN: Aamarpay
+Traceback (most recent call last):
+  File "C:\Users\Yusuf\OneDrive\Desktop\matjri - Copy\analyze_translations.py", line 72, in <module>
+    print(f'  AR: {ar[key]}')
+  File "C:\Users\Yusuf\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 7-13: character maps to <undefined>

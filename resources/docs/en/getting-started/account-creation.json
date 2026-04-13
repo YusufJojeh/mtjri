@@ -1,0 +1,12 @@
+{
+  "slug": "account-creation",
+  "title": "Account Creation & Registration",
+  "category": "getting-started",
+  "description": "Step-by-step guide to creating your Matjrii account and completing the registration process.",
+  "content": "<h1>Creating Your Matjrii Account</h1><p>Getting started with Matjrii is simple. Follow these steps to create your account:</p><h2>Step 1: Visit the Registration Page</h2><p>Navigate to the Matjrii landing page and click the <strong>\"Get Started\"</strong> or <strong>\"Register\"</strong> button in the header.</p><h2>Step 2: Fill in Your Information</h2><p>You'll need to provide:</p><ul><li>Your full name</li><li>Email address</li><li>Password (minimum 8 characters)</li><li>Confirm password</li></ul><h2>Step 3: Verify Your Email</h2><p>After registration, check your email inbox for a verification link. Click the link to verify your email address.</p><h2>Step 4: Complete Your Profile</h2><p>Once verified, you'll be guided through a registration stepper where you can:</p><ul><li>Add company information</li><li>Select your business type</li><li>Configure basic settings</li></ul><h2>Step 5: Choose a Subscription Plan</h2><p>After completing your profile, you'll be redirected to the plans page where you can choose a subscription plan that fits your needs.</p><h2>Next Steps</h2><p>After creating your account, check out the <a href=\"/docs/dashboard-overview\">Dashboard Overview</a> guide to learn how to navigate your new Matjrii dashboard.</p>",
+  "meta_description": "Learn how to create your Matjrii account, verify your email, and complete the registration process.",
+  "order": 2,
+  "updated_at": "2026-01-11",
+  "reading_time": 5
+}
+

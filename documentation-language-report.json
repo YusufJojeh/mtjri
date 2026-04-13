@@ -1,0 +1,150 @@
+{
+    "summary": {
+        "total_files": 197,
+        "files_with_issues": 0,
+        "clean_percentage": 100,
+        "languages_affected": [],
+        "by_language": {
+            "en": {
+                "total_files": 64,
+                "files_with_issues": 0,
+                "clean_files": 64,
+                "clean_percentage": 100
+            },
+            "ar": {
+                "total_files": 34,
+                "files_with_issues": 0,
+                "clean_files": 34,
+                "clean_percentage": 100
+            },
+            "es": {
+                "total_files": 33,
+                "files_with_issues": 0,
+                "clean_files": 33,
+                "clean_percentage": 100
+            },
+            "fr": {
+                "total_files": 33,
+                "files_with_issues": 0,
+                "clean_files": 33,
+                "clean_percentage": 100
+            },
+            "de": {
+                "total_files": 33,
+                "files_with_issues": 0,
+                "clean_files": 33,
+                "clean_percentage": 100
+            },
+            "da": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "it": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "ja": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "nl": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "pl": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "pt": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "pt-BR": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "ru": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "tr": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "zh": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "he": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "fa": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "et": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "id": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "ro": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "th": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "zh-CN": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            },
+            "zh-TW": {
+                "total_files": 0,
+                "files_with_issues": 0,
+                "clean_files": 0,
+                "clean_percentage": 100
+            }
+        }
+    },
+    "issues": [],
+    "generated_at": "2026-01-12 11:58:01"
+}

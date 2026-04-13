@@ -1,0 +1,12 @@
+{
+  "slug": "account-creation",
+  "title": "Création de Compte et Inscription",
+  "category": "getting-started",
+  "description": "Guide étape par étape pour créer votre compte Matjrii et compléter le processus d'inscription.",
+  "content": "<h1>Créer Votre Compte Matjrii</h1><p>Commencer avec Matjrii est simple. Suivez ces étapes pour créer votre compte:</p><h2>Étape 1: Visitez la Page d'Inscription</h2><p>Naviguez vers la page d'accueil Matjrii et cliquez sur le bouton <strong>\"Commencer\"</strong> ou <strong>\"S'inscrire\"</strong> dans l'en-tête.</p><h2>Étape 2: Remplissez Vos Informations</h2><p>Vous devrez fournir:</p><ul><li>Votre nom complet</li><li>Adresse e-mail</li><li>Mot de passe (minimum 8 caractères)</li><li>Confirmer le mot de passe</li></ul><h2>Étape 3: Vérifiez Votre E-mail</h2><p>Après l'inscription, vérifiez votre boîte de réception pour un lien de vérification. Cliquez sur le lien pour vérifier votre adresse e-mail.</p><h2>Étape 4: Complétez Votre Profil</h2><p>Une fois vérifié, vous serez guidé à travers un assistant d'inscription où vous pouvez:</p><ul><li>Ajouter des informations sur l'entreprise</li><li>Sélectionner votre type d'entreprise</li><li>Configurer les paramètres de base</li></ul><h2>Étape 5: Choisissez un Plan d'Abonnement</h2><p>Après avoir complété votre profil, vous serez redirigé vers la page des plans où vous pouvez choisir un plan d'abonnement qui correspond à vos besoins.</p><h2>Prochaines Étapes</h2><p>Après avoir créé votre compte, consultez le guide <a href=\"/docs/dashboard-overview\">Aperçu du Tableau de Bord</a> pour apprendre à naviguer dans votre nouveau tableau de bord Matjrii.</p>",
+  "meta_description": "Apprenez comment créer votre compte Matjrii, vérifier votre e-mail et compléter le processus d'inscription.",
+  "order": 2,
+  "updated_at": "2026-01-11",
+  "reading_time": 5
+}
+
