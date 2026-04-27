@@ -42,4 +42,10 @@ return [
         'download_track_cache_ttl' => (int) env('UNSPLASH_DOWNLOAD_TRACK_TTL', 86400),
     ],
 
+    'ollama' => [
+        'base_url' => env('OLLAMA_BASE_URL', 'http://127.0.0.1:11434'),
+        'model' => env('OLLAMA_MODEL', ''),
+        'timeout_ms' => (int) env('OLLAMA_TIMEOUT_MS', 60000),
+    ],
+
 ];

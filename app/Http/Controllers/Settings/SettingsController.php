@@ -47,6 +47,12 @@ class SettingsController extends Controller
         $systemSettings['unsplashAccessKey'] = Setting::getGlobal('unsplashAccessKey');
         $systemSettings['unsplashApplicationId'] = Setting::getGlobal('unsplashApplicationId');
         $systemSettings['unsplashSecretKey'] = Setting::getGlobal('unsplashSecretKey');
+        $systemSettings['aiProviderDefault'] = Setting::getGlobal('aiProviderDefault') ?? config('ai.default_provider', 'openai');
+        $systemSettings['ollamaBaseUrl'] = Setting::getGlobal('ollamaBaseUrl') ?? config('ai.ollama.base_url', 'http://127.0.0.1:11434');
+        $systemSettings['ollamaModel'] = Setting::getGlobal('ollamaModel') ?? config('ai.ollama.model', '');
+        $systemSettings['ollamaTimeoutMs'] = Setting::getGlobal('ollamaTimeoutMs') ?? (string) config('ai.ollama.timeout_ms', 60000);
+        $systemSettings['aiAgenticEnabled'] = Setting::getGlobal('aiAgenticEnabled') ?? (config('ai.agentic_enabled', false) ? '1' : '0');
+        $systemSettings['aiFallbackToOpenai'] = Setting::getGlobal('aiFallbackToOpenai') ?? (config('ai.fallback_to_openai', false) ? '1' : '0');
         
         $currencies = Currency::all();
         $paymentSettings = PaymentSetting::getUserSettings($user->id, $storeId);
@@ -66,6 +72,7 @@ class SettingsController extends Controller
             'hasUnsplashKey' => !empty(Setting::getGlobal('unsplashAccessKey')),
             'hasUnsplashApplicationId' => !empty(Setting::getGlobal('unsplashApplicationId')),
             'hasUnsplashSecretKey' => !empty(Setting::getGlobal('unsplashSecretKey')),
+            'hasOllamaModel' => !empty(Setting::getGlobal('ollamaModel')),
 
         ]);
     }

@@ -47,38 +47,19 @@ class LandingPageController extends Controller
         
         $plans = Plan::where('is_plan_enable', 'on')->get()->map(function ($plan) {
             $features = [];
-            if ($plan->features) {
-                $enabledFeatures = $plan->getEnabledFeatures();
-                $featureLabels = [
-                    'custom_domain' => __('Custom Domain'),
-                    'custom_subdomain' => __('Subdomain'),
-                    'pwa_support' => __('PWA'),
-                    'ai_integration' => __('AI Integration'),
-                    'password_protection' => __('Password Protection')
-                ];
-                foreach ($enabledFeatures as $feature) {
-                    if (isset($featureLabels[$feature])) {
-                        $features[] = $featureLabels[$feature];
-                    }
-                }
-                
-                // Add template sections with count
-                $templateSections = $plan->getAllowedTemplateSections();
-                if (!empty($templateSections)) {
-                    $features[] = __('Template Sections ( :count )', ['count' => count($templateSections)]);
-                } else {
-                    $features[] = __('Template Sections ( :count )', ['count' => $templateSections ?? 0]);
-                }
-            } else {
-                // Fallback to legacy columns
-                if ($plan->enable_custdomain === 'on') $features[] = __('Custom Domain');
-                if ($plan->enable_custsubdomain === 'on') $features[] = __('Subdomain');
-                if ($plan->pwa_business === 'on') $features[] = __('PWA');
-                if ($plan->enable_chatgpt === 'on') $features[] = __('AI Integration');
-                  $templateSections = [];
-    $features[] = __('Template Sections ( :count )', ['count' => count($templateSections)]);
+            if ($plan->enable_custdomain === 'on') $features[] = __('Custom Domain');
+            if ($plan->enable_custsubdomain === 'on') $features[] = __('Custom Subdomain');
+            if ($plan->pwa_business === 'on') $features[] = __('PWA Support');
+            if ($plan->enable_chatgpt === 'on') $features[] = __('AI Content Tools');
+            if ($plan->enable_custom_pages === 'on') $features[] = __('Custom Pages');
+            if ($plan->enable_blog === 'on') $features[] = __('Blog');
+            if ($plan->enable_shipping_method === 'on') $features[] = __('Shipping Methods');
+
+            $themeCount = is_array($plan->themes) ? count($plan->themes) : 0;
+            if ($themeCount > 0) {
+                $features[] = __('Theme Access (:count)', ['count' => $themeCount]);
             }
-            
+
             return [
                 'id' => $plan->id,
                 'name' => $plan->name,
@@ -88,12 +69,12 @@ class LandingPageController extends Controller
                 'description' => $plan->description,
                 'features' => $features,
                 'stats' => [
-                    'businesses' => $plan->business,
-                    'users' => $plan->max_users,
+                    'stores' => $plan->max_stores,
+                    'users_per_store' => $plan->max_users_per_store,
+                    'products_per_store' => $plan->max_products_per_store,
                     'storage' => $plan->storage_limit . ' GB',
-                    'templates' => is_array($plan->themes) ? count($plan->themes) : 34,
-                    'bio_links' => $plan->bio_links,
-                    'bio_links_templates' => is_array($plan->bio_links_themes) ? count($plan->bio_links_themes) : 14,
+                    'themes' => $themeCount,
+                    'trial_days' => $plan->trial_day,
                 ],
                 'is_plan_enable' => $plan->is_plan_enable,
                 'is_popular' => false // Will be set based on subscriber count

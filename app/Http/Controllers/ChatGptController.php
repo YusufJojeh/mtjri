@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Models\Setting;
-use OpenAI;
+use App\Services\AIOrchestratorService;
 
 class ChatGptController extends Controller
 {
+    public function __construct(
+        private readonly AIOrchestratorService $aiOrchestratorService
+    ) {
+    }
+
     public function generate(Request $request): JsonResponse
     {
         $request->validate([
@@ -16,20 +20,12 @@ class ChatGptController extends Controller
             'language' => 'string|in:en,es,ar,da,de,fr,he,it,ja,nl,pl,pt,pt-BR,ru,tr,zh',
             'creativity' => 'string|in:low,medium,high',
             'num_results' => 'integer|min:1|max:5',
-            'max_length' => 'integer|min:1|max:500'
+            'max_length' => 'integer|min:1|max:500',
+            'provider' => 'nullable|string|in:openai,ollama',
+            'agentic' => 'nullable|boolean',
         ]);
 
         try {
-            $apiKey = Setting::where('key', 'chatgptKey')->value('value');
-            $model = Setting::where('key', 'chatgptModel')->value('value') ?? 'gpt-3.5-turbo';
-            
-            if (!$apiKey) {
-                return response()->json([
-                    'success' => false,
-                    'message' => __('Please set proper configuration for Api Key')
-                ]);
-            }
-
             $temperature = (float) $request->input('creativity', 0.7);
             if (is_string($request->input('creativity'))) {
                 $temperature = match($request->input('creativity')) {
@@ -61,46 +57,43 @@ class ChatGptController extends Controller
 
             $maxTokens = (int) $request->input('max_length', 150);
             $maxResults = (int) $request->input('num_results', 1);
+            $orchestrated = $this->aiOrchestratorService->generateChatResponse(
+                $request->prompt . ' ' . $langText,
+                [
+                    'provider' => $request->input('provider'),
+                    'agentic' => $request->has('agentic') ? (bool) $request->boolean('agentic') : null,
+                    'temperature' => $temperature,
+                    'max_tokens' => $maxTokens,
+                    'n' => $maxResults,
+                ]
+            );
 
-            $client = OpenAI::client($apiKey);
-            
-            $response = $client->chat()->create([
-                'model' => $model,
-                'messages' => [
-                    [
-                        'role' => 'user',
-                        'content' => $request->prompt . ' ' . $langText
-                    ]
-                ],
-                'max_tokens' => $maxTokens,
-                'temperature' => $temperature,
-                'n' => $maxResults
-            ]);
-
-            if (isset($response->choices)) {
-                $text = '';
-                $counter = 1;
-                
-                if (count($response->choices) > 1) {
-                    foreach ($response->choices as $choice) {
-                        $text .= $counter . '. ' . trim($choice->message->content) . "\r\n\r\n\r\n";
-                        $counter++;
-                    }
-                } else {
-                    $text = $response->choices[0]->message->content;
-                }
-
-                return response()->json([
-                    'success' => true,
-                    'content' => trim($text)
-                ]);
-            } else {
+            if (!$orchestrated['success']) {
                 return response()->json([
                     'success' => false,
-                    'message' => __('Text was not generated, please try again')
-                ]);
+                    'error_code' => $orchestrated['error_code'] ?? 'tool_failed',
+                    'message' => $orchestrated['error_message'] ?? __('Text was not generated, please try again'),
+                ], 422);
             }
 
+            $choices = $orchestrated['choices'] ?? [];
+            $text = '';
+            $counter = 1;
+            if (count($choices) > 1) {
+                foreach ($choices as $choice) {
+                    $text .= $counter . '. ' . trim($choice) . "\r\n\r\n\r\n";
+                    $counter++;
+                }
+            } else {
+                $text = (string) ($orchestrated['content'] ?? '');
+            }
+
+            return response()->json([
+                'success' => true,
+                'content' => trim($text),
+                'provider' => $orchestrated['provider'] ?? null,
+                'steps' => $orchestrated['steps'] ?? [],
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

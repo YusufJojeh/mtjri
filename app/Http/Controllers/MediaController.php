@@ -97,16 +97,12 @@ class MediaController extends Controller
         if (str_starts_with($url, 'http')) {
             return $url;
         }
-        
-        // Get the base URL from the APP_URL environment variable
-        $baseUrl = rtrim(config('app.url'), '/');
-        
-        // Make sure the URL starts with a slash
+
         if (!str_starts_with($url, '/')) {
             $url = '/' . $url;
         }
-        
-        return $baseUrl . $url;
+
+        return url($url);
     }
 
     private function getUserFriendlyError(\Exception $e, $fileName): string

@@ -31,7 +31,7 @@
                 
                 // Set base URL for image helper
                 window.appSettings = {
-                    baseUrl: '{{ config('app.url') }}'
+                    baseUrl: '{{ request()->getSchemeAndHttpHost() }}'
                 };
             })();
         </script>

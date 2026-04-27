@@ -60,7 +60,7 @@ class StoreContentGenerationServiceTest extends TestCase
         // Configure mock for successful OpenAI response
         $mockOpenAIContentGenerator = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAIContentGenerator->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt, $userLanguage) {
+            ->andReturnUsing(function ($prompt, $userLanguage, $options = []) {
                 if (str_contains($prompt, 'hero')) {
                     return ['title' => 'AI Hero Title', 'subtitle' => 'AI Hero Subtitle', 'description' => 'AI Hero Description', 'cta_text' => 'Shop Now'];
                 } elseif (str_contains($prompt, 'features')) {
@@ -186,7 +186,7 @@ class StoreContentGenerationServiceTest extends TestCase
         // Configure mock for successful OpenAI response
         $mockOpenAIContentGenerator = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAIContentGenerator->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt, $userLanguage) {
+            ->andReturnUsing(function ($prompt, $userLanguage, $options = []) {
                 if (str_contains($prompt, 'hero')) {
                     return ['title' => 'AI Hero Title', 'subtitle' => 'AI Hero Subtitle', 'description' => 'AI Hero Description', 'cta_text' => 'Shop Now'];
                 } elseif (str_contains($prompt, 'about')) {
@@ -234,7 +234,7 @@ class StoreContentGenerationServiceTest extends TestCase
         // Configure mock for OpenAI to return empty content (simulating no key/failure)
         $mockOpenAIContentGenerator = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAIContentGenerator->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt, $userLanguage) {
+            ->andReturnUsing(function ($prompt, $userLanguage, $options = []) {
                 // If the key is not set, the service should eventually return empty for AI content
                 return ['error' => 'OpenAI API key not set in settings.'];
             });
@@ -288,7 +288,7 @@ class StoreContentGenerationServiceTest extends TestCase
         // Configure mock for successful OpenAI response
         $mockOpenAIContentGenerator = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAIContentGenerator->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt, $userLanguage) {
+            ->andReturnUsing(function ($prompt, $userLanguage, $options = []) {
                 if (str_contains($prompt, 'hero')) {
                     return ['title' => 'AI Hero Title', 'subtitle' => 'AI Hero Subtitle', 'description' => 'AI Hero Description', 'cta_text' => 'Shop Now'];
                 }
@@ -326,7 +326,7 @@ class StoreContentGenerationServiceTest extends TestCase
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt) {
+            ->andReturnUsing(function ($prompt, $userLanguage = 'en', $options = []) {
                 // Check that prompt includes context from new service
                 $this->assertStringContainsString('fashion', $prompt);
                 return ['title' => 'Test'];
@@ -353,7 +353,7 @@ class StoreContentGenerationServiceTest extends TestCase
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt) {
+            ->andReturnUsing(function ($prompt, $userLanguage = 'en', $options = []) {
                 // Check that prompt includes language context
                 $this->assertStringContainsString('Arabic', $prompt);
                 return ['title' => 'Test'];
@@ -397,7 +397,7 @@ class StoreContentGenerationServiceTest extends TestCase
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt) {
+            ->andReturnUsing(function ($prompt, $userLanguage = 'en', $options = []) {
                 if (str_contains($prompt, 'hero')) {
                     return ['title' => 'Hero Title'];
                 }
@@ -425,7 +425,7 @@ class StoreContentGenerationServiceTest extends TestCase
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt) {
+            ->andReturnUsing(function ($prompt, $userLanguage = 'en', $options = []) {
                 $this->assertStringContainsString('fashion', $prompt);
                 return ['title' => 'Section Title'];
             });
@@ -460,3 +460,5 @@ class StoreContentGenerationServiceTest extends TestCase
         }
     }
 }
+
+

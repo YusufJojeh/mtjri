@@ -43,7 +43,7 @@ class StoreContentGenerationIntegrationTest extends TestCase
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt) {
+            ->andReturnUsing(function ($prompt, $userLanguage = 'en', $options = []) {
                 if (str_contains($prompt, 'hero')) {
                     return ['title' => 'Fashion Hero', 'subtitle' => 'Style', 'button_text' => 'Shop'];
                 }
@@ -142,4 +142,5 @@ class StoreContentGenerationIntegrationTest extends TestCase
         }
     }
 }
+
 

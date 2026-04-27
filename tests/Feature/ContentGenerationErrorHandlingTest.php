@@ -90,7 +90,7 @@ class ContentGenerationErrorHandlingTest extends TestCase
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt) {
+            ->andReturnUsing(function ($prompt, $userLanguage = 'en', $options = []) {
                 if (str_contains($prompt, 'hero')) {
                     return ['title' => 'Hero Title'];
                 }
@@ -126,4 +126,5 @@ class ContentGenerationErrorHandlingTest extends TestCase
         $this->assertIsArray($content);
     }
 }
+
 

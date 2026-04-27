@@ -15,7 +15,10 @@ export function useChatGpt(options: UseChatGptOptions = {}) {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const generateContent = async (prompt: string): Promise<string | null> => {
+  const generateContent = async (
+    prompt: string,
+    requestOptions: { provider?: 'openai' | 'ollama'; agentic?: boolean } = {}
+  ): Promise<string | null> => {
     if (!prompt.trim()) {
       toast.error(t('Please enter a prompt'));
       return null;
@@ -29,7 +32,11 @@ export function useChatGpt(options: UseChatGptOptions = {}) {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
         },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify({
+          prompt,
+          provider: requestOptions.provider,
+          agentic: requestOptions.agentic
+        })
       });
 
       const data = await response.json();

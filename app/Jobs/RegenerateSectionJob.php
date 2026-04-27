@@ -146,11 +146,11 @@ class RegenerateSectionJob implements ShouldQueue
             $errorCode = 'GENERATION_FAILED';
             $errorMessage = $e->getMessage();
 
-            if (str_contains($errorMessage, 'API key') || str_contains($errorMessage, 'OpenAI')) {
-                $errorCode = 'OPENAI_KEY_MISSING';
-                $errorMessage = __('OpenAI API key is not configured. Please configure it in settings.');
+            if (str_contains($errorMessage, 'API key') || str_contains($errorMessage, 'OpenAI') || str_contains($errorMessage, 'Ollama model')) {
+                $errorCode = 'AI_PROVIDER_MISCONFIGURED';
+                $errorMessage = __('AI provider is not configured. Please review AI settings.');
             } elseif (str_contains($errorMessage, 'rate limit') || str_contains($errorMessage, '429')) {
-                $errorCode = 'OPENAI_RATE_LIMIT';
+                $errorCode = 'AI_RATE_LIMIT';
                 $errorMessage = __('Rate limit exceeded. Please wait a moment and try again.');
             } elseif (str_contains($errorMessage, 'timeout')) {
                 $errorCode = 'TIMEOUT';
@@ -199,4 +199,3 @@ class RegenerateSectionJob implements ShouldQueue
         Cache::put($cacheKey, $updated, 1800);
     }
 }
-

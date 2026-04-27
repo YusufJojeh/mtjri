@@ -1,330 +1,201 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from '@inertiajs/react';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
 import { useBrand } from '@/contexts/BrandContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { PUBLIC_BRAND_PRIMARY, PUBLIC_BRAND_SECONDARY, getMarketingLogoDisplayUrl } from '@/lib/public-brand';
+import { getMarketingLogoDisplayUrl, PUBLIC_BRAND_PRIMARY } from '@/lib/public-brand';
 
 interface CustomPage {
-  id: number;
-  title: string;
-  slug: string;
+    id: number;
+    title: string;
+    slug: string;
 }
 
 interface HeaderProps {
-  brandColor?: string;
-  settings: {
-    company_name: string;
-    config_sections?: {
-      colors?: {
-        primary?: string;
-        secondary?: string;
-        accent?: string;
-      };
+    brandColor?: string;
+    settings: {
+        company_name: string;
     };
-    [key: string]: any;
-  };
-  customPages?: CustomPage[];
-  user?: any;
+    customPages?: CustomPage[];
+    user?: any;
 }
 
-export default function Header({ settings, customPages = [], brandColor = PUBLIC_BRAND_PRIMARY, user }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { logoLight, logoDark } = useBrand();
-  
-  // Get colors from settings
-  const colors = settings?.config_sections?.colors || {
-    primary: brandColor,
-    secondary: PUBLIC_BRAND_SECONDARY,
-    accent: brandColor,
-  };
-  const primaryColor = colors.primary || brandColor;
-  const secondaryColor = colors.secondary || PUBLIC_BRAND_SECONDARY;
+export default function Header({
+    settings,
+    customPages = [],
+    brandColor = PUBLIC_BRAND_PRIMARY,
+    user,
+}: HeaderProps) {
+    const { t } = useTranslation();
+    const { logoLight, logoDark } = useBrand();
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [isScrolled, setIsScrolled] = React.useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    React.useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 12);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const home = route('home');
+    const hash = (id: string) => `${home}#${id}`;
+    const logoSrc = getMarketingLogoDisplayUrl(logoLight, logoDark, false);
+
+    const customNavItems = customPages
+        .filter((page) => !['about-us', 'contact-us', 'faq', 'privacy-policy', 'terms-of-service'].includes(page.slug))
+        .slice(0, 2)
+        .map((page) => ({
+            label: page.title,
+            href: route('custom-page.show', page.slug),
+            externalToHome: false,
+        }));
+
+    const navItems = [
+        { label: t('landing.cinematic.header.platform'), href: hash('platform'), externalToHome: true },
+        { label: t('landing.cinematic.header.motion'), href: hash('motion-story'), externalToHome: true },
+        { label: t('landing.cinematic.header.proof'), href: hash('proof'), externalToHome: true },
+        { label: t('landing.cinematic.header.themes'), href: hash('themes'), externalToHome: true },
+        { label: t('documentation.title'), href: route('documentation.index'), externalToHome: false },
+        ...customNavItems,
+        { label: t('landing.cinematic.header.contact'), href: route('contact'), externalToHome: false },
+    ];
+
+    const chromeClass = isScrolled
+        ? 'border-slate-200/80 bg-white/92 shadow-[0_18px_60px_-28px_rgba(15,23,42,0.22)] backdrop-blur-xl'
+        : 'border-transparent bg-white/72 backdrop-blur-lg';
+
+    const primaryCtaLabel = t('landing.cinematic.header.primaryCta');
+    const loginLabel = t('Login');
+
+    const renderNavLink = (item: { label: string; href: string; externalToHome: boolean }, mobile = false) => {
+        const className = mobile
+            ? 'block rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-slate-950'
+            : 'text-sm font-medium text-slate-600 transition hover:text-slate-950';
+
+        if (item.externalToHome) {
+            return (
+                <a key={item.label} href={item.href} className={className}>
+                    {item.label}
+                </a>
+            );
+        }
+
+        return (
+            <Link key={item.label} href={item.href} className={className}>
+                {item.label}
+            </Link>
+        );
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  const { t } = useTranslation();
-  
-  // Filter out Terms and Privacy from header navbar (they stay in footer)
-  const excludedFromHeader = ['terms', 'privacy', 'terms-of-service', 'privacy-policy'];
-  
-  // Helper function to get translated menu title from slug
-  const getMenuTitle = (slug: string, fallbackTitle: string): string => {
-    // Map common page slugs to translation keys
-    const translationKey = `landing.header.menu.${slug}`;
-    const translated = t(translationKey);
-    
-    // If translation exists and is different from the key, use it
-    // Otherwise, use the fallback title (but this shouldn't happen if translations are set)
-    if (translated && translated !== translationKey) {
-      return translated;
-    }
-    
-    // Fallback: return the fallback title (from backend) if translation not found
-    // This handles dynamic pages that might not have translations
-    return fallbackTitle;
-  };
-  
-  const menuItems = customPages
-    .filter(page => !excludedFromHeader.includes(page.slug))
-    .map(page => ({
-      name: getMenuTitle(page.slug, page.title),
-      href: route('custom-page.show', page.slug)
-    }));
-  // Static styling - no dynamic data
-  const getHeaderClasses = () =>
-    isScrolled
-      ? 'bg-white/85 shadow-lg shadow-slate-900/5 backdrop-blur-xl border-b border-slate-200/80'
-      : 'bg-white/70 backdrop-blur-md border-b border-transparent';
-
-  const getHeaderStyle = () => ({});
-
-  return (
-    <header 
-      data-testid='landing-header'
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 motion-reduce:transition-none ${getHeaderClasses()}`}
-      style={getHeaderStyle()}
-    >
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex justify-between items-center h-16'>
-          {/* Logo */}
-          <div className='flex-shrink-0'>
-            <Link 
-              href={route('home')} 
-              className='flex items-center transition-colors'
+    return (
+        <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-5">
+            <div
+                className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl border px-4 py-3 transition duration-300 md:px-5 ${chromeClass}`}
             >
-              {(() => {
-                // Header chrome is always light (white/blur). Do not tie to `html.dark` or the light
-                // mark is used and disappears on the bar.
-                const displayUrl = getMarketingLogoDisplayUrl(logoLight, logoDark, false);
-                return (
-                  <img
-                    src={displayUrl}
-                    alt={settings.company_name}
-                    className='h-8 w-auto max-w-[100px] object-scale-down transition-all duration-200 sm:max-w-[130px] xl:max-w-[180px]'
-                  />
-                );
-              })()} 
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className='hidden lg:flex items-center xl:space-x-8 space-x-4' role='navigation' aria-label='Main navigation'>
-            {/* Documentation Link */}
-            <Link
-              href={route('documentation.index')}
-              className='text-slate-600 text-sm font-medium transition-colors relative group'
-              style={{ '--hover-color': primaryColor } as React.CSSProperties}
-              onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-              onMouseLeave={(e) => e.currentTarget.style.color = ''}
-            >
-              {t('documentation.title', 'Documentation')}
-              <span
-                className='absolute -bottom-1 left-0 h-0.5 w-0 motion-safe:transition-all motion-safe:duration-300 group-hover:w-full'
-                style={{ backgroundColor: primaryColor }}
-                aria-hidden='true'
-              />
-            </Link>
-
-            <Link
-              href={route('contact')}
-              className='text-slate-600 text-sm font-medium transition-colors relative group'
-              onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-              onMouseLeave={(e) => e.currentTarget.style.color = ''}
-            >
-              {t('landing.header.contact', 'Contact')}
-              <span
-                className='absolute -bottom-1 left-0 h-0.5 w-0 motion-safe:transition-all motion-safe:duration-300 group-hover:w-full'
-                style={{ backgroundColor: primaryColor }}
-                aria-hidden
-              />
-            </Link>
-
-            {menuItems.map((item: any) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className='text-slate-600 text-sm font-medium transition-colors relative group'
-                style={{ '--hover-color': primaryColor } as React.CSSProperties}
-                onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                onMouseLeave={(e) => e.currentTarget.style.color = ''}
-              >
-                {item.name}
-                <span
-                  className='absolute -bottom-1 left-0 h-0.5 w-0 motion-safe:transition-all motion-safe:duration-300 group-hover:w-full'
-                  style={{ backgroundColor: primaryColor }}
-                  aria-hidden='true'
-                />
-              </Link>
-            ))}
-          </nav>
-
-          {/* Auth Buttons */}
-          <div className='hidden lg:flex items-center gap-4'>
-            <LanguageSwitcher brandColor={primaryColor} />
-            {user ? (
-              <Link
-                href={route('dashboard')}
-                className='landing-cta-depth landing-cta-primary rounded-lg border px-6 py-2.5 text-sm font-semibold text-white transition-colors'
-                style={{
-                  backgroundColor: primaryColor,
-                  borderColor: primaryColor,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = secondaryColor;
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = primaryColor;
-                  e.currentTarget.style.color = 'white';
-                }}
-              >
-                {t('Dashboard')}
-              </Link>
-            ) : (
-              <>
-                <Link
-                  href={route('login')}
-                  className='text-slate-600 text-sm font-medium transition-colors'
-                  onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                  onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                >
-                  {t('Login')}
+                <Link href={route('home')} className="flex min-w-0 items-center gap-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)] focus-visible:ring-offset-2">
+                    <div className="flex items-center rounded-[18px] border border-slate-200/80 bg-white px-3 py-2 shadow-sm">
+                        <img
+                            src={logoSrc}
+                            alt={settings.company_name}
+                            className="h-8 w-auto max-w-[112px] object-contain sm:h-9 sm:max-w-[132px]"
+                        />
+                    </div>
+                    <div className="hidden min-w-0 lg:block">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+                            {t('landing.cinematic.header.eyebrow')}
+                        </p>
+                        <p className="truncate text-sm font-semibold text-slate-900">
+                            {t('landing.cinematic.header.subline')}
+                        </p>
+                    </div>
                 </Link>
-                <Link
-                  href={route('register')}
-                  className='landing-cta-depth landing-cta-primary rounded-lg border px-6 py-2.5 text-sm font-semibold text-white transition-colors'
-                  style={{
-                    backgroundColor: primaryColor,
-                    borderColor: primaryColor,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = secondaryColor;
-                    e.currentTarget.style.color = 'white';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = primaryColor;
-                    e.currentTarget.style.color = 'white';
-                  }}
-                >
-                  {t('Get Started')}
-                </Link>
-              </>
-            )}
-          </div>
 
-          {/* Mobile menu button */}
-          <div className='lg:hidden'>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className='p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
-              style={{ ['--tw-ring-color' as string]: primaryColor }}
-              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              aria-expanded={isMenuOpen}
-              aria-controls='mobile-menu'
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
+                <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
+                    {navItems.map((item) => renderNavLink(item))}
+                </nav>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className='lg:hidden border-t border-slate-200/90 bg-white/95 backdrop-blur-md' id='mobile-menu'>
-            <div className='px-4 py-6 space-y-4'>
-              {/* Documentation Link (Mobile) */}
-              <Link
-                href={route('documentation.index')}
-                className='block text-slate-600 hover:text-slate-900 text-base font-medium transition-colors'
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('documentation.title', 'Documentation')}
-              </Link>
-
-              <Link
-                href={route('contact')}
-                className='block text-slate-600 hover:text-slate-900 text-base font-medium transition-colors'
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('landing.header.contact', 'Contact')}
-              </Link>
-
-              {menuItems.map((item: any) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className='block text-slate-600 hover:text-slate-900 text-base font-medium transition-colors'
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className='pt-4 space-y-3 border-t border-slate-200'>
-                <div className='pb-3'>
-                  <LanguageSwitcher brandColor={primaryColor} />
+                <div className="hidden items-center gap-3 lg:flex">
+                    <LanguageSwitcher brandColor={brandColor} />
+                    {user ? (
+                        <Link
+                            href={route('dashboard')}
+                            className="landing-cta-depth inline-flex items-center justify-center rounded-xl border border-[var(--primary-color)] bg-[var(--primary-color)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_18px_40px_-24px_var(--primary-color)] transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)] focus-visible:ring-offset-2"
+                        >
+                            {t('Dashboard')}
+                        </Link>
+                    ) : (
+                        <>
+                            <Link
+                                href={route('login')}
+                                className="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+                            >
+                                {loginLabel}
+                            </Link>
+                            <Link
+                                href={route('register.stepper.index')}
+                                className="landing-cta-depth inline-flex items-center justify-center rounded-xl border border-[var(--primary-color)] bg-[var(--primary-color)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_18px_40px_-24px_var(--primary-color)] transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary-color)] focus-visible:ring-offset-2"
+                            >
+                                {primaryCtaLabel}
+                            </Link>
+                        </>
+                    )}
                 </div>
-                {user ? (
-                  <Link
-                    href={route('dashboard')}
-                    className='landing-cta-depth landing-cta-primary block w-full rounded-lg border py-2.5 text-center text-sm font-semibold text-white transition-colors'
-                    style={{
-                      backgroundColor: primaryColor,
-                      borderColor: primaryColor,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = secondaryColor;
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = primaryColor;
-                      e.currentTarget.style.color = 'white';
-                    }}
-                  >
-                    {t('Dashboard')}
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      href={route('login')}
-                      className='block w-full text-center text-slate-600 py-2.5 text-sm font-medium transition-colors'
-                      onMouseEnter={(e) => e.currentTarget.style.color = primaryColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {t('Login')}
-                    </Link>
-                    <Link
-                      href={route('register')}
-                      className='landing-cta-depth landing-cta-primary block w-full rounded-lg border py-2.5 text-center text-sm font-semibold text-white transition-colors'
-                      style={{
-                        backgroundColor: primaryColor,
-                        borderColor: primaryColor,
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = secondaryColor;
-                        e.currentTarget.style.color = 'white';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = primaryColor;
-                        e.currentTarget.style.color = 'white';
-                      }}
-                    >
-                      {t('Get Started')}
-                    </Link>
-                  </>
-                )}
-              </div>
+
+                <button
+                    type="button"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200/80 bg-white text-slate-700 transition hover:bg-slate-50 lg:hidden"
+                    onClick={() => setIsMenuOpen((open) => !open)}
+                    aria-expanded={isMenuOpen}
+                    aria-controls="landing-mobile-menu"
+                    aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                >
+                    {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                </button>
             </div>
-          </div>
-        )}
-      </div>
-    </header>
-  );
+
+            {isMenuOpen ? (
+                <div
+                    id="landing-mobile-menu"
+                    className="mx-auto mt-3 max-w-7xl rounded-2xl border border-slate-200/80 bg-white/96 p-4 shadow-[0_24px_70px_-34px_rgba(15,23,42,0.24)] backdrop-blur-xl lg:hidden"
+                >
+                    <div className="space-y-1">{navItems.map((item) => renderNavLink(item, true))}</div>
+                    <div className="mt-4 border-t border-slate-200/80 pt-4">
+                        <div className="mb-4">
+                            <LanguageSwitcher brandColor={brandColor} />
+                        </div>
+                        <div className="grid gap-3">
+                            {user ? (
+                                <Link
+                                    href={route('dashboard')}
+                                    className="landing-cta-depth inline-flex items-center justify-center rounded-xl border border-[var(--primary-color)] bg-[var(--primary-color)] px-5 py-3 text-sm font-semibold text-white"
+                                >
+                                    {t('Dashboard')}
+                                </Link>
+                            ) : (
+                                <>
+                                    <Link
+                                        href={route('register.stepper.index')}
+                                        className="landing-cta-depth inline-flex items-center justify-center rounded-xl border border-[var(--primary-color)] bg-[var(--primary-color)] px-5 py-3 text-sm font-semibold text-white"
+                                    >
+                                        {primaryCtaLabel}
+                                    </Link>
+                                    <Link
+                                        href={route('login')}
+                                        className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-5 py-3 text-sm font-medium text-slate-700"
+                                    >
+                                        {loginLabel}
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+        </header>
+    );
 }

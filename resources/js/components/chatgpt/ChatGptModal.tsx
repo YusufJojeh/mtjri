@@ -4,6 +4,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Loader2, Sparkles, Copy, Check, X } from 'lucide-react';
@@ -39,6 +40,8 @@ export function ChatGptModal({
   const [maxLength, setMaxLength] = useState(150);
   const [selectedText, setSelectedText] = useState('');
   const [copied, setCopied] = useState(false);
+  const [provider, setProvider] = useState<'openai' | 'ollama'>('openai');
+  const [agentic, setAgentic] = useState(false);
 
   const handleGenerate = async () => {
     if (!prompt.trim()) {
@@ -59,7 +62,9 @@ export function ChatGptModal({
           language,
           creativity,
           num_results: numResults,
-          max_length: maxLength
+          max_length: maxLength,
+          provider,
+          agentic
         })
       });
 
@@ -89,6 +94,8 @@ export function ChatGptModal({
     setGeneratedContent('');
     setSelectedText('');
     setCopied(false);
+    setProvider('openai');
+    setAgentic(false);
     onClose();
   };
 
@@ -120,7 +127,7 @@ export function ChatGptModal({
   const modalContent = (
     <div className='fixed inset-0 flex items-center justify-center' style={{ zIndex }}>
       <div className='fixed inset-0 bg-black/50' />
-      <div className='bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 pointer-events-auto border' style={{ zIndex: zIndex + 1 }}>
+      <div data-testid='chatgpt-modal-root' className='bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 pointer-events-auto border' style={{ zIndex: zIndex + 1 }}>
         <div className='p-6 border-b flex items-center justify-between'>
           <h2 className='text-lg font-semibold flex items-center gap-2'>
             <Sparkles className='h-5 w-5 text-blue-500' />
@@ -173,6 +180,25 @@ export function ChatGptModal({
 
           <div className='grid grid-cols-2 gap-4'>
             <div>
+              <Label>{t('Provider')}</Label>
+              <Select value={provider} onValueChange={(value) => setProvider(value as 'openai' | 'ollama')}>
+                <SelectTrigger data-testid='chatgpt-provider-trigger'>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent style={{ zIndex: zIndex + 10 }}>
+                  <SelectItem value='openai' data-testid='chatgpt-provider-openai'>OpenAI</SelectItem>
+                  <SelectItem value='ollama' data-testid='chatgpt-provider-ollama'>Ollama</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className='flex items-center justify-between rounded-md border px-3 py-2 mt-6'>
+              <Label>{t('Agentic Mode')}</Label>
+              <Switch data-testid='chatgpt-agentic-toggle' checked={agentic} onCheckedChange={setAgentic} />
+            </div>
+          </div>
+
+          <div className='grid grid-cols-2 gap-4'>
+            <div>
               <Label>{t('Number of Results')}</Label>
               <Input
                 type='number'
@@ -198,6 +224,7 @@ export function ChatGptModal({
             <Label htmlFor='prompt'>{t('Add Text')}</Label>
             <Textarea
               id='prompt'
+              data-testid='chatgpt-prompt-input'
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder={t(placeholder)}
@@ -206,7 +233,8 @@ export function ChatGptModal({
             />
           </div>
 
-          <Button 
+          <Button
+            data-testid='chatgpt-generate-button'
             onClick={handleGenerate} 
             disabled={isLoading || !prompt.trim()}
             className='w-full'

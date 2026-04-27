@@ -8,6 +8,12 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
+        "remotion:compositions": "remotion compositions resources/js/remotion/index.ts",
+        "remotion:studio": "remotion studio resources/js/remotion/index.ts",
+        "remotion:still:hero": "remotion still resources/js/remotion/index.ts MTJRiiHeroFilm artifacts/remotion/mtjrii-hero-frame.png --scale=0.25 --frame=60",
+        "remotion:still:landing": "remotion still resources/js/remotion/index.ts MTJRiiLandingFilm artifacts/remotion/mtjrii-landing-frame.png --scale=0.25 --frame=180",
+        "remotion:render:hero": "remotion render resources/js/remotion/index.ts MTJRiiHeroFilm artifacts/remotion/mtjrii-hero.mp4",
+        "remotion:render:landing": "remotion render resources/js/remotion/index.ts MTJRiiLandingFilm artifacts/remotion/mtjrii-landing.mp4",
         "types": "tsc --noEmit",
         "test": "jest",
         "test:watch": "jest --watch",
@@ -22,6 +28,7 @@
         "@babel/preset-typescript": "^7.28.5",
         "@eslint/js": "^9.19.0",
         "@playwright/test": "^1.59.1",
+        "@remotion/cli": "^4.0.448",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.1",
         "@types/node": "^22.13.5",
@@ -35,6 +42,7 @@
         "prettier": "^3.4.2",
         "prettier-plugin-organize-imports": "^4.1.0",
         "prettier-plugin-tailwindcss": "^0.6.11",
+        "remotion": "^4.0.448",
         "typescript-eslint": "^8.23.0"
     },
     "dependencies": {

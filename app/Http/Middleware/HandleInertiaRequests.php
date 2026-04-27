@@ -36,6 +36,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $frontendBaseUrl = $request->getSchemeAndHttpHost();
+
         // ---- Safety flags (no DB queries during install/update/uninstalled)
         $installed = $this->isInstalled();
         $isSetupRoute = $this->isSetupRoute($request);
@@ -77,8 +79,8 @@ class HandleInertiaRequests extends Middleware
 
             // Merge settings into globalSettings
             $globalSettings = array_merge($settings, $currencySettings);
-            $globalSettings['base_url']  = config('app.url');
-            $globalSettings['image_url'] = config('app.url');
+            $globalSettings['base_url']  = $frontendBaseUrl;
+            $globalSettings['image_url'] = $frontendBaseUrl;
 
             // Filter sensitive keys before sharing to frontend
             $globalSettings = $this->filterSensitiveSettings($globalSettings);
@@ -177,8 +179,8 @@ class HandleInertiaRequests extends Middleware
 
             'name'       => config('app.name'),
             'appName'    => config('app.name'),
-            'base_url'   => config('app.url'),
-            'image_url'  => config('app.url'),
+            'base_url'   => $frontendBaseUrl,
+            'image_url'  => $frontendBaseUrl,
 
             'quote'      => [
                 'message' => $quoteMessage,

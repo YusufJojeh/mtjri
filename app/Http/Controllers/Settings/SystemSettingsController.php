@@ -130,23 +130,48 @@ class SystemSettingsController extends Controller
                 'unsplashAccessKey' => 'nullable|string',
                 'unsplashApplicationId' => 'nullable|string',
                 'unsplashSecretKey' => 'nullable|string',
+                'aiProviderDefault' => 'nullable|in:openai,ollama',
+                'ollamaBaseUrl' => 'nullable|url',
+                'ollamaModel' => 'nullable|string',
+                'ollamaTimeoutMs' => 'nullable|integer|min:1000|max:300000',
+                'aiAgenticEnabled' => 'nullable|boolean',
+                'aiFallbackToOpenai' => 'nullable|boolean',
             ]);
 
             // Only update keys if they are present in the request (i.e., not empty on the frontend)
             if ($request->has('chatgptKey')) {
-                Setting::setGlobal('chatgptKey', $validated['chatgptKey']);
+                Setting::setGlobal('chatgptKey', (string) ($validated['chatgptKey'] ?? ''));
             }
             // chatgptModel should always be present, as it has a default
-            Setting::setGlobal('chatgptModel', $validated['chatgptModel']);
+            Setting::setGlobal('chatgptModel', (string) ($validated['chatgptModel'] ?? 'gpt-3.5-turbo'));
 
             if ($request->has('unsplashAccessKey')) {
-                Setting::setGlobal('unsplashAccessKey', $validated['unsplashAccessKey']);
+                Setting::setGlobal('unsplashAccessKey', (string) ($validated['unsplashAccessKey'] ?? ''));
             }
             if ($request->has('unsplashApplicationId')) {
-                Setting::setGlobal('unsplashApplicationId', $validated['unsplashApplicationId']);
+                Setting::setGlobal('unsplashApplicationId', (string) ($validated['unsplashApplicationId'] ?? ''));
             }
             if ($request->has('unsplashSecretKey')) {
-                Setting::setGlobal('unsplashSecretKey', $validated['unsplashSecretKey']);
+                Setting::setGlobal('unsplashSecretKey', (string) ($validated['unsplashSecretKey'] ?? ''));
+            }
+
+            if ($request->has('aiProviderDefault')) {
+                Setting::setGlobal('aiProviderDefault', (string) ($validated['aiProviderDefault'] ?? config('ai.default_provider', 'openai')));
+            }
+            if ($request->has('ollamaBaseUrl')) {
+                Setting::setGlobal('ollamaBaseUrl', (string) ($validated['ollamaBaseUrl'] ?? config('ai.ollama.base_url', 'http://127.0.0.1:11434')));
+            }
+            if ($request->has('ollamaModel')) {
+                Setting::setGlobal('ollamaModel', (string) ($validated['ollamaModel'] ?? ''));
+            }
+            if ($request->has('ollamaTimeoutMs')) {
+                Setting::setGlobal('ollamaTimeoutMs', (string) ($validated['ollamaTimeoutMs'] ?? config('ai.ollama.timeout_ms', 60000)));
+            }
+            if ($request->has('aiAgenticEnabled')) {
+                Setting::setGlobal('aiAgenticEnabled', $request->boolean('aiAgenticEnabled') ? '1' : '0');
+            }
+            if ($request->has('aiFallbackToOpenai')) {
+                Setting::setGlobal('aiFallbackToOpenai', $request->boolean('aiFallbackToOpenai') ? '1' : '0');
             }
 
             return redirect()->back()->with('success', __('AI settings updated successfully.'));

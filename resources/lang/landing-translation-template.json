@@ -1,233 +1,266 @@
 {
-    "landing": {
-        "hero": {
-            "title": "Launch Your Online Store in Minutes",
-            "subtitle": "Create, customize, and manage multiple online stores with our powerful e-commerce platform.",
-            "announcement": "🚀 New: Advanced Analytics Dashboard",
-            "primaryButton": "Start Free Trial",
-            "secondaryButton": "Login",
-            "sampleStore": "Sample Store",
-            "premiumTheme": "Premium Theme",
-            "multiStorePlatform": "Multi-Store Platform",
-            "store": "STORE",
-            "stats": {
-                "users": {
-                    "value": "10K+",
-                    "label": "Active Users"
-                },
-                "countries": {
-                    "value": "50+",
-                    "label": "Countries"
-                },
-                "satisfaction": {
-                    "value": "99%",
-                    "label": "Satisfaction"
-                }
-            }
+  "landing": {
+    "hero": {
+      "title": "Launch Your Online Store in Minutes",
+      "subtitle": "Create, customize, and manage multiple online stores with our powerful e-commerce platform.",
+      "announcement": "🚀 New: Advanced Analytics Dashboard",
+      "primaryButton": "Start Free Trial",
+      "secondaryButton": "Login",
+      "sampleStore": "Sample Store",
+      "premiumTheme": "Premium Theme",
+      "multiStorePlatform": "Multi-Store Platform",
+      "store": "STORE",
+      "stats": {
+        "users": {
+          "value": "10K+",
+          "label": "Active Users"
         },
-        "features": {
-            "title": "Everything You Need to Sell Online",
-            "description": "Powerful e-commerce features designed for modern businesses.",
-            "analytics": {
-                "title": "Analytics & Insights",
-                "description": "Track views, clicks, and engagement metrics. Understand how your network interacts with your card."
-            },
-            "domains": {
-                "title": "Custom Domains",
-                "description": "Use your own domain for a professional branded experience. Build trust with custom URLs."
-            },
-            "security": {
-                "title": "Secure & Private",
-                "description": "Enterprise-grade security with privacy controls. Your data is protected and under your control."
-            }
+        "countries": {
+          "value": "50+",
+          "label": "Countries"
         },
-        "whyChooseUs": {
-            "title": "Why Choose MTJRii?",
-            "subtitle": "We're not just another e-commerce platform. We're your partner in building successful online stores that drive business growth.",
-            "badge": "Why Choose Us",
-            "multiStore": {
-                "title": "Multi-Store Architecture",
-                "description": "Manage unlimited stores from one account with powerful centralized dashboard"
-            },
-            "noFees": {
-                "title": "No Transaction Fees",
-                "description": "Keep 100% of your profits with our transparent pricing and no hidden costs"
-            },
-            "trustedBy": "Trusted by Industry Leaders",
-            "joinCommunity": "Join the growing community of professionals",
-            "readyToStart": "Ready to get started?",
-            "joinThousands": "Join thousands of satisfied users today"
-        },
-        "pricing": {
-            "title": "Choose Your Plan",
-            "subtitle": "Start with our free plan and upgrade as you grow. All plans include our core features with no setup fees or hidden costs.",
-            "monthly": "Monthly",
-            "yearly": "Yearly",
-            "recommended": "Recommended",
-            "usageLimits": "Usage Limits",
-            "businesses": "Businesses",
-            "users": "Users",
-            "storage": "Storage",
-            "templates": "Templates",
-            "bioLinks": "Bio Links",
-            "bioTemplates": "Bio Templates",
-            "features": "Features",
-            "startFree": "Start Free",
-            "getStarted": "Get Started"
-        },
-        "faq": {
-            "title": "Frequently Asked Questions",
-            "subtitle": "Got questions? We've got answers. If you can't find what you're looking for, feel free to contact our support team.",
-            "stillHaveQuestions": "Still have questions?",
-            "contactUs": "Contact us",
-            "items": {
-                "1": {
-                    "question": "How does MTJRii work?",
-                    "answer": "MTJRii allows you to create and manage multiple online stores from one powerful platform. Simply create your store, customize it with your products and branding, and start selling!"
-                },
-                "2": {
-                    "question": "Is my data secure?",
-                    "answer": "Yes, we use enterprise-grade security measures to protect your data. All information is encrypted and stored securely. You have full control over your privacy settings."
-                },
-                "3": {
-                    "question": "Can I customize my online store?",
-                    "answer": "Absolutely! You can customize colors, fonts, layout, add your logo, product images, and much more. Our platform offers extensive customization options."
-                },
-                "4": {
-                    "question": "Do I need technical skills to use MTJRii?",
-                    "answer": "Not at all! MTJRii is designed to be user-friendly. You can create and manage your online stores in minutes without any technical knowledge."
-                },
-                "5": {
-                    "question": "Can I track my store performance?",
-                    "answer": "Yes, our analytics feature allows you to track sales, views, clicks, and engagement metrics so you can understand how your customers interact with your stores."
-                }
-            }
-        },
-        "newsletter": {
-            "title": "Stay Updated with MTJRii",
-            "subtitle": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
-            "enterEmail": "Enter your email address",
-            "subscribe": "Subscribe",
-            "subscribing": "Subscribing...",
-            "subscribingToNewsletter": "Subscribing to newsletter",
-            "subscribeToNewsletter": "Subscribe to newsletter",
-            "thankYouSubscribing": "Thank you for subscribing!",
-            "privacyText": "No spam, unsubscribe at any time. We respect your privacy."
-        },
-        "about": {
-            "title": "The Story Behind MTJRii",
-            "description": "Founded by e-commerce experts and technology innovators, MTJRii was created to solve the challenges of managing multiple online stores. Today, we serve over 25,000 entrepreneurs across 120+ countries, helping them build and scale successful e-commerce businesses with our comprehensive platform.",
-            "innovationDriven": "Innovation Driven",
-            "buildingFuture": "Building the future of e-commerce",
-            "values": {
-                "mission": {
-                    "title": "Our Mission",
-                    "description": "To democratize e-commerce by providing powerful, easy-to-use tools that enable anyone to build and manage successful online stores."
-                },
-                "values": {
-                    "title": "Our Values",
-                    "description": "We believe in innovation, scalability, and empowering entrepreneurs to achieve e-commerce success."
-                },
-                "commitment": {
-                    "title": "Our Commitment",
-                    "description": "Delivering exceptional multi-store management experience with cutting-edge technology and 24/7 support."
-                },
-                "vision": {
-                    "title": "Our Vision",
-                    "description": "A world where every entrepreneur can easily create, manage, and scale multiple profitable online stores."
-                }
-            },
-            "stats": {
-                "users": "Users",
-                "countries": "Countries",
-                "satisfaction": "Satisfaction"
-            }
-        },
-        "footer": {
-            "ctaTitle": "Ready to put your store live?",
-            "ctaSubtitle": "Open a workspace, choose a theme, connect payments, and publish when you are ready—without replatforming later.",
-            "allRightsReserved": "All rights reserved.",
-            "product": "Product",
-            "company": "Company",
-            "support": "Support",
-            "legal": "Legal"
-        },
-        "contact": {
-            "title": "Get in Touch",
-            "subtitle": "Have questions about MTJRii? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
-            "formTitle": "Send us a Message",
-            "infoTitle": "Contact Information",
-            "infoDescription": "We're here to help and answer any question you might have. We look forward to hearing from you."
-        },
-        "screenshots": {
-            "title": "See MTJRii in Action",
-            "subtitle": "Explore our intuitive dashboard and powerful store management features.",
-            "items": {
-                "1": {
-                    "title": "Multi-Store Dashboard",
-                    "description": "Manage all your stores from one cloud-based dashboard",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
-                    "alt": "Multi-Store Dashboard"
-                },
-                "2": {
-                    "title": "Product Management",
-                    "description": "Add products, organize categories, and track inventory for each store separately",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
-                    "alt": "Product Management"
-                },
-                "3": {
-                    "title": "Theme Selection",
-                    "description": "Choose from over 10 professional templates for each store",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
-                    "alt": "Theme Selection"
-                },
-                "4": {
-                    "title": "Order Management",
-                    "description": "Process orders and manage customer transactions with ease",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
-                    "alt": "Order Management"
-                },
-                "5": {
-                    "title": "Blog Management",
-                    "description": "Built-in blog system for each store with advanced content management tools",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
-                    "alt": "Blog Management"
-                },
-                "6": {
-                    "title": "Payment Integration",
-                    "description": "Over 30 payment gateways ready to connect with your stores",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
-                    "alt": "Payment Integration"
-                }
-            }
-        },
-        "team": {
-            "title": "Meet Our Team",
-            "subtitle": "We're a diverse team of innovators, designers, and problem-solvers united by our passion for transforming e-commerce.",
-            "ctaTitle": "Want to Join Our Team?",
-            "ctaDescription": "We're always looking for talented individuals who share our passion for innovation and excellence. Check out our open positions.",
-            "ctaButton": "View Open Positions"
-        },
-        "testimonials": {
-            "title": "What Our Customers Say",
-            "subtitle": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii."
-        },
-        "templates": {
-            "title": "Explore Our Templates",
-            "subtitle": "Choose from our professionally designed templates to create your perfect online store.",
-            "ctaText": "View All Templates"
-        },
-        "activeCampaigns": {
-            "title": "Featured Business Promotions",
-            "subtitle": "Explore businesses we're currently promoting and discover amazing services"
-        },
-        "header": {
-            "menu": {
-                "about-us": "About Us",
-                "contact-us": "Contact Us",
-                "features": "Features",
-                "faq": "FAQ"
-            }
+        "satisfaction": {
+          "value": "99%",
+          "label": "Satisfaction"
         }
+      }
+    },
+    "features": {
+      "title": "Everything You Need to Sell Online",
+      "description": "Powerful e-commerce features designed for modern businesses.",
+      "analytics": {
+        "title": "Analytics & Insights",
+        "description": "Track views, clicks, and engagement metrics. Understand how your network interacts with your card."
+      },
+      "domains": {
+        "title": "Custom Domains",
+        "description": "Use your own domain for a professional branded experience. Build trust with custom URLs."
+      },
+      "security": {
+        "title": "Secure & Private",
+        "description": "Enterprise-grade security with privacy controls. Your data is protected and under your control."
+      }
+    },
+    "whyChooseUs": {
+      "title": "Why Choose MTJRii?",
+      "subtitle": "We're not just another e-commerce platform. We're your partner in building successful online stores that drive business growth.",
+      "badge": "Why Choose Us",
+      "multiStore": {
+        "title": "Multi-Store Architecture",
+        "description": "Manage unlimited stores from one account with powerful centralized dashboard"
+      },
+      "noFees": {
+        "title": "No Transaction Fees",
+        "description": "Keep 100% of your profits with our transparent pricing and no hidden costs"
+      },
+      "trustedBy": "Trusted by Industry Leaders",
+      "joinCommunity": "Join the growing community of professionals",
+      "readyToStart": "Ready to get started?",
+      "joinThousands": "Join thousands of satisfied users today"
+    },
+    "pricing": {
+      "title": "Choose Your Plan",
+      "subtitle": "Start with our free plan and upgrade as you grow. All plans include our core features with no setup fees or hidden costs.",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "recommended": "Recommended",
+      "usageLimits": "Usage Limits",
+      "businesses": "Businesses",
+      "users": "Users",
+      "storage": "Storage",
+      "templates": "Templates",
+      "bioLinks": "Bio Links",
+      "bioTemplates": "Bio Templates",
+      "features": "Features",
+      "startFree": "Start Free",
+      "getStarted": "Get Started"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Got questions? We've got answers. If you can't find what you're looking for, feel free to contact our support team.",
+      "stillHaveQuestions": "Still have questions?",
+      "contactUs": "Contact us",
+      "items": {
+        "1": {
+          "question": "How does MTJRii work?",
+          "answer": "MTJRii allows you to create and manage multiple online stores from one powerful platform. Simply create your store, customize it with your products and branding, and start selling!"
+        },
+        "2": {
+          "question": "Is my data secure?",
+          "answer": "Yes, we use enterprise-grade security measures to protect your data. All information is encrypted and stored securely. You have full control over your privacy settings."
+        },
+        "3": {
+          "question": "Can I customize my online store?",
+          "answer": "Absolutely! You can customize colors, fonts, layout, add your logo, product images, and much more. Our platform offers extensive customization options."
+        },
+        "4": {
+          "question": "Do I need technical skills to use MTJRii?",
+          "answer": "Not at all! MTJRii is designed to be user-friendly. You can create and manage your online stores in minutes without any technical knowledge."
+        },
+        "5": {
+          "question": "Can I track my store performance?",
+          "answer": "Yes, our analytics feature allows you to track sales, views, clicks, and engagement metrics so you can understand how your customers interact with your stores."
+        }
+      }
+    },
+    "newsletter": {
+      "title": "Stay Updated with MTJRii",
+      "subtitle": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+      "enterEmail": "Enter your email address",
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing...",
+      "subscribingToNewsletter": "Subscribing to newsletter",
+      "subscribeToNewsletter": "Subscribe to newsletter",
+      "thankYouSubscribing": "Thank you for subscribing!",
+      "privacyText": "No spam, unsubscribe at any time. We respect your privacy."
+    },
+    "about": {
+      "title": "The Story Behind MTJRii",
+      "description": "Founded by e-commerce experts and technology innovators, MTJRii was created to solve the challenges of managing multiple online stores. Today, we serve over 25,000 entrepreneurs across 120+ countries, helping them build and scale successful e-commerce businesses with our comprehensive platform.",
+      "innovationDriven": "Innovation Driven",
+      "buildingFuture": "Building the future of e-commerce",
+      "values": {
+        "mission": {
+          "title": "Our Mission",
+          "description": "To democratize e-commerce by providing powerful, easy-to-use tools that enable anyone to build and manage successful online stores."
+        },
+        "values": {
+          "title": "Our Values",
+          "description": "We believe in innovation, scalability, and empowering entrepreneurs to achieve e-commerce success."
+        },
+        "commitment": {
+          "title": "Our Commitment",
+          "description": "Delivering exceptional multi-store management experience with cutting-edge technology and 24/7 support."
+        },
+        "vision": {
+          "title": "Our Vision",
+          "description": "A world where every entrepreneur can easily create, manage, and scale multiple profitable online stores."
+        }
+      },
+      "stats": {
+        "users": "Users",
+        "countries": "Countries",
+        "satisfaction": "Satisfaction"
+      }
+    },
+    "footer": {
+      "ctaTitle": "Ready to put your store live?",
+      "ctaSubtitle": "Open a workspace, choose a theme, connect payments, and publish when you are ready—without replatforming later.",
+      "allRightsReserved": "All rights reserved.",
+      "product": "Product",
+      "company": "Company",
+      "support": "Support",
+      "legal": "Legal"
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "subtitle": "Have questions about MTJRii? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+      "formTitle": "Send us a Message",
+      "infoTitle": "Contact Information",
+      "infoDescription": "We're here to help and answer any question you might have. We look forward to hearing from you."
+    },
+    "screenshots": {
+      "title": "See MTJRii in Action",
+      "subtitle": "Explore our intuitive dashboard and powerful store management features.",
+      "items": {
+        "1": {
+          "title": "Multi-Store Dashboard",
+          "description": "Manage all your stores from one cloud-based dashboard",
+          "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+          "alt": "Multi-Store Dashboard"
+        },
+        "2": {
+          "title": "Product Management",
+          "description": "Add products, organize categories, and track inventory for each store separately",
+          "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+          "alt": "Product Management"
+        },
+        "3": {
+          "title": "Theme Selection",
+          "description": "Choose from over 10 professional templates for each store",
+          "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+          "alt": "Theme Selection"
+        },
+        "4": {
+          "title": "Order Management",
+          "description": "Process orders and manage customer transactions with ease",
+          "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+          "alt": "Order Management"
+        },
+        "5": {
+          "title": "Blog Management",
+          "description": "Built-in blog system for each store with advanced content management tools",
+          "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+          "alt": "Blog Management"
+        },
+        "6": {
+          "title": "Payment Integration",
+          "description": "Over 30 payment gateways ready to connect with your stores",
+          "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+          "alt": "Payment Integration"
+        }
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "We're a diverse team of innovators, designers, and problem-solvers united by our passion for transforming e-commerce.",
+      "ctaTitle": "Want to Join Our Team?",
+      "ctaDescription": "We're always looking for talented individuals who share our passion for innovation and excellence. Check out our open positions.",
+      "ctaButton": "View Open Positions"
+    },
+    "testimonials": {
+      "title": "What Our Customers Say",
+      "subtitle": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii."
+    },
+    "templates": {
+      "title": "Explore Our Templates",
+      "subtitle": "Choose from our professionally designed templates to create your perfect online store.",
+      "ctaText": "View All Templates"
+    },
+    "activeCampaigns": {
+      "title": "Featured Business Promotions",
+      "subtitle": "Explore businesses we're currently promoting and discover amazing services"
+    },
+    "header": {
+      "menu": {
+        "about-us": "About Us",
+        "contact-us": "Contact Us",
+        "features": "Features",
+        "faq": "FAQ"
+      }
+    },
+    "v2": {
+      "features": {
+        "motionLabel": "Platform film",
+        "motionTitle": "The feature story is rendered inside the same Remotion system",
+        "motionCard": {
+          "title": "The page now explains capability as a motion sequence",
+          "description": "Instead of dropping isolated cards under a static headline, the landing keeps the product story alive while visitors scan each capability block."
+        },
+        "sceneLabel": "Scene",
+        "sceneValue": "Chapter {{index}}"
+      },
+      "proof": {
+        "motionLabel": "Proof film",
+        "motionTitle": "Operational breadth is visible inside the live composition system"
+      },
+      "faq": {
+        "badge": "Closing chapter",
+        "side": {
+          "label": "Final clarity",
+          "title": "Questions should resolve friction, not interrupt the cinematic flow",
+          "description": "This final chapter keeps the landing readable and conversion-focused while preserving the same motion-led visual language established above.",
+          "points": {
+            "one": "Clear answers for setup, pricing, and support",
+            "two": "High-contrast surfaces for readability",
+            "three": "Contact CTA remains visible at the end of the story"
+          }
+        }
+      },
+      "footer": {
+        "sceneLabel": "Final frame",
+        "sceneBody": "The landing closes on the same promise it opened with: one branded workspace for storefront creation, operations, and growth."
+      }
     }
+  }
 }

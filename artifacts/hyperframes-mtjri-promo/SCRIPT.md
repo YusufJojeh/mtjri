@@ -1,0 +1,11 @@
+# Script
+
+**Duration target:** 20 seconds
+
+Run every storefront from one commerce control center.
+
+MTJRii brings stores, themes, products, orders, customers, and payments into one workspace.
+
+Launch with polished storefront directions, then operate from a dashboard built for real selling.
+
+Start setup, choose a theme, and move from idea to live store faster.

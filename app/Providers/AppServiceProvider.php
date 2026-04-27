@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(\App\Services\WebhookService::class);
+        $this->app->singleton(\App\Services\AIProviderManager::class);
+        $this->app->singleton(\App\Services\AIOrchestratorService::class);
         $this->app->bind(\App\Contracts\OpenAIContentGenerator::class, \App\Services\OpenAIContentGeneratorService::class);
     }
 

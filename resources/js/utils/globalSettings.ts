@@ -45,7 +45,7 @@ export function initializeGlobalSettings(settings: Record<string, any>) {
 
     window.appSettings = {
         get: (key: string, defaultValue: any = null) => settings[key] ?? defaultValue,
-        baseUrl: settings.base_url ?? 'http://localhost',
+        baseUrl: settings.base_url ?? window.location.origin,
         dateFormat: settings.dateFormat ?? 'yyyy-MM-dd',
         timeFormat: settings.timeFormat ?? 'HH:mm',
         timezone: settings.defaultTimezone ?? 'UTC',
