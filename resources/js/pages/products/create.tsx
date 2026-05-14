@@ -299,7 +299,7 @@ export default function CreateProduct() {
                   <Label>{t('Product Specifications')}</Label>
                   <RichTextEditor
                     value={formData.specifications}
-                    onChange={(value) => handleSelectChange('pecifications', value)}
+                    onChange={(value) => handleSelectChange('specifications', value)}
                     placeholder={t('Enter product specifications...')}
                   />
                 </div>

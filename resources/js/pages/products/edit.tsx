@@ -334,7 +334,7 @@ export default function EditProduct() {
                   <RichTextEditor
                     key={`specifications-${product.id}`}
                     value={formData.specifications}
-                    onChange={(value) => handleSelectChange('pecifications', value)}
+                    onChange={(value) => handleSelectChange('specifications', value)}
                     placeholder={t('Enter product specifications...')}
                   />
                 </div>

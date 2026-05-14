@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Support\MediaReference;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductFormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -85,6 +86,9 @@ class ProductController extends BaseController
 
         return \DB::transaction(function () use ($request, $currentStoreId) {
             $validatedData = $request->validated();
+            $validatedData['cover_image'] = MediaReference::normalizeForStorage($validatedData['cover_image'] ?? null, $request);
+            $validatedData['images'] = MediaReference::normalizeCsvForStorage($validatedData['images'] ?? null, $request);
+            $validatedData['downloadable_file'] = MediaReference::normalizeForStorage($validatedData['downloadable_file'] ?? null, $request);
             $product = new Product();
             $product->fill($validatedData);
             $product->store_id = $currentStoreId;
@@ -164,6 +168,9 @@ class ProductController extends BaseController
 
         return \DB::transaction(function () use ($request, $product) {
             $validatedData = $request->validated();
+            $validatedData['cover_image'] = MediaReference::normalizeForStorage($validatedData['cover_image'] ?? null, $request);
+            $validatedData['images'] = MediaReference::normalizeCsvForStorage($validatedData['images'] ?? null, $request);
+            $validatedData['downloadable_file'] = MediaReference::normalizeForStorage($validatedData['downloadable_file'] ?? null, $request);
 
             $product->fill($validatedData);
             $product->save();

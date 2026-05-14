@@ -43,9 +43,13 @@ export default function CreateCategory() {
     setFormData(prev => ({ ...prev, image: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const submitForm = () => {
     router.post(route('categories.store'), formData);
+  };
+
+  const handleSubmit = (e?: FormEvent) => {
+    e?.preventDefault();
+    submitForm();
   };
 
   const pageActions = [
@@ -59,7 +63,7 @@ export default function CreateCategory() {
       label: t('Save Category'),
       icon: <Save className='h-4 w-4' />,
       variant: 'default' as const,
-      onClick: handleSubmit
+      onClick: submitForm
     }
   ];
 

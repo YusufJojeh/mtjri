@@ -57,9 +57,13 @@ export default function EditCategory() {
     setFormData(prev => ({ ...prev, image: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const submitForm = () => {
     router.put(route('categories.update', category.id), formData);
+  };
+
+  const handleSubmit = (e?: FormEvent) => {
+    e?.preventDefault();
+    submitForm();
   };
 
   const pageActions = [
@@ -73,7 +77,7 @@ export default function EditCategory() {
       label: t('Update Category'),
       icon: <Save className='h-4 w-4' />,
       variant: 'default' as const,
-      onClick: handleSubmit
+      onClick: submitForm
     }
   ];
 
