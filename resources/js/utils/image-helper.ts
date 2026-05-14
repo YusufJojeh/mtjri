@@ -11,6 +11,56 @@ export interface UnsplashImageData {
   unsplash_id: string;
 }
 
+const DEFAULT_LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '::1', '[::1]']);
+
+function normalizeHost(hostname: string): string {
+  return hostname.toLowerCase().replace(/^\[|\]$/g, '');
+}
+
+function collectAllowedHosts(): Set<string> {
+  const hosts = new Set<string>(Array.from(DEFAULT_LOCAL_HOSTS, normalizeHost));
+
+  try {
+    if (typeof window !== 'undefined' && window.location?.hostname) {
+      hosts.add(normalizeHost(window.location.hostname));
+    }
+  } catch (e) {
+    // Ignore errors accessing window.location
+  }
+
+  const addHostFromUrl = (value?: string) => {
+    if (!value) return;
+    try {
+      const parsed = new URL(value, typeof window !== 'undefined' ? window.location.origin : undefined);
+      hosts.add(normalizeHost(parsed.hostname));
+    } catch (e) {
+      // Ignore malformed URLs
+    }
+  };
+
+  try {
+    if (typeof window !== 'undefined') {
+      addHostFromUrl((window as any).appSettings?.baseUrl);
+      addHostFromUrl((window as any).page?.props?.globalSettings?.base_url);
+      addHostFromUrl((window as any).page?.props?.base_url);
+    }
+  } catch (e) {
+    // Ignore cross-origin errors
+  }
+
+  return hosts;
+}
+
+function isAllowedAbsoluteImageUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    return (parsed.protocol === 'http:' || parsed.protocol === 'https:')
+      && collectAllowedHosts().has(normalizeHost(parsed.hostname));
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Get the full URL for an image path or Unsplash image object
  * 
@@ -28,25 +78,36 @@ export function getImageUrl(image: string | UnsplashImageData | null | undefined
   }
   
   if (path.startsWith('http')) {
-    return path;
+    return isAllowedAbsoluteImageUrl(path) ? path : '';
   }
   
   let baseUrl = '';
-  
-  // Try app settings first
+
+  // In local development, always prefer the current localhost origin.
   try {
-    if (typeof window !== 'undefined' && window === window.self) {
-      try {
-        const appSettings = (window as any).appSettings;
-        if (appSettings?.baseUrl) {
-          baseUrl = appSettings.baseUrl;
-        }
-      } catch (e) {
-        // Ignore cross-origin errors
-      }
+    if (typeof window !== 'undefined' && window.location) {
+      baseUrl = window.location.origin;
     }
   } catch (e) {
-    // Ignore errors
+    // Ignore errors accessing window.location
+  }
+  
+  // Try app settings first
+  if (!baseUrl) {
+    try {
+      if (typeof window !== 'undefined' && window === window.self) {
+        try {
+          const appSettings = (window as any).appSettings;
+          if (appSettings?.baseUrl) {
+            baseUrl = appSettings.baseUrl;
+          }
+        } catch (e) {
+          // Ignore cross-origin errors
+        }
+      }
+    } catch (e) {
+      // Ignore errors
+    }
   }
   
   // Try global settings from Inertia

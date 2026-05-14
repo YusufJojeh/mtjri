@@ -13,7 +13,9 @@ interface MediaItem {
   id: number;
   name: string;
   file_name: string;
+  path?: string;
   url: string;
+  thumb_path?: string;
   thumb_url: string;
   size: number;
   mime_type: string;
@@ -344,24 +346,24 @@ export default function MediaLibraryModal({
                     <div
                       key={item.id}
                       className={`relative group cursor-pointer rounded-lg overflow-hidden transition-all hover:scale-105 ${
-                        selectedItems.includes(item.url) 
+                        selectedItems.includes(item.path || convertToRelativePath(item.url))
                           ? 'ring-2 ring-primary shadow-lg' 
                           : 'hover:shadow-md border border-border hover:border-primary/50'
                       }`}
-                      onClick={() => handleSelect(item.url)}
+                      onClick={() => handleSelect(item.path || item.url)}
                     >
                       <div className='relative aspect-square bg-muted'>
                         <img
-                          src={getImageUrl(item.thumb_url)}
+                          src={getImageUrl(item.thumb_path || item.thumb_url)}
                           alt={item.name}
                           className='w-full h-full object-cover'
                           onError={(e) => {
-                            e.currentTarget.src = getImageUrl(item.url);
+                            e.currentTarget.src = getImageUrl(item.path || item.url);
                           }}
                         />
                         
                         {/* Selection Indicator */}
-                        {selectedItems.includes(item.url) && (
+                        {selectedItems.includes(item.path || convertToRelativePath(item.url)) && (
                           <div className='absolute inset-0 bg-primary/30 flex items-center justify-center'>
                             <div className='bg-primary text-primary-foreground rounded-full p-1.5'>
                               <Check className='h-4 w-4' />

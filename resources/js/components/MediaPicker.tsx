@@ -30,26 +30,57 @@ export default function MediaPicker({
     const relativePath = convertToRelativePath(selectedUrl);
     onChange(relativePath);
   };
+
+  const getAllowedHosts = (): Set<string> => {
+    const hosts = new Set(['localhost', '127.0.0.1', '::1']);
+
+    try {
+      if (typeof window !== 'undefined' && window.location?.hostname) {
+        hosts.add(window.location.hostname.toLowerCase());
+      }
+
+      const page = (window as any)?.page;
+      const baseUrl = page?.props?.globalSettings?.base_url || page?.props?.base_url;
+      if (baseUrl) {
+        hosts.add(new URL(baseUrl, window.location.origin).hostname.toLowerCase());
+      }
+    } catch (e) {
+      // Ignore host discovery errors
+    }
+
+    return hosts;
+  };
   
   // Function to convert absolute URL to relative path
   const convertToRelativePath = (url: string): string => {
-    if (!url) return "";
+    if (!url) return '';
     
-    // If it"'s" already a relative path starting with /storage, return as is
-    if (url.startsWith('/storage')) {
-      return url;
+    if (url.startsWith('/')) {
+      return url.replace(/\/{2,}/g, '/');
+    }
+
+    try {
+      const parsed = new URL(url);
+      const allowedHosts = getAllowedHosts();
+
+      if (!allowedHosts.has(parsed.hostname)) {
+        return '';
+      }
+
+      return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+    } catch {
+      // Fall through to the regex-based extraction below.
     }
     
     // Extract the path after /storage from the full URL
-    const storagePattern = /\/storage\/(.*)$/;
+    const storagePattern = /(\/(?:storage|media)\/.*)$/;
     const matches = url.match(storagePattern);
     
     if (matches && matches[0]) {
       return matches[0]; // Return /storage/path/to/file.jpg
     }
     
-    // If no match found, return the original URL
-    return url;
+    return url.startsWith('storage/') ? `/${url}` : '';
   };
   
   // Function to convert relative path to full URL for display
