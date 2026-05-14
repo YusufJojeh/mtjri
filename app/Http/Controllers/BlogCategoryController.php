@@ -6,6 +6,7 @@ use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class BlogCategoryController extends Controller
@@ -65,16 +66,24 @@ class BlogCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:blog_categories,slug',
-            'description' => 'nullable|string',
-            'is_active' => 'boolean',
-            'parent_id' => 'nullable|exists:blog_categories,id'
-        ]);
-
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => [
+                'nullable',
+                'string',
+                'max:255',
+                Rule::unique('blog_categories', 'slug')->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
+            'description' => 'nullable|string',
+            'is_active' => 'boolean',
+            'parent_id' => [
+                'nullable',
+                Rule::exists('blog_categories', 'id')->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
+        ]);
 
         $data = $request->all();
         $data['store_id'] = $currentStoreId;
@@ -112,10 +121,20 @@ class BlogCategoryController extends Controller
         
         $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:blog_categories,slug,' . $category->id,
+            'slug' => [
+                'nullable',
+                'string',
+                'max:255',
+                Rule::unique('blog_categories', 'slug')
+                    ->ignore($category->id)
+                    ->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
             'description' => 'nullable|string',
             'is_active' => 'boolean',
-            'parent_id' => 'nullable|exists:blog_categories,id'
+            'parent_id' => [
+                'nullable',
+                Rule::exists('blog_categories', 'id')->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
         ]);
 
         $data = $request->all();

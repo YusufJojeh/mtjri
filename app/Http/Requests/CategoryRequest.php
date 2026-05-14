@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\LocalImageReference;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -23,13 +25,16 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         $storeId = getCurrentStoreId(Auth::user());
-        $categoryId = $this->route('category'); // For update operations
+        $categoryId = $this->route('category') ?? $this->route('id');
 
         return [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|string',
-            'parent_id' => 'nullable|exists:categories,id',
+            'image' => ['nullable', 'string', new LocalImageReference()],
+            'parent_id' => [
+                'nullable',
+                Rule::exists('categories', 'id')->where(fn ($query) => $query->where('store_id', $storeId)),
+            ],
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
             'slug' => [

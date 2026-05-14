@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\LocalImageReference;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -24,6 +25,7 @@ class BlogRequest extends FormRequest
     public function rules(): array
     {
         $blogId = $this->route('blog'); // For update operations
+        $currentStoreId = getCurrentStoreId(Auth::user());
 
         return [
             'title' => 'required|string|max:255',
@@ -35,8 +37,11 @@ class BlogRequest extends FormRequest
             ],
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
-            'featured_image' => 'nullable|string',
-            'category_id' => 'nullable|exists:blog_categories,id',
+            'featured_image' => ['nullable', 'string', new LocalImageReference()],
+            'category_id' => [
+                'nullable',
+                Rule::exists('blog_categories', 'id')->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
             'status' => 'required|in:draft,published,scheduled',
             'published_at' => 'nullable|date',
             'is_featured' => 'boolean',
@@ -49,4 +54,3 @@ class BlogRequest extends FormRequest
         ];
     }
 }
-
