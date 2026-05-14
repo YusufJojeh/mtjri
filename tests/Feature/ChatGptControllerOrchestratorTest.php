@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Services\AIOrchestratorService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 use Tests\TestCase;
 
 class ChatGptControllerOrchestratorTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -23,8 +26,7 @@ class ChatGptControllerOrchestratorTest extends TestCase
 
     public function test_chat_route_remains_backward_compatible(): void
     {
-        $user = new User();
-        $user->id = 1;
+        $user = User::factory()->create();
         $mock = Mockery::mock(AIOrchestratorService::class);
         $mock->shouldReceive('generateChatResponse')->once()->andReturn([
             'success' => true,
@@ -45,15 +47,16 @@ class ChatGptControllerOrchestratorTest extends TestCase
 
         $response->assertOk()->assertJson([
             'success' => true,
-            'content' => 'Hello world',
-            'provider' => 'openai',
+            'data' => [
+                'content' => 'Hello world',
+                'provider' => 'openai',
+            ],
         ]);
     }
 
     public function test_chat_route_returns_standardized_error_for_provider_failure(): void
     {
-        $user = new User();
-        $user->id = 1;
+        $user = User::factory()->create();
         $mock = Mockery::mock(AIOrchestratorService::class);
         $mock->shouldReceive('generateChatResponse')->once()->andReturn([
             'success' => false,
@@ -70,7 +73,8 @@ class ChatGptControllerOrchestratorTest extends TestCase
 
         $response->assertStatus(422)->assertJson([
             'success' => false,
-            'error_code' => 'provider_unavailable',
+            'code' => 'provider_unavailable',
+            'message' => 'AI provider is not configured.',
         ]);
     }
 }

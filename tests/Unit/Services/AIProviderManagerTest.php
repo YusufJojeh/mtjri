@@ -25,6 +25,8 @@ class AIProviderManagerTest extends TestCase
 
     public function test_it_reports_missing_ollama_model_configuration(): void
     {
+        config(['ai.ollama.model' => '']);
+
         $manager = $this->app->make(AIProviderManager::class);
         $status = $manager->checkProviderConfiguration('ollama');
 

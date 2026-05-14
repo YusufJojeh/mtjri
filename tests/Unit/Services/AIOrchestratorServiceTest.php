@@ -40,7 +40,8 @@ class AIOrchestratorServiceTest extends TestCase
         };
 
         $manager = Mockery::mock(AIProviderManager::class);
-        $manager->shouldReceive('resolveProvider')->andReturn('openai');
+        $manager->shouldReceive('resolveExecutionProvider')->andReturn('openai');
+        $manager->shouldReceive('checkProviderConfiguration')->andReturn(['success' => true, 'provider' => 'openai']);
         $manager->shouldReceive('isAgenticEnabled')->andReturn(true);
         $manager->shouldReceive('getClient')->andReturn($failingClient);
         $manager->shouldReceive('isFallbackToOpenAIEnabled')->andReturn(false);
@@ -93,7 +94,8 @@ class AIOrchestratorServiceTest extends TestCase
         };
 
         $manager = Mockery::mock(AIProviderManager::class);
-        $manager->shouldReceive('resolveProvider')->andReturn('ollama');
+        $manager->shouldReceive('resolveExecutionProvider')->andReturn('ollama');
+        $manager->shouldReceive('checkProviderConfiguration')->andReturn(['success' => true, 'provider' => 'ollama']);
         $manager->shouldReceive('isAgenticEnabled')->andReturn(false);
         $manager->shouldReceive('isFallbackToOpenAIEnabled')->andReturn(true);
         $manager->shouldReceive('getClient')->with('ollama')->andReturn($ollamaClient);
@@ -106,4 +108,3 @@ class AIOrchestratorServiceTest extends TestCase
         $this->assertSame('fallback response', $result['content']);
     }
 }
-
