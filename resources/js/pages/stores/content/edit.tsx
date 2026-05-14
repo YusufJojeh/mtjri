@@ -171,7 +171,7 @@ export default function StoreContentEdit({
             if (newSettings && Object.keys(newSettings).length > 0) {
               setData('content', {
                 ...newSettings,
-                preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                   use_custom_image: false,
                   custom_preview_image: ''
                 }
@@ -186,7 +186,7 @@ export default function StoreContentEdit({
                 if (newSettings && Object.keys(newSettings).length > 0) {
                   setData('content', {
                     ...newSettings,
-                    preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                    preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                       use_custom_image: false,
                       custom_preview_image: ''
                     }
@@ -212,7 +212,7 @@ export default function StoreContentEdit({
 
       return () => clearInterval(interval);
     }
-  }, [contentGenerationStatus, data.content.preview_settings]);
+  }, [contentGenerationStatus, data.content?.preview_settings]);
 
   const updateNestedField = (path: string[], value: any) => {
     const newContent = { ...data.content };
@@ -1102,7 +1102,7 @@ export default function StoreContentEdit({
                             if (newSettings && Object.keys(newSettings).length > 0) {
                               setData('content', {
                                 ...newSettings,
-                                preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                                preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                                   use_custom_image: false,
                                   custom_preview_image: ''
                                 }
@@ -1161,7 +1161,7 @@ export default function StoreContentEdit({
                                     if (newSettings && Object.keys(newSettings).length > 0) {
                                       setData('content', {
                                         ...newSettings,
-                                        preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                                        preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                                           use_custom_image: false,
                                           custom_preview_image: ''
                                         }
@@ -1181,7 +1181,7 @@ export default function StoreContentEdit({
                   )}
                   <div className='space-y-4 sm:space-y-6 order-2 lg:order-1'>
                     {tab.sections.map(sectionKey => {
-                      const content = data.content as Record<string, any>;
+                      const content = (data.content ?? {}) as Record<string, any>;
                       return content[sectionKey] ? renderSection(sectionKey, content[sectionKey]) : null;
                     })}
                   </div>
@@ -1211,7 +1211,7 @@ export default function StoreContentEdit({
                           </Button>
                         </div>
                       </div>
-                      {data.content.preview_settings?.use_custom_image && (
+                      {data.content?.preview_settings?.use_custom_image && (
                         <Badge variant='outline' className='text-primary border-primary text-xs'>
                           {t('Custom Image')}
                         </Badge>
