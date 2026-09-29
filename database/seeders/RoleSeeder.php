@@ -205,6 +205,8 @@ class RoleSeeder extends Seeder
             // Analytics & Reporting permissions
             'manage-analytics',
             'view-analytics',
+            // Tijraa AI platform
+            ...\App\Ai\AiPermissions::names(),
             'export-analytics',
             
             // Referral Program permissions

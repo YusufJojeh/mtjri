@@ -290,6 +290,8 @@ class PermissionSeeder extends Seeder
 
         ];
 
+        $permissions = array_merge($permissions, \App\Ai\AiPermissions::definitions());
+
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(
                 ['name' => $permission['name'], 'guard_name' => 'web'],

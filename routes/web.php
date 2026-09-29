@@ -380,6 +380,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard/redirect', [DashboardController::class, 'redirectToFirstAvailablePage'])->name('dashboard.redirect');
         Route::get('dashboard/export', [DashboardController::class, 'export'])->middleware('permission:export-dashboard')->name('dashboard.export');
 
+        // Tijraa AI platform (Copilot, actions, knowledge, content, notifications, onboarding)
+        require __DIR__ . '/tijraa.php';
+
         // Merchant command palette search (read-only, store-scoped, permission-filtered)
         Route::get('search', \App\Http\Controllers\MerchantSearchController::class)->middleware('throttle:60,1')->name('merchant.search');
         
