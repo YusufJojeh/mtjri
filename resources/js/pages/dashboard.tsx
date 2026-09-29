@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { PageTemplate, type PageAction } from '@/components/page-template';
-import { RefreshCw, BarChart3, Download, Building2, ShoppingCart, Users, DollarSign, Package, TrendingUp, QrCode, Copy, Check, CreditCard, FileText, Tag, Activity, ArrowRight, Sparkles } from 'lucide-react';
+import { RefreshCw, BarChart3, Building2, DollarSign, Package, TrendingUp, Copy, Check, FileText, Tag, Activity, ArrowRight, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { Link, router, usePage } from '@inertiajs/react';
 import QRCode from 'react-qr-code';
 import { useCurrencyFormatter } from '@/hooks/use-store-currency';
-import { useBrand } from '@/contexts/BrandContext';
-import { THEME_COLORS } from '@/hooks/use-appearance';
+import { MerchantDashboard, type CommandCenter } from '@/components/dashboard/merchant-dashboard';
+import { EmptyState, Panel } from '@/components/ds/layout';
 
 interface Props {
   dashboardData: {
@@ -44,13 +44,6 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
   const [copied, setCopied] = useState(false);
   const formatCurrency = useCurrencyFormatter();
   const { auth } = usePage().props as any;
-  const permissions = auth?.permissions || [];
-  const { themeColor, customColor } = useBrand();
-
-  // Get dynamic theme color value
-  const getThemeColorValue = () => {
-    return themeColor === 'custom' ? customColor : THEME_COLORS[themeColor];
-  };
 
   const copyToClipboard = async () => {
     try {
@@ -66,23 +59,10 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
     {
       label: t('Refresh'),
       icon: <RefreshCw className="h-4 w-4" />,
-      variant: 'outline',
+      variant: 'outline' as const,
       onClick: () => router.reload({ only: ['dashboardData'] })
     }
-  ] : [
-    ...(permissions.includes('view-analytics') ? [{
-      label: t('Analytics'),
-      icon: <BarChart3 className="h-4 w-4" />,
-      variant: 'outline',
-      onClick: () => window.location.href = route('analytics.index')
-    }] : []),
-    ...(permissions.includes('export-dashboard') ? [{
-      label: t('Export'),
-      icon: <Download className="h-4 w-4" />,
-      variant: 'default',
-      onClick: () => window.open(route('dashboard.export'), '_blank')
-    }] : [])
-  ];
+  ] : [];
 
   // Super Admin Dashboard
   if (isSuperAdmin) {
@@ -339,163 +319,62 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
 
   if (!currentStore) {
     return (
-      <PageTemplate title={t('Dashboard')} description={t('Please select a store to view dashboard')} url="/dashboard">
-        <div className="text-center py-12">
-          <p className="text-gray-500">{t('Please select a store to view dashboard')}</p>
-        </div>
+      <PageTemplate title={t('Home')} url="/dashboard" header={<></>}>
+        <Panel>
+          <EmptyState
+            icon={<Building2 />}
+            title={t('Create or select a store to get started')}
+            description={t('Your command center shows sales, orders and stock once a store is active')}
+            action={
+              <Button asChild size="sm">
+                <Link href={route('stores.create')}>{t('Create New Store')}</Link>
+              </Button>
+            }
+          />
+        </Panel>
       </PageTemplate>
     );
   }
 
+  const commandCenter = (dashboardData as { commandCenter?: CommandCenter }).commandCenter;
+
   return (
-    <PageTemplate
-      title={t('Dashboard')}
-      description={t('Store dashboard and analytics')}
-      url="/dashboard"
-      actions={pageActions}
-    >
-      <div className="space-y-4">
-        {/* Stats Cards */}
-        <div className="grid gap-2 sm:gap-4 grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium">{t('Total Orders')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-xl sm:text-2xl font-bold">{dashboardData.metrics.orders.toLocaleString()}</div>
-                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
-              </div>
-              <p className="text-xs text-muted-foreground truncate">{currentStore.name}</p>
-            </CardContent>
-          </Card>
+    <PageTemplate title={t('Home')} url="/dashboard" header={<></>}>
+      {commandCenter ? (
+        <MerchantDashboard
+          data={commandCenter}
+          store={{ name: currentStore.name, slug: currentStore.slug }}
+          userName={auth?.user?.name}
+        />
+      ) : null}
+      {storeUrl && (
+        <ShareStore url={storeUrl} name={currentStore.name} copied={copied} onCopy={copyToClipboard} />
+      )}
+    </PageTemplate>
+  );
+}
 
-          <Card>
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium">{t('Total Products')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-xl sm:text-2xl font-bold">{dashboardData.metrics.products.toLocaleString()}</div>
-                <Package className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
-              </div>
-              <p className="text-xs text-muted-foreground">{t('Active products')}</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium">{t('Total Customers')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-xl sm:text-2xl font-bold">{dashboardData.metrics.customers.toLocaleString()}</div>
-                <Users className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
-              </div>
-              <p className="text-xs text-muted-foreground">{t('Registered customers')}</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium">{t('Total Revenue')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-lg sm:text-xl lg:text-2xl font-bold break-words">{formatCurrency(dashboardData.metrics.revenue)}</div>
-                <DollarSign className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
-              </div>
-              <p className="text-xs text-muted-foreground">{t('All time revenue')}</p>
-            </CardContent>
-          </Card>
+function ShareStore({ url, name, copied, onCopy }: { url: string; name: string; copied: boolean; onCopy: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <Panel className="mt-5" title={t('Share your store')} description={t('Customers can scan the code or open the link')}>
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <div className="rounded-lg border bg-white p-2">
+          <QRCode value={url} size={88} aria-label={t('QR code for {{name}}', { name })} />
         </div>
-
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          <Card>
-            <CardHeader className="p-3 sm:p-6">
-              <CardTitle className="text-base sm:text-lg">{t('Recent Orders')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="space-y-3 sm:space-y-4">
-                {(Array.isArray(dashboardData.recentOrders) ? dashboardData.recentOrders : []).map((order, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-2 sm:p-0 border-b sm:border-0 last:border-0">
-                    <div className="flex-1 min-w-0">
-                      <Link
-                        href={route('orders.show', order.id)}
-                        className="font-medium hover:underline text-sm sm:text-base break-words"
-                        style={{ color: getThemeColorValue() }}
-                      >
-                        {order.order_number}
-                      </Link>
-                      <p className="text-xs sm:text-sm text-muted-foreground truncate">{order.customer}</p>
-                    </div>
-                    <div className="text-left sm:text-right flex-shrink-0">
-                      <p className="font-medium text-sm sm:text-base">{formatCurrency(order.amount)}</p>
-                      <p className="text-xs sm:text-sm text-muted-foreground">{order.status}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="p-3 sm:p-6">
-              <CardTitle className="text-base sm:text-lg">{t('Top Products')}</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="space-y-3 sm:space-y-4">
-                {(Array.isArray(dashboardData.topProducts) ? dashboardData.topProducts : []).map((product, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-2 sm:p-0 border-b sm:border-0 last:border-0">
-                    <div className="flex-1 min-w-0">
-                      <Link
-                        href={route('products.show', product.id)}
-                        className="font-medium hover:underline text-sm sm:text-base break-words"
-                        style={{ color: getThemeColorValue() }}
-                      >
-                        {product.name}
-                      </Link>
-                      <p className="text-xs sm:text-sm text-muted-foreground">{product.sold} {t('sold')}</p>
-                    </div>
-                    <div className="text-left sm:text-right flex-shrink-0">
-                      <p className="font-medium text-sm sm:text-base">{formatCurrency(product.price)}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="p-3 sm:p-6">
-              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-                <QrCode className="h-4 w-4 sm:h-5 sm:w-5" />
-                {t('Store QR Code')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 sm:p-6 pt-0">
-              <div className="flex flex-col items-center space-y-3 sm:space-y-4">
-                <div className="bg-white p-3 sm:p-4 rounded-lg">
-                  <QRCode value={storeUrl} size={120} className="w-full max-w-[120px] h-auto" />
-                </div>
-                <div className="text-center space-y-2 w-full">
-                  <p className="text-sm sm:text-base font-medium truncate px-2">{currentStore.name}</p>
-                  <p className="text-xs text-muted-foreground">{t('Scan to visit store')}</p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={copyToClipboard}
-                    className="flex items-center justify-center gap-2 w-full sm:w-auto min-h-[44px] sm:min-h-0"
-                  >
-                    {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    {copied ? t('Copied!') : t('Copy Link')}
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        <div className="min-w-0 flex-1 space-y-2">
+          <p className="text-muted-foreground truncate text-sm" dir="ltr">{url}</p>
+          <div className="flex flex-wrap gap-2">
+            <Button size="sm" variant="outline" onClick={onCopy}>
+              {copied ? <Check /> : <Copy />}
+              {copied ? t('Copied') : t('Copy link')}
+            </Button>
+            <Button size="sm" variant="ghost" asChild>
+              <a href={url} target="_blank" rel="noopener noreferrer">{t('Open store')}</a>
+            </Button>
+          </div>
         </div>
       </div>
-    </PageTemplate>
+    </Panel>
   );
 }

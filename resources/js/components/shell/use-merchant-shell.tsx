@@ -34,7 +34,6 @@ export function useMerchantShell() {
             isCompany,
             feature: (f) => !plan || plan[featureMap[f]] === 'on',
         });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [t, permissions, isCompany, isSuperAdmin, plan]);
 
     const quickActions = useMemo(() => {

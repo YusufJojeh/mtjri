@@ -5,7 +5,7 @@ Sync UI strings used by the merchant frontend into resources/lang/{en,ar}.json.
 Keys are English source strings (react-i18next `t('...')`). For every key
 found in the scanned files:
   * en.json gets the identity mapping if missing;
-  * ar.json gets the translation from scripts/i18n/ar.json if missing.
+  * ar.json gets the translation from scripts/i18n/ar*.json if missing.
 Prints keys that still lack an Arabic translation. Existing entries are
 never overwritten.
 
@@ -15,7 +15,7 @@ import json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LANG = os.path.join(ROOT, 'resources', 'lang')
-AR_SOURCE = os.path.join(ROOT, 'scripts', 'i18n', 'ar.json')
+AR_DIR = os.path.join(ROOT, 'scripts', 'i18n')
 PATTERN = re.compile(r"""\bt\(\s*(['"])((?:\\.|(?!\1).)+)\1""")
 # Source-string tables consumed via t(meta.label) etc. (lib/commerce only).
 TABLE_PATTERN = re.compile(r"""\b(?:label|title|body)\s*:\s*(['"])((?:\\.|(?!\1).)+)\1""")
@@ -42,7 +42,11 @@ def main():
     check = '--check' in args
     paths = [a for a in args if a != '--check']
     keys = collect(paths)
-    ar_src = json.load(open(AR_SOURCE, encoding='utf-8')) if os.path.exists(AR_SOURCE) else {}
+    # Arabic source translations: every scripts/i18n/ar*.json file (one per workstream).
+    ar_src = {}
+    for name in sorted(os.listdir(AR_DIR)) if os.path.isdir(AR_DIR) else []:
+        if name.startswith('ar') and name.endswith('.json'):
+            ar_src.update(json.load(open(os.path.join(AR_DIR, name), encoding='utf-8')))
     changed = {}
     missing_ar = []
     for code in ('en', 'ar'):

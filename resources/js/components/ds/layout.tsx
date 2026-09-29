@@ -94,9 +94,10 @@ interface MetricCardProps {
     invert?: boolean;
     emphasis?: 'default' | 'warning' | 'danger';
     loading?: boolean;
+    className?: string;
 }
 
-export function MetricCard({ label, value, change, changeLabel, hint, href, icon, invert, emphasis = 'default', loading }: MetricCardProps) {
+export function MetricCard({ label, value, change, changeLabel, hint, href, icon, invert, emphasis = 'default', loading, className }: MetricCardProps) {
     const { t, i18n } = useTranslation();
     const hasChange = change !== undefined && change !== null && Number.isFinite(change);
     const positive = hasChange && (invert ? change! < 0 : change! > 0);
@@ -121,7 +122,7 @@ export function MetricCard({ label, value, change, changeLabel, hint, href, icon
             ) : (
                 <div
                     className={cn(
-                        'mt-1.5 truncate text-2xl font-semibold tabular-nums tracking-tight',
+                        'mt-1.5 truncate text-xl font-semibold tabular-nums tracking-tight sm:text-2xl',
                         emphasis === 'warning' && 'text-warning-fg',
                         emphasis === 'danger' && 'text-danger-fg',
                     )}
@@ -149,7 +150,7 @@ export function MetricCard({ label, value, change, changeLabel, hint, href, icon
         </>
     );
 
-    const cls = 'bg-card group relative block rounded-xl border p-4 shadow-card transition-colors';
+    const cls = cn('bg-card group relative block min-w-0 rounded-xl border p-3.5 shadow-card transition-colors sm:p-4', className);
     if (href) {
         return (
             <Link href={href} className={cn(cls, 'hover:border-foreground/20 focus-visible:ring-ring/50 outline-none focus-visible:ring-[3px]')}>

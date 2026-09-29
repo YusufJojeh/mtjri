@@ -36,11 +36,12 @@ export function formatMoney(
     value: number | string | null | undefined,
     currency: CurrencyConfig,
     lang?: string,
-    opts: { compact?: boolean } = {},
+    opts: { compact?: boolean; whole?: boolean } = {},
 ): string {
     const amount = toNumber(value);
     const locale = resolveLocale(lang);
-    const digits = currency.decimals ?? 2;
+    // `whole` drops minor units for large headline figures (>= 1,000).
+    const digits = opts.whole && Math.abs(amount) >= 1000 ? 0 : currency.decimals ?? 2;
     try {
         return new Intl.NumberFormat(locale, {
             style: 'currency',

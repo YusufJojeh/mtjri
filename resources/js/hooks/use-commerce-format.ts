@@ -22,7 +22,7 @@ export function useCommerceFormat() {
             lang,
             isRtl: isRtlLanguage(lang),
             currencyCode: currency.code,
-            money: (v: number | string | null | undefined, opts?: { compact?: boolean }) =>
+            money: (v: number | string | null | undefined, opts?: { compact?: boolean; whole?: boolean }) =>
                 formatMoney(v, { code: currency.code, symbol: currency.symbol, decimals: currency.decimals }, lang, opts),
             number: (v: number | string | null | undefined, opts?: Intl.NumberFormatOptions) => formatNumber(v, lang, opts),
             percent: (v: number | null | undefined, opts?: { signed?: boolean }) => formatPercent(v, lang, opts),

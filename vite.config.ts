@@ -65,16 +65,10 @@ function fixEsToolkitImport(): import('vite').Plugin {
         const functionName = id.replace('\0es-toolkit-compat-', '');
         // Provide a wrapper module that exports both default and named exports
         return {
-          code: `
-            // Use require to get the actual function from es-toolkit/compat
-            const compatModule = require('es-toolkit/compat/${functionName}');
-            // The compat modules export functions as default/commonjs exports
-            const fn = compatModule.default || compatModule['${functionName}'] || compatModule;
-            // Export as default for ES module imports (recharts uses import ${functionName} from ...)
-            export default fn;
-            // Also export as named export for compatibility
-            export const ${functionName} = fn;
-          `,
+          // recharts does `import get from 'es-toolkit/compat/get'`, but those
+          // per-function files are CommonJS. Re-export from the package's ESM
+          // compat entry instead (never emit `require` into browser code).
+          code: `export { ${functionName} as default, ${functionName} } from 'es-toolkit/compat';`,
           map: null,
         };
       }
@@ -99,8 +93,10 @@ function fixReactIsImport(): import('vite').Plugin {
       if (id === '\0react-is-fixed') {
         return {
           code: `
-            // Import react-is as CommonJS module
-            const reactIs = require('react-is');
+            // Import the CommonJS entry by path (bypasses this plugin's own
+            // 'react-is' interception); Vite's commonjs transform provides the
+            // default export. Never emit \`require\` into browser code.
+            import reactIs from 'react-is/index.js';
             // Re-export all named exports for ES module compatibility
             export const isFragment = reactIs.isFragment;
             export const isMemo = reactIs.isMemo;
