@@ -29,7 +29,7 @@ export async function ensureLocale(code) {
     try {
         const mod = await loader();
         i18n.addResourceBundle(code, 'translation', mod.default ?? mod, true, true);
-    } catch (e) {
+    } catch {
         // Fall back to English strings silently; UI stays usable.
     }
 }
@@ -39,7 +39,7 @@ export async function ensureLocale(code) {
 const initialStoredLang = (() => {
     try {
         return typeof window !== 'undefined' ? window.localStorage.getItem('i18nextLng') : null;
-    } catch (e) {
+    } catch {
         return null;
     }
 })();
