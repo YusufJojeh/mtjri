@@ -86,7 +86,10 @@ i18n
         
         // Ensure nested keys work correctly
         keySeparator: '.',
-        nsSeparator: ':',
+        // Single namespace; keys are natural-language strings such as
+        // "Status:" or "Average order value: {{amount}}", so ':' must not be
+        // treated as a namespace separator.
+        nsSeparator: false,
         
         // React configuration
         react: {

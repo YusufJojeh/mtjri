@@ -1,5 +1,8 @@
 export default {
   testEnvironment: 'jsdom',
+  // Only real test files; mocks/fixtures and Playwright specs are not Jest suites.
+  testMatch: ['<rootDir>/resources/js/**/*.test.{ts,tsx,js,jsx}'],
+  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/e2e/'],
   setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/resources/js/$1',

@@ -59,6 +59,8 @@ export default function ShowProduct() {
     const { hasPermission } = usePermissions();
     const { currentStore } = useMerchantShell();
     const { product, performance, recentOrders = [], lowStockThreshold = 20 } = usePage().props as unknown as PageProps;
+    // Files referenced by the product but missing from storage fall back to the placeholder.
+    const [brokenImages, setBrokenImages] = useState<Set<string>>(() => new Set());
     const [range, setRange] = useState<'d30' | 'd90'>('d30');
     const [activeImage, setActiveImage] = useState<string | null>(product.cover_image || null);
 
@@ -136,8 +138,13 @@ export default function ShowProduct() {
                         <div className="flex flex-col gap-5 sm:flex-row">
                             <div className="w-full shrink-0 sm:w-56">
                                 <div className="bg-muted aspect-square overflow-hidden rounded-lg border">
-                                    {activeImage ? (
-                                        <img src={getImageUrl(activeImage)} alt={product.name} className="size-full object-cover" />
+                                    {activeImage && !brokenImages.has(activeImage) ? (
+                                        <img
+                                            src={getImageUrl(activeImage)}
+                                            alt={product.name}
+                                            className="size-full object-cover"
+                                            onError={() => setBrokenImages((prev) => new Set(prev).add(activeImage))}
+                                        />
                                     ) : (
                                         <div className="text-muted-foreground flex size-full flex-col items-center justify-center gap-2 text-xs">
                                             <Images className="size-6" aria-hidden />

@@ -50,7 +50,7 @@ export function TrendChart({ data, metric, showPrevious, height = 240, label, su
                 </span>
                 {showPrevious && (
                     <span className="text-muted-foreground inline-flex items-center gap-1.5">
-                        <span className="h-0.5 w-4 rounded-full" style={{ background: 'var(--chart-2)' }} />
+                        <span className="border-muted-foreground/60 w-4 border-t-2 border-dashed" />
                         {t('Previous period')}
                     </span>
                 )}
@@ -103,7 +103,7 @@ export function TrendChart({ data, metric, showPrevious, height = 240, label, su
                                         {showPrevious && (
                                             <div className="text-muted-foreground mt-1 flex items-center justify-between gap-4">
                                                 <span className="inline-flex items-center gap-1.5">
-                                                    <span className="size-2 rounded-full" style={{ background: 'var(--chart-2)' }} />
+                                                    <span className="bg-muted-foreground/60 size-2 rounded-full" />
                                                     {f.date(parseDay(p.previous_date))}
                                                 </span>
                                                 <span className="tabular-nums">{fmtValue(prev)}</span>
@@ -117,8 +117,10 @@ export function TrendChart({ data, metric, showPrevious, height = 240, label, su
                             <Line
                                 type="monotone"
                                 dataKey={prevKey}
-                                stroke="var(--chart-2)"
-                                strokeWidth={2}
+                                stroke="var(--muted-foreground)"
+                                strokeOpacity={0.55}
+                                strokeDasharray="4 4"
+                                strokeWidth={1.5}
                                 dot={false}
                                 activeDot={{ r: 4, strokeWidth: 2, stroke: 'var(--card)' }}
                                 isAnimationActive={false}

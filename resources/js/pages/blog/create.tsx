@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AiSeoAssist } from '@/components/ai/ai-seo-assist';
 import { PageTemplate } from '@/components/page-template';
 import { ArrowLeft, Save } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -301,6 +302,16 @@ export default function CreateBlog() {
                 <CardTitle>{t('SEO Settings')}</CardTitle>
               </CardHeader>
               <CardContent className='space-y-4'>
+                <AiSeoAssist
+                  kind='blog post'
+                  subject={formData.title}
+                  contentHtml={formData.content}
+                  current={{ title: formData.meta_title, description: formData.meta_description }}
+                  fields={['title', 'description']}
+                  onApply={(field, value) =>
+                    setFormData((prev) => ({ ...prev, [field === 'title' ? 'meta_title' : field === 'description' ? 'meta_description' : 'meta_keywords']: value }))
+                  }
+                />
                 <div>
                   <Label htmlFor='meta_title'>{t('Meta Title')}</Label>
                   <Input 

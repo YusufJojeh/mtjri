@@ -1,0 +1,16 @@
+{
+  "Accepting fills the field — nothing is saved until you save": "القبول يملأ الحقل فقط — لا يُحفظ شيء حتى تضغط حفظ",
+  "Draft search-engine title and description from this content": "صياغة عنوان ووصف لمحركات البحث من هذا المحتوى",
+  "Regenerate SEO": "إعادة إنشاء بيانات السيو",
+  "Suggest SEO with AI": "اقتراح بيانات السيو بالذكاء الاصطناعي",
+  "{{length}} of {{limit}} recommended characters — accepting fills the field only": "{{length}} من {{limit}} حرفًا موصى بها — القبول يملأ الحقل فقط",
+  "Are you sure you want to delete the blog post '{{title}}'?": "هل أنت متأكد من حذف التدوينة '{{title}}'؟",
+  "Are you sure you want to delete the category '{{name}}'?": "هل أنت متأكد من حذف التصنيف '{{name}}'؟",
+  "Default": "افتراضي",
+  "Modified: {{date}}": "آخر تعديل: {{date}}",
+  "Template: {{template}}": "القالب: {{template}}",
+  "This category has {{count}} posts. Deleting it may affect these posts.": "يحتوي هذا التصنيف على {{count}} تدوينات. قد يؤثر حذفه عليها.",
+  "{{count}} views": "{{count}} مشاهدة",
+  "{{percent}}% active": "{{percent}}% نشط",
+  "{{percent}}% published": "{{percent}}% منشور"
+}

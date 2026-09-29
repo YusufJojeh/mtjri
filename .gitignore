@@ -33,3 +33,7 @@ yarn-error.log
 /.claude/
 /playwright-report/
 /test-results/
+# Playwright
+/e2e/.auth
+/playwright-report
+/test-results

@@ -67,12 +67,6 @@ def main():
                 json.dump(data, fh, ensure_ascii=False, indent=4)
                 fh.write('\n')
         changed[code] = added
-    # i18next resolves natural-language keys flat (ignoreJSONStructure), but a
-    # leading "word:" can still be read as a namespace prefix.
-    bad = [k for k in keys if re.match(r'^[A-Za-z]+:', k)]
-    print(f'keys scanned: {len(keys)}; added en={changed["en"]} ar={changed["ar"]}')
-    if bad:
-        print('WARNING keys that look like "namespace:key":', bad)
     if missing_ar:
         print('MISSING ARABIC (%d):' % len(missing_ar))
         for k in missing_ar: print('  ' + json.dumps(k, ensure_ascii=False))

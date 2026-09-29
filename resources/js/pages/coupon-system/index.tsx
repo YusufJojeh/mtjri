@@ -143,7 +143,7 @@ export default function DiscountsIndex() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem asChild>
-                        <Link href={route('store-coupons.show', c.id)}>
+                        <Link href={route('coupon-system.show', c.id)}>
                             <Eye className="size-4" /> {t('View details')}
                         </Link>
                     </DropdownMenuItem>
@@ -319,7 +319,7 @@ export default function DiscountsIndex() {
                         rows={rows}
                         columns={columns}
                         rowKey={(c) => c.id}
-                        rowHref={(c) => route('store-coupons.show', c.id)}
+                        rowHref={(c) => route('coupon-system.show', c.id)}
                         mobileCard={mobileCard}
                         caption={t('Discounts')}
                         empty={

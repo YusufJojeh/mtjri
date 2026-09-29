@@ -43,7 +43,7 @@ export default function EditCoupon() {
                 mode="edit"
                 initial={initial}
                 canSave={hasPermission('edit-coupon-system')}
-                backHref={route('store-coupons.show', coupon.id)}
+                backHref={route('coupon-system.show', coupon.id)}
                 submit={(form) => {
                     form.transform((d) => ({ ...d, start_date: d.start_date || null, expiry_date: d.expiry_date || null }) as unknown as DiscountFormData);
                     form.put(route('store-coupons.update', coupon.id), { preserveScroll: true });

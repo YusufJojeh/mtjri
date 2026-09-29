@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { Link, router, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
@@ -46,9 +46,6 @@ export default function DiscountShow() {
     const [pending, setPending] = useState(false);
 
     // The shared /coupon-system/{id} route renders without performance data; load the full view.
-    useEffect(() => {
-        if (!stats && coupon?.id) router.visit(route('store-coupons.show', coupon.id), { replace: true, preserveScroll: true });
-    }, [stats, coupon?.id]);
 
     const state: DiscountState = stats?.state ?? deriveState(coupon);
     const daysLeft = daysUntil(coupon.expiry_date);

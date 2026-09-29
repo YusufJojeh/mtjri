@@ -14,7 +14,8 @@
         "test:frontend": "jest resources/js",
         "test:backend": "php artisan test tests/Feature/StoreContentManagementTest.php",
         "test:visual": "playwright test e2e/visual",
-        "test:visual:update": "playwright test e2e/visual --update-snapshots"
+        "test:visual:update": "playwright test e2e/visual --update-snapshots",
+        "test:e2e": "playwright test -c playwright.flows.config.ts"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.28.5",

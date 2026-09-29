@@ -465,9 +465,8 @@ Route::middleware(['auth'])->group(function () {
                 $user = Auth::user();
                 $currentStoreId = getCurrentStoreId($user);
                 $coupon = \App\Models\StoreCoupon::where('store_id', $currentStoreId)->findOrFail($id);
-                return Inertia::render('coupon-system/show', [
-                    'coupon' => $coupon
-                ]);
+                // Delegate so the detail page always receives usage & performance stats.
+                return app(\App\Http\Controllers\StoreCouponController::class)->show($coupon);
             })->middleware('permission:view-coupon-system')->name('coupon-system.show');
             Route::post('store-coupons', [\App\Http\Controllers\StoreCouponController::class, 'store'])->middleware('permission:create-coupon-system')->name('store-coupons.store');
             Route::get('store-coupons/{storeCoupon}', [\App\Http\Controllers\StoreCouponController::class, 'show'])->middleware('permission:view-coupon-system')->name('store-coupons.show');
