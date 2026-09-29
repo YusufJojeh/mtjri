@@ -148,8 +148,8 @@ export default function LandingPage() {
   // Get title from brand context (superadmin settings) first, then SEO, then fallback
   const { titleText } = useBrand();
   const seo = settings.config_sections?.seo;
-  const pageTitle = titleText || seo?.meta_title || 'MTJRii - Build Your Online Store';
-  const metaDescription = seo?.meta_description || 'Create beautiful, professional online stores with MTJRii. Everything you need to start selling online.';
+  const pageTitle = titleText || seo?.meta_title || 'Tijraa - Build Your Online Store';
+  const metaDescription = seo?.meta_description || 'Create beautiful, professional online stores with Tijraa. Everything you need to start selling online.';
 
   // Custom CSS
   React.useEffect(() => {

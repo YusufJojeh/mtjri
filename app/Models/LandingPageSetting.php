@@ -77,7 +77,7 @@ class LandingPageSetting extends Model
                     ],
                     [
                         'key' => 'screenshots',
-                        'title' => 'See StoreGo in Action',
+                        'title' => 'See Tijraa in Action',
                         'subtitle' => 'Explore our intuitive dashboard and powerful store management features.',
                         'screenshots_list' => [
                             [
@@ -96,7 +96,7 @@ class LandingPageSetting extends Model
                     ],
                     [
                         'key' => 'why_choose_us',
-                        'title' => 'Why Choose StoreGo?',
+                        'title' => 'Why Choose Tijraa?',
                         'subtitle' => 'The complete e-commerce solution for modern businesses.',
                         'reasons' => [
                             ['title' => 'Multi-Store Architecture', 'description' => 'Manage unlimited stores from one account with centralized dashboard.', 'icon' => 'stores'],
@@ -136,7 +136,7 @@ class LandingPageSetting extends Model
                         'title' => 'About',
                         'description' => 'We are passionate about empowering entrepreneurs to build successful e-commerce businesses.',
                         'story_title' => 'Revolutionizing Multi-Store E-commerce Since 2019',
-                        'story_content' => 'Founded by e-commerce experts and technology innovators, StoreGo was created to solve the challenges of managing multiple online stores.',
+                        'story_content' => 'Founded by e-commerce experts and technology innovators, Tijraa was created to solve the challenges of managing multiple online stores.',
                         'image' => '',
                         'background_color' => '#f9fafb',
                         'layout' => 'image-right',
@@ -154,7 +154,7 @@ class LandingPageSetting extends Model
                         'cta_description' => 'We\'re always looking for talented individuals.',
                         'cta_button_text' => 'View Open Positions',
                         'members' => [
-                            ['name' => 'Sarah Johnson', 'role' => 'CEO & Founder', 'bio' => 'Former tech executive with 15+ years experience.', 'image' => '', 'linkedin' => '#', 'email' => 'sarah@storego.com']
+                            ['name' => 'Sarah Johnson', 'role' => 'CEO & Founder', 'bio' => 'Former tech executive with 15+ years experience.', 'image' => '', 'linkedin' => '#', 'email' => 'sarah@tijraa.com']
                         ]
                     ],
                     [
@@ -167,7 +167,7 @@ class LandingPageSetting extends Model
                             ['value' => '10K+', 'label' => 'Happy Users', 'color' => 'green']
                         ],
                         'testimonials' => [
-                            ['name' => 'Alex Thompson', 'role' => 'Sales Director', 'company' => 'TechCorp Inc.', 'content' => 'StoreGo has revolutionized how I manage my online stores.', 'rating' => 5]
+                            ['name' => 'Alex Thompson', 'role' => 'Sales Director', 'company' => 'TechCorp Inc.', 'content' => 'Tijraa has revolutionized how I manage my online stores.', 'rating' => 5]
                         ]
                     ],
                     [
@@ -191,12 +191,12 @@ class LandingPageSetting extends Model
                         'cta_text' => 'Still have questions?',
                         'button_text' => 'Contact Support',
                         'faqs' => [
-                            ['question' => 'How does StoreGo work?', 'answer' => 'StoreGo allows you to create and manage multiple online stores from a single dashboard with different themes and products.']
+                            ['question' => 'How does Tijraa work?', 'answer' => 'Tijraa allows you to create and manage multiple online stores from a single dashboard with different themes and products.']
                         ]
                     ],
                     [
                         'key' => 'newsletter',
-                        'title' => 'Stay Updated with StoreGo',
+                        'title' => 'Stay Updated with Tijraa',
                         'subtitle' => 'Get the latest e-commerce tips and platform updates.',
                         'privacy_text' => 'No spam, unsubscribe at any time.',
                         'benefits' => [
@@ -206,7 +206,7 @@ class LandingPageSetting extends Model
                     [
                         'key' => 'contact',
                         'title' => 'Get in Touch',
-                        'subtitle' => 'Have questions about StoreGo? We\'d love to hear from you.',
+                        'subtitle' => 'Have questions about Tijraa? We\'d love to hear from you.',
                         'form_title' => 'Send us a Message',
                         'info_title' => 'Contact Information',
                         'info_description' => 'We\'re here to help and answer any question you might have.',
@@ -246,8 +246,8 @@ class LandingPageSetting extends Model
                     'accent' => '#FFC107',
                 ],
                 'seo' => [
-                    'meta_title' => 'StoreGo - Multi-Store E-commerce Platform',
-                    'meta_description' => 'Create and manage multiple online stores with StoreGo. 30+ payment gateways, beautiful themes, and powerful features.',
+                    'meta_title' => 'Tijraa - Multi-Store E-commerce Platform',
+                    'meta_description' => 'Create and manage multiple online stores with Tijraa. 30+ payment gateways, beautiful themes, and powerful features.',
                     'meta_keywords' => 'ecommerce platform, online store builder, multi-store management, sell online'
                 ],
                 'custom_css' => '',

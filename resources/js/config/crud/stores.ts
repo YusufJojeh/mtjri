@@ -3,8 +3,8 @@ import { CrudConfig } from '@/types/crud';
 import { t } from '@/utils/i18n';
 
 export const storesConfig: CrudConfig = {
-  entity: 'tore',
-  entityPlural: 'tores',
+  entity: 'store',
+  entityPlural: 'stores',
   route: '/stores',
   permissions: {
     view: 'manage-stores',
@@ -24,7 +24,7 @@ export const storesConfig: CrudConfig = {
       sortable: true,
     },
     {
-      key: 'tore_count',
+      key: 'store_count',
       label: 'Store Count',
       sortable: true,
     },
@@ -46,7 +46,7 @@ export const storesConfig: CrudConfig = {
   ],
   filters: [
     {
-      key: 'earch',
+      key: 'search',
       label: 'Search',
       type: 'text',
       placeholder: 'Search stores...',
@@ -66,7 +66,7 @@ export const storesConfig: CrudConfig = {
       permission: 'delete-stores',
     },
     {
-      key: 'tore_links',
+      key: 'store_links',
       label: 'Store Links',
       icon: 'Link',
       permission: 'uper-admin',
@@ -99,7 +99,7 @@ export const storesConfig: CrudConfig = {
   form: {
     fields: ([] as any) || [
       {
-        key: 'tore_name',
+        key: 'store_name',
         label: 'Store Name',
         type: 'text',
         required: true,

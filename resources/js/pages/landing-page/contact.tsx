@@ -42,7 +42,7 @@ export default function ContactPage() {
   const { settings, customPages = [], flash } = page.props || {};
 
   const defaultSettings = {
-    company_name: 'MTJRii',
+    company_name: 'Tijraa',
     contact_email: '',
     contact_phone: '',
     contact_address: '',

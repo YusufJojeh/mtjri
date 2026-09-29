@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Domain Configuration",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.",
     "Domestic": "Domestic",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Downloadable File",
     "Draft Pages": "Draft Pages",
     "Edit Blog Post": "Edit Blog Post",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Get started by creating your first blog post.",
     "Get started by creating your first express checkout.": "Get started by creating your first express checkout.",
     "Get started by creating your first shipping method.": "Get started by creating your first shipping method.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Go directly to checkout",
     "Guest Checkout Allowed": "Guest Checkout Allowed",
     "Handling Fee": "Handling Fee",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Special instructions...",
     "Standard Shipping - $9.99": "Standard Shipping - $9.99",
     "Stay Updated with Store": "Stay Updated with Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Stock Quantity *",
     "Store Configuration": "Store Configuration",
     "Store Content": "Store Content",
@@ -2469,7 +2469,7 @@
     "What's this about?": "What's this about?",
     "Wholesale Customer": "Wholesale Customer",
     "Why Choose Store?": "Why Choose Store?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Word Count",
     "Work in progress": "Work in progress",
     "Write your blog post content here...": "Write your blog post content here...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "چرا MTJRii را انتخاب کنیم؟",
+            "title": "چرا Tijraa را انتخاب کنیم؟",
             "subtitle": "ما فقط یک پلتفرم تجارت الکترونیک دیگر نیستیم. ما شریک شما در ساخت فروشگاه‌های آنلاین موفق هستیم که رشد کسب‌وکار را هدایت می‌کنند.",
             "badge": "چرا ما را انتخاب کنید",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "با ما تماس بگیرید",
             "items": {
                 "1": {
-                    "question": "MTJRii چگونه کار می‌کند؟",
-                    "answer": "MTJRii به شما امکان می‌دهد چندین فروشگاه آنلاین را از یک پلتفرم قدرتمند ایجاد و مدیریت کنید. به سادگی فروشگاه خود را ایجاد کنید، آن را با محصولات و برند خود سفارشی کنید و شروع به فروش کنید!"
+                    "question": "Tijraa چگونه کار می‌کند؟",
+                    "answer": "Tijraa به شما امکان می‌دهد چندین فروشگاه آنلاین را از یک پلتفرم قدرتمند ایجاد و مدیریت کنید. به سادگی فروشگاه خود را ایجاد کنید، آن را با محصولات و برند خود سفارشی کنید و شروع به فروش کنید!"
                 },
                 "2": {
                     "question": "داده‌های من امن هستند؟",
@@ -2598,8 +2598,8 @@
                     "answer": "کاملاً! می‌توانید رنگ‌ها، فونت‌ها، چیدمان را سفارشی کنید، لوگو، تصاویر محصول و موارد دیگر را اضافه کنید. پلتفرم ما گزینه‌های گسترده سفارشی‌سازی را ارائه می‌دهد."
                 },
                 "4": {
-                    "question": "آیا برای استفاده از MTJRii به مهارت‌های فنی نیاز دارم؟",
-                    "answer": "اصلاً! MTJRii برای کاربرپسند بودن طراحی شده است. می‌توانید فروشگاه‌های آنلاین خود را در چند دقیقه بدون هیچ دانش فنی ایجاد و مدیریت کنید."
+                    "question": "آیا برای استفاده از Tijraa به مهارت‌های فنی نیاز دارم؟",
+                    "answer": "اصلاً! Tijraa برای کاربرپسند بودن طراحی شده است. می‌توانید فروشگاه‌های آنلاین خود را در چند دقیقه بدون هیچ دانش فنی ایجاد و مدیریت کنید."
                 },
                 "5": {
                     "question": "آیا می‌توانم عملکرد فروشگاه خود را ردیابی کنم؟",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "با MTJRii به‌روز بمانید",
-            "subtitle": "آخرین نکات تجارت الکترونیک، به‌روزرسانی‌های MTJRii و بینش‌های انحصاری را مستقیماً به صندوق ورودی خود دریافت کنید. به جامعه بازرگانان موفق ما بپیوندید.",
+            "title": "با Tijraa به‌روز بمانید",
+            "subtitle": "آخرین نکات تجارت الکترونیک، به‌روزرسانی‌های Tijraa و بینش‌های انحصاری را مستقیماً به صندوق ورودی خود دریافت کنید. به جامعه بازرگانان موفق ما بپیوندید.",
             "enterEmail": "آدرس ایمیل خود را وارد کنید",
             "subscribe": "اشتراک",
             "subscribing": "در حال اشتراک...",
@@ -2619,8 +2619,8 @@
             "privacyText": "بدون هرزنامه، در هر زمان لغو اشتراک کنید. ما به حریم خصوصی شما احترام می‌گذاریم."
         },
         "about": {
-            "title": "داستان پشت MTJRii",
-            "description": "تأسیس شده توسط متخصصان تجارت الکترونیک و نوآوران فناوری، MTJRii برای حل چالش‌های مدیریت چندین فروشگاه آنلاین ایجاد شد. امروز، ما به بیش از 25,000 کارآفرین در بیش از 120 کشور خدمات ارائه می‌دهیم و به آن‌ها کمک می‌کنیم با پلتفرم جامع ما کسب‌وکارهای تجارت الکترونیک موفق بسازند و مقیاس‌بندی کنند.",
+            "title": "داستان پشت Tijraa",
+            "description": "تأسیس شده توسط متخصصان تجارت الکترونیک و نوآوران فناوری، Tijraa برای حل چالش‌های مدیریت چندین فروشگاه آنلاین ایجاد شد. امروز، ما به بیش از 25,000 کارآفرین در بیش از 120 کشور خدمات ارائه می‌دهیم و به آن‌ها کمک می‌کنیم با پلتفرم جامع ما کسب‌وکارهای تجارت الکترونیک موفق بسازند و مقیاس‌بندی کنند.",
             "innovationDriven": "هدایت شده با نوآوری",
             "buildingFuture": "ساخت آینده تجارت الکترونیک",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "تماس با ما",
-            "subtitle": "سوالی در مورد MTJRii دارید؟ دوست داریم از شما بشنویم. برای ما پیام بفرستید و ما در اسرع وقت پاسخ خواهیم داد.",
+            "subtitle": "سوالی در مورد Tijraa دارید؟ دوست داریم از شما بشنویم. برای ما پیام بفرستید و ما در اسرع وقت پاسخ خواهیم داد.",
             "formTitle": "برای ما پیام بفرستید",
             "infoTitle": "اطلاعات تماس",
             "infoDescription": "ما اینجا هستیم تا کمک کنیم و به هر سوالی که ممکن است داشته باشید پاسخ دهیم. منتظر شنیدن از شما هستیم."
         },
         "screenshots": {
-            "title": "MTJRii را در عمل ببینید",
+            "title": "Tijraa را در عمل ببینید",
             "subtitle": "داشبورد بصری و ویژگی‌های قدرتمند مدیریت فروشگاه ما را کاوش کنید.",
             "items": {
                 "1": {
                     "title": "داشبورد چند فروشگاهی",
                     "description": "همه فروشگاه‌های خود را از یک داشبورد مبتنی بر ابر مدیریت کنید",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "داشبورد چند فروشگاهی"
                 },
                 "2": {
                     "title": "مدیریت محصول",
                     "description": "محصولات را اضافه کنید، دسته‌بندی‌ها را سازماندهی کنید و موجودی را برای هر فروشگاه به صورت جداگانه ردیابی کنید",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "مدیریت محصول"
                 },
                 "3": {
                     "title": "انتخاب تم",
                     "description": "از بیش از 10 قالب حرفه‌ای برای هر فروشگاه انتخاب کنید",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "انتخاب تم"
                 },
                 "4": {
                     "title": "مدیریت سفارش",
                     "description": "سفارش‌ها را پردازش کنید و تراکنش‌های مشتری را با سهولت مدیریت کنید",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "مدیریت سفارش"
                 },
                 "5": {
                     "title": "مدیریت وبلاگ",
                     "description": "سیستم وبلاگ داخلی برای هر فروشگاه با ابزارهای پیشرفته مدیریت محتوا",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "مدیریت وبلاگ"
                 },
                 "6": {
                     "title": "ادغام پرداخت",
                     "description": "بیش از 30 درگاه پرداخت آماده اتصال به فروشگاه‌های شما",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "ادغام پرداخت"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "آنچه مشتریان ما می‌گویند",
-            "subtitle": "فقط حرف ما را باور نکنید. در اینجا آنچه بازرگانان در سراسر جهان در مورد MTJRii می‌گویند آمده است."
+            "subtitle": "فقط حرف ما را باور نکنید. در اینجا آنچه بازرگانان در سراسر جهان در مورد Tijraa می‌گویند آمده است."
         },
         "templates": {
             "title": "قالب‌های ما را کاوش کنید",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "مستندات",
-        "description": "بیاموزید چگونه از Matjrii برای ایجاد و مدیریت فروشگاه‌های آنلاین خود استفاده کنید. راهنماها، آموزش‌ها و پاسخ به سوالات متداول را پیدا کنید.",
+        "description": "بیاموزید چگونه از Tijraa برای ایجاد و مدیریت فروشگاه‌های آنلاین خود استفاده کنید. راهنماها، آموزش‌ها و پاسخ به سوالات متداول را پیدا کنید.",
         "navigation": {
             "home": "صفحه اصلی مستندات",
             "search": "جستجو در مستندات...",

@@ -141,7 +141,7 @@ export default function EditReview() {
               <Textarea 
                 id='store_response' 
                 value={data.store_response}
-                onChange={(e) => setData('tore_response', e.target.value)}
+                onChange={(e) => setData('store_response', e.target.value)}
                 placeholder={t('Add your response to this review...')}
                 rows={3} 
               />

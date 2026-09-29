@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { Mail } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
@@ -13,7 +14,7 @@ import { THEME_COLORS } from '@/hooks/use-appearance';
 export default function VerifyEmail({ status }: { status?: string }) {
     const { t } = useTranslation();
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     const { post, processing } = useForm({});
 
     const submit: FormEventHandler = (e) => {

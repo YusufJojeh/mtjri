@@ -37,7 +37,7 @@ function StoreLayoutContent({
   customPages,
   customFooter,
   theme
-}: Omit<StoreLayoutProps, 'toreId' | 'toreContent'>) {
+}: Omit<StoreLayoutProps, 'storeId' | 'storeContent'>) {
   // Set store-specific favicon
   useStoreFavicon();
   

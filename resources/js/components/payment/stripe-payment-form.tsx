@@ -53,7 +53,7 @@ const CheckoutForm = ({ planId, couponCode, billingCycle, onSuccess, onCancel }:
       return;
     }
 
-    processPayment('tripe', {
+    processPayment('stripe', {
       planId,
       billingCycle,
       couponCode,

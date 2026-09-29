@@ -111,7 +111,7 @@ class CustomPageController extends Controller
         $page = LandingPageCustomPage::where('slug', $slug)->where('is_active', true)->firstOrFail();
         $landingSettings = \App\Models\LandingPageSetting::getSettings();
         
-        // Page visit tracking removed for Storego
+        // Page visit tracking removed for Tijraa
         
         return Inertia::render('landing-page/custom-page', [
             'page' => $page,

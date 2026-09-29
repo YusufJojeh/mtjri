@@ -221,7 +221,7 @@ export default function POSSettings() {
                   </div>
                   <Switch 
                     checked={formData.show_logo_on_receipt}
-                    onCheckedChange={() => handleSwitchChange('how_logo_on_receipt')}
+                    onCheckedChange={() => handleSwitchChange('show_logo_on_receipt')}
                   />
                 </div>
                 <div className='flex items-center justify-between'>
@@ -231,7 +231,7 @@ export default function POSSettings() {
                   </div>
                   <Switch 
                     checked={formData.show_tax_details}
-                    onCheckedChange={() => handleSwitchChange('how_tax_details')}
+                    onCheckedChange={() => handleSwitchChange('show_tax_details')}
                   />
                 </div>
                 <div className='flex items-center justify-between'>
@@ -241,7 +241,7 @@ export default function POSSettings() {
                   </div>
                   <Switch 
                     checked={formData.show_cashier_name}
-                    onCheckedChange={() => handleSwitchChange('how_cashier_name')}
+                    onCheckedChange={() => handleSwitchChange('show_cashier_name')}
                   />
                 </div>
                 <div className='flex items-center justify-between'>

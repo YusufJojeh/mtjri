@@ -21,7 +21,7 @@ export default function ContactSection({ data, setData, errors, handleInputChang
             <select
               id='contact_layout'
               name='contact_layout'
-              value={data.contact_layout || 'plit'}
+              value={data.contact_layout || 'split'}
               onChange={handleInputChange}
               className='w-full p-2 border border-gray-300 rounded-md'
             >

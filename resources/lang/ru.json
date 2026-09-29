@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Конфигурация домена",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Доменные функции не доступны в вашем текущем плане. Ваш магазин будет доступен через URL-адрес, основанный на слэге.",
     "Domestic": "Внутренние",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Загружаемый файл",
     "Draft Pages": "Проекты страниц",
     "Edit Blog Post": "Изменить сообщение в блоге",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Начните с создания своего первого поста в блоге.",
     "Get started by creating your first express checkout.": "Начните с создания вашего первого экспресс-касса.",
     "Get started by creating your first shipping method.": "Начните с создания первого способа доставки.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Идите прямо в кассу .",
     "Guest Checkout Allowed": "Допускается выезд гостя",
     "Handling Fee": "Сборы за обработку",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Специальные инструкции...",
     "Standard Shipping - $9.99": "Стандартная доставка - $9.99",
     "Stay Updated with Store": "Оставайтесь в курсе со Складом",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Количество запасов *",
     "Store Configuration": "Конфигурация хранилища",
     "Store Content": "Содержание",
@@ -2469,7 +2469,7 @@
     "What's this about?": "Что это за история?",
     "Wholesale Customer": "Оптовый клиент",
     "Why Choose Store?": "Почему выбрать магазин?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Число слов",
     "Work in progress": "Работа в процессе",
     "Write your blog post content here...": "Напишите свой блог здесь...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Почему Выбрать MTJRii?",
+            "title": "Почему Выбрать Tijraa?",
             "subtitle": "Мы не просто еще одна платформа электронной коммерции. Мы ваш партнер в создании успешных интернет-магазинов, которые способствуют росту бизнеса.",
             "badge": "Почему Выбрать Нас",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Свяжитесь с нами",
             "items": {
                 "1": {
-                    "question": "Как работает MTJRii?",
-                    "answer": "MTJRii позволяет создавать и управлять несколькими интернет-магазинами с одной мощной платформы. Просто создайте свой магазин, настройте его своими продуктами и брендингом, и начните продавать!"
+                    "question": "Как работает Tijraa?",
+                    "answer": "Tijraa позволяет создавать и управлять несколькими интернет-магазинами с одной мощной платформы. Просто создайте свой магазин, настройте его своими продуктами и брендингом, и начните продавать!"
                 },
                 "2": {
                     "question": "Безопасны ли мои данные?",
@@ -2598,8 +2598,8 @@
                     "answer": "Абсолютно! Вы можете настраивать цвета, шрифты, макет, добавлять свой логотип, изображения продуктов и многое другое. Наша платформа предлагает обширные возможности настройки."
                 },
                 "4": {
-                    "question": "Нужны ли мне технические навыки для использования MTJRii?",
-                    "answer": "Вовсе нет! MTJRii разработан для удобства пользователей. Вы можете создавать и управлять своими интернет-магазинами за минуты без каких-либо технических знаний."
+                    "question": "Нужны ли мне технические навыки для использования Tijraa?",
+                    "answer": "Вовсе нет! Tijraa разработан для удобства пользователей. Вы можете создавать и управлять своими интернет-магазинами за минуты без каких-либо технических знаний."
                 },
                 "5": {
                     "question": "Могу ли я отслеживать производительность моего магазина?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Оставайтесь В Курсе С MTJRii",
-            "subtitle": "Получайте последние советы по электронной коммерции, обновления MTJRii и эксклюзивные инсайты прямо на вашу почту. Присоединяйтесь к нашему сообществу успешных торговцев.",
+            "title": "Оставайтесь В Курсе С Tijraa",
+            "subtitle": "Получайте последние советы по электронной коммерции, обновления Tijraa и эксклюзивные инсайты прямо на вашу почту. Присоединяйтесь к нашему сообществу успешных торговцев.",
             "enterEmail": "Введите ваш адрес электронной почты",
             "subscribe": "Подписаться",
             "subscribing": "Подписка...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Без спама, отписаться можно в любое время. Мы уважаем вашу конфиденциальность."
         },
         "about": {
-            "title": "История За MTJRii",
-            "description": "Основанный экспертами по электронной коммерции и технологическими новаторами, MTJRii был создан для решения проблем управления несколькими интернет-магазинами. Сегодня мы обслуживаем более 25 000 предпринимателей в более чем 120 странах, помогая им строить и масштабировать успешные бизнесы электронной коммерции с помощью нашей комплексной платформы.",
+            "title": "История За Tijraa",
+            "description": "Основанный экспертами по электронной коммерции и технологическими новаторами, Tijraa был создан для решения проблем управления несколькими интернет-магазинами. Сегодня мы обслуживаем более 25 000 предпринимателей в более чем 120 странах, помогая им строить и масштабировать успешные бизнесы электронной коммерции с помощью нашей комплексной платформы.",
             "innovationDriven": "Движимый Инновациями",
             "buildingFuture": "Строим будущее электронной коммерции",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Свяжитесь С Нами",
-            "subtitle": "Есть вопросы о MTJRii? Мы будем рады услышать от вас. Отправьте нам сообщение, и мы ответим как можно скорее.",
+            "subtitle": "Есть вопросы о Tijraa? Мы будем рады услышать от вас. Отправьте нам сообщение, и мы ответим как можно скорее.",
             "formTitle": "Отправьте Нам Сообщение",
             "infoTitle": "Контактная Информация",
             "infoDescription": "Мы здесь, чтобы помочь и ответить на любой вопрос, который у вас может быть. Мы с нетерпением ждем вашего ответа."
         },
         "screenshots": {
-            "title": "Увидьте MTJRii В Действии",
+            "title": "Увидьте Tijraa В Действии",
             "subtitle": "Исследуйте нашу интуитивную панель и мощные функции управления магазином.",
             "items": {
                 "1": {
                     "title": "Панель Мульти-Магазин",
                     "description": "Управляйте всеми своими магазинами с одной облачной панели",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Панель Мульти-Магазин"
                 },
                 "2": {
                     "title": "Управление Продуктами",
                     "description": "Добавляйте продукты, организуйте категории и отслеживайте инвентарь для каждого магазина отдельно",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Управление Продуктами"
                 },
                 "3": {
                     "title": "Выбор Темы",
                     "description": "Выберите из более чем 10 профессиональных шаблонов для каждого магазина",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Выбор Темы"
                 },
                 "4": {
                     "title": "Управление Заказами",
                     "description": "Обрабатывайте заказы и управляйте транзакциями клиентов с легкостью",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Управление Заказами"
                 },
                 "5": {
                     "title": "Управление Блогом",
                     "description": "Встроенная система блога для каждого магазина с продвинутыми инструментами управления контентом",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Управление Блогом"
                 },
                 "6": {
                     "title": "Интеграция Платежей",
                     "description": "Более 30 платежных шлюзов готовы подключиться к вашим магазинам",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Интеграция Платежей"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Что Говорят Наши Клиенты",
-            "subtitle": "Не верьте нам на слово. Вот что говорят торговцы по всему миру о MTJRii."
+            "subtitle": "Не верьте нам на слово. Вот что говорят торговцы по всему миру о Tijraa."
         },
         "templates": {
             "title": "Исследуйте Наши Шаблоны",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Документация",
-        "description": "Узнайте, как использовать Matjrii для создания и управления вашими интернет-магазинами. Найдите руководства, учебные пособия и ответы на распространенные вопросы.",
+        "description": "Узнайте, как использовать Tijraa для создания и управления вашими интернет-магазинами. Найдите руководства, учебные пособия и ответы на распространенные вопросы.",
         "navigation": {
             "home": "Главная Документации",
             "search": "Поиск в документации...",

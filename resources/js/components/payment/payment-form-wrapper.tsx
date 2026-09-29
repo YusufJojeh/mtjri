@@ -51,7 +51,7 @@ export function PaymentFormWrapper({
       
       if (data.is_stripe_enabled) {
         methods.push({
-          id: 'tripe',
+          id: 'stripe',
           name: 'Credit Card (Stripe)',
           enabled: true,
           config: {
@@ -134,7 +134,7 @@ export function PaymentFormWrapper({
     };
 
     switch (selectedMethod) {
-      case 'tripe':
+      case 'stripe':
         return (
           <StripePaymentForm
             {...commonProps}

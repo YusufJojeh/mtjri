@@ -17,7 +17,7 @@ export const categoriesConfig: CrudConfig = {
   table: {
     columns: ([] as any) || [
       { key: 'name', label: t('Name'), sortable: true },
-      { key: 'lug', label: t('Slug'), sortable: true },
+      { key: 'slug', label: t('Slug'), sortable: true },
       { 
         key: 'image', 
         label: t('Image'), 
@@ -59,7 +59,7 @@ export const categoriesConfig: CrudConfig = {
   form: {
     fields: ([] as any) || [
       { name: 'name', label: t('Name'), type: 'text', required: true },
-      { name: 'lug', label: t('Slug'), type: 'text', required: true },
+      { name: 'slug', label: t('Slug'), type: 'text', required: true },
       { name: 'description', label: t('Description'), type: 'textarea' },
       { 
         name: 'image', 

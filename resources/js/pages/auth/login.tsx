@@ -1,4 +1,5 @@
 import { useForm, router, usePage } from '@inertiajs/react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { Mail, Lock } from 'lucide-react';
 import { FormEventHandler, useState, useEffect } from 'react';
 
@@ -42,7 +43,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
     const { themeColor, customColor } = useBrand();
     const { settings = {} } = usePage().props as any;
     const recaptchaEnabled = settings.recaptchaEnabled === 'true' || settings.recaptchaEnabled === true || settings.recaptchaEnabled === 1 || settings.recaptchaEnabled === '1';
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     const [isDemo, setIsDemo] = useState<boolean>(false);
     const [hoveredStore, setHoveredStore] = useState<string | null>(null);
     

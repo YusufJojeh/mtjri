@@ -34,7 +34,7 @@ export function ThemePreview() {
   
   // Get title text
   const getTitleText = () => {
-    return 'StoreGo';
+    return 'Tijraa';
   };
   
   return (

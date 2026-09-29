@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Configuratie van het domein",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Domain-functies zijn niet beschikbaar in uw huidige plan. Uw winkel is toegankelijk via een slug-gebaseerde URL.",
     "Domestic": "Binnenlandse",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Downloadbestand",
     "Draft Pages": "Ontwerppagina's",
     "Edit Blog Post": "Bewerken blogpost",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Begin met het maken van je eerste blogpost.",
     "Get started by creating your first express checkout.": "Begin met het maken van je eerste express checkout.",
     "Get started by creating your first shipping method.": "Begin met het creëren van je eerste verzendmethode.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Ga direct naar de kassa.",
     "Guest Checkout Allowed": "Gast Checkout toegestaan",
     "Handling Fee": "Verwerkingsvergoeding",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Speciale instructies...",
     "Standard Shipping - $9.99": "Standaard verzending - $9.99",
     "Stay Updated with Store": "Blijf op de hoogte met Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Voorraadhoeveelheid *",
     "Store Configuration": "Configuratie van de opslag",
     "Store Content": "Inhoud opslaan",
@@ -2469,7 +2469,7 @@
     "What's this about?": "Waar gaat dit over?",
     "Wholesale Customer": "Grote klant",
     "Why Choose Store?": "Waarom een winkel kiezen?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Woordtelling",
     "Work in progress": "Werk in uitvoering",
     "Write your blog post content here...": "Schrijf je blogpost hier...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Waarom MTJRii Kiezen?",
+            "title": "Waarom Tijraa Kiezen?",
             "subtitle": "We zijn niet zomaar een ander e-commerce platform. We zijn uw partner bij het bouwen van succesvolle online winkels die bedrijfsgroei stimuleren.",
             "badge": "Waarom Ons Kiezen",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Neem Contact Op",
             "items": {
                 "1": {
-                    "question": "Hoe werkt MTJRii?",
-                    "answer": "MTJRii stelt u in staat om meerdere online winkels te maken en te beheren vanuit één krachtig platform. Maak gewoon uw winkel, personaliseer deze met uw producten en merk, en begin met verkopen!"
+                    "question": "Hoe werkt Tijraa?",
+                    "answer": "Tijraa stelt u in staat om meerdere online winkels te maken en te beheren vanuit één krachtig platform. Maak gewoon uw winkel, personaliseer deze met uw producten en merk, en begin met verkopen!"
                 },
                 "2": {
                     "question": "Zijn mijn gegevens veilig?",
@@ -2598,8 +2598,8 @@
                     "answer": "Absoluut! U kunt kleuren, lettertypen, lay-out aanpassen, uw logo, productafbeeldingen en nog veel meer toevoegen. Ons platform biedt uitgebreide aanpassingsopties."
                 },
                 "4": {
-                    "question": "Heb ik technische vaardigheden nodig om MTJRii te gebruiken?",
-                    "answer": "Helemaal niet! MTJRii is ontworpen om gebruiksvriendelijk te zijn. U kunt uw online winkels in enkele minuten maken en beheren zonder technische kennis."
+                    "question": "Heb ik technische vaardigheden nodig om Tijraa te gebruiken?",
+                    "answer": "Helemaal niet! Tijraa is ontworpen om gebruiksvriendelijk te zijn. U kunt uw online winkels in enkele minuten maken en beheren zonder technische kennis."
                 },
                 "5": {
                     "question": "Kan ik de prestaties van mijn winkel volgen?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Blijf Op de Hoogte met MTJRii",
-            "subtitle": "Ontvang de nieuwste e-commerce tips, MTJRii-updates en exclusieve inzichten rechtstreeks in uw inbox. Word lid van onze gemeenschap van succesvolle handelaren.",
+            "title": "Blijf Op de Hoogte met Tijraa",
+            "subtitle": "Ontvang de nieuwste e-commerce tips, Tijraa-updates en exclusieve inzichten rechtstreeks in uw inbox. Word lid van onze gemeenschap van succesvolle handelaren.",
             "enterEmail": "Voer uw e-mailadres in",
             "subscribe": "Abonneren",
             "subscribing": "Abonneren...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Geen spam, uitschrijven kan altijd. We respecteren uw privacy."
         },
         "about": {
-            "title": "Het Verhaal Achter MTJRii",
-            "description": "Opgericht door e-commerce experts en technologische innovators, werd MTJRii gecreëerd om de uitdagingen van het beheren van meerdere online winkels op te lossen. Vandaag bedienen we meer dan 25.000 ondernemers in meer dan 120 landen en helpen we hen succesvolle e-commerce bedrijven op te bouwen en te schalen met ons uitgebreide platform.",
+            "title": "Het Verhaal Achter Tijraa",
+            "description": "Opgericht door e-commerce experts en technologische innovators, werd Tijraa gecreëerd om de uitdagingen van het beheren van meerdere online winkels op te lossen. Vandaag bedienen we meer dan 25.000 ondernemers in meer dan 120 landen en helpen we hen succesvolle e-commerce bedrijven op te bouwen en te schalen met ons uitgebreide platform.",
             "innovationDriven": "Innovatie Gedreven",
             "buildingFuture": "De toekomst van e-commerce bouwen",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Neem Contact Op",
-            "subtitle": "Heeft u vragen over MTJRii? We horen graag van u. Stuur ons een bericht en we reageren zo snel mogelijk.",
+            "subtitle": "Heeft u vragen over Tijraa? We horen graag van u. Stuur ons een bericht en we reageren zo snel mogelijk.",
             "formTitle": "Stuur Ons een Bericht",
             "infoTitle": "Contactgegevens",
             "infoDescription": "We zijn hier om te helpen en elke vraag te beantwoorden die u mogelijk heeft. We kijken uit naar uw bericht."
         },
         "screenshots": {
-            "title": "Zie MTJRii in Actie",
+            "title": "Zie Tijraa in Actie",
             "subtitle": "Verken ons intuïtieve dashboard en krachtige winkelbeheerfuncties.",
             "items": {
                 "1": {
                     "title": "Multi-Winkel Dashboard",
                     "description": "Beheer al uw winkels vanuit één cloudgebaseerd dashboard",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Multi-Winkel Dashboard"
                 },
                 "2": {
                     "title": "Productbeheer",
                     "description": "Voeg producten toe, organiseer categorieën en volg voorraad voor elke winkel afzonderlijk",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Productbeheer"
                 },
                 "3": {
                     "title": "Thema Selectie",
                     "description": "Kies uit meer dan 10 professionele sjablonen voor elke winkel",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Thema Selectie"
                 },
                 "4": {
                     "title": "Orderbeheer",
                     "description": "Verwerk bestellingen en beheer klanttransacties met gemak",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Orderbeheer"
                 },
                 "5": {
                     "title": "Blogbeheer",
                     "description": "Ingebouwd blogsysteem voor elke winkel met geavanceerde contentbeheertools",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Blogbeheer"
                 },
                 "6": {
                     "title": "Betalingsintegratie",
                     "description": "Meer dan 30 betaalpoorten klaar om te verbinden met uw winkels",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Betalingsintegratie"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Wat Onze Klanten Zeggen",
-            "subtitle": "Geloof ons niet zomaar op ons woord. Dit is wat handelaren over de hele wereld zeggen over MTJRii."
+            "subtitle": "Geloof ons niet zomaar op ons woord. Dit is wat handelaren over de hele wereld zeggen over Tijraa."
         },
         "templates": {
             "title": "Verken Onze Sjablonen",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Documentatie",
-        "description": "Leer hoe u Matjrii gebruikt om uw online winkels te maken en te beheren. Vind handleidingen, tutorials en antwoorden op veelgestelde vragen.",
+        "description": "Leer hoe u Tijraa gebruikt om uw online winkels te maken en te beheren. Vind handleidingen, tutorials en antwoorden op veelgestelde vragen.",
         "navigation": {
             "home": "Documentatie Startpagina",
             "search": "Zoek in documentatie...",

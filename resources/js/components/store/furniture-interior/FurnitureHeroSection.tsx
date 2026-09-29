@@ -39,7 +39,7 @@ interface FurnitureHeroSectionProps {
 
 const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {} }) => {
   const { props } = usePage();
-  const appName = (props as any).appName || 'matjri';
+  const appName = (props as any).appName || 'Tijraa';
   const storeSlug = (props.store as any)?.slug || 'furniture-store';
   const baseUrl = props.base_url;
   const [isVisible, setIsVisible] = useState(false);

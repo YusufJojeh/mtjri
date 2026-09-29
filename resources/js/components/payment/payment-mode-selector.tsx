@@ -3,8 +3,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useTranslation } from 'react-i18next';
 
 interface PaymentModeSelectorProps {
-  value: 'andbox' | 'live';
-  onChange: (mode: 'andbox' | 'live') => void;
+  value: 'sandbox' | 'live';
+  onChange: (mode: 'sandbox' | 'live') => void;
   name: string;
   error?: string;
 }

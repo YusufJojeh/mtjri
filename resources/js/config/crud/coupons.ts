@@ -206,7 +206,7 @@ export const couponsConfig: CrudConfig = {
 
           const isAuto = formData.code_type === 'auto';
 
-          return React.createElement('div', { className: 'pace-y-2' }, [
+          return React.createElement('div', { className: 'space-y-2' }, [
             React.createElement('div', { 
               className: isAuto ? 'flex gap-2' : '', 
               key: 'input-group' 

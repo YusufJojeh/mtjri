@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { brandPalette } from '@/lib/commerce/color';
 
 export type Appearance = 'light' | 'dark' | 'system';
-export type ThemeColor = 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'custom';
+export type ThemeColor = 'tijraa' | 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'custom';
 
 export interface ThemeSettings {
     appearance: Appearance;
@@ -12,12 +12,14 @@ export interface ThemeSettings {
 
 const DEFAULT_THEME: ThemeSettings = {
     appearance: 'light',
-    themeColor: 'green',
+    themeColor: 'tijraa',
     customColor: '#10b981',
 };
 
 // Preset theme colors
 export const THEME_COLORS = {
+    /** Tijraa brand emerald (default). */
+    tijraa: '#0B6B5A',
     blue: '#3b82f6',
     green: '#10b981',
     purple: '#8b5cf6',

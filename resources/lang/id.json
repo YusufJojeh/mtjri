@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Domain Configuration",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.",
     "Domestic": "Domestic",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Downloadable File",
     "Draft Pages": "Draft Pages",
     "Edit Blog Post": "Edit Blog Post",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Get started by creating your first blog post.",
     "Get started by creating your first express checkout.": "Get started by creating your first express checkout.",
     "Get started by creating your first shipping method.": "Get started by creating your first shipping method.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Go directly to checkout",
     "Guest Checkout Allowed": "Guest Checkout Allowed",
     "Handling Fee": "Handling Fee",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Special instructions...",
     "Standard Shipping - $9.99": "Standard Shipping - $9.99",
     "Stay Updated with Store": "Stay Updated with Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Stock Quantity *",
     "Store Configuration": "Store Configuration",
     "Store Content": "Store Content",
@@ -2469,7 +2469,7 @@
     "What's this about?": "What's this about?",
     "Wholesale Customer": "Wholesale Customer",
     "Why Choose Store?": "Why Choose Store?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Word Count",
     "Work in progress": "Work in progress",
     "Write your blog post content here...": "Write your blog post content here...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Mengapa Memilih MTJRii?",
+            "title": "Mengapa Memilih Tijraa?",
             "subtitle": "Kami bukan hanya platform e-commerce lainnya. Kami adalah mitra Anda dalam membangun toko online yang sukses yang mendorong pertumbuhan bisnis.",
             "badge": "Mengapa Memilih Kami",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Hubungi kami",
             "items": {
                 "1": {
-                    "question": "Bagaimana cara kerja MTJRii?",
-                    "answer": "MTJRii memungkinkan Anda membuat dan mengelola beberapa toko online dari satu platform yang powerful. Cukup buat toko Anda, sesuaikan dengan produk dan branding Anda, dan mulailah berjualan!"
+                    "question": "Bagaimana cara kerja Tijraa?",
+                    "answer": "Tijraa memungkinkan Anda membuat dan mengelola beberapa toko online dari satu platform yang powerful. Cukup buat toko Anda, sesuaikan dengan produk dan branding Anda, dan mulailah berjualan!"
                 },
                 "2": {
                     "question": "Apakah data saya aman?",
@@ -2598,8 +2598,8 @@
                     "answer": "Tentu saja! Anda dapat menyesuaikan warna, font, tata letak, menambahkan logo, gambar produk, dan banyak lagi. Platform kami menawarkan opsi kustomisasi yang luas."
                 },
                 "4": {
-                    "question": "Apakah saya perlu keterampilan teknis untuk menggunakan MTJRii?",
-                    "answer": "Sama sekali tidak! MTJRii dirancang untuk ramah pengguna. Anda dapat membuat dan mengelola toko online Anda dalam hitungan menit tanpa pengetahuan teknis apa pun."
+                    "question": "Apakah saya perlu keterampilan teknis untuk menggunakan Tijraa?",
+                    "answer": "Sama sekali tidak! Tijraa dirancang untuk ramah pengguna. Anda dapat membuat dan mengelola toko online Anda dalam hitungan menit tanpa pengetahuan teknis apa pun."
                 },
                 "5": {
                     "question": "Bisakah saya melacak kinerja toko saya?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Tetap Terbarui dengan MTJRii",
-            "subtitle": "Dapatkan tips e-commerce terbaru, pembaruan MTJRii, dan wawasan eksklusif yang dikirim langsung ke kotak masuk Anda. Bergabunglah dengan komunitas pedagang sukses kami.",
+            "title": "Tetap Terbarui dengan Tijraa",
+            "subtitle": "Dapatkan tips e-commerce terbaru, pembaruan Tijraa, dan wawasan eksklusif yang dikirim langsung ke kotak masuk Anda. Bergabunglah dengan komunitas pedagang sukses kami.",
             "enterEmail": "Masukkan alamat email Anda",
             "subscribe": "Berlangganan",
             "subscribing": "Berlangganan...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Tidak ada spam, berhenti berlangganan kapan saja. Kami menghormati privasi Anda."
         },
         "about": {
-            "title": "Kisah Di Balik MTJRii",
-            "description": "Didirikan oleh ahli e-commerce dan inovator teknologi, MTJRii dibuat untuk mengatasi tantangan mengelola beberapa toko online. Hari ini, kami melayani lebih dari 25.000 pengusaha di lebih dari 120 negara, membantu mereka membangun dan mengembangkan bisnis e-commerce yang sukses dengan platform komprehensif kami.",
+            "title": "Kisah Di Balik Tijraa",
+            "description": "Didirikan oleh ahli e-commerce dan inovator teknologi, Tijraa dibuat untuk mengatasi tantangan mengelola beberapa toko online. Hari ini, kami melayani lebih dari 25.000 pengusaha di lebih dari 120 negara, membantu mereka membangun dan mengembangkan bisnis e-commerce yang sukses dengan platform komprehensif kami.",
             "innovationDriven": "Didorong Inovasi",
             "buildingFuture": "Membangun masa depan e-commerce",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Hubungi Kami",
-            "subtitle": "Ada pertanyaan tentang MTJRii? Kami ingin mendengar dari Anda. Kirimkan pesan kepada kami dan kami akan merespons sesegera mungkin.",
+            "subtitle": "Ada pertanyaan tentang Tijraa? Kami ingin mendengar dari Anda. Kirimkan pesan kepada kami dan kami akan merespons sesegera mungkin.",
             "formTitle": "Kirimkan Pesan kepada Kami",
             "infoTitle": "Informasi Kontak",
             "infoDescription": "Kami di sini untuk membantu dan menjawab pertanyaan apa pun yang mungkin Anda miliki. Kami menantikan kabar dari Anda."
         },
         "screenshots": {
-            "title": "Lihat MTJRii dalam Aksi",
+            "title": "Lihat Tijraa dalam Aksi",
             "subtitle": "Jelajahi dashboard intuitif kami dan fitur manajemen toko yang powerful.",
             "items": {
                 "1": {
                     "title": "Dashboard Multi-Toko",
                     "description": "Kelola semua toko Anda dari satu dashboard berbasis cloud",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Dashboard Multi-Toko"
                 },
                 "2": {
                     "title": "Manajemen Produk",
                     "description": "Tambahkan produk, atur kategori, dan lacak inventaris untuk setiap toko secara terpisah",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Manajemen Produk"
                 },
                 "3": {
                     "title": "Pemilihan Tema",
                     "description": "Pilih dari lebih dari 10 template profesional untuk setiap toko",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Pemilihan Tema"
                 },
                 "4": {
                     "title": "Manajemen Pesanan",
                     "description": "Proses pesanan dan kelola transaksi pelanggan dengan mudah",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Manajemen Pesanan"
                 },
                 "5": {
                     "title": "Manajemen Blog",
                     "description": "Sistem blog bawaan untuk setiap toko dengan alat manajemen konten lanjutan",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Manajemen Blog"
                 },
                 "6": {
                     "title": "Integrasi Pembayaran",
                     "description": "Lebih dari 30 gateway pembayaran siap terhubung dengan toko Anda",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Integrasi Pembayaran"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Apa Kata Pelanggan Kami",
-            "subtitle": "Jangan hanya percaya kata-kata kami. Inilah yang dikatakan pedagang di seluruh dunia tentang MTJRii."
+            "subtitle": "Jangan hanya percaya kata-kata kami. Inilah yang dikatakan pedagang di seluruh dunia tentang Tijraa."
         },
         "templates": {
             "title": "Jelajahi Template Kami",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Dokumentasi",
-        "description": "Pelajari cara menggunakan Matjrii untuk membuat dan mengelola toko online Anda. Temukan panduan, tutorial, dan jawaban untuk pertanyaan umum.",
+        "description": "Pelajari cara menggunakan Tijraa untuk membuat dan mengelola toko online Anda. Temukan panduan, tutorial, dan jawaban untuk pertanyaan umum.",
         "navigation": {
             "home": "Beranda Dokumentasi",
             "search": "Cari dokumentasi...",

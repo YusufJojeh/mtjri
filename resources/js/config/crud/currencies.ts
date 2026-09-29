@@ -26,7 +26,7 @@ export const currenciesConfig: CrudConfig = {
         sortable: true 
       },
       { 
-        key: 'ymbol', 
+        key: 'symbol', 
         label: t('Symbol'), 
         sortable: true 
       },
@@ -75,7 +75,7 @@ export const currenciesConfig: CrudConfig = {
         placeholder: 'e.g. USD, EUR, GBP'
       },
       { 
-        name: 'ymbol', 
+        name: 'symbol', 
         label: t('Currency Symbol'), 
         type: 'text', 
         required: true,

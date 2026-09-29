@@ -429,7 +429,7 @@ export function PaymentProcessor({
             currency={plan.paymentMethods?.currency || 'USD'}
           />
         );
-      case 'spay':
+      case 'sspay':
         return (
           <SSPayPaymentForm
             {...commonProps}

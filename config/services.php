@@ -36,10 +36,14 @@ return [
         'timeout' => (int) env('UNSPLASH_TIMEOUT', 5),
 
         // Prefer a dedicated app name for Unsplash UTM (avoid spaces/special chars).
-        'app_name' => env('UNSPLASH_APP_NAME', env('APP_NAME', 'matjri')),
+        'app_name' => env('UNSPLASH_APP_NAME', env('APP_NAME', 'Tijraa')),
 
         // Optional: TTL (seconds) to avoid sending duplicate download triggers.
         'download_track_cache_ttl' => (int) env('UNSPLASH_DOWNLOAD_TRACK_TTL', 86400),
+    ],
+
+    'gtm' => [
+        'id' => env('GTM_ID'),
     ],
 
 ];

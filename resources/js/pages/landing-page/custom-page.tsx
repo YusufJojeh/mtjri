@@ -250,7 +250,7 @@ export default function CustomPage() {
         
         <Footer 
           settings={{
-            company_name: settings?.company_name || 'MTJRii',
+            company_name: settings?.company_name || 'Tijraa',
             contact_email: settings?.contact_email || '',
             contact_phone: settings?.contact_phone || '',
             contact_address: settings?.contact_address || '',

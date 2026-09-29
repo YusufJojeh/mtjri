@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Eye } from 'lucide-react';
-// Simple template data for Storego
+// Simple template data for Tijraa
 const getBusinessTemplate = (name: string) => {
   return {
     defaultData: {
@@ -61,7 +61,7 @@ export default function TemplatePreviewCard({
             onClick={(e) => {
               e.stopPropagation();
               
-              // Simple preview alert for Storego
+              // Simple preview alert for Tijraa
               alert(`Preview: ${templateData?.defaultData?.header?.name || template.name}`);
             }}
           >

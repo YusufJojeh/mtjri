@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { Lock } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
@@ -14,7 +15,7 @@ import { THEME_COLORS } from '@/hooks/use-appearance';
 export default function ConfirmPassword() {
     const { t } = useTranslation();
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     const { data, setData, post, processing, errors, reset } = useForm<Required<{ password: string }>>({
         password: '',
     });

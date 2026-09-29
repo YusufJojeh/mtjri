@@ -2036,7 +2036,7 @@
     "Domain Configuration": "تكوين النطاق",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "ميزات النطاق غير متوفرة في خطتك الحالية. سيتم الوصول إلى متجرك عبر عنوان URL القائم على slug.",
     "Domestic": "محلي",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "لا تصدقوا كلامنا فحسب، هذا ما يقوله التجار حول العالم عن \"ستورجو\".",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "لا تصدقوا كلامنا فحسب، هذا ما يقوله التجار حول العالم عن \"ستورجو\".",
     "Downloadable File": "ملف قابل للتنزيل",
     "Draft Pages": "صفحات المسودة",
     "Edit Blog Post": "تحرير المدونة",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "ابدأ بإنشاء أول منشور مدونتك.",
     "Get started by creating your first express checkout.": "ابدأ بإنشاء أول عملية تسجيل سريعة لك.",
     "Get started by creating your first shipping method.": "ابدأ بإنشاء طريقة الشحن الأولى.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "احصل على أحدث نصائح التجارة الإلكترونية، وتحديثات MTJRii، والبصيرة الحصرية التي يتم تسليمها مباشرة إلى صندوق البريد الوارد. انضم إلى مجتمعنا من التجار الناجحين.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "احصل على أحدث نصائح التجارة الإلكترونية، وتحديثات Tijraa، والبصيرة الحصرية التي يتم تسليمها مباشرة إلى صندوق البريد الوارد. انضم إلى مجتمعنا من التجار الناجحين.",
     "Go directly to checkout": "إذهب مباشرة إلى الصندوق",
     "Guest Checkout Allowed": "يسمح بإخراج الضيوف",
     "Handling Fee": "رسوم التعامل",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "تعليمات خاصة",
     "Standard Shipping - $9.99": "الشحن القياسي - 9.99 دولار",
     "Stay Updated with Store": "البقاء على اطلاع مع المتجر",
-    "Stay Updated with MTJRii": "البقاء على اطلاع مع MTJRii",
+    "Stay Updated with Tijraa": "البقاء على اطلاع مع Tijraa",
     "Stock Quantity *": "كمية المخزون *",
     "Store Configuration": "تكوين المتجر",
     "Store Content": "المحتوى",
@@ -2469,7 +2469,7 @@
     "What's this about?": "ما هذا؟",
     "Wholesale Customer": "عميل الجملة",
     "Why Choose Store?": "لماذا تختار المتجر؟",
-    "Why Choose MTJRii?": "لماذا تختار MTJRii؟",
+    "Why Choose Tijraa?": "لماذا تختار Tijraa؟",
     "Word Count": "عدد الكلمات",
     "Work in progress": "العمل الجاري",
     "Write your blog post content here...": "اكتب محتوى مدونتك هنا",
@@ -2595,7 +2595,7 @@
             "visitCta": "زيارة المتجر"
         },
         "whyChooseUs": {
-            "title": "لماذا تختار MTJRii؟",
+            "title": "لماذا تختار Tijraa؟",
             "subtitle": "لسنا مجرد منصة تجارة إلكترونية أخرى. نحن شريكك في بناء متاجر إلكترونية ناجحة تحفز نمو الأعمال.",
             "badge": "لماذا تختارنا",
             "multiStore": {
@@ -2635,8 +2635,8 @@
             "contactUs": "اتصل بنا",
             "items": {
                 "1": {
-                    "question": "كيف يعمل MTJRii؟",
-                    "answer": "يتيح لك MTJRii إنشاء وإدارة متاجر إلكترونية متعددة من منصة قوية واحدة. ببساطة أنشئ متجرك، وقم بتخصيصه بمنتجاتك وعلامتك التجارية، وابدأ البيع!"
+                    "question": "كيف يعمل Tijraa؟",
+                    "answer": "يتيح لك Tijraa إنشاء وإدارة متاجر إلكترونية متعددة من منصة قوية واحدة. ببساطة أنشئ متجرك، وقم بتخصيصه بمنتجاتك وعلامتك التجارية، وابدأ البيع!"
                 },
                 "2": {
                     "question": "هل بياناتي آمنة؟",
@@ -2647,8 +2647,8 @@
                     "answer": "بالتأكيد! يمكنك تخصيص الألوان والخطوط والتخطيط وإضافة شعارك وصور منتجاتك والمزيد. تقدم منصتنا خيارات تخصيص واسعة."
                 },
                 "4": {
-                    "question": "هل أحتاج إلى مهارات تقنية لاستخدام MTJRii؟",
-                    "answer": "ليس على الإطلاق! تم تصميم MTJRii ليكون سهل الاستخدام. يمكنك إنشاء وإدارة متاجرك الإلكترونية في دقائق دون أي معرفة تقنية."
+                    "question": "هل أحتاج إلى مهارات تقنية لاستخدام Tijraa؟",
+                    "answer": "ليس على الإطلاق! تم تصميم Tijraa ليكون سهل الاستخدام. يمكنك إنشاء وإدارة متاجرك الإلكترونية في دقائق دون أي معرفة تقنية."
                 },
                 "5": {
                     "question": "هل يمكنني تتبع أداء متجري؟",
@@ -2657,8 +2657,8 @@
             }
         },
         "newsletter": {
-            "title": "ابق على اطلاع مع MTJRii",
-            "subtitle": "احصل على أحدث نصائح التجارة الإلكترونية وتحديثات MTJRii ورؤى حصرية يتم تسليمها مباشرة إلى صندوق الوارد الخاص بك. انضم إلى مجتمع التجار الناجحين لدينا.",
+            "title": "ابق على اطلاع مع Tijraa",
+            "subtitle": "احصل على أحدث نصائح التجارة الإلكترونية وتحديثات Tijraa ورؤى حصرية يتم تسليمها مباشرة إلى صندوق الوارد الخاص بك. انضم إلى مجتمع التجار الناجحين لدينا.",
             "enterEmail": "أدخل عنوان بريدك الإلكتروني",
             "subscribe": "اشترك",
             "subscribing": "جاري الاشتراك...",
@@ -2668,8 +2668,8 @@
             "privacyText": "لا بريد مزعج، يمكنك إلغاء الاشتراك في أي وقت. نحن نحترم خصوصيتك."
         },
         "about": {
-            "title": "قصة MTJRii",
-            "description": "تأسست MTJRii من قبل خبراء التجارة الإلكترونية ومبتكري التكنولوجيا، لمعالجة تحديات إدارة متاجر إلكترونية متعددة. اليوم، نخدم أكثر من 25,000 رائد أعمال في أكثر من 120 دولة، ونساعدهم على بناء وتوسيع أعمال التجارة الإلكترونية الناجحة باستخدام منصتنا الشاملة.",
+            "title": "قصة Tijraa",
+            "description": "تأسست Tijraa من قبل خبراء التجارة الإلكترونية ومبتكري التكنولوجيا، لمعالجة تحديات إدارة متاجر إلكترونية متعددة. اليوم، نخدم أكثر من 25,000 رائد أعمال في أكثر من 120 دولة، ونساعدهم على بناء وتوسيع أعمال التجارة الإلكترونية الناجحة باستخدام منصتنا الشاملة.",
             "innovationDriven": "مدفوع بالابتكار",
             "buildingFuture": "بناء مستقبل التجارة الإلكترونية",
             "values": {
@@ -2707,49 +2707,49 @@
         },
         "contact": {
             "title": "تواصل معنا",
-            "subtitle": "لديك أسئلة حول MTJRii؟ نحن نحب أن نسمع منك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
+            "subtitle": "لديك أسئلة حول Tijraa؟ نحن نحب أن نسمع منك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
             "formTitle": "أرسل لنا رسالة",
             "infoTitle": "معلومات الاتصال",
             "infoDescription": "نحن هنا للمساعدة والإجابة على أي سؤال قد يكون لديك. نتطلع إلى التواصل معك."
         },
         "screenshots": {
-            "title": "شاهد MTJRii في العمل",
+            "title": "شاهد Tijraa في العمل",
             "subtitle": "استكشف لوحة التحكم البديهية وميزات إدارة المتاجر القوية.",
             "items": {
                 "1": {
                     "title": "لوحة تحكم متعددة المتاجر",
                     "description": "أدر جميع متاجرك من لوحة تحكم سحابية واحدة",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "لوحة تحكم متعددة المتاجر"
                 },
                 "2": {
                     "title": "إدارة المنتجات",
                     "description": "أضف المنتجات، نظّم الفئات، وتابع المخزون لكل متجر على حدة",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "إدارة المنتجات"
                 },
                 "3": {
                     "title": "اختيار القوالب",
                     "description": "اختر من بين أكثر من 10 قوالب احترافية لكل متجر",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "اختيار القوالب"
                 },
                 "4": {
                     "title": "إدارة الطلبات",
                     "description": "قم بمعالجة الطلبات وإدارة معاملات العملاء بسهولة",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "إدارة الطلبات"
                 },
                 "5": {
                     "title": "إدارة المدونة",
                     "description": "نظام مدونة مدمج لكل متجر مع أدوات متقدمة لإدارة المحتوى",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "إدارة المدونة"
                 },
                 "6": {
                     "title": "تكامل أنظمة الدفع",
                     "description": "أكثر من 30 بوابة دفع جاهزة للربط مع متاجرك",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "تكامل أنظمة الدفع"
                 }
             }
@@ -2763,7 +2763,7 @@
         },
         "testimonials": {
             "title": "ماذا يقول عملاؤنا",
-            "subtitle": "لا تأخذ كلمتنا فقط. إليك ما يقوله التجار حول العالم عن MTJRii."
+            "subtitle": "لا تأخذ كلمتنا فقط. إليك ما يقوله التجار حول العالم عن Tijraa."
         },
         "templates": {
             "title": "استكشف قوالبنا",
@@ -2785,7 +2785,7 @@
     },
     "documentation": {
         "title": "التوثيق",
-        "description": "تعلم كيفية استخدام Matjrii لإنشاء وإدارة متاجرك الإلكترونية. ابحث عن الأدلة والبرامج التعليمية والإجابات على الأسئلة الشائعة.",
+        "description": "تعلم كيفية استخدام Tijraa لإنشاء وإدارة متاجرك الإلكترونية. ابحث عن الأدلة والبرامج التعليمية والإجابات على الأسئلة الشائعة.",
         "navigation": {
             "home": "الصفحة الرئيسية للتوثيق",
             "search": "البحث في التوثيق...",

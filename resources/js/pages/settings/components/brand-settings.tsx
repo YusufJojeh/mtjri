@@ -37,9 +37,9 @@ export const DEFAULT_BRAND_SETTINGS: BrandSettings = {
   logoDark: '/images/logos/logo-dark.png',
   logoLight: '/images/logos/logo-light.png',
   favicon: '/images/logos/favicon.ico',
-  titleText: 'StoreGo',
-  footerText: '© 2025 StoreGo SaaS. Powered by WorkDo.',
-  themeColor: 'green',
+  titleText: 'Tijraa',
+  footerText: '© 2026 Tijraa. All rights reserved.',
+  themeColor: 'tijraa',
   customColor: '#10b981',
   sidebarVariant: 'inset',
   sidebarStyle: 'plain',
@@ -452,7 +452,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                     name="titleText"
                     value={settings.titleText}
                     onChange={handleInputChange}
-                    placeholder="StoreGo"
+                    placeholder="Tijraa"
                   />
                   <p className="text-xs text-muted-foreground">
                     {t("Application title displayed in the browser tab")}
@@ -466,7 +466,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                     name="footerText"
                     value={settings.footerText}
                     onChange={handleInputChange}
-                    placeholder="© 2025 StoreGo SaaS. Powered by WorkDo."
+                    placeholder="© 2026 Tijraa. All rights reserved."
                   />
                   <p className="text-xs text-muted-foreground">
                     {t("Text displayed in the footer")}
@@ -489,7 +489,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                   <Separator className="my-2" />
 
                   <div className="grid grid-cols-6 gap-2">
-                    {Object.entries({ blue: '#3b82f6', green: '#10b981', purple: '#8b5cf6', orange: '#f97316', red: '#ef4444' }).map(([color, hex]) => (
+                    {Object.entries({ tijraa: '#0B6B5A', blue: '#3b82f6', green: '#10b981', purple: '#8b5cf6', orange: '#f97316', red: '#ef4444' }).map(([color, hex]) => (
                       <Button
                         key={color}
                         type="button"

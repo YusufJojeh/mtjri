@@ -214,7 +214,7 @@ export function Repeater({
   };
 
   return (
-    <div className={cn('pace-y-4', className)}>
+    <div className={cn('space-y-4', className)}>
       {items.length === 0 && (
         <div className='text-center py-8 text-gray-500 border-2 border-dashed border-gray-200 rounded-lg'>
           {emptyMessage}

@@ -244,7 +244,7 @@ export default function EditCustomPage() {
                   </div>
                   <Switch 
                     checked={formData.show_in_navigation}
-                    onCheckedChange={(checked) => handleSwitchChange('how_in_navigation', checked)}
+                    onCheckedChange={(checked) => handleSwitchChange('show_in_navigation', checked)}
                   />
                 </div>
                 <div className='flex items-center justify-between'>

@@ -69,7 +69,7 @@ export default function StoreSettings({ store, settings }: Props) {
               </div>
               <Switch 
                 checked={formData.store_status || false}
-                onCheckedChange={(checked) => updateSetting('tore_status', checked)}
+                onCheckedChange={(checked) => updateSetting('store_status', checked)}
               />
             </div>
             <div className='flex items-center justify-between'>

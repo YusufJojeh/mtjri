@@ -172,7 +172,7 @@ export default function CustomPagesIndex() {
         exclude_id: excludeId
       });
       
-      setData('lug', response.data.slug);
+      setData('slug', response.data.slug);
       setSlugValidation({ loading: false, available: true, message: 'Generated unique slug' });
     } catch (error) {
       console.error('Error generating slug:', error);
@@ -219,7 +219,7 @@ export default function CustomPagesIndex() {
       )
     },
     { 
-      key: 'lug', 
+      key: 'slug', 
       label: 'Slug',
       render: (value: string) => (
         <div className='font-mono text-sm text-blue-600'>
@@ -373,7 +373,7 @@ export default function CustomPagesIndex() {
                   id='edit_slug'
                   value={data.slug}
                   onChange={(e) => {
-                    setData('lug', e.target.value);
+                    setData('slug', e.target.value);
                     if (e.target.value && e.target.value !== editingPage?.slug) {
                       checkSlugAvailability(e.target.value, editingPage?.id);
                     } else {
@@ -481,7 +481,7 @@ export default function CustomPagesIndex() {
                   id='slug'
                   value={data.slug}
                   onChange={(e) => {
-                    setData('lug', e.target.value);
+                    setData('slug', e.target.value);
                     if (e.target.value) {
                       checkSlugAvailability(e.target.value);
                     } else {

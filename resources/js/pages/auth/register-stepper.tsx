@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { Stepper, StepperStep } from '@/components/ui/stepper';
 import Step1Register from './steps/Step1Register';
 import Step2EditStore from './steps/Step2EditStore';
@@ -49,7 +50,7 @@ export default function RegisterStepper({
 }: RegisterStepperProps) {
     const { t } = useTranslation();
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     const { props: pageProps } = usePage();
     const props = pageProps as any;
     

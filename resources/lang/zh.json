@@ -2036,7 +2036,7 @@
     "Domain Configuration": "域配置",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "您的商店将通过基于的URL访问.",
     "Domestic": "国内的",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "可下载的文件",
     "Draft Pages": "页面草案",
     "Edit Blog Post": "编辑博客文章",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "创建你的第一篇博客文章.",
     "Get started by creating your first express checkout.": "创建您的第一个快速结账.",
     "Get started by creating your first shipping method.": "首先创建您的第一个运输方法.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "直接到结账处",
     "Guest Checkout Allowed": "允许客人结账",
     "Handling Fee": "处理费",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "特别指示...",
     "Standard Shipping - $9.99": "标准运输 - $9.99",
     "Stay Updated with Store": "通过存储保持最新状态",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "库存量 *",
     "Store Configuration": "存储配置",
     "Store Content": "存储内容",
@@ -2469,7 +2469,7 @@
     "What's this about?": "这是什么?",
     "Wholesale Customer": "批发客户",
     "Why Choose Store?": "为什么选择商店?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "字数",
     "Work in progress": "工作正在进行中",
     "Write your blog post content here...": "在这里写一下你的博客文章内容...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Why Choose MTJRii?",
+            "title": "Why Choose Tijraa?",
             "subtitle": "We're not just another e-commerce platform. We're your partner in building successful online stores that drive business growth.",
             "badge": "Why Choose Us",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Contact us",
             "items": {
                 "1": {
-                    "question": "How does MTJRii work?",
-                    "answer": "MTJRii allows you to create and manage multiple online stores from one powerful platform. Simply create your store, customize it with your products and branding, and start selling!"
+                    "question": "How does Tijraa work?",
+                    "answer": "Tijraa allows you to create and manage multiple online stores from one powerful platform. Simply create your store, customize it with your products and branding, and start selling!"
                 },
                 "2": {
                     "question": "Is my data secure?",
@@ -2598,8 +2598,8 @@
                     "answer": "Absolutely! You can customize colors, fonts, layout, add your logo, product images, and much more. Our platform offers extensive customization options."
                 },
                 "4": {
-                    "question": "Do I need technical skills to use MTJRii?",
-                    "answer": "Not at all! MTJRii is designed to be user-friendly. You can create and manage your online stores in minutes without any technical knowledge."
+                    "question": "Do I need technical skills to use Tijraa?",
+                    "answer": "Not at all! Tijraa is designed to be user-friendly. You can create and manage your online stores in minutes without any technical knowledge."
                 },
                 "5": {
                     "question": "Can I track my store performance?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Stay Updated with MTJRii",
-            "subtitle": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+            "title": "Stay Updated with Tijraa",
+            "subtitle": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
             "enterEmail": "Enter your email address",
             "subscribe": "Subscribe",
             "subscribing": "Subscribing...",
@@ -2619,8 +2619,8 @@
             "privacyText": "No spam, unsubscribe at any time. We respect your privacy."
         },
         "about": {
-            "title": "The Story Behind MTJRii",
-            "description": "Founded by e-commerce experts and technology innovators, MTJRii was created to solve the challenges of managing multiple online stores. Today, we serve over 25,000 entrepreneurs across 120+ countries, helping them build and scale successful e-commerce businesses with our comprehensive platform.",
+            "title": "The Story Behind Tijraa",
+            "description": "Founded by e-commerce experts and technology innovators, Tijraa was created to solve the challenges of managing multiple online stores. Today, we serve over 25,000 entrepreneurs across 120+ countries, helping them build and scale successful e-commerce businesses with our comprehensive platform.",
             "innovationDriven": "Innovation Driven",
             "buildingFuture": "Building the future of e-commerce",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Get in Touch",
-            "subtitle": "Have questions about MTJRii? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+            "subtitle": "Have questions about Tijraa? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
             "formTitle": "Send us a Message",
             "infoTitle": "Contact Information",
             "infoDescription": "We're here to help and answer any question you might have. We look forward to hearing from you."
         },
         "screenshots": {
-            "title": "See MTJRii in Action",
+            "title": "See Tijraa in Action",
             "subtitle": "Explore our intuitive dashboard and powerful store management features.",
             "items": {
                 "1": {
                     "title": "Multi-Store Dashboard",
                     "description": "Manage all your stores from one cloud-based dashboard",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Multi-Store Dashboard"
                 },
                 "2": {
                     "title": "Product Management",
                     "description": "Add products, organize categories, and track inventory for each store separately",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Product Management"
                 },
                 "3": {
                     "title": "Theme Selection",
                     "description": "Choose from over 10 professional templates for each store",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Theme Selection"
                 },
                 "4": {
                     "title": "Order Management",
                     "description": "Process orders and manage customer transactions with ease",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Order Management"
                 },
                 "5": {
                     "title": "Blog Management",
                     "description": "Built-in blog system for each store with advanced content management tools",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Blog Management"
                 },
                 "6": {
                     "title": "Payment Integration",
                     "description": "Over 30 payment gateways ready to connect with your stores",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Payment Integration"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "What Our Customers Say",
-            "subtitle": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii."
+            "subtitle": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa."
         },
         "templates": {
             "title": "Explore Our Templates",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "文档",
-        "description": "了解如何使用 Matjrii 创建和管理您的在线商店。查找指南、教程和常见问题的答案。",
+        "description": "了解如何使用 Tijraa 创建和管理您的在线商店。查找指南、教程和常见问题的答案。",
         "navigation": {
             "home": "文档首页",
             "search": "搜索文档...",

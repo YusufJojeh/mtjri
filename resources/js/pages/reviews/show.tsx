@@ -223,7 +223,7 @@ export default function ShowReview() {
                   <Textarea
                     placeholder={t('Write your response to this review...')}
                     value={data.store_response}
-                    onChange={(e) => setData('tore_response', e.target.value)}
+                    onChange={(e) => setData('store_response', e.target.value)}
                     rows={3}
                   />
                   <div className='flex space-x-2'>

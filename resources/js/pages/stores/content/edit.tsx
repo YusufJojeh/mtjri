@@ -494,7 +494,7 @@ export default function StoreContentEdit({
       const isImage = key.includes('image') || key.includes('logo') ||
                      (typeof value === 'string' && value.match(/\.(jpg|jpeg|png|gif|webp|svg)(\?|$)/i)) ||
                      (typeof value === 'string' && value.includes('unsplash.com'));
-      const isLongText = !isImage && (value.length > 100 || key.includes('description') || key.includes('ubtitle'));
+      const isLongText = !isImage && (value.length > 100 || key.includes('description') || key.includes('subtitle'));
 
       return (
         <div key={fieldId} className='space-y-2.5'>
@@ -1225,7 +1225,7 @@ export default function StoreContentEdit({
                           <div className='w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400'></div>
                         </div>
                         <div className='bg-background px-2 sm:px-3 py-0.5 rounded text-[9px] sm:text-[10px] text-muted-foreground flex-grow text-center truncate font-mono'>
-                          {store.name.toLowerCase().replace(/\s+/g, '-')}.matjri.com
+                          {store.name.toLowerCase().replace(/\s+/g, '-')}.tijraa.com
                         </div>
                       </div>
                       <div className='relative bg-white overflow-auto max-h-[500px] sm:max-h-[600px] lg:max-h-[700px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100'>

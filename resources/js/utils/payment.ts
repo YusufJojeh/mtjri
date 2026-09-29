@@ -7,7 +7,7 @@ export const PAYMENT_METHODS = {
   FLUTTERWAVE: 'flutterwave',
   BANK: 'bank',
   PAYTABS: 'paytabs',
-  SKRILL: 'krill',
+  SKRILL: 'skrill',
   COINGATE: 'coingate',
   PAYFAST: 'payfast',
   TAP: 'tap',
@@ -16,7 +16,7 @@ export const PAYMENT_METHODS = {
   MOLLIE: 'mollie',
   TOYYIBPAY: 'toyyibpay',
   PAYMENTWALL: 'paymentwall',
-  SSPAY: 'spay',
+  SSPAY: 'sspay',
   BENEFIT: 'benefit',
   IYZIPAY: 'iyzipay',
   AAMARPAY: 'aamarpay',
@@ -106,7 +106,7 @@ export const PAYMENT_METHOD_HELP_URLS = {
 } as const;
 
 export const PAYMENT_MODES = {
-  SANDBOX: 'andbox',
+  SANDBOX: 'sandbox',
   LIVE: 'live'
 } as const;
 

@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Domain Configuration",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.",
     "Domestic": "Domestic",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Downloadable File",
     "Draft Pages": "Draft Pages",
     "Edit Blog Post": "Edit Blog Post",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Get started by creating your first blog post.",
     "Get started by creating your first express checkout.": "Get started by creating your first express checkout.",
     "Get started by creating your first shipping method.": "Get started by creating your first shipping method.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Go directly to checkout",
     "Guest Checkout Allowed": "Guest Checkout Allowed",
     "Handling Fee": "Handling Fee",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Special instructions...",
     "Standard Shipping - $9.99": "Standard Shipping - $9.99",
     "Stay Updated with Store": "Stay Updated with Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Stock Quantity *",
     "Store Configuration": "Store Configuration",
     "Store Content": "Store Content",
@@ -2469,7 +2469,7 @@
     "What's this about?": "What's this about?",
     "Wholesale Customer": "Wholesale Customer",
     "Why Choose Store?": "Why Choose Store?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Word Count",
     "Work in progress": "Work in progress",
     "Write your blog post content here...": "Write your blog post content here...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "De Ce Să Alegi MTJRii?",
+            "title": "De Ce Să Alegi Tijraa?",
             "subtitle": "Nu suntem doar o altă platformă de e-commerce. Suntem partenerul tău în construirea magazinelor online de succes care stimulează creșterea afacerii.",
             "badge": "De Ce Să Ne Alegi",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Contactează-ne",
             "items": {
                 "1": {
-                    "question": "Cum funcționează MTJRii?",
-                    "answer": "MTJRii îți permite să creezi și să gestionezi mai multe magazine online dintr-o platformă puternică. Pur și simplu creează magazinul tău, personalizează-l cu produsele și brandul tău, și începe să vinzi!"
+                    "question": "Cum funcționează Tijraa?",
+                    "answer": "Tijraa îți permite să creezi și să gestionezi mai multe magazine online dintr-o platformă puternică. Pur și simplu creează magazinul tău, personalizează-l cu produsele și brandul tău, și începe să vinzi!"
                 },
                 "2": {
                     "question": "Sunt datele mele sigure?",
@@ -2598,8 +2598,8 @@
                     "answer": "Absolut! Poți personaliza culorile, fonturile, layout-ul, adăuga logo-ul tău, imagini de produse și multe altele. Platforma noastră oferă opțiuni extinse de personalizare."
                 },
                 "4": {
-                    "question": "Am nevoie de abilități tehnice pentru a folosi MTJRii?",
-                    "answer": "Deloc! MTJRii este proiectat să fie ușor de folosit. Poți crea și gestiona magazinele tale online în minute fără cunoștințe tehnice."
+                    "question": "Am nevoie de abilități tehnice pentru a folosi Tijraa?",
+                    "answer": "Deloc! Tijraa este proiectat să fie ușor de folosit. Poți crea și gestiona magazinele tale online în minute fără cunoștințe tehnice."
                 },
                 "5": {
                     "question": "Pot urmări performanța magazinului meu?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Rămâi la Curent cu MTJRii",
-            "subtitle": "Primește cele mai recente sfaturi de e-commerce, actualizări MTJRii și perspective exclusive livrate direct în inbox-ul tău. Alătură-te comunității noastre de comercianți de succes.",
+            "title": "Rămâi la Curent cu Tijraa",
+            "subtitle": "Primește cele mai recente sfaturi de e-commerce, actualizări Tijraa și perspective exclusive livrate direct în inbox-ul tău. Alătură-te comunității noastre de comercianți de succes.",
             "enterEmail": "Introdu adresa ta de email",
             "subscribe": "Abonează-te",
             "subscribing": "Abonare...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Fără spam, dezabonează-te oricând. Respectăm confidențialitatea ta."
         },
         "about": {
-            "title": "Povestea din Spatele MTJRii",
-            "description": "Fondat de experți în e-commerce și inovatori tehnologici, MTJRii a fost creat pentru a rezolva provocările gestionării mai multor magazine online. Astăzi, servim peste 25.000 de antreprenori din peste 120 de țări, ajutându-i să construiască și să extindă afaceri de e-commerce de succes cu platforma noastră cuprinzătoare.",
+            "title": "Povestea din Spatele Tijraa",
+            "description": "Fondat de experți în e-commerce și inovatori tehnologici, Tijraa a fost creat pentru a rezolva provocările gestionării mai multor magazine online. Astăzi, servim peste 25.000 de antreprenori din peste 120 de țări, ajutându-i să construiască și să extindă afaceri de e-commerce de succes cu platforma noastră cuprinzătoare.",
             "innovationDriven": "Condus de Inovație",
             "buildingFuture": "Construind viitorul e-commerce",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Ia Legătura",
-            "subtitle": "Ai întrebări despre MTJRii? Ne-ar plăcea să auzim de la tine. Trimite-ne un mesaj și vom răspunde cât mai curând posibil.",
+            "subtitle": "Ai întrebări despre Tijraa? Ne-ar plăcea să auzim de la tine. Trimite-ne un mesaj și vom răspunde cât mai curând posibil.",
             "formTitle": "Trimite-ne un Mesaj",
             "infoTitle": "Informații de Contact",
             "infoDescription": "Suntem aici pentru a ajuta și a răspunde la orice întrebare ai putea avea. Așteptăm cu nerăbdare să auzim de la tine."
         },
         "screenshots": {
-            "title": "Vezi MTJRii în Acțiune",
+            "title": "Vezi Tijraa în Acțiune",
             "subtitle": "Explorează tabloul nostru intuitiv și funcțiile puternice de management al magazinului.",
             "items": {
                 "1": {
                     "title": "Tablou Multi-Magazin",
                     "description": "Gestionează toate magazinele tale dintr-un tablou de bord bazat pe cloud",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Tablou Multi-Magazin"
                 },
                 "2": {
                     "title": "Management Produse",
                     "description": "Adaugă produse, organizează categorii și urmărește inventarul pentru fiecare magazin separat",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Management Produse"
                 },
                 "3": {
                     "title": "Selecție Temă",
                     "description": "Alege din peste 10 șabloane profesionale pentru fiecare magazin",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Selecție Temă"
                 },
                 "4": {
                     "title": "Management Comenzi",
                     "description": "Procesează comenzi și gestionează tranzacțiile clienților cu ușurință",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Management Comenzi"
                 },
                 "5": {
                     "title": "Management Blog",
                     "description": "Sistem de blog integrat pentru fiecare magazin cu instrumente avansate de management al conținutului",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Management Blog"
                 },
                 "6": {
                     "title": "Integrare Plăți",
                     "description": "Peste 30 gateway-uri de plată gata să se conecteze cu magazinele tale",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Integrare Plăți"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Ce Spun Clienții Noștri",
-            "subtitle": "Nu ne crede doar pe cuvânt. Iată ce spun comercianții din întreaga lume despre MTJRii."
+            "subtitle": "Nu ne crede doar pe cuvânt. Iată ce spun comercianții din întreaga lume despre Tijraa."
         },
         "templates": {
             "title": "Explorează Șabloanele Noastre",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Documentație",
-        "description": "Învață cum să folosești Matjrii pentru a crea și gestiona magazinele tale online. Găsește ghiduri, tutoriale și răspunsuri la întrebări frecvente.",
+        "description": "Învață cum să folosești Tijraa pentru a crea și gestiona magazinele tale online. Găsește ghiduri, tutoriale și răspunsuri la întrebări frecvente.",
         "navigation": {
             "home": "Pagina Principală Documentație",
             "search": "Caută în documentație...",

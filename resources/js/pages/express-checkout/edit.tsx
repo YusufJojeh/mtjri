@@ -236,8 +236,8 @@ export default function EditExpressCheckout() {
                   <div className='flex items-center space-x-2'>
                     <Checkbox 
                       id='samsung_pay' 
-                      checked={formData.payment_methods.includes('amsung_pay')}
-                      onCheckedChange={(checked) => handlePaymentMethodChange('amsung_pay', checked)}
+                      checked={formData.payment_methods.includes('samsung_pay')}
+                      onCheckedChange={(checked) => handlePaymentMethodChange('samsung_pay', checked)}
                     />
                     <Label htmlFor='samsung_pay'>{t('Samsung Pay')}</Label>
                   </div>
@@ -276,7 +276,7 @@ export default function EditExpressCheckout() {
                   </div>
                   <Switch 
                     checked={formData.skip_cart}
-                    onCheckedChange={(checked) => handleSwitchChange('kip_cart', checked)}
+                    onCheckedChange={(checked) => handleSwitchChange('skip_cart', checked)}
                   />
                 </div>
                 <div className='flex items-center justify-between'>
@@ -316,7 +316,7 @@ export default function EditExpressCheckout() {
                   </div>
                   <Switch 
                     checked={formData.save_payment_methods}
-                    onCheckedChange={(checked) => handleSwitchChange('ave_payment_methods', checked)}
+                    onCheckedChange={(checked) => handleSwitchChange('save_payment_methods', checked)}
                   />
                 </div>
                 <div>

@@ -305,7 +305,7 @@
 
 /* Theme color variables */
 :root {
-  --theme-color: #10b981;
+  --theme-color: #0B6B5A;
 }
 
 /* Apply theme color to various elements */
@@ -329,7 +329,7 @@
    --theme-color-accessible is set at runtime to a shade that keeps text on
    it at WCAG AA contrast. The fallback is the default brand's AA shade. */
 :root {
-  --primary: var(--theme-color-accessible, #047857);
+  --primary: var(--theme-color-accessible, #0B6B5A);
   --primary-foreground: #ffffff;
   --chart-1: var(--theme-color);
 }

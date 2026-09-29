@@ -26,7 +26,7 @@ interface PageProps {
 export default function PrivacyPage() {
   const { settings, customPages } = usePage<PageProps>().props;
   const reduce = useReducedMotion() ?? false;
-  const company = settings?.company_name || 'MTJRii';
+  const company = settings?.company_name || 'Tijraa';
 
   return (
     <>

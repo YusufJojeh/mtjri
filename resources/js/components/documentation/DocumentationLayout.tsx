@@ -72,7 +72,7 @@ export default function DocumentationLayout({
   const primaryColor = palette.primary;
 
   const headerFooterSettings = {
-    company_name: settings?.company_name || 'Matjrii',
+    company_name: settings?.company_name || 'Tijraa',
     contact_email: (settings as any)?.contact_email ?? '',
     contact_phone: (settings as any)?.contact_phone ?? '',
     contact_address: (settings as any)?.contact_address ?? '',

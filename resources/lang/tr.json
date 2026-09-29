@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Alan Ayarları",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Mevcut planınızda alan adı özellikleri mevcut değil. Mağazanıza slug tabanlı URL üzerinden erişilebilir.",
     "Domestic": "İç",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "İndirilebilir Dosya",
     "Draft Pages": "Sayfa taslağı",
     "Edit Blog Post": "Blog Yayını Düzenle",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "İlk blog yazınızı oluşturarak başlayın.",
     "Get started by creating your first express checkout.": "İlk hızlı ödeme işlemini oluşturarak başlayın.",
     "Get started by creating your first shipping method.": "İlk nakliye yönteminizi oluşturarak başlayın.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Doğrudan çekmeceye git.",
     "Guest Checkout Allowed": "Misafirler için ödeme yapma izni",
     "Handling Fee": "İşleme ücreti",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Özel talimatlar...",
     "Standard Shipping - $9.99": "Standart Nakliye - 9,99 $",
     "Stay Updated with Store": "Store ile Güncel Kalın",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Kaynak miktarı *",
     "Store Configuration": "Depo Yapılandırması",
     "Store Content": "Depo İçeriği",
@@ -2469,7 +2469,7 @@
     "What's this about?": "Ne oldu?",
     "Wholesale Customer": "Toptan Müşteri",
     "Why Choose Store?": "Neden Mağazayı Seçin?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Kelime Sayısı",
     "Work in progress": "Devam eden işler",
     "Write your blog post content here...": "Blog yazınızı buraya yazın...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Neden MTJRii'yi Seçmelisiniz?",
+            "title": "Neden Tijraa'yi Seçmelisiniz?",
             "subtitle": "Biz sadece başka bir e-ticaret platformu değiliz. İş büyümesini teşvik eden başarılı çevrimiçi mağazalar oluşturmada sizin ortağınızız.",
             "badge": "Neden Bizi Seçmelisiniz",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Bize Ulaşın",
             "items": {
                 "1": {
-                    "question": "MTJRii nasıl çalışır?",
-                    "answer": "MTJRii, tek bir güçlü platformdan birden fazla çevrimiçi mağaza oluşturmanıza ve yönetmenize olanak tanır. Sadece mağazanızı oluşturun, ürünleriniz ve markanızla özelleştirin ve satmaya başlayın!"
+                    "question": "Tijraa nasıl çalışır?",
+                    "answer": "Tijraa, tek bir güçlü platformdan birden fazla çevrimiçi mağaza oluşturmanıza ve yönetmenize olanak tanır. Sadece mağazanızı oluşturun, ürünleriniz ve markanızla özelleştirin ve satmaya başlayın!"
                 },
                 "2": {
                     "question": "Verilerim güvende mi?",
@@ -2598,8 +2598,8 @@
                     "answer": "Kesinlikle! Renkleri, yazı tiplerini, düzeni özelleştirebilir, logonuzu, ürün görsellerinizi ve çok daha fazlasını ekleyebilirsiniz. Platformumuz kapsamlı özelleştirme seçenekleri sunar."
                 },
                 "4": {
-                    "question": "MTJRii'yi kullanmak için teknik becerilere ihtiyacım var mı?",
-                    "answer": "Hiç de değil! MTJRii kullanıcı dostu olacak şekilde tasarlanmıştır. Herhangi bir teknik bilgi olmadan dakikalar içinde çevrimiçi mağazalarınızı oluşturabilir ve yönetebilirsiniz."
+                    "question": "Tijraa'yi kullanmak için teknik becerilere ihtiyacım var mı?",
+                    "answer": "Hiç de değil! Tijraa kullanıcı dostu olacak şekilde tasarlanmıştır. Herhangi bir teknik bilgi olmadan dakikalar içinde çevrimiçi mağazalarınızı oluşturabilir ve yönetebilirsiniz."
                 },
                 "5": {
                     "question": "Mağaza performansımı takip edebilir miyim?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "MTJRii ile Güncel Kalın",
-            "subtitle": "En son e-ticaret ipuçlarını, MTJRii güncellemelerini ve özel içgörüleri doğrudan gelen kutunuza alın. Başarılı tüccarlar topluluğumuza katılın.",
+            "title": "Tijraa ile Güncel Kalın",
+            "subtitle": "En son e-ticaret ipuçlarını, Tijraa güncellemelerini ve özel içgörüleri doğrudan gelen kutunuza alın. Başarılı tüccarlar topluluğumuza katılın.",
             "enterEmail": "E-posta adresinizi girin",
             "subscribe": "Abone Ol",
             "subscribing": "Abone olunuyor...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Spam yok, istediğiniz zaman abonelikten çıkabilirsiniz. Gizliliğinize saygı duyuyoruz."
         },
         "about": {
-            "title": "MTJRii'nin Hikayesi",
-            "description": "E-ticaret uzmanları ve teknoloji yenilikçileri tarafından kurulan MTJRii, birden fazla çevrimiçi mağazayı yönetme zorluklarını çözmek için oluşturuldu. Bugün, 120'den fazla ülkede 25.000'den fazla girişimciye hizmet veriyoruz ve kapsamlı platformumuzla başarılı e-ticaret işletmeleri kurmalarına ve ölçeklendirmelerine yardımcı oluyoruz.",
+            "title": "Tijraa'nin Hikayesi",
+            "description": "E-ticaret uzmanları ve teknoloji yenilikçileri tarafından kurulan Tijraa, birden fazla çevrimiçi mağazayı yönetme zorluklarını çözmek için oluşturuldu. Bugün, 120'den fazla ülkede 25.000'den fazla girişimciye hizmet veriyoruz ve kapsamlı platformumuzla başarılı e-ticaret işletmeleri kurmalarına ve ölçeklendirmelerine yardımcı oluyoruz.",
             "innovationDriven": "Yenilik Odaklı",
             "buildingFuture": "E-ticaretin geleceğini inşa etmek",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "İletişime Geçin",
-            "subtitle": "MTJRii hakkında sorularınız mı var? Sizden haber almak isteriz. Bize bir mesaj gönderin, en kısa sürede yanıtlayalım.",
+            "subtitle": "Tijraa hakkında sorularınız mı var? Sizden haber almak isteriz. Bize bir mesaj gönderin, en kısa sürede yanıtlayalım.",
             "formTitle": "Bize Mesaj Gönderin",
             "infoTitle": "İletişim Bilgileri",
             "infoDescription": "Yardımcı olmak ve sorabileceğiniz herhangi bir soruyu yanıtlamak için buradayız. Sizden haber almayı dört gözle bekliyoruz."
         },
         "screenshots": {
-            "title": "MTJRii'yi Aksiyonda Görün",
+            "title": "Tijraa'yi Aksiyonda Görün",
             "subtitle": "Sezgisel panelimizi ve güçlü mağaza yönetim özelliklerimizi keşfedin.",
             "items": {
                 "1": {
                     "title": "Çoklu Mağaza Paneli",
                     "description": "Tüm mağazalarınızı tek bir bulut tabanlı panelden yönetin",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Çoklu Mağaza Paneli"
                 },
                 "2": {
                     "title": "Ürün Yönetimi",
                     "description": "Her mağaza için ayrı ayrı ürün ekleyin, kategorileri düzenleyin ve envanteri takip edin",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Ürün Yönetimi"
                 },
                 "3": {
                     "title": "Tema Seçimi",
                     "description": "Her mağaza için 10'dan fazla profesyonel şablondan seçim yapın",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Tema Seçimi"
                 },
                 "4": {
                     "title": "Sipariş Yönetimi",
                     "description": "Siparişleri işleyin ve müşteri işlemlerini kolayca yönetin",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Sipariş Yönetimi"
                 },
                 "5": {
                     "title": "Blog Yönetimi",
                     "description": "Her mağaza için gelişmiş içerik yönetim araçlarıyla yerleşik blog sistemi",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Blog Yönetimi"
                 },
                 "6": {
                     "title": "Ödeme Entegrasyonu",
                     "description": "Mağazalarınıza bağlanmaya hazır 30'dan fazla ödeme ağ geçidi",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Ödeme Entegrasyonu"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Müşterilerimiz Ne Diyor",
-            "subtitle": "Sadece sözümüze güvenmeyin. Dünya çapındaki tüccarların MTJRii hakkında söyledikleri burada."
+            "subtitle": "Sadece sözümüze güvenmeyin. Dünya çapındaki tüccarların Tijraa hakkında söyledikleri burada."
         },
         "templates": {
             "title": "Şablonlarımızı Keşfedin",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Dokümantasyon",
-        "description": "Matjrii'yi kullanarak çevrimiçi mağazalarınızı nasıl oluşturacağınızı ve yöneteceğinizi öğrenin. Kılavuzlar, öğreticiler ve yaygın soruların yanıtlarını bulun.",
+        "description": "Tijraa'yi kullanarak çevrimiçi mağazalarınızı nasıl oluşturacağınızı ve yöneteceğinizi öğrenin. Kılavuzlar, öğreticiler ve yaygın soruların yanıtlarını bulun.",
         "navigation": {
             "home": "Dokümantasyon Ana Sayfası",
             "search": "Dokümantasyonda ara...",

@@ -165,7 +165,7 @@ export default function DocumentationIndex({
             </h1>
           </div>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-600">
-            {t('documentation.description', 'Learn how to use Matjrii to create and manage your online stores. Find guides, tutorials, and answers to common questions.')}
+            {t('documentation.description', 'Learn how to use Tijraa to create and manage your online stores. Find guides, tutorials, and answers to common questions.')}
           </p>
         </div>
 

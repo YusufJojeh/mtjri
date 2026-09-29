@@ -19,6 +19,7 @@ import { MerchantSidebarNav } from '@/components/shell/merchant-sidebar-nav';
 import { SidebarStoreSwitcher } from '@/components/shell/store-switcher';
 import { openCommandPalette } from '@/components/shell/command-palette';
 import { Search as SearchIcon } from 'lucide-react';
+import { TijraaLogo, TijraaMark } from '@/components/brand/tijraa-logo';
 
 
 
@@ -506,6 +507,12 @@ export function AppSidebar() {
                 <SidebarContent className="px-1">
                     <MerchantSidebarNav groups={shell.groups} />
                 </SidebarContent>
+                <SidebarFooter className="border-sidebar-border border-t px-3 py-2.5 group-data-[collapsible=icon]:px-2">
+                    <span className="text-muted-foreground flex items-center justify-between text-[11px] group-data-[collapsible=icon]:justify-center">
+                        <TijraaLogo size="sm" className="group-data-[collapsible=icon]:[&>span:last-child]:hidden" />
+                        <span className="group-data-[collapsible=icon]:hidden">{t('Commerce OS')}</span>
+                    </span>
+                </SidebarFooter>
             </Sidebar>
         );
     }
@@ -534,14 +541,12 @@ export function AppSidebar() {
                                 return displayUrl ? (
                                     <img
                                         src={displayUrl}
-                                        alt="Logo"
+                                        alt="Tijraa"
                                         className="h-8 w-auto max-w-[150px] transition-all duration-200"
                                         onError={() => updateBrandSettings({ [isDark ? 'logoLight' : 'logoDark']: '' })}
                                     />
                                 ) : (
-                                    <div className="h-8 text-inherit font-semibold flex items-center text-lg tracking-tight">
-                                        StoreGo
-                                    </div>
+                                    <TijraaLogo size="lg" />
                                 );
                             })()}
                         </div>
@@ -558,14 +563,12 @@ export function AppSidebar() {
                                 return displayFavicon ? (
                                     <img
                                         src={displayFavicon}
-                                        alt="Icon"
+                                        alt="Tijraa"
                                         className="h-8 w-8 transition-all duration-200"
                                         onError={() => updateBrandSettings({ favicon: '' })}
                                     />
                                 ) : (
-                                    <div className="h-8 w-8 bg-primary text-white rounded flex items-center justify-center font-bold shadow-sm">
-                                        W
-                                    </div>
+                                    <TijraaMark className="size-8" />
                                 );
                             })()}
                         </div>

@@ -11,7 +11,7 @@ interface CashfreePaymentFormProps {
   couponCode: string;
   billingCycle: 'monthly' | 'yearly';
   cashfreeAppId: string;
-  mode?: 'andbox' | 'production';
+  mode?: 'sandbox' | 'production';
   currency?: string;
   onSuccess: () => void;
   onCancel: () => void;
@@ -23,7 +23,7 @@ export function CashfreePaymentForm({
   couponCode,
   billingCycle,
   cashfreeAppId,
-  mode = 'andbox',
+  mode = 'sandbox',
   currency = 'INR',
   onSuccess,
   onCancel

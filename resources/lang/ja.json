@@ -2036,7 +2036,7 @@
     "Domain Configuration": "ドメイン構成",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "店舗はスラグベースのURLでアクセスできます.",
     "Domestic": "国内",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "ダウンロード可能なファイル",
     "Draft Pages": "ページの草案",
     "Edit Blog Post": "ブログ投稿を編集する",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "ブログの投稿を始めてください",
     "Get started by creating your first express checkout.": "ファースト・チェックアウトを 作成して始めましょう",
     "Get started by creating your first shipping method.": "送料の方法を作って始めましょう",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "チェックアウトに直接",
     "Guest Checkout Allowed": "ゲストのチェックアウトが許可されています.",
     "Handling Fee": "処理手数料",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "特別な指示...",
     "Standard Shipping - $9.99": "標準送料 - $9.99",
     "Stay Updated with Store": "ストアで更新を続ける",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "ストック数量 *",
     "Store Configuration": "ストア構成",
     "Store Content": "コンテンツを保存する",
@@ -2469,7 +2469,7 @@
     "What's this about?": "何のこと?",
     "Wholesale Customer": "卸売顧客",
     "Why Choose Store?": "なぜ 店 を 選ぶ の か",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "単語の数",
     "Work in progress": "進行中の作業",
     "Write your blog post content here...": "ブログの内容をここに書いてください",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "なぜMTJRiiを選ぶのか？",
+            "title": "なぜTijraaを選ぶのか？",
             "subtitle": "私たちは単なるeコマースプラットフォームではありません。ビジネス成長を促進する成功したオンラインストアを構築するためのパートナーです。",
             "badge": "私たちを選ぶ理由",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "お問い合わせ",
             "items": {
                 "1": {
-                    "question": "MTJRiiはどのように機能しますか？",
-                    "answer": "MTJRiiを使用すると、1つの強力なプラットフォームから複数のオンラインストアを作成および管理できます。ストアを作成し、製品とブランディングでカスタマイズして、販売を開始するだけです！"
+                    "question": "Tijraaはどのように機能しますか？",
+                    "answer": "Tijraaを使用すると、1つの強力なプラットフォームから複数のオンラインストアを作成および管理できます。ストアを作成し、製品とブランディングでカスタマイズして、販売を開始するだけです！"
                 },
                 "2": {
                     "question": "データは安全ですか？",
@@ -2598,8 +2598,8 @@
                     "answer": "もちろんです！色、フォント、レイアウトをカスタマイズし、ロゴ、製品画像などを追加できます。プラットフォームには広範なカスタマイズオプションがあります。"
                 },
                 "4": {
-                    "question": "MTJRiiを使用するために技術スキルが必要ですか？",
-                    "answer": "まったく必要ありません！MTJRiiは使いやすく設計されています。技術知識なしで、数分でオンラインストアを作成および管理できます。"
+                    "question": "Tijraaを使用するために技術スキルが必要ですか？",
+                    "answer": "まったく必要ありません！Tijraaは使いやすく設計されています。技術知識なしで、数分でオンラインストアを作成および管理できます。"
                 },
                 "5": {
                     "question": "ストアのパフォーマンスを追跡できますか？",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "MTJRiiで最新情報を入手",
-            "subtitle": "最新のeコマースのヒント、MTJRiiの更新、独占的なインサイトをメールボックスに直接配信。成功した商人のコミュニティに参加してください。",
+            "title": "Tijraaで最新情報を入手",
+            "subtitle": "最新のeコマースのヒント、Tijraaの更新、独占的なインサイトをメールボックスに直接配信。成功した商人のコミュニティに参加してください。",
             "enterEmail": "メールアドレスを入力",
             "subscribe": "購読",
             "subscribing": "購読中...",
@@ -2619,8 +2619,8 @@
             "privacyText": "スパムなし、いつでも購読解除可能。プライバシーを尊重します。"
         },
         "about": {
-            "title": "MTJRiiの背景",
-            "description": "eコマースの専門家と技術革新者によって設立されたMTJRiiは、複数のオンラインストアを管理する課題を解決するために作成されました。今日、120以上の国で25,000人以上の起業家にサービスを提供し、包括的なプラットフォームで成功したeコマースビジネスを構築および拡大するのを支援しています。",
+            "title": "Tijraaの背景",
+            "description": "eコマースの専門家と技術革新者によって設立されたTijraaは、複数のオンラインストアを管理する課題を解決するために作成されました。今日、120以上の国で25,000人以上の起業家にサービスを提供し、包括的なプラットフォームで成功したeコマースビジネスを構築および拡大するのを支援しています。",
             "innovationDriven": "革新主導",
             "buildingFuture": "eコマースの未来を構築",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "お問い合わせ",
-            "subtitle": "MTJRiiについて質問がありますか？お聞かせください。メッセージを送信していただければ、できるだけ早く返信いたします。",
+            "subtitle": "Tijraaについて質問がありますか？お聞かせください。メッセージを送信していただければ、できるだけ早く返信いたします。",
             "formTitle": "メッセージを送信",
             "infoTitle": "連絡先情報",
             "infoDescription": "お手伝いし、ご質問にお答えするためにここにいます。お返事をお待ちしております。"
         },
         "screenshots": {
-            "title": "MTJRiiの動作を確認",
+            "title": "Tijraaの動作を確認",
             "subtitle": "直感的なダッシュボードと強力なストア管理機能を探索してください。",
             "items": {
                 "1": {
                     "title": "マルチストアダッシュボード",
                     "description": "クラウドベースのダッシュボードからすべてのストアを管理",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "マルチストアダッシュボード"
                 },
                 "2": {
                     "title": "製品管理",
                     "description": "各ストアの製品を追加し、カテゴリを整理し、在庫を個別に追跡",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "製品管理"
                 },
                 "3": {
                     "title": "テーマ選択",
                     "description": "各ストア用に10以上のプロフェッショナルテンプレートから選択",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "テーマ選択"
                 },
                 "4": {
                     "title": "注文管理",
                     "description": "注文を処理し、顧客取引を簡単に管理",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "注文管理"
                 },
                 "5": {
                     "title": "ブログ管理",
                     "description": "高度なコンテンツ管理ツールを備えた各ストア用の組み込みブログシステム",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "ブログ管理"
                 },
                 "6": {
                     "title": "決済統合",
                     "description": "ストアに接続する準備ができた30以上の決済ゲートウェイ",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "決済統合"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "お客様の声",
-            "subtitle": "私たちの言葉だけを信じないでください。世界中の商人がMTJRiiについて言っていることをご覧ください。"
+            "subtitle": "私たちの言葉だけを信じないでください。世界中の商人がTijraaについて言っていることをご覧ください。"
         },
         "templates": {
             "title": "テンプレートを探索",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "ドキュメント",
-        "description": "Matjrii を使用してオンラインストアを作成および管理する方法を学びます。ガイド、チュートリアル、よくある質問への回答を見つけます。",
+        "description": "Tijraa を使用してオンラインストアを作成および管理する方法を学びます。ガイド、チュートリアル、よくある質問への回答を見つけます。",
         "navigation": {
             "home": "ドキュメントホーム",
             "search": "ドキュメントを検索...",

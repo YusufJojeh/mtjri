@@ -33,7 +33,7 @@ export default function Recaptcha({ onVerify, onExpired, onError }: RecaptchaPro
     return new Promise((resolve, reject) => {
       if (window.grecaptcha && window.grecaptcha.ready) {
         window.grecaptcha.ready(() => {
-          window.grecaptcha.execute(recaptchaSiteKey, { action: 'ubmit' })
+          window.grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
             .then((token: string) => {
               isVerified = true;
               onVerify(token);

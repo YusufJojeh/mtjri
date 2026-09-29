@@ -23,7 +23,7 @@ const DEFAULT_TESTIMONIALS = [
     name: 'Alex Thompson',
     role: 'Store Owner',
     company: 'Fashion Hub',
-    content: 'MTJRii has revolutionized how I manage my multiple online stores. The multi-store dashboard is a game-changer!',
+    content: 'Tijraa has revolutionized how I manage my multiple online stores. The multi-store dashboard is a game-changer!',
     rating: 5,
   },
   {

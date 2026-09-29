@@ -24,7 +24,7 @@ jest.mock('@inertiajs/react', () => ({
   Link: ({ children, href }: any) => <a href={href}>{children}</a>,
   usePage: () => ({
     props: {
-      appName: 'matjri'
+      appName: 'Tijraa'
     }
   }),
 }));
@@ -449,7 +449,7 @@ describe('StoreContentEdit', () => {
 
       const previewImage = screen.getByAltText('Custom Preview');
       expect(previewImage).toBeInTheDocument();
-      expect(previewImage).toHaveAttribute('rc', '/custom-preview.jpg');
+      expect(previewImage).toHaveAttribute('src', '/custom-preview.jpg');
     });
 
     it('updates preview when content changes', () => {

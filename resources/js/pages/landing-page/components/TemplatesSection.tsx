@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from '@inertiajs/react';
 import { ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-// Simple template data for Storego
+// Simple template data for Tijraa
 const getBusinessTemplate = (name: string) => {
   return {
     defaultData: {
@@ -74,7 +74,7 @@ export default function TemplatesSection({ settings, brandColor }: TemplatesSect
   const openPreview = (templateName: string) => {
     // Store the template data in localStorage for the preview page to use
     const templateData = getBusinessTemplate(templateName);
-    localStorage.setItem('tore_preview_data', JSON.stringify({
+    localStorage.setItem('store_preview_data', JSON.stringify({
       business_type: templateName,
       name: templateData?.defaultData?.header?.name || 'Business Name',
       slug: 'preview',

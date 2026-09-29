@@ -2732,7 +2732,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-6'>
-                    {['product', 'company', 'upport', 'legal'].map((category) => (
+                    {['product', 'company', 'support', 'legal'].map((category) => (
                       <div key={category} className='space-y-4'>
                         <div className='space-y-3'>
                           <Label htmlFor={`${category}_title`}>{t('Section Title')}</Label>

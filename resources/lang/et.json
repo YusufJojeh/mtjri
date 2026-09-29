@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Domain Configuration",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.",
     "Domestic": "Domestic",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Downloadable File",
     "Draft Pages": "Draft Pages",
     "Edit Blog Post": "Edit Blog Post",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Get started by creating your first blog post.",
     "Get started by creating your first express checkout.": "Get started by creating your first express checkout.",
     "Get started by creating your first shipping method.": "Get started by creating your first shipping method.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Go directly to checkout",
     "Guest Checkout Allowed": "Guest Checkout Allowed",
     "Handling Fee": "Handling Fee",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Special instructions...",
     "Standard Shipping - $9.99": "Standard Shipping - $9.99",
     "Stay Updated with Store": "Stay Updated with Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Stock Quantity *",
     "Store Configuration": "Store Configuration",
     "Store Content": "Store Content",
@@ -2469,7 +2469,7 @@
     "What's this about?": "What's this about?",
     "Wholesale Customer": "Wholesale Customer",
     "Why Choose Store?": "Why Choose Store?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Word Count",
     "Work in progress": "Work in progress",
     "Write your blog post content here...": "Write your blog post content here...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Miks valida MTJRii?",
+            "title": "Miks valida Tijraa?",
             "subtitle": "Me ei ole lihtsalt veel üks e-kaubanduse platvorm. Me oleme teie partner edukate veebipoodide ehitamisel, mis edendavad ärikasvu.",
             "badge": "Miks meid valida",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Võtke meiega ühendust",
             "items": {
                 "1": {
-                    "question": "Kuidas MTJRii töötab?",
-                    "answer": "MTJRii võimaldab teil luua ja hallata mitmeid veebipoode ühest võimsast platvormist. Lihtsalt looge oma pood, kohandage seda oma toodete ja brändiga ning hakake müüma!"
+                    "question": "Kuidas Tijraa töötab?",
+                    "answer": "Tijraa võimaldab teil luua ja hallata mitmeid veebipoode ühest võimsast platvormist. Lihtsalt looge oma pood, kohandage seda oma toodete ja brändiga ning hakake müüma!"
                 },
                 "2": {
                     "question": "Kas minu andmed on turvalised?",
@@ -2598,8 +2598,8 @@
                     "answer": "Absoluutselt! Saate kohandada värve, fonte, paigutust, lisada oma logo, toodete pilte ja palju muud. Meie platvorm pakub laiaulatuslikke kohandamisvõimalusi."
                 },
                 "4": {
-                    "question": "Kas mul on vaja tehnilisi oskusi MTJRii kasutamiseks?",
-                    "answer": "Üldse mitte! MTJRii on loodud kasutajasõbralikuks. Saate luua ja hallata oma veebipoode minutitega ilma tehniliste teadmisteta."
+                    "question": "Kas mul on vaja tehnilisi oskusi Tijraa kasutamiseks?",
+                    "answer": "Üldse mitte! Tijraa on loodud kasutajasõbralikuks. Saate luua ja hallata oma veebipoode minutitega ilma tehniliste teadmisteta."
                 },
                 "5": {
                     "question": "Kas ma saan jälgida oma poe jõudlust?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Püsige MTJRii-ga kursis",
-            "subtitle": "Saage uusimad e-kaubanduse näpunäited, MTJRii uuendused ja eksklusiivsed ülevaated otse oma postkasti. Liituge meie edukate kaupmeeste kogukonnaga.",
+            "title": "Püsige Tijraa-ga kursis",
+            "subtitle": "Saage uusimad e-kaubanduse näpunäited, Tijraa uuendused ja eksklusiivsed ülevaated otse oma postkasti. Liituge meie edukate kaupmeeste kogukonnaga.",
             "enterEmail": "Sisestage oma e-posti aadress",
             "subscribe": "Telli",
             "subscribing": "Tellimine...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Ei rämpsposti, tellimuse saate igal ajal tühistada. Me austame teie privaatsust."
         },
         "about": {
-            "title": "Lugu MTJRii taga",
-            "description": "Asutatud e-kaubanduse ekspertide ja tehnoloogia innovaatorite poolt, loodi MTJRii mitme veebipoe haldamise väljakutsete lahendamiseks. Täna teenindame üle 25 000 ettevõtja üle 120 riigi, aidates neil ehitada ja skaleerida edukaid e-kaubanduse ettevõtteid meie põhjaliku platvormiga.",
+            "title": "Lugu Tijraa taga",
+            "description": "Asutatud e-kaubanduse ekspertide ja tehnoloogia innovaatorite poolt, loodi Tijraa mitme veebipoe haldamise väljakutsete lahendamiseks. Täna teenindame üle 25 000 ettevõtja üle 120 riigi, aidates neil ehitada ja skaleerida edukaid e-kaubanduse ettevõtteid meie põhjaliku platvormiga.",
             "innovationDriven": "Innovatsioonist juhitud",
             "buildingFuture": "E-kaubanduse tuleviku ehitamine",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Võtke ühendust",
-            "subtitle": "Kas teil on küsimusi MTJRii kohta? Me tahaksime teilt kuulda. Saatke meile sõnum ja vastame nii kiiresti kui võimalik.",
+            "subtitle": "Kas teil on küsimusi Tijraa kohta? Me tahaksime teilt kuulda. Saatke meile sõnum ja vastame nii kiiresti kui võimalik.",
             "formTitle": "Saadke meile sõnum",
             "infoTitle": "Kontaktteave",
             "infoDescription": "Oleme siin, et aidata ja vastata kõigile teie küsimustele. Ootame teie sõnumit."
         },
         "screenshots": {
-            "title": "Vaadake MTJRii tegevuses",
+            "title": "Vaadake Tijraa tegevuses",
             "subtitle": "Avastage meie intuitiivne armatuurlaud ja võimsad poe haldamise funktsioonid.",
             "items": {
                 "1": {
                     "title": "Mitme poe armatuurlaud",
                     "description": "Hallake kõiki oma poode ühest pilvepõhisest armatuurlaudast",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Mitme poe armatuurlaud"
                 },
                 "2": {
                     "title": "Toodete haldamine",
                     "description": "Lisage tooteid, korraldage kategooriaid ja jälgige laoseisu iga poe jaoks eraldi",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Toodete haldamine"
                 },
                 "3": {
                     "title": "Teema valik",
                     "description": "Valige iga poe jaoks üle 10 professionaalse malli",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Teema valik"
                 },
                 "4": {
                     "title": "Tellimuste haldamine",
                     "description": "Töödelge tellimusi ja hallake klienditehinguid hõlpsalt",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Tellimuste haldamine"
                 },
                 "5": {
                     "title": "Blogi haldamine",
                     "description": "Sisseehitatud blogisüsteem iga poe jaoks koos täiustatud sisu haldamise tööriistadega",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Blogi haldamine"
                 },
                 "6": {
                     "title": "Maksete integratsioon",
                     "description": "Üle 30 maksevärav valmis ühendamiseks teie poodidega",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Maksete integratsioon"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Mida meie kliendid ütlevad",
-            "subtitle": "Ärge uskuge lihtsalt meie sõnu. Siin on see, mida kaupmehed üle maailma MTJRii kohta ütlevad."
+            "subtitle": "Ärge uskuge lihtsalt meie sõnu. Siin on see, mida kaupmehed üle maailma Tijraa kohta ütlevad."
         },
         "templates": {
             "title": "Avastage meie mallid",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Dokumentatsioon",
-        "description": "Õppige, kuidas kasutada Matjrii oma veebipoodide loomiseks ja haldamiseks. Leidke juhendid, õpetused ja vastused levinud küsimustele.",
+        "description": "Õppige, kuidas kasutada Tijraa oma veebipoodide loomiseks ja haldamiseks. Leidke juhendid, õpetused ja vastused levinud küsimustele.",
         "navigation": {
             "home": "Dokumentatsiooni Avaleht",
             "search": "Otsi dokumentatsioonist...",

@@ -69,7 +69,7 @@ export function usePaymentProcessor(options: UsePaymentProcessorOptions = {}) {
       stripe: ['payment_method_id', 'cardholder_name'],
       paypal: ['order_id', 'payment_id'],
       bank: ['amount'],
-      razorpay: ['payment_id', 'order_id', 'ignature'],
+      razorpay: ['payment_id', 'order_id', 'signature'],
       mercadopago: ['payment_id', 'status'],
       paystack: ['payment_id'],
       flutterwave: ['payment_id'],

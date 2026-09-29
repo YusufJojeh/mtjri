@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Configurazione del dominio",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Le funzionalità di dominio non sono disponibili nel piano corrente. Il tuo negozio sarà accessibile tramite URL basato su slug.",
     "Domestic": "Prodotti di base",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "File scaricabile",
     "Draft Pages": "Pagine di progetto",
     "Edit Blog Post": "Modifica del post sul blog",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Inizia creando il tuo primo post sul blog.",
     "Get started by creating your first express checkout.": "Inizia creando il tuo primo conto espresso.",
     "Get started by creating your first shipping method.": "Inizia creando il tuo primo metodo di spedizione.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Vai direttamente alla cassa.",
     "Guest Checkout Allowed": "Visita autorizzata",
     "Handling Fee": "Tassa di gestione",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "- Instruzioni speciali...",
     "Standard Shipping - $9.99": "Spedizione standard - 9,99 dollari",
     "Stay Updated with Store": "Resta aggiornato con Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Quantità di scorte *",
     "Store Configuration": "Configurazione del magazzino",
     "Store Content": "Contenuto della memoria",
@@ -2469,7 +2469,7 @@
     "What's this about?": "- Che cosa c'è?",
     "Wholesale Customer": "Cliente all'ingrosso",
     "Why Choose Store?": "Perché scegliere il negozio?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Conto di parole",
     "Work in progress": "Lavori in corso",
     "Write your blog post content here...": "Scrivi il tuo contenuto del blog qui...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Perché Scegliere MTJRii?",
+            "title": "Perché Scegliere Tijraa?",
             "subtitle": "Non siamo solo un'altra piattaforma e-commerce. Siamo il tuo partner nella creazione di negozi online di successo che guidano la crescita del business.",
             "badge": "Perché Sceglierci",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Contattaci",
             "items": {
                 "1": {
-                    "question": "Come funziona MTJRii?",
-                    "answer": "MTJRii ti permette di creare e gestire più negozi online da una potente piattaforma. Crea semplicemente il tuo negozio, personalizzalo con i tuoi prodotti e il tuo brand, e inizia a vendere!"
+                    "question": "Come funziona Tijraa?",
+                    "answer": "Tijraa ti permette di creare e gestire più negozi online da una potente piattaforma. Crea semplicemente il tuo negozio, personalizzalo con i tuoi prodotti e il tuo brand, e inizia a vendere!"
                 },
                 "2": {
                     "question": "I miei dati sono sicuri?",
@@ -2598,8 +2598,8 @@
                     "answer": "Assolutamente! Puoi personalizzare colori, font, layout, aggiungere il tuo logo, immagini di prodotti e molto altro. La nostra piattaforma offre opzioni di personalizzazione estese."
                 },
                 "4": {
-                    "question": "Ho bisogno di competenze tecniche per usare MTJRii?",
-                    "answer": "Affatto! MTJRii è progettato per essere user-friendly. Puoi creare e gestire i tuoi negozi online in pochi minuti senza alcuna conoscenza tecnica."
+                    "question": "Ho bisogno di competenze tecniche per usare Tijraa?",
+                    "answer": "Affatto! Tijraa è progettato per essere user-friendly. Puoi creare e gestire i tuoi negozi online in pochi minuti senza alcuna conoscenza tecnica."
                 },
                 "5": {
                     "question": "Posso tracciare le prestazioni del mio negozio?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Resta Aggiornato con MTJRii",
-            "subtitle": "Ricevi i migliori consigli e-commerce, aggiornamenti MTJRii e insights esclusivi direttamente nella tua casella di posta. Unisciti alla nostra comunità di commercianti di successo.",
+            "title": "Resta Aggiornato con Tijraa",
+            "subtitle": "Ricevi i migliori consigli e-commerce, aggiornamenti Tijraa e insights esclusivi direttamente nella tua casella di posta. Unisciti alla nostra comunità di commercianti di successo.",
             "enterEmail": "Inserisci il tuo indirizzo email",
             "subscribe": "Iscriviti",
             "subscribing": "Iscrizione in corso...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Niente spam, disiscriviti in qualsiasi momento. Rispettiamo la tua privacy."
         },
         "about": {
-            "title": "La Storia Dietro MTJRii",
-            "description": "Fondato da esperti e-commerce e innovatori tecnologici, MTJRii è stato creato per risolvere le sfide della gestione di più negozi online. Oggi serviamo oltre 25.000 imprenditori in più di 120 paesi, aiutandoli a costruire e scalare aziende e-commerce di successo con la nostra piattaforma completa.",
+            "title": "La Storia Dietro Tijraa",
+            "description": "Fondato da esperti e-commerce e innovatori tecnologici, Tijraa è stato creato per risolvere le sfide della gestione di più negozi online. Oggi serviamo oltre 25.000 imprenditori in più di 120 paesi, aiutandoli a costruire e scalare aziende e-commerce di successo con la nostra piattaforma completa.",
             "innovationDriven": "Guidato dall'Innovazione",
             "buildingFuture": "Costruire il futuro dell'e-commerce",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Mettiti in Contatto",
-            "subtitle": "Hai domande su MTJRii? Ci piacerebbe sentirti. Inviaci un messaggio e risponderemo il prima possibile.",
+            "subtitle": "Hai domande su Tijraa? Ci piacerebbe sentirti. Inviaci un messaggio e risponderemo il prima possibile.",
             "formTitle": "Inviaci un Messaggio",
             "infoTitle": "Informazioni di Contatto",
             "infoDescription": "Siamo qui per aiutare e rispondere a qualsiasi domanda tu possa avere. Non vediamo l'ora di sentirti."
         },
         "screenshots": {
-            "title": "Vedi MTJRii in Azione",
+            "title": "Vedi Tijraa in Azione",
             "subtitle": "Esplora la nostra dashboard intuitiva e le potenti funzionalità di gestione negozio.",
             "items": {
                 "1": {
                     "title": "Dashboard Multi-Negozio",
                     "description": "Gestisci tutti i tuoi negozi da una dashboard basata su cloud",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Dashboard Multi-Negozio"
                 },
                 "2": {
                     "title": "Gestione Prodotti",
                     "description": "Aggiungi prodotti, organizza categorie e traccia l'inventario per ogni negozio separatamente",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Gestione Prodotti"
                 },
                 "3": {
                     "title": "Selezione Tema",
                     "description": "Scegli tra oltre 10 modelli professionali per ogni negozio",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Selezione Tema"
                 },
                 "4": {
                     "title": "Gestione Ordini",
                     "description": "Elabora ordini e gestisci transazioni clienti con facilità",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Gestione Ordini"
                 },
                 "5": {
                     "title": "Gestione Blog",
                     "description": "Sistema blog integrato per ogni negozio con strumenti avanzati di gestione contenuti",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Gestione Blog"
                 },
                 "6": {
                     "title": "Integrazione Pagamenti",
                     "description": "Oltre 30 gateway di pagamento pronti a connettersi con i tuoi negozi",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Integrazione Pagamenti"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Cosa Dicono I Nostri Clienti",
-            "subtitle": "Non crederci sulla parola. Ecco cosa dicono i commercianti di tutto il mondo su MTJRii."
+            "subtitle": "Non crederci sulla parola. Ecco cosa dicono i commercianti di tutto il mondo su Tijraa."
         },
         "templates": {
             "title": "Esplora I Nostri Modelli",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Documentazione",
-        "description": "Impara come usare Matjrii per creare e gestire i tuoi negozi online. Trova guide, tutorial e risposte alle domande comuni.",
+        "description": "Impara come usare Tijraa per creare e gestire i tuoi negozi online. Trova guide, tutorial e risposte alle domande comuni.",
         "navigation": {
             "home": "Home Documentazione",
             "search": "Cerca documentazione...",

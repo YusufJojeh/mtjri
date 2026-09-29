@@ -2036,7 +2036,7 @@
     "Domain Configuration": "Domænekonfiguration",
     "Domain features are not available in your current plan. Your store will be accessible via slug-based URL.": "Domænefunktioner er ikke tilgængelige i din nuværende plan. Din butik vil være tilgængelig via slug-baseret URL.",
     "Domestic": "Indenlandske",
-    "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.": "Don't just take our word for it. Here's what merchants around the world are saying about MTJRii.",
+    "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.": "Don't just take our word for it. Here's what merchants around the world are saying about Tijraa.",
     "Downloadable File": "Downloadbare filer",
     "Draft Pages": "Udkast til sider",
     "Edit Blog Post": "Rediger blogindlæg",
@@ -2108,7 +2108,7 @@
     "Get started by creating your first blog post.": "Begynd med at skrive dit første blogindlæg.",
     "Get started by creating your first express checkout.": "Begynd med at oprette din første ekspresscheckout.",
     "Get started by creating your first shipping method.": "Begynd med at skabe din første forsendelsesmetode.",
-    "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, MTJRii updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
+    "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.": "Get the latest e-commerce tips, Tijraa updates, and exclusive insights delivered straight to your inbox. Join our community of successful merchants.",
     "Go directly to checkout": "Gå direkte til kassen",
     "Guest Checkout Allowed": "Gæsteudbetaling tilladt",
     "Handling Fee": "Håndteringsgebyr",
@@ -2377,7 +2377,7 @@
     "Special instructions...": "Særlige instruktioner...",
     "Standard Shipping - $9.99": "Standardforsendelse - 9,99 kr.",
     "Stay Updated with Store": "Hold dig opdateret med Store",
-    "Stay Updated with MTJRii": "Stay Updated with MTJRii",
+    "Stay Updated with Tijraa": "Stay Updated with Tijraa",
     "Stock Quantity *": "Lagermængde *",
     "Store Configuration": "Konfiguration af lager",
     "Store Content": "Indhold",
@@ -2469,7 +2469,7 @@
     "What's this about?": "- Hvad er det?",
     "Wholesale Customer": "Engroskunder",
     "Why Choose Store?": "Hvorfor vælge butik?",
-    "Why Choose MTJRii?": "Why Choose MTJRii?",
+    "Why Choose Tijraa?": "Why Choose Tijraa?",
     "Word Count": "Ordantal",
     "Work in progress": "Arbejd i gang",
     "Write your blog post content here...": "Skriv dit blogindlæg her...",
@@ -2546,7 +2546,7 @@
             }
         },
         "whyChooseUs": {
-            "title": "Hvorfor Vælge MTJRii?",
+            "title": "Hvorfor Vælge Tijraa?",
             "subtitle": "Vi er ikke bare endnu en e-handelsplatform. Vi er din partner i at bygge succesfulde online butikker, der driver forretningsvækst.",
             "badge": "Hvorfor Vælge Os",
             "multiStore": {
@@ -2586,8 +2586,8 @@
             "contactUs": "Kontakt os",
             "items": {
                 "1": {
-                    "question": "Hvordan fungerer MTJRii?",
-                    "answer": "MTJRii giver dig mulighed for at oprette og administrere flere online butikker fra én kraftfuld platform. Opret blot din butik, tilpas den med dine produkter og branding, og begynd at sælge!"
+                    "question": "Hvordan fungerer Tijraa?",
+                    "answer": "Tijraa giver dig mulighed for at oprette og administrere flere online butikker fra én kraftfuld platform. Opret blot din butik, tilpas den med dine produkter og branding, og begynd at sælge!"
                 },
                 "2": {
                     "question": "Er mine data sikre?",
@@ -2598,8 +2598,8 @@
                     "answer": "Absolut! Du kan tilpasse farver, skrifttyper, layout, tilføje dit logo, produktbilleder og meget mere. Vores platform tilbyder omfattende tilpasningsmuligheder."
                 },
                 "4": {
-                    "question": "Har jeg brug for tekniske færdigheder for at bruge MTJRii?",
-                    "answer": "Slet ikke! MTJRii er designet til at være brugervenligt. Du kan oprette og administrere dine online butikker på få minutter uden teknisk viden."
+                    "question": "Har jeg brug for tekniske færdigheder for at bruge Tijraa?",
+                    "answer": "Slet ikke! Tijraa er designet til at være brugervenligt. Du kan oprette og administrere dine online butikker på få minutter uden teknisk viden."
                 },
                 "5": {
                     "question": "Kan jeg spore min butiks præstation?",
@@ -2608,8 +2608,8 @@
             }
         },
         "newsletter": {
-            "title": "Hold Dig Opdateret med MTJRii",
-            "subtitle": "Få de seneste e-handelstips, MTJRii-opdateringer og eksklusive indsigt leveret direkte til din indbakke. Bliv en del af vores fællesskab af succesfulde forhandlere.",
+            "title": "Hold Dig Opdateret med Tijraa",
+            "subtitle": "Få de seneste e-handelstips, Tijraa-opdateringer og eksklusive indsigt leveret direkte til din indbakke. Bliv en del af vores fællesskab af succesfulde forhandlere.",
             "enterEmail": "Indtast din e-mailadresse",
             "subscribe": "Tilmeld dig",
             "subscribing": "Tilmelder...",
@@ -2619,8 +2619,8 @@
             "privacyText": "Ingen spam, afmeld når som helst. Vi respekterer dit privatliv."
         },
         "about": {
-            "title": "Historien Bag MTJRii",
-            "description": "Grundlagt af e-handelseksperter og teknologiske innovatører, blev MTJRii skabt for at løse udfordringerne ved at administrere flere online butikker. I dag betjener vi over 25.000 iværksættere i 120+ lande og hjælper dem med at bygge og skalere succesfulde e-handelsvirksomheder med vores omfattende platform.",
+            "title": "Historien Bag Tijraa",
+            "description": "Grundlagt af e-handelseksperter og teknologiske innovatører, blev Tijraa skabt for at løse udfordringerne ved at administrere flere online butikker. I dag betjener vi over 25.000 iværksættere i 120+ lande og hjælper dem med at bygge og skalere succesfulde e-handelsvirksomheder med vores omfattende platform.",
             "innovationDriven": "Innovation Drevet",
             "buildingFuture": "Bygger fremtiden for e-handel",
             "values": {
@@ -2658,49 +2658,49 @@
         },
         "contact": {
             "title": "Kom i Kontakt",
-            "subtitle": "Har du spørgsmål om MTJRii? Vi vil meget gerne høre fra dig. Send os en besked, og vi svarer så hurtigt som muligt.",
+            "subtitle": "Har du spørgsmål om Tijraa? Vi vil meget gerne høre fra dig. Send os en besked, og vi svarer så hurtigt som muligt.",
             "formTitle": "Send os en Besked",
             "infoTitle": "Kontaktinformation",
             "infoDescription": "Vi er her for at hjælpe og besvare ethvert spørgsmål, du måtte have. Vi ser frem til at høre fra dig."
         },
         "screenshots": {
-            "title": "Se MTJRii i Aktion",
+            "title": "Se Tijraa i Aktion",
             "subtitle": "Udforsk vores intuitive dashboard og kraftfulde butiksstyringsfunktioner.",
             "items": {
                 "1": {
                     "title": "Multi-Butik Dashboard",
                     "description": "Administrer alle dine butikker fra ét skybaseret dashboard",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/multi-store-dashboard.png",
+                    "src": "/storage/placeholder/landing-page/multi-store-dashboard.png",
                     "alt": "Multi-Butik Dashboard"
                 },
                 "2": {
                     "title": "Produktstyring",
                     "description": "Tilføj produkter, organiser kategorier og spoor lagerbeholdning for hver butik separat",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/product-management.png",
+                    "src": "/storage/placeholder/landing-page/product-management.png",
                     "alt": "Produktstyring"
                 },
                 "3": {
                     "title": "Tema Valg",
                     "description": "Vælg blandt over 10 professionelle skabeloner til hver butik",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/theme-selection.png",
+                    "src": "/storage/placeholder/landing-page/theme-selection.png",
                     "alt": "Tema Valg"
                 },
                 "4": {
                     "title": "Ordreforvaltning",
                     "description": "Behandl ordrer og administrer kundetransaktioner med lethed",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/order-management.png",
+                    "src": "/storage/placeholder/landing-page/order-management.png",
                     "alt": "Ordreforvaltning"
                 },
                 "5": {
                     "title": "Blog Forvaltning",
                     "description": "Indbygget blogsystem til hver butik med avancerede indholdsstyringsværktøjer",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/blog-management.png",
+                    "src": "/storage/placeholder/landing-page/blog-management.png",
                     "alt": "Blog Forvaltning"
                 },
                 "6": {
                     "title": "Betalingsintegration",
                     "description": "Over 30 betalingsgateways klar til at forbinde med dine butikker",
-                    "src": "https://mtjrii.com/storage/placeholder/landing-page/payment-integration.png",
+                    "src": "/storage/placeholder/landing-page/payment-integration.png",
                     "alt": "Betalingsintegration"
                 }
             }
@@ -2714,7 +2714,7 @@
         },
         "testimonials": {
             "title": "Hvad Vores Kunder Siger",
-            "subtitle": "Tag ikke bare vores ord for det. Her er hvad forhandlere rundt omkring i verden siger om MTJRii."
+            "subtitle": "Tag ikke bare vores ord for det. Her er hvad forhandlere rundt omkring i verden siger om Tijraa."
         },
         "templates": {
             "title": "Udforsk Vores Skabeloner",
@@ -2736,7 +2736,7 @@
     },
     "documentation": {
         "title": "Dokumentation",
-        "description": "Lær hvordan du bruger Matjrii til at oprette og administrere dine online butikker. Find guider, tutorials og svar på almindelige spørgsmål.",
+        "description": "Lær hvordan du bruger Tijraa til at oprette og administrere dine online butikker. Find guider, tutorials og svar på almindelige spørgsmål.",
         "navigation": {
             "home": "Dokumentations Startside",
             "search": "Søg i dokumentation...",

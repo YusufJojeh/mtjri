@@ -193,7 +193,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
     
     if (paymentSettings?.is_stripe_enabled === true || paymentSettings?.is_stripe_enabled === '1') {
       methods.push({
-        id: 'tripe',
+        id: 'stripe',
         name: t('Stripe'),
         icon: <CreditCard className='h-5 w-5' />,
         enabled: true
@@ -256,7 +256,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
     
     if (paymentSettings?.is_skrill_enabled === true || paymentSettings?.is_skrill_enabled === '1') {
       methods.push({
-        id: 'krill',
+        id: 'skrill',
         name: t('Skrill'),
         icon: <Wallet className='h-5 w-5' />,
         enabled: true
@@ -472,7 +472,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
     
     if (paymentSettings?.is_sspay_enabled === true || paymentSettings?.is_sspay_enabled === '1') {
       methods.push({
-        id: 'spay',
+        id: 'sspay',
         name: t('SSPay'),
         icon: <CreditCard className='h-5 w-5' />,
         enabled: true

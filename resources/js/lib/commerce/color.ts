@@ -60,3 +60,11 @@ export function brandPalette(color: string, isDark: boolean): { surface: string;
     if (!isDark) return { surface: accessibleShade(color, LIGHT_ON_BRAND, 4.5, 'darken'), onSurface: LIGHT_ON_BRAND };
     return { surface: accessibleShade(color, DARK_ON_BRAND, 4.5, 'lighten'), onSurface: DARK_ON_BRAND };
 }
+
+/**
+ * Brand colour safe for white text on it and for brand-coloured text on white
+ * (AA 4.5:1). Used by pages that paint the brand colour inline.
+ */
+export function accessibleBrand(color: string | undefined | null, fallback = '#0B6B5A'): string {
+    return accessibleShade(color || fallback, LIGHT_ON_BRAND, 4.5, 'darken');
+}

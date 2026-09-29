@@ -41,7 +41,7 @@ const RichTextField = forwardRef<RichTextFieldRef, RichTextFieldProps>(({
   }))
 
   return (
-    <div className={cn('pace-y-2', className)}>
+    <div className={cn('space-y-2', className)}>
       {label && (
         <Label htmlFor={name} className='text-sm font-medium'>
           {label}

@@ -1,4 +1,5 @@
 import { Mail, Lock, User } from 'lucide-react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { FormEventHandler, useState } from 'react';
 import InputError from '@/components/input-error';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -37,7 +38,7 @@ export default function Step1Register({ referralCode, planId, onSuccess }: Step1
     const { t } = useTranslation();
     const [recaptchaToken, setRecaptchaToken] = useState<string>('');
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     const [formData, setFormData] = useState<RegisterForm>({
         name: '',
         email: '',

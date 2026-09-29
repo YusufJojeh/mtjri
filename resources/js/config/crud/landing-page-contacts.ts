@@ -22,7 +22,7 @@ export const landingPageContactsConfig = {
         sortable: true
       },
       {
-        key: 'ubject',
+        key: 'subject',
         label: 'Subject',
         sortable: true
       },

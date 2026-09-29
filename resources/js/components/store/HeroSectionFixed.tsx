@@ -29,7 +29,7 @@ export default function HeroSection({
   baseUrl
 }: HeroSectionProps) {
   const { props } = usePage();
-  const appName = (props as any).appName || 'matjri'; // Get appName from Inertia props
+  const appName = (props as any).appName || 'Tijraa'; // Get appName from Inertia props
 
   // Use dynamic content if available, otherwise fallback to props or static config
   const heroTitle = content?.title || title || storeTheme.homepage.heroSection.title;

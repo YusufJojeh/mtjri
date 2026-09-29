@@ -17,8 +17,8 @@ class LandingPageSeeder extends Seeder
         LandingPageSetting::updateOrCreate(
             ['id' => 1],
             [
-            'company_name' => 'StoreGo',
-            'contact_email' => 'support@storego.com',
+            'company_name' => 'Tijraa',
+            'contact_email' => 'support@tijraa.com',
             'contact_phone' => '+1 (555) 123-4567',
             'contact_address' => 'San Francisco, CA',
             'config_sections' => [
@@ -236,7 +236,7 @@ class LandingPageSeeder extends Seeder
                             ]
                         ],
                         'stats_title' => 'Trusted by Entrepreneurs Worldwide',
-                        'stats_subtitle' => 'Join thousands of successful merchants who chose StoreGo',
+                        'stats_subtitle' => 'Join thousands of successful merchants who chose Tijraa',
                         'cta_title' => 'Ready to Launch Your Store?',
                         'cta_subtitle' => 'Start your 14-day free trial today - no credit card required'
                     ],
@@ -248,11 +248,11 @@ class LandingPageSeeder extends Seeder
                         'description' => 'Founded by SaaS and e-commerce experts, our platform is built to solve the real challenges of managing multiple online stores.',
                         'background_color' => '#f8fafc',
                         'layout' => 'image-right',
-                        'image' => '/storage/placeholder/about-storego.svg',
+                        'image' => '/storage/placeholder/about-tijraa.svg',
                         'image_position' => 'right',
                         'parallax' => false,
                         'story_title' => 'Revolutionizing Multi-Store E-commerce Since 2019',
-                        'story_content' => 'StoreGo emerged from the vision of experienced e-commerce professionals who recognized the growing need for unified multi-store management. What started as a solution for managing multiple online stores has evolved into a comprehensive platform serving over 25,000 entrepreneurs across 120+ countries. Our mission is to democratize e-commerce by providing powerful, intuitive tools that enable anyone to build, manage, and scale successful online businesses without technical barriers.',
+                        'story_content' => 'Tijraa emerged from the vision of experienced e-commerce professionals who recognized the growing need for unified multi-store management. What started as a solution for managing multiple online stores has evolved into a comprehensive platform serving over 25,000 entrepreneurs across 120+ countries. Our mission is to democratize e-commerce by providing powerful, intuitive tools that enable anyone to build, manage, and scale successful online businesses without technical barriers.',
                         'stats' => [
                             ['label' => 'Store Themes', 'value' => '10+', 'color' => '#3b82f6'],
                             ['label' => 'Payment Gateways', 'value' => '30+', 'color' => '#1E90FF'],
@@ -291,7 +291,7 @@ class LandingPageSeeder extends Seeder
                     [
                         'key' => 'team',
                         'title' => 'Meet Our Team',
-                        'subtitle' => 'Meet the passionate team behind StoreGo\'s success',
+                        'subtitle' => 'Meet the passionate team behind Tijraa\'s success',
                         'description' => 'Our diverse team of e-commerce experts, engineers, and designers is dedicated to helping entrepreneurs build successful online businesses.',
                         'background_color' => '#f8fafc',
                         'layout' => 'grid',
@@ -304,7 +304,7 @@ class LandingPageSeeder extends Seeder
                                 'image' => '/storage/placeholder/team/alex.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
                                 'twitter' => 'https://twitter.com/',
-                                'email' => 'alex@storego.com'
+                                'email' => 'alex@tijraa.com'
                             ],
                             [
                                 'name' => 'Sarah Kim',
@@ -313,7 +313,7 @@ class LandingPageSeeder extends Seeder
                                 'image' => '/storage/placeholder/team/sarah.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
                                 'twitter' => 'https://twitter.com/',
-                                'email' => 'sarah@storego.com'
+                                'email' => 'sarah@tijraa.com'
                             ],
                             [
                                 'name' => 'David Wilson',
@@ -321,7 +321,7 @@ class LandingPageSeeder extends Seeder
                                 'bio' => 'Helping merchants grow their businesses since day one. 8+ years in customer success and e-commerce consulting.',
                                 'image' => '/storage/placeholder/team/david.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
-                                'email' => 'david@storego.com'
+                                'email' => 'david@tijraa.com'
                             ],
                             [
                                 'name' => 'Maria Garcia',
@@ -330,7 +330,7 @@ class LandingPageSeeder extends Seeder
                                 'image' => '/storage/placeholder/team/maria.svg',
                                 'linkedin' => 'https://linkedin.com/in/',
                                 'twitter' => 'https://twitter.com/',
-                                'email' => 'maria@storego.com'
+                                'email' => 'maria@tijraa.com'
                             ]
                         ],
                         'cta_title' => 'Join Our Growing Team',
@@ -356,7 +356,7 @@ class LandingPageSeeder extends Seeder
                         'key' => 'testimonials',
                         'title' => 'What Our Merchants Say',
                         'subtitle' => 'Join thousands of successful store owners',
-                        'description' => 'Don\'t just take our word for it. See what our successful merchants have to say about StoreGo.',
+                        'description' => 'Don\'t just take our word for it. See what our successful merchants have to say about Tijraa.',
                         'background_color' => '#ffffff',
                         'layout' => 'carousel',
                         'autoplay' => true,
@@ -365,7 +365,7 @@ class LandingPageSeeder extends Seeder
                         'show_navigation' => true,
                         'show_trust_indicators' => true,
                         'trust_indicators' => [
-                            ['metric' => 'Customer Satisfaction', 'value' => '98.5%', 'description' => 'of merchants recommend StoreGo to others'],
+                            ['metric' => 'Customer Satisfaction', 'value' => '98.5%', 'description' => 'of merchants recommend Tijraa to others'],
                             ['metric' => 'Average Rating', 'value' => '4.9/5', 'description' => 'based on 8,500+ verified reviews'],
                             ['metric' => 'Success Rate', 'value' => '94%', 'description' => 'of stores see growth in first 90 days'],
                             ['metric' => 'Revenue Growth', 'value' => '340%', 'description' => 'average increase in first year'],
@@ -384,7 +384,7 @@ class LandingPageSeeder extends Seeder
                                 'name' => 'Emma Thompson',
                                 'role' => 'Store Owner',
                                 'company' => 'Boutique Fashion Co.',
-                                'content' => 'StoreGo made it incredibly easy to launch my fashion store. The multi-store feature lets me manage different brands from one dashboard. Sales increased 400% in the first 6 months!',
+                                'content' => 'Tijraa made it incredibly easy to launch my fashion store. The multi-store feature lets me manage different brands from one dashboard. Sales increased 400% in the first 6 months!',
                                 'rating' => 5,
                                 'avatar' => '/storage/placeholder/testimonials/emma.svg',
                                 'location' => 'London, UK'
@@ -412,7 +412,7 @@ class LandingPageSeeder extends Seeder
                     [
                         'key' => 'faq',
                         'title' => 'Frequently Asked Questions',
-                        'subtitle' => 'Everything you need to know about StoreGo',
+                        'subtitle' => 'Everything you need to know about Tijraa',
                         'description' => 'Got questions? We\'ve got answers. Browse our most frequently asked questions below.',
                         'background_color' => '#f8fafc',
                         'layout' => 'accordion',
@@ -458,7 +458,7 @@ class LandingPageSeeder extends Seeder
                     [
                         'key' => 'newsletter',
                         'title' => 'Stay Updated',
-                        'subtitle' => 'Get the latest e-commerce tips and StoreGo updates',
+                        'subtitle' => 'Get the latest e-commerce tips and Tijraa updates',
                         'description' => 'Join our newsletter and get exclusive insights, tips, and updates delivered to your inbox.',
                         'background_color' => '#3b82f6',
                         'text_color' => '#ffffff',
@@ -474,7 +474,7 @@ class LandingPageSeeder extends Seeder
                             [
                                 'icon' => '🚀',
                                 'title' => 'Early Access',
-                                'description' => 'Be first to try new StoreGo features and updates'
+                                'description' => 'Be first to try new Tijraa features and updates'
                             ],
                             [
                                 'icon' => '💡',
@@ -500,7 +500,7 @@ class LandingPageSeeder extends Seeder
                         'form_title' => 'Send us a message',
                         'form_subtitle' => 'We\'ll get back to you within 4 hours',
                         'contact_methods' => [
-                            ['type' => 'email', 'value' => 'support@storego.com', 'label' => 'Email Support', 'description' => 'Get help via email'],
+                            ['type' => 'email', 'value' => 'support@tijraa.com', 'label' => 'Email Support', 'description' => 'Get help via email'],
                             ['type' => 'phone', 'value' => '+1 (555) 123-4567', 'label' => 'Phone Support', 'description' => 'Speak with our team'],
                             ['type' => 'chat', 'value' => 'Live Chat', 'label' => 'Live Chat', 'description' => 'Chat with us instantly']
                         ],
@@ -529,8 +529,8 @@ class LandingPageSeeder extends Seeder
                         'show_newsletter' => true,
                         'show_logo' => true,
                         'logo_position' => 'top',
-                        'description' => 'StoreGo is the leading multi-store e-commerce SaaS platform that empowers entrepreneurs to create, manage, and scale unlimited online stores from a single dashboard. Join thousands of successful merchants worldwide.',
-                        'newsletter_title' => 'Stay Connected with StoreGo',
+                        'description' => 'Tijraa is the leading multi-store e-commerce SaaS platform that empowers entrepreneurs to create, manage, and scale unlimited online stores from a single dashboard. Join thousands of successful merchants worldwide.',
+                        'newsletter_title' => 'Stay Connected with Tijraa',
                         'newsletter_subtitle' => 'Get exclusive e-commerce insights, platform updates, and growth strategies delivered to your inbox',
                         'links' => [
                             'product' => [
@@ -565,7 +565,7 @@ class LandingPageSeeder extends Seeder
                             ['name' => 'Facebook', 'icon' => 'Facebook', 'href' => 'https://www.facebook.com/'],
                             ['name' => 'Instagram', 'icon' => 'Instagram', 'href' => 'https://www.instagram.com/']
                         ],
-                        'copyright' => '© 2024 StoreGo. All rights reserved.',
+                        'copyright' => '© 2024 Tijraa. All rights reserved.',
                         'bottom_text' => 'Built for entrepreneurs, by entrepreneurs. Trusted by 25,000+ merchants across 120+ countries worldwide. SOC 2 Type II compliant with 99.9% uptime guarantee.'
                     ]
                 ],
@@ -575,8 +575,8 @@ class LandingPageSeeder extends Seeder
                     'accent' => '#FFC107',
                 ],
                 'seo' => [
-                    'meta_title' => 'StoreGo - Multi-Store E-commerce Platform | Launch Your Online Store',
-                    'meta_description' => 'Create and manage multiple online stores with StoreGo. 30+ payment gateways, beautiful themes, inventory management, and more. Start your free trial today.',
+                    'meta_title' => 'Tijraa - Multi-Store E-commerce Platform | Launch Your Online Store',
+                    'meta_description' => 'Create and manage multiple online stores with Tijraa. 30+ payment gateways, beautiful themes, inventory management, and more. Start your free trial today.',
                     'meta_keywords' => 'ecommerce platform, online store builder, multi-store management, sell online, ecommerce website, store builder'
                 ],
                 'section_order' => [
@@ -607,8 +607,8 @@ class LandingPageSeeder extends Seeder
                 'title' => 'About Us',
                 'slug' => 'about-us',
                 'content' => "About Our Multi-Store E-commerce Platform: Empowering entrepreneurs to <b>create, manage, and scale multiple online stores smarter</b>.<br>We are dedicated to helping businesses streamline e-commerce operations, optimize store management, and grow their revenue with ease.<br>Our platform centralizes store data, automates sales processes, and provides actionable insights to drive business growth.<br>Whether you're launching your first store or managing multiple brands, our platform adapts to your needs—from product management to customer analytics—ensuring efficiency, scalability, and measurable success.<br><b>Stats:</b> &bull; 4+ Years E-commerce Experience &bull; 25K+ Active Stores &bull; 120+ Countries Served<br><b>Our Mission:</b> Transform the way businesses operate online by providing scalable, intelligent, and user-friendly multi-store e-commerce solutions.<br><b>Our Values:</b> Innovation, reliability, and merchant success are at the heart of everything we build.<br><b>Our Commitment:</b> Deliver secure, scalable, and reliable e-commerce solutions with world-class support.<br><b>Our Vision:</b> A future where every entrepreneur maximizes their potential through automated store management, data-driven decisions, and seamless customer experiences.",
-                'meta_title' => 'About Us - StoreGo Multi-Store E-commerce Platform',
-                'meta_description' => 'Learn more about StoreGo – designed to simplify multi-store operations, optimize inventory management, and accelerate business growth for entrepreneurs worldwide.',
+                'meta_title' => 'About Us - Tijraa Multi-Store E-commerce Platform',
+                'meta_description' => 'Learn more about Tijraa – designed to simplify multi-store operations, optimize inventory management, and accelerate business growth for entrepreneurs worldwide.',
                 'is_active' => true,
                 'sort_order' => 1
             ],
@@ -617,44 +617,44 @@ class LandingPageSeeder extends Seeder
                 'title' => 'Privacy Policy',
                 'slug' => 'privacy-policy',
                 'content' => "Your privacy is important to us. This Privacy Policy explains how our multi-store e-commerce platform collects, uses, and protects your information.<br><b>Information We Collect:</b> &bull; Business and store details such as name, address, phone, and company information &bull; Product inventory, pricing, and sales transaction data &bull; Customer information and purchase history for analytics &bull; Payment processing details and order management data &bull; System usage analytics to enhance platform performance<br><b>How We Use Your Information:</b> &bull; Provide, maintain, and improve e-commerce platform services &bull; Enable store management, product listings, and order processing &bull; Process payments, transactions, and generate invoices securely &bull; Send important updates, notifications, and feature announcements (with your consent) &bull; Monitor and enhance security, prevent fraud, and ensure compliance<br><b>Information Sharing:</b> We do not sell or trade business or customer data. Information may be shared with: &bull; Authorized store owners and administrators &bull; Trusted third-party service providers (e.g., payment gateways, shipping providers) &bull; Legal authorities when required by law<br><b>Data Security:</b> We use encryption, firewalls, access control, and regular audits to safeguard business and transaction data from unauthorized access or misuse.<br><b>Data Retention:</b> Data is stored as long as your account remains active or as legally required. Upon request, data can be deleted, anonymized, or exported as needed.<br><b>Your Rights:</b> You have the right to access, correct, or request deletion of your business data. You may also manage communication preferences or withdraw consent anytime by contacting our support team.",
-                'meta_title' => 'Privacy Policy - StoreGo Multi-Store Platform',
-                'meta_description' => 'Read the privacy policy of StoreGo to understand how business, store, and transaction data is collected, used, and protected.',
+                'meta_title' => 'Privacy Policy - Tijraa Multi-Store Platform',
+                'meta_description' => 'Read the privacy policy of Tijraa to understand how business, store, and transaction data is collected, used, and protected.',
                 'is_active' => true,
                 'sort_order' => 2
             ],
             [
                 'title' => 'Terms of Service',
                 'slug' => 'terms-of-service',
-                'content' => "Please read these terms carefully before using our multi-store e-commerce platform. By accessing or using our services, you agree to these terms.<br><br><b>Acceptance of Terms:</b> By creating an account or using our StoreGo platform, you confirm that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree, you may not use the platform.<br><br><b>Service Description:</b> Our platform provides businesses with multi-store e-commerce solutions, including but not limited to:<br>&bull; Store creation and management tools<br>&bull; Product catalog and inventory management<br>&bull; Order processing and customer management<br>&bull; Payment gateway integrations<br>&bull; Analytics and reporting features<br><br><b>User Responsibilities:</b> As a user of our e-commerce platform, you agree to:<br>&bull; Provide accurate and updated information when creating an account<br>&bull; Maintain confidentiality of your login credentials<br>&bull; Ensure that all uploaded content complies with applicable laws<br>&bull; Use the platform only for lawful e-commerce and business purposes<br><br><b>Subscription & Payments:</b> You agree to pay all fees associated with your chosen plan in accordance with the billing terms. Failure to pay may result in suspension or termination of your account.<br><br><b>Termination of Service:</b> We reserve the right to suspend or terminate your access if you violate these Terms or engage in harmful activities.<br><br><b>Data & Privacy:</b> Your data will be handled per our Privacy Policy. You are responsible for safeguarding your account access.<br><br><b>Limitation of Liability:</b> Our company shall not be held liable for any indirect, incidental, or consequential damages arising from your use of the StoreGo platform.",
-                'meta_title' => 'Terms of Service - StoreGo Multi-Store Platform',
-                'meta_description' => 'Read our terms of service to understand the rules and responsibilities for using our StoreGo e-commerce platform.',
+                'content' => "Please read these terms carefully before using our multi-store e-commerce platform. By accessing or using our services, you agree to these terms.<br><br><b>Acceptance of Terms:</b> By creating an account or using our Tijraa platform, you confirm that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree, you may not use the platform.<br><br><b>Service Description:</b> Our platform provides businesses with multi-store e-commerce solutions, including but not limited to:<br>&bull; Store creation and management tools<br>&bull; Product catalog and inventory management<br>&bull; Order processing and customer management<br>&bull; Payment gateway integrations<br>&bull; Analytics and reporting features<br><br><b>User Responsibilities:</b> As a user of our e-commerce platform, you agree to:<br>&bull; Provide accurate and updated information when creating an account<br>&bull; Maintain confidentiality of your login credentials<br>&bull; Ensure that all uploaded content complies with applicable laws<br>&bull; Use the platform only for lawful e-commerce and business purposes<br><br><b>Subscription & Payments:</b> You agree to pay all fees associated with your chosen plan in accordance with the billing terms. Failure to pay may result in suspension or termination of your account.<br><br><b>Termination of Service:</b> We reserve the right to suspend or terminate your access if you violate these Terms or engage in harmful activities.<br><br><b>Data & Privacy:</b> Your data will be handled per our Privacy Policy. You are responsible for safeguarding your account access.<br><br><b>Limitation of Liability:</b> Our company shall not be held liable for any indirect, incidental, or consequential damages arising from your use of the Tijraa platform.",
+                'meta_title' => 'Terms of Service - Tijraa Multi-Store Platform',
+                'meta_description' => 'Read our terms of service to understand the rules and responsibilities for using our Tijraa e-commerce platform.',
                 'is_active' => true,
                 'sort_order' => 3
             ],
             [
                 'title' => 'Contact Us',
                 'slug' => 'contact-us',
-                'content' => "Have questions about <b>StoreGo</b>? Our team is here to assist you with demos, pricing, integrations, and more.<br><br><b>Send us a Message:</b> Fill out the form with your Full Name, Email Address, Subject, and Message. Our dedicated support team will get back to you promptly.<br><br><b>Contact Information:</b><br>&bull; <b>Email Us:</b> support@storego.com (Average response time: within 24 hours)<br>&bull; <b>Call Us:</b> +1 (555) 123-4567 (Available Monday – Friday, 9am – 6pm EST)<br>&bull; <b>Visit Us:</b> 123 E-commerce Street, Suite 100, San Francisco, CA 94105<br><br><b>Business Hours:</b><br>&bull; Monday - Friday: 9:00 AM - 6:00 PM EST<br>&bull; Saturday: 10:00 AM - 2:00 PM EST<br>&bull; Sunday: Closed",
-                'meta_title' => 'Contact Us - StoreGo Support',
-                'meta_description' => 'Reach out to our StoreGo support team for inquiries, demos, pricing, or technical assistance. We\'re here to help you succeed.',
+                'content' => "Have questions about <b>Tijraa</b>? Our team is here to assist you with demos, pricing, integrations, and more.<br><br><b>Send us a Message:</b> Fill out the form with your Full Name, Email Address, Subject, and Message. Our dedicated support team will get back to you promptly.<br><br><b>Contact Information:</b><br>&bull; <b>Email Us:</b> support@tijraa.com (Average response time: within 24 hours)<br>&bull; <b>Call Us:</b> +1 (555) 123-4567 (Available Monday – Friday, 9am – 6pm EST)<br>&bull; <b>Visit Us:</b> 123 E-commerce Street, Suite 100, San Francisco, CA 94105<br><br><b>Business Hours:</b><br>&bull; Monday - Friday: 9:00 AM - 6:00 PM EST<br>&bull; Saturday: 10:00 AM - 2:00 PM EST<br>&bull; Sunday: Closed",
+                'meta_title' => 'Contact Us - Tijraa Support',
+                'meta_description' => 'Reach out to our Tijraa support team for inquiries, demos, pricing, or technical assistance. We\'re here to help you succeed.',
                 'is_active' => true,
                 'sort_order' => 4
             ],
             [
                 'title' => 'FAQ',
                 'slug' => 'faq',
-                'content' => "Find quick answers to the most <b>common questions</b> about using our multi-store e-commerce platform.<br><br><b>Getting Started:</b><br><b>What is StoreGo?</b> StoreGo is a comprehensive multi-store e-commerce platform that helps businesses create unlimited online stores, manage products, process orders, handle customers, and generate detailed analytics.<br><b>How do I get started?</b> You can sign up for a free trial, set up your business profile, create your first store, configure products, and start selling right away.<br><br><b>Features & Operations:</b><br><b>Which subscription plans are available?</b> We offer Free, Starter, Professional, and Enterprise plans to fit businesses of all sizes, each with advanced features such as multi-store management, payment integrations, and analytics tools.<br><b>Can I integrate StoreGo with other tools?</b> Yes, StoreGo integrates with popular payment gateways, shipping providers, accounting software, and marketing tools.<br><br><b>Analytics & Support:</b><br><b>How does reporting work?</b> Our analytics dashboard provides real-time insights into sales performance, customer behavior, product analytics, and store performance across all your stores.<br><b>What support options are available?</b> We offer 24/7 email support, live chat, and phone assistance for premium users. You can also explore our Help Center for detailed guides and tutorials.",
-                'meta_title' => 'FAQ - StoreGo Help Center',
-                'meta_description' => 'Get answers to frequently asked questions about StoreGo, including features, pricing plans, integrations, and support options.',
+                'content' => "Find quick answers to the most <b>common questions</b> about using our multi-store e-commerce platform.<br><br><b>Getting Started:</b><br><b>What is Tijraa?</b> Tijraa is a comprehensive multi-store e-commerce platform that helps businesses create unlimited online stores, manage products, process orders, handle customers, and generate detailed analytics.<br><b>How do I get started?</b> You can sign up for a free trial, set up your business profile, create your first store, configure products, and start selling right away.<br><br><b>Features & Operations:</b><br><b>Which subscription plans are available?</b> We offer Free, Starter, Professional, and Enterprise plans to fit businesses of all sizes, each with advanced features such as multi-store management, payment integrations, and analytics tools.<br><b>Can I integrate Tijraa with other tools?</b> Yes, Tijraa integrates with popular payment gateways, shipping providers, accounting software, and marketing tools.<br><br><b>Analytics & Support:</b><br><b>How does reporting work?</b> Our analytics dashboard provides real-time insights into sales performance, customer behavior, product analytics, and store performance across all your stores.<br><b>What support options are available?</b> We offer 24/7 email support, live chat, and phone assistance for premium users. You can also explore our Help Center for detailed guides and tutorials.",
+                'meta_title' => 'FAQ - Tijraa Help Center',
+                'meta_description' => 'Get answers to frequently asked questions about Tijraa, including features, pricing plans, integrations, and support options.',
                 'is_active' => true,
                 'sort_order' => 5
             ],
             [
                 'title' => 'Refund Policy',
                 'slug' => 'refund-policy',
-                'content' => "We value your trust in <b>StoreGo</b> and are committed to delivering the best experience. Please review our refund policy below.<br><br><b>30-Day Money Back Guarantee:</b> We offer a 30-day money-back guarantee on all premium subscription plans. If StoreGo does not meet your expectations, you can request a full refund within 30 days of purchase.<br><br><b>Eligible Refunds:</b><br>&bull; Monthly and annual subscription plans<br>&bull; One-time premium features or add-ons<br>&bull; Unused portions of prepaid services<br><br><b>Refund Process:</b><br>1. Contact our support team within 30 days of purchase.<br>2. Provide your registered account details and reason for the refund.<br>3. Our team will review and process your request within 3–5 business days.<br>4. Refunds will be credited to your original payment method.<br><br><b>Non-Refundable Items:</b><br>&bull; Custom development, consulting, or integration services<br>&bull; Third-party services or marketplace add-ons<br>&bull; Domain registration or external licensing fees<br>&bull; Subscriptions after the 30-day guarantee period<br><br>If you have any questions about our refund policy, please reach out to <b>support@storego.com</b>. Our team is here to help.",
-                'meta_title' => 'Refund Policy - StoreGo',
-                'meta_description' => 'Read about the StoreGo refund policy, including our 30-day money-back guarantee and eligibility details.',
+                'content' => "We value your trust in <b>Tijraa</b> and are committed to delivering the best experience. Please review our refund policy below.<br><br><b>30-Day Money Back Guarantee:</b> We offer a 30-day money-back guarantee on all premium subscription plans. If Tijraa does not meet your expectations, you can request a full refund within 30 days of purchase.<br><br><b>Eligible Refunds:</b><br>&bull; Monthly and annual subscription plans<br>&bull; One-time premium features or add-ons<br>&bull; Unused portions of prepaid services<br><br><b>Refund Process:</b><br>1. Contact our support team within 30 days of purchase.<br>2. Provide your registered account details and reason for the refund.<br>3. Our team will review and process your request within 3–5 business days.<br>4. Refunds will be credited to your original payment method.<br><br><b>Non-Refundable Items:</b><br>&bull; Custom development, consulting, or integration services<br>&bull; Third-party services or marketplace add-ons<br>&bull; Domain registration or external licensing fees<br>&bull; Subscriptions after the 30-day guarantee period<br><br>If you have any questions about our refund policy, please reach out to <b>support@tijraa.com</b>. Our team is here to help.",
+                'meta_title' => 'Refund Policy - Tijraa',
+                'meta_description' => 'Read about the Tijraa refund policy, including our 30-day money-back guarantee and eligibility details.',
                 'is_active' => true,
                 'sort_order' => 6
             ]

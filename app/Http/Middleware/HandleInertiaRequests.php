@@ -167,8 +167,8 @@ class HandleInertiaRequests extends Middleware
             : array_merge(defaultSettings(), getSuperadminSettings());
 
         $dynamicTitleText = $skipDb
-            ? config('app.name', 'StoreGo')
-            : getSetting('titleText', config('app.name', 'StoreGo'));
+            ? config('app.name', 'Tijraa')
+            : getSetting('titleText', config('app.name', 'Tijraa'));
 
         $referralEnabled = $skipDb ? false : ReferralSetting::isEnabled();
 

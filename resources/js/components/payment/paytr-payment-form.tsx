@@ -46,7 +46,7 @@ export function PayTRPaymentForm({
     const handleMessage = (event: MessageEvent) => {
       if (event.origin !== 'https://www.paytr.com') return;
       
-      if (event.data === 'uccess') {
+      if (event.data === 'success') {
         setShowIframe(false);
         onSuccess();
       } else if (event.data === 'fail') {

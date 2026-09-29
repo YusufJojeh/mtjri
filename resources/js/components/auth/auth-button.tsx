@@ -1,4 +1,5 @@
 import { LoaderCircle } from 'lucide-react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { ButtonHTMLAttributes } from 'react';
 import { useBrand } from '@/contexts/BrandContext';
 import { THEME_COLORS } from '@/hooks/use-appearance';
@@ -18,7 +19,7 @@ export default function AuthButton({
     ...props 
 }: AuthButtonProps) {
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     return (
         <button
             {...props}

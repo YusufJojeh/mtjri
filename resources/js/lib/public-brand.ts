@@ -1,19 +1,19 @@
 import { sanitizeLandingHex } from '@/pages/landing-page/lib/landing-brand';
 
 /**
- * MTJRii logo palette (`public/images/logos/logo-dark.png`):
- * digital blue (bag + "MTJR") + golden yellow ("ii").
+ * Tijraa palette (`public/images/logos/tijraa-mark.svg`):
+ * deep commerce emerald + a restrained trade gold accent.
  */
-export const PUBLIC_BRAND_PRIMARY = '#1E90FF';
+export const PUBLIC_BRAND_PRIMARY = '#0B6B5A';
 
-/** Deeper blue for hover / secondary emphasis */
-export const PUBLIC_BRAND_SECONDARY = '#1578D8';
+/** Deeper emerald for hover / secondary emphasis */
+export const PUBLIC_BRAND_SECONDARY = '#09594B';
 
-/** Logo gold — badges, sparks, sparing highlights */
-export const PUBLIC_BRAND_ACCENT = '#FFC107';
+/** Trade gold — badges and sparing highlights only */
+export const PUBLIC_BRAND_ACCENT = '#D9AE4E';
 
-/** Ambient glows (same family as primary, slightly softer) */
-export const PUBLIC_BRAND_AMBIENT = '#38BDF8';
+/** Ambient glows (same family as primary, softer) */
+export const PUBLIC_BRAND_AMBIENT = '#5EB8A5';
 
 /** Full logo for light backgrounds (dark-colored artwork) */
 export const PUBLIC_BRAND_LOGO_LIGHT_BG = '/images/logos/logo-dark.png';

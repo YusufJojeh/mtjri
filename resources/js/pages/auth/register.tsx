@@ -1,4 +1,5 @@
 import { useForm } from '@inertiajs/react';
+import { accessibleBrand } from '@/lib/commerce/color';
 import { Mail, Lock, User } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
 
@@ -29,7 +30,7 @@ export default function Register({ referralCode, planId }: { referralCode?: stri
     const { t } = useTranslation();
     const [recaptchaToken, setRecaptchaToken] = useState<string>('');
     const { themeColor, customColor } = useBrand();
-    const primaryColor = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS];
+    const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
     const { data, setData, post, processing, errors, reset } = useForm<RegisterForm>({
         name: '',
         email: '',

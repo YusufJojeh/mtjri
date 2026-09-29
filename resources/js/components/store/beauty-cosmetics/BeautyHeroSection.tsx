@@ -28,7 +28,7 @@ interface BeautyHeroSectionProps {
 
 export default function BeautyHeroSection({ content }: BeautyHeroSectionProps) {
   const { props } = usePage();
-  const appName = (props as any).appName || 'matjri'; // Get appName
+  const appName = (props as any).appName || 'Tijraa'; // Get appName
   const storeSlug = (props.store as any)?.slug || 'beauty-store';
   const [isVisible, setIsVisible] = useState(false);
   

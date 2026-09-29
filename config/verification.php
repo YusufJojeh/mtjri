@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'system' => 'StoreGo SaaS',
+    'system' => 'Tijraa',
     'system_version' => '8.1',
 ];

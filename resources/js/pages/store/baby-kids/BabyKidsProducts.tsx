@@ -515,7 +515,7 @@ export default function BabyKidsProducts({
                 {products.length > 0 ? (
                   <div className={viewMode === 'grid' 
                     ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' 
-                    : 'pace-y-6'
+                    : 'space-y-6'
                   }>
                     {products.map((product) => (
                       viewMode === 'list' ? (

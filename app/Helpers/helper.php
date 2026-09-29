@@ -962,9 +962,9 @@ if (! function_exists('defaultSettings')) {
             'logoDark' => '/images/logos/logo-dark.png',
             'logoLight' => '/images/logos/logo-light.png',
             'favicon' => '/images/logos/favicon.ico',
-            'titleText' => 'StoreGo',
-            'footerText' => '© 2025 StoreGo SaaS. Powered by WorkDo.',
-            'themeColor' => 'green',
+            'titleText' => 'Tijraa',
+            'footerText' => '© 2026 Tijraa. All rights reserved.',
+            'themeColor' => 'tijraa',
             'customColor' => '#10b981',
             'sidebarVariant' => 'inset',
             'sidebarStyle' => 'plain',
@@ -998,8 +998,8 @@ if (! function_exists('defaultSettings')) {
             'currencySymbolPosition' => 'before',
 
             // SEO Settings
-            'metaKeywords' => 'ecommerce, online store, shopping, multi-store, saas platform, storego',
-            'metaDescription' => 'StoreGo - A powerful SaaS platform for creating and managing multiple online stores with professional themes and complete e-commerce features.',
+            'metaKeywords' => 'ecommerce, online store, shopping, multi-store, saas platform, tijraa',
+            'metaDescription' => 'Tijraa - A powerful SaaS platform for creating and managing multiple online stores with professional themes and complete e-commerce features.',
             'metaImage' => '/images/logos/logo-dark.png',
         ];
     }

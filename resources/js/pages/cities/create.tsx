@@ -31,7 +31,7 @@ export default function CreateCity() {
             options: countries?.map((country: any) => ({ value: country.id, label: country.name })) || []
           },
           { 
-            name: 'tate_id', 
+            name: 'state_id', 
             label: t('State'), 
             type: 'select', 
             required: true,
