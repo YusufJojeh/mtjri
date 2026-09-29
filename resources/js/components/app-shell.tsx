@@ -18,7 +18,9 @@ export function AppShell({ children, variant = 'header' }: AppShellProps) {
         }
         const stored =
             localStorage.getItem(APP_SHELL_SIDEBAR_OPEN_KEY) ?? localStorage.getItem(LEGACY_APP_SHELL_SIDEBAR_OPEN_KEY);
-        return stored !== 'false';
+        if (stored !== null) return stored !== 'false';
+        // No saved preference: tablets (< 1280px) start with the compact icon rail.
+        return window.innerWidth >= 1280;
     });
 
     // All hooks must be called before any conditional returns

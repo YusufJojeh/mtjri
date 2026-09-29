@@ -33,12 +33,14 @@ interface DataTableProps<T> {
         selected: Set<string | number>;
         onChange: (next: Set<string | number>) => void;
     };
+    /** Width at which the table replaces the cards. Use 'lg' for wide tables. */
+    breakpoint?: 'md' | 'lg';
 }
 
 const alignCls = { start: 'text-start', end: 'text-end', center: 'text-center' };
 const hideCls = { lg: 'hidden lg:table-cell', xl: 'hidden xl:table-cell' };
 
-export function DataTable<T>({ rows, columns, rowKey, mobileCard, rowHref, empty, loading, caption, selectable }: DataTableProps<T>) {
+export function DataTable<T>({ rows, columns, rowKey, mobileCard, rowHref, empty, loading, caption, selectable, breakpoint = 'md' }: DataTableProps<T>) {
     const { t } = useTranslation();
 
     if (loading) {
@@ -83,7 +85,7 @@ export function DataTable<T>({ rows, columns, rowKey, mobileCard, rowHref, empty
     return (
         <>
             {/* Desktop / tablet */}
-            <div className="hidden md:block">
+            <div className={cn('hidden overflow-x-auto', breakpoint === 'lg' ? 'lg:block' : 'md:block')}>
                 <table className="w-full border-collapse text-sm">
                     {caption && <caption className="sr-only">{caption}</caption>}
                     <thead>
@@ -161,7 +163,7 @@ export function DataTable<T>({ rows, columns, rowKey, mobileCard, rowHref, empty
             </div>
 
             {/* Phone */}
-            <ul className="divide-y md:hidden" role="list">
+            <ul className={cn('divide-y', breakpoint === 'lg' ? 'lg:hidden' : 'md:hidden')} role="list">
                 {rows.map((row) => {
                     const k = rowKey(row);
                     const href = rowHref?.(row);

@@ -85,16 +85,20 @@ export default function Orders({ orders = [], pagination, counts, filters, stats
             key: 'number',
             header: t('Order'),
             cell: (o) => (
-                <span dir="ltr" className="font-medium whitespace-nowrap tabular-nums">
-                    {o.orderNumber}
-                </span>
+                <div>
+                    <span dir="ltr" className="font-medium whitespace-nowrap tabular-nums">
+                        {o.orderNumber}
+                    </span>
+                    {/* Date column is hidden below xl; keep the date visible under the number. */}
+                    <div className="text-muted-foreground text-xs whitespace-nowrap xl:hidden">{fmt.relative(o.createdAt)}</div>
+                </div>
             ),
         },
-        { key: 'date', header: t('Date'), cell: (o) => dateCell(o.createdAt) },
+        { key: 'date', header: t('Date'), className: 'whitespace-nowrap', hideBelow: 'xl', cell: (o) => dateCell(o.createdAt) },
         {
             key: 'customer',
             header: t('Customer'),
-            className: 'max-w-[220px]',
+            className: 'max-w-[200px]',
             cell: (o) => (
                 <div className="min-w-0">
                     <div className="truncate font-medium">{o.customer || t('Guest')}</div>
@@ -107,12 +111,31 @@ export default function Orders({ orders = [], pagination, counts, filters, stats
             ),
         },
         { key: 'payment', header: t('Payment'), cell: (o) => <StatusBadge meta={paymentStatusMeta(o.paymentStatus)} /> },
-        { key: 'status', header: t('Fulfillment'), cell: (o) => <StatusBadge meta={orderStatusMeta(o.status)} /> },
+        {
+            key: 'status',
+            header: t('Fulfillment'),
+            cell: (o) => {
+                const issue = orderIssue(o, t, now);
+                // A failed payment is already shown in the Payment column; only surface other issues here.
+                const extra = issue && o.paymentStatus?.toLowerCase() !== 'failed' ? issue : null;
+                return (
+                    <div className="flex flex-col items-start gap-1">
+                        <StatusBadge meta={orderStatusMeta(o.status)} />
+                        {extra && (
+                            <span className={extra.tone === 'danger' ? 'text-danger-fg inline-flex items-center gap-1 text-xs font-medium whitespace-nowrap' : 'text-warning-fg inline-flex items-center gap-1 text-xs font-medium whitespace-nowrap'}>
+                                <AlertTriangle className="size-3" aria-hidden />
+                                {extra.label}
+                            </span>
+                        )}
+                    </div>
+                );
+            },
+        },
         {
             key: 'items',
             header: t('Items'),
             align: 'end',
-            hideBelow: 'lg',
+            hideBelow: 'xl',
             cell: (o) => <span className="tabular-nums">{fmt.number(o.items)}</span>,
         },
         {
@@ -120,14 +143,6 @@ export default function Orders({ orders = [], pagination, counts, filters, stats
             header: t('Method'),
             hideBelow: 'xl',
             cell: (o) => <span className="text-muted-foreground whitespace-nowrap">{paymentMethodLabel(o.paymentMethod, t) || '—'}</span>,
-        },
-        {
-            key: 'issue',
-            header: <span className="sr-only">{t('Attention')}</span>,
-            cell: (o) => {
-                const issue = orderIssue(o, t, now);
-                return issue ? <ToneBadge tone={issue.tone} icon={<AlertTriangle aria-hidden />}>{issue.label}</ToneBadge> : null;
-            },
         },
         {
             key: 'total',
@@ -138,7 +153,9 @@ export default function Orders({ orders = [], pagination, counts, filters, stats
     ];
 
     const mobileCard = (o: OrderRow) => {
-        const issue = orderIssue(o, t, now);
+        const found = orderIssue(o, t, now);
+        // Payment column/badge already conveys a failed payment.
+        const issue = found && o.paymentStatus?.toLowerCase() !== 'failed' ? found : null;
         return (
             <div className="space-y-1.5">
                 <div className="flex items-baseline justify-between gap-3">
@@ -274,6 +291,7 @@ export default function Orders({ orders = [], pagination, counts, filters, stats
                         </div>
                     </Toolbar>
                     <DataTable
+                        breakpoint="lg"
                         rows={orders}
                         columns={columns}
                         rowKey={(o) => o.id}
