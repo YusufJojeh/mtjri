@@ -95,7 +95,7 @@ export default function Inventory() {
         <div className="flex min-w-0 items-center gap-3">
             <ProductThumb src={i.image} alt="" size={compact ? 'lg' : 'md'} />
             <div className="min-w-0">
-                <p className={cn('truncate font-medium', !compact && 'max-w-[30ch]')}>{i.name}</p>
+                <p dir="auto" className={cn('truncate text-start font-medium', !compact && 'max-w-[30ch]')}>{i.name}</p>
                 <p className="text-muted-foreground truncate text-xs">
                     {i.sku ? <bdi dir="ltr">{i.sku}</bdi> : t('No SKU')}
                     {i.category && <> · {i.category}</>}

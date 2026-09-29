@@ -331,7 +331,7 @@ export function MerchantDashboard({ data, store, userName }: Props) {
                                                 <span className="bg-muted size-9 shrink-0 rounded-md border" aria-hidden />
                                             )}
                                             <span className="min-w-0 flex-1">
-                                                <span className="block truncate text-sm font-medium">{p.name}</span>
+                                                <span dir="auto" className="block truncate text-start text-sm font-medium">{p.name}</span>
                                                 <span className="bg-muted mt-1 block h-1 overflow-hidden rounded-full" aria-hidden>
                                                     <span className="bg-primary block h-full rounded-full" style={{ width: `${Math.max(4, (p.revenue / max) * 100)}%` }} />
                                                 </span>
