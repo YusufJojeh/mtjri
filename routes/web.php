@@ -379,6 +379,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('dashboard/redirect', [DashboardController::class, 'redirectToFirstAvailablePage'])->name('dashboard.redirect');
         Route::get('dashboard/export', [DashboardController::class, 'export'])->middleware('permission:export-dashboard')->name('dashboard.export');
+
+        // Merchant command palette search (read-only, store-scoped, permission-filtered)
+        Route::get('search', \App\Http\Controllers\MerchantSearchController::class)->middleware('throttle:60,1')->name('merchant.search');
         
         // Store Content Management routes with permissions (MUST come before stores/{id})
         Route::middleware('permission:manage-store-content')->group(function () {
@@ -415,6 +418,7 @@ Route::middleware(['auth'])->group(function () {
             Route::put('products/{id}', [\App\Http\Controllers\ProductController::class, 'update'])->middleware('permission:edit-products')->name('products.update');
             Route::delete('products/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->middleware('permission:delete-products')->name('products.destroy');
             Route::get('products/{id}', [\App\Http\Controllers\ProductController::class, 'show'])->middleware('permission:view-products')->name('products.show');
+            Route::get('inventory', [\App\Http\Controllers\InventoryController::class, 'index'])->middleware('permission:view-products')->name('inventory.index');
 
         });
         

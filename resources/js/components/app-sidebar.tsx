@@ -14,6 +14,11 @@ import AppLogo from './app-logo';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { hasPermission } from '@/utils/authorization';
+import { useMerchantShell } from '@/components/shell/use-merchant-shell';
+import { MerchantSidebarNav } from '@/components/shell/merchant-sidebar-nav';
+import { SidebarStoreSwitcher } from '@/components/shell/store-switcher';
+import { openCommandPalette } from '@/components/shell/command-palette';
+import { Search as SearchIcon } from 'lucide-react';
 
 
 
@@ -478,6 +483,32 @@ export function AppSidebar() {
         }
         return route('dashboard');
     };
+
+    const shell = useMerchantShell();
+
+    if (!shell.isSuperAdmin) {
+        return (
+            <Sidebar side={position} collapsible={collapsible} variant={variant} className="border-sidebar-border">
+                <SidebarHeader className="gap-2 px-2 pt-3 pb-1">
+                    <SidebarStoreSwitcher stores={shell.stores} current={shell.currentStore} />
+                    <button
+                        type="button"
+                        onClick={openCommandPalette}
+                        className="bg-background text-muted-foreground hover:text-foreground flex h-8 w-full items-center gap-2 rounded-lg border px-2.5 text-sm shadow-card transition-colors group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
+                        aria-label={t('Search')}
+                        aria-keyshortcuts="Control+K Meta+K"
+                    >
+                        <SearchIcon className="size-4 shrink-0" aria-hidden />
+                        <span className="flex-1 text-start group-data-[collapsible=icon]:hidden">{t('Search')}</span>
+                        <kbd dir="ltr" className="rounded border px-1 text-[10px] font-medium group-data-[collapsible=icon]:hidden">⌘K</kbd>
+                    </button>
+                </SidebarHeader>
+                <SidebarContent className="px-1">
+                    <MerchantSidebarNav groups={shell.groups} />
+                </SidebarContent>
+            </Sidebar>
+        );
+    }
 
     return (
         <Sidebar

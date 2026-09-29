@@ -3,79 +3,58 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import languageData from '@/../../resources/lang/language.json';
 
-// Import all translation files directly (local files, no HTTP requests)
+// English (source language) and Arabic (default UI language) ship in the main
+// bundle. Every other locale is code-split and fetched on first use, which
+// keeps ~3 MB of JSON out of the initial download.
 import enTranslations from '@/../../resources/lang/en.json';
 import arTranslations from '@/../../resources/lang/ar.json';
-import esTranslations from '@/../../resources/lang/es.json';
-import daTranslations from '@/../../resources/lang/da.json';
-import deTranslations from '@/../../resources/lang/de.json';
-import frTranslations from '@/../../resources/lang/fr.json';
-import itTranslations from '@/../../resources/lang/it.json';
-import jaTranslations from '@/../../resources/lang/ja.json';
-import nlTranslations from '@/../../resources/lang/nl.json';
-import plTranslations from '@/../../resources/lang/pl.json';
-import ptTranslations from '@/../../resources/lang/pt.json';
-import ptBRTranslations from '@/../../resources/lang/pt-BR.json';
-import ruTranslations from '@/../../resources/lang/ru.json';
-import trTranslations from '@/../../resources/lang/tr.json';
-import zhTranslations from '@/../../resources/lang/zh.json';
-import heTranslations from '@/../../resources/lang/he.json';
-import faTranslations from '@/../../resources/lang/fa.json';
-import etTranslations from '@/../../resources/lang/et.json';
-import idTranslations from '@/../../resources/lang/id.json';
-import roTranslations from '@/../../resources/lang/ro.json';
-import thTranslations from '@/../../resources/lang/th.json';
-import zhCNTranslations from '@/../../resources/lang/zh-CN.json';
-import zhTWTranslations from '@/../../resources/lang/zh-TW.json';
 
 // Make i18n instance available for direct imports
 export { default as i18next } from 'i18next';
 
-/**
- * i18next Local Translation Configuration
- * 
- * This configuration uses ONLY local JSON translation files.
- * All translations are loaded directly from resources/lang/{locale}.json files.
- * NO HTTP requests, NO Laravel backend dependency.
- * 
- * Translations are bundled with the frontend build.
- * All React components use useTranslation() and t() from react-i18next.
- */
+const lazyLocales = typeof import.meta !== 'undefined' && import.meta.glob
+    ? import.meta.glob(['../lang/*.json', '!../lang/en.json', '!../lang/ar.json', '!../lang/language.json'])
+    : {};
 
-// Prepare resources object with all translations
 const resources = {
     en: { translation: enTranslations },
     ar: { translation: arTranslations },
-    es: { translation: esTranslations },
-    da: { translation: daTranslations },
-    de: { translation: deTranslations },
-    fr: { translation: frTranslations },
-    it: { translation: itTranslations },
-    ja: { translation: jaTranslations },
-    nl: { translation: nlTranslations },
-    pl: { translation: plTranslations },
-    pt: { translation: ptTranslations },
-    'pt-BR': { translation: ptBRTranslations },
-    ru: { translation: ruTranslations },
-    tr: { translation: trTranslations },
-    zh: { translation: zhTranslations },
-    he: { translation: heTranslations },
-    fa: { translation: faTranslations },
-    et: { translation: etTranslations },
-    id: { translation: idTranslations },
-    ro: { translation: roTranslations },
-    th: { translation: thTranslations },
-    'zh-CN': { translation: zhCNTranslations },
-    'zh-TW': { translation: zhTWTranslations },
 };
+
+/** Load a locale bundle on demand (no-op for bundled or unknown locales). */
+export async function ensureLocale(code) {
+    if (!code || i18n.hasResourceBundle(code, 'translation')) return;
+    const loader = lazyLocales[`../lang/${code}.json`];
+    if (!loader) return;
+    try {
+        const mod = await loader();
+        i18n.addResourceBundle(code, 'translation', mod.default ?? mod, true, true);
+    } catch (e) {
+        // Fall back to English strings silently; UI stays usable.
+    }
+}
+
+// Capture the merchant's saved choice before init: the detector caches
+// whatever it resolves, which would otherwise mask "nothing saved yet".
+const initialStoredLang = (() => {
+    try {
+        return typeof window !== 'undefined' ? window.localStorage.getItem('i18nextLng') : null;
+    } catch (e) {
+        return null;
+    }
+})();
 
 // Initialize i18n
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        fallbackLng: 'ar',
-        lng: 'ar', // Arabic is the default language
+        // Keys are English source strings, so English is the correct fallback.
+        // (The default *UI* language is still Arabic – see initial language
+        // resolution below.) Do not pass `lng` here: with the localStorage
+        // detector that would overwrite the merchant's saved choice.
+        fallbackLng: 'en',
+        partialBundledLanguages: true,
         debug: typeof process !== 'undefined' && process.env?.NODE_ENV === 'development',
 
         // All supported languages (derived from resources/lang/language.json)
@@ -147,7 +126,7 @@ const validLanguages = languageData.map(lang => lang.code);
 if (typeof window !== 'undefined' && !window.i18nInitialized) {
     window.i18nInitialized = true; // Mark as initialized to prevent re-running
     
-    const storedLang = localStorage.getItem('i18nextLng');
+    const storedLang = initialStoredLang;
     
     // Try to get locale from server (Inertia page props) as fallback
     let serverLocale = null;
@@ -169,8 +148,8 @@ if (typeof window !== 'undefined' && !window.i18nInitialized) {
         localStorage.setItem('i18nextLng', serverLocale);
     }
     
-    // Set the language (translations are already loaded from local files)
-    i18n.changeLanguage(targetLang);
+    // Load the bundle if it is code-split, then switch.
+    ensureLocale(targetLang).finally(() => i18n.changeLanguage(targetLang));
     
     // Update direction immediately based on initial language
     updateDirection(targetLang);
@@ -179,7 +158,13 @@ if (typeof window !== 'undefined' && !window.i18nInitialized) {
 // Listen for language changes
 i18n.on('languageChanged', (lng) => {
     updateDirection(lng);
-    // Translations are already loaded from local files, no need to reload
+    // Switchers call changeLanguage() directly; fetch a code-split bundle
+    // if needed and re-emit so components re-render with real strings.
+    if (!i18n.hasResourceBundle(lng, 'translation')) {
+        ensureLocale(lng).then(() => {
+            if (i18n.hasResourceBundle(lng, 'translation') && i18n.language === lng) i18n.changeLanguage(lng);
+        });
+    }
 });
 
 // Export the initialized instance

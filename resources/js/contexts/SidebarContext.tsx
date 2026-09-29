@@ -24,7 +24,7 @@ interface ExtendedSidebarSettings extends SidebarSettings {
 const DEFAULT_EXTENDED_SETTINGS: ExtendedSidebarSettings = {
   variant: 'inset',
   collapsible: 'icon',
-  style: 'colored'
+  style: 'plain'
 };
 
 // Get extended sidebar settings from localStorage

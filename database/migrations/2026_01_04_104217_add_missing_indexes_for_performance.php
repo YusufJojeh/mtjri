@@ -13,8 +13,13 @@ return new class extends Migration
     private function hasIndex(string $table, string $column): bool
     {
         try {
-            $indexes = DB::select("SHOW INDEXES FROM `{$table}` WHERE Column_name = ?", [$column]);
-            return !empty($indexes);
+            // Driver-agnostic (MySQL, SQLite, Postgres) index lookup.
+            foreach (Schema::getIndexes($table) as $index) {
+                if (in_array($column, $index['columns'] ?? [], true)) {
+                    return true;
+                }
+            }
+            return false;
         } catch (\Exception $e) {
             return false;
         }

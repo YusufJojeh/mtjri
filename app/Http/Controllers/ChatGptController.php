@@ -26,6 +26,7 @@ class ChatGptController extends Controller
             if (!$apiKey) {
                 return response()->json([
                     'success' => false,
+                    'code' => 'not_configured',
                     'message' => __('Please set proper configuration for Api Key')
                 ]);
             }
@@ -97,14 +98,27 @@ class ChatGptController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
+                    'code' => 'empty_response',
                     'message' => __('Text was not generated, please try again')
                 ]);
             }
 
         } catch (\Exception $e) {
+            // Never leak provider/internal exception text to merchants.
+            \Illuminate\Support\Facades\Log::warning('AI generation failed', ['error' => $e->getMessage()]);
+
+            $raw = strtolower($e->getMessage());
+            $code = match (true) {
+                str_contains($raw, 'rate limit') || str_contains($raw, 'too many requests') => 'rate_limited',
+                str_contains($raw, 'quota') || str_contains($raw, 'billing') || str_contains($raw, 'insufficient') => 'budget_exhausted',
+                str_contains($raw, 'api key') || str_contains($raw, 'unauthorized') || str_contains($raw, 'authentication') => 'not_configured',
+                default => 'provider_error',
+            };
+
             return response()->json([
                 'success' => false,
-                'message' => 'Error: ' . $e->getMessage()
+                'code' => $code,
+                'message' => __('The AI service could not complete this request. Please try again shortly.')
             ]);
         }
     }
