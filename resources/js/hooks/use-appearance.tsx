@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { brandPalette } from '@/lib/commerce/color';
 
 export type Appearance = 'light' | 'dark' | 'system';
 export type ThemeColor = 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'custom';
@@ -62,8 +63,13 @@ const applyTheme = (settings: ThemeSettings) => {
     const color = themeColor === 'custom' ? customColor : THEME_COLORS[themeColor];
     document.documentElement.style.setProperty('--theme-color', color);
     
-    // Also update CSS variables that depend on theme color
-    document.documentElement.style.setProperty('--primary', color);
+    // Buttons and other text-bearing brand surfaces use an accessible shade of
+    // the brand colour (WCAG AA 4.5:1 with its text); the raw colour is kept
+    // for decoration such as charts.
+    const brand = brandPalette(color, isDark);
+    document.documentElement.style.setProperty('--theme-color-accessible', brand.surface);
+    document.documentElement.style.setProperty('--primary', brand.surface);
+    document.documentElement.style.setProperty('--primary-foreground', brand.onSurface);
     document.documentElement.style.setProperty('--chart-1', color);
     
     // Generate a lighter/darker variant for hover states

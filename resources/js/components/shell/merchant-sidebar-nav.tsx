@@ -28,7 +28,7 @@ export function MerchantSidebarNav({ groups }: { groups: MerchantNavGroup[] }) {
             {groups.map((group) => (
                 <SidebarGroup key={group.id} className="py-1">
                     {group.label && (
-                        <SidebarGroupLabel className="text-sidebar-foreground/55 h-7 px-2 text-[11px] font-semibold tracking-wide uppercase">
+                        <SidebarGroupLabel className="text-muted-foreground h-7 px-2 text-[11px] font-semibold tracking-wide uppercase">
                             {group.label}
                         </SidebarGroupLabel>
                     )}

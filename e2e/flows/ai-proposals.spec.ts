@@ -84,9 +84,11 @@ test.describe('AI proposals never overwrite merchant content', () => {
         const { assertNoErrors } = await prepare(page);
         await mockAi(page, { success: true, content: 'Title: Spring Home Refresh Guide\nDescription: Simple ideas to refresh every room this spring.' });
         await page.goto('/blog');
+        // Inertia embeds the initial page props in #app[data-page].
         const id = await page.evaluate(() => {
-            const blogs = (window as unknown as { page: { props: { blogs: { data?: Array<{ id: number }> } | Array<{ id: number }> } } }).page.props.blogs;
-            return (Array.isArray(blogs) ? blogs : blogs.data ?? [])[0]?.id;
+            const data = JSON.parse(document.getElementById('app')?.dataset.page ?? '{}');
+            const blogs = data?.props?.blogs;
+            return (Array.isArray(blogs) ? blogs : blogs?.data ?? [])[0]?.id;
         });
         test.skip(!id, 'No blog posts in this store');
         await page.goto(`/blog/${id}/edit`);

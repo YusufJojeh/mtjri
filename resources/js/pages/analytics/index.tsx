@@ -125,7 +125,7 @@ export default function Analytics({ analytics, range, hasStore }: Props) {
                 hasStore ? (
                     <>
                         {periodLabel}
-                        <span className="text-muted-foreground/80"> · {t('compared with {{period}}', { period: prevLabel })}</span>
+                        <span className="text-muted-foreground"> · {t('compared with {{period}}', { period: prevLabel })}</span>
                     </>
                 ) : undefined
             }
@@ -176,11 +176,11 @@ export default function Analytics({ analytics, range, hasStore }: Props) {
             <RangeControl key={`${range.key}-${range.from}-${range.to}`} range={range} onChange={go} busy={busy} />
 
             <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                <MetricCard label={t('Sales')} value={f.money(cur.revenue)} change={change(cur.revenue, prev?.revenue)} changeLabel={changeLabel} hint={t('No earlier data')} />
+                <MetricCard label={t('Sales')} value={f.money(cur.revenue, { whole: true })} change={change(cur.revenue, prev?.revenue)} changeLabel={changeLabel} hint={t('No earlier data')} />
                 <MetricCard label={t('Orders')} value={f.number(cur.orders)} change={change(cur.orders, prev?.orders)} changeLabel={changeLabel} hint={t('No earlier data')} />
                 <MetricCard
                     label={t('Average order value')}
-                    value={cur.aov !== null ? f.money(cur.aov) : '—'}
+                    value={cur.aov !== null ? f.money(cur.aov, { whole: true }) : '—'}
                     change={change(cur.aov, prev?.aov)}
                     changeLabel={changeLabel}
                     hint={t('No earlier data')}

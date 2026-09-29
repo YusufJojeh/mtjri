@@ -250,7 +250,7 @@ export default function Inventory() {
             <div className="space-y-5">
                 <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                     <MetricCard label={t('Units on hand')} value={fmt.number(summary.units)} icon={<Package />} hint={t('Across {{n}} products', { n: fmt.number(counts.all) })} />
-                    <MetricCard label={t('Stock value')} value={fmt.money(summary.value)} icon={<Wallet />} hint={t('At retail price')} />
+                    <MetricCard label={t('Stock value')} value={fmt.money(summary.value, { whole: true })} icon={<Wallet />} hint={t('At retail price')} />
                     <MetricCard label={t('On open orders')} value={fmt.number(summary.onOpenOrders)} icon={<ShoppingCart />} hint={t('Pending and processing')} />
                     <MetricCard
                         label={t('At risk')}

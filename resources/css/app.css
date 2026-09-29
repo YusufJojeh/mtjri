@@ -128,7 +128,7 @@
     --secondary: oklch(0.965 0.003 247);
     --secondary-foreground: oklch(0.25 0.012 256);
     --muted: oklch(0.965 0.003 247);
-    --muted-foreground: oklch(0.52 0.014 257);
+    --muted-foreground: oklch(0.49 0.014 257);
     --accent: oklch(0.955 0.004 247);
     --accent-foreground: oklch(0.21 0.012 256);
     --destructive: oklch(0.577 0.215 27);
@@ -325,27 +325,28 @@
   --tw-ring-color: var(--theme-color);
 }
 
-/* Override primary colors with theme color */
+/* Brand colour: --theme-color is the merchant's raw colour (decoration);
+   --theme-color-accessible is set at runtime to a shade that keeps text on
+   it at WCAG AA contrast. The fallback is the default brand's AA shade. */
 :root {
-  --primary: var(--theme-color);
+  --primary: var(--theme-color-accessible, #047857);
+  --primary-foreground: #ffffff;
   --chart-1: var(--theme-color);
 }
 
 .dark {
-  --primary: var(--theme-color);
+  --primary: var(--theme-color-accessible, #34d399);
+  --primary-foreground: #0b0f14;
   --chart-1: var(--theme-color);
 }
 
 /* Apply theme color to buttons and interactive elements */
 .btn-primary,
-.bg-primary,
 .active-nav-item {
-  background-color: var(--theme-color);
+  background-color: var(--primary);
 }
 
-.text-primary {
-  color: var(--theme-color);
-}
+
 
 .border-primary {
   border-color: var(--theme-color);
@@ -582,42 +583,4 @@
   border-color: #374151;
 }
 
-/* Force sidebar white background and black text */
-[data-sidebar] {
-  background-color: white !important;
-  color: black !important;
-}
-
-[data-sidebar] * {
-  color: black !important;
-}
-
-[data-sidebar] [data-active="true"] {
-  background-color: #f3f4f6 !important;
-  color: black !important;
-}
-
-[data-sidebar] button:hover {
-  background-color: #f9fafb !important;
-  color: black !important;
-}
-
-/* Dark mode sidebar overrides */
-.dark [data-sidebar] {
-  background-color: white !important;
-  color: black !important;
-}
-
-.dark [data-sidebar] * {
-  color: black !important;
-}
-
-.dark [data-sidebar] [data-active="true"] {
-  background-color: #f3f4f6 !important;
-  color: black !important;
-}
-
-.dark [data-sidebar] button:hover {
-  background-color: #f9fafb !important;
-  color: black !important;
-}
+/* Sidebar colours come from the --sidebar* tokens (light and dark). */
