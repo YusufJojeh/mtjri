@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\OrderItem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -13,48 +14,300 @@ use Carbon\Carbon;
 
 class AnalyticsController extends BaseController
 {
-    public function index()
+    /** Orders in these statuses never count towards sales. */
+    private const EXCLUDED_STATUSES = ['cancelled', 'refunded'];
+
+    public function index(Request $request)
     {
+        $validated = $request->validate([
+            'range' => 'nullable|in:7d,30d,90d,mtd,custom',
+            'from' => 'nullable|required_if:range,custom|date_format:Y-m-d',
+            'to' => 'nullable|required_if:range,custom|date_format:Y-m-d|after_or_equal:from',
+        ]);
+
         $user = Auth::user();
         $storeId = getCurrentStoreId($user);
+        $range = $this->resolveRange($validated);
 
         if (!$storeId) {
             return Inertia::render('analytics/index', [
-                'analytics' => $this->getEmptyAnalytics(),
-                'hasStore' => false
+                'analytics' => null,
+                'range' => $range['meta'],
+                'hasStore' => false,
             ]);
         }
 
-        $analytics = [
-            'metrics' => $this->getKeyMetrics($storeId),
-            'topProducts' => $this->getTopProducts($storeId),
-            'topCustomers' => $this->getTopCustomers($storeId),
-            'recentActivity' => $this->getRecentActivity($storeId),
-            'revenueChart' => $this->getRevenueChartData($storeId),
-            'salesChart' => $this->getSalesChartData($storeId)
-        ];
-        
-        // In demo mode, add dummy data for metrics and charts only when they are zero/null
-        if (config('app.is_demo', false)) {
-            if ($analytics['metrics']['revenue']['current'] == 0 && $analytics['metrics']['orders']['current'] == 0) {
-                $analytics['metrics'] = [
-                    'revenue' => ['current' => 45250.75, 'change' => 12.5],
-                    'orders' => ['current' => 156, 'change' => 23],
-                    'customers' => ['total' => 342, 'new' => 28]
-                ];
-            }
-            if (empty($analytics['revenueChart']) || count($analytics['revenueChart']) == 0) {
-                $analytics['revenueChart'] = $this->getDemoRevenueChart();
-            }
-            if (empty($analytics['salesChart']) || count($analytics['salesChart']) == 0) {
-                $analytics['salesChart'] = $this->getDemoSalesChart();
-            }
+        return Inertia::render('analytics/index', [
+            'analytics' => $this->buildReport($storeId, $range),
+            'range' => $range['meta'],
+            'hasStore' => true,
+        ]);
+    }
+
+    /**
+     * Resolve the requested period and the previous period of equal length.
+     */
+    private function resolveRange(array $input): array
+    {
+        $key = $input['range'] ?? '30d';
+        $today = Carbon::today();
+
+        switch ($key) {
+            case '7d':
+                $start = $today->copy()->subDays(6);
+                $end = $today->copy()->endOfDay();
+                break;
+            case '90d':
+                $start = $today->copy()->subDays(89);
+                $end = $today->copy()->endOfDay();
+                break;
+            case 'mtd':
+                $start = $today->copy()->startOfMonth();
+                $end = $today->copy()->endOfDay();
+                break;
+            case 'custom':
+                $start = Carbon::createFromFormat('Y-m-d', $input['from'])->startOfDay();
+                $end = Carbon::createFromFormat('Y-m-d', $input['to'])->endOfDay();
+                // Keep daily series bounded (one year).
+                if ($start->diffInDays($end) > 366) {
+                    $start = $end->copy()->subDays(365)->startOfDay();
+                }
+                break;
+            default:
+                $key = '30d';
+                $start = $today->copy()->subDays(29);
+                $end = $today->copy()->endOfDay();
         }
 
-        return Inertia::render('analytics/index', [
-            'analytics' => $analytics,
-            'hasStore' => true
-        ]);
+        $days = (int) $start->copy()->startOfDay()->diffInDays($end->copy()->startOfDay()) + 1;
+        $prevEnd = $start->copy()->subSecond();
+        $prevStart = $start->copy()->subDays($days)->startOfDay();
+
+        return [
+            'start' => $start,
+            'end' => $end,
+            'prevStart' => $prevStart,
+            'prevEnd' => $prevEnd,
+            'days' => $days,
+            'meta' => [
+                'key' => $key,
+                'from' => $start->toDateString(),
+                'to' => $end->toDateString(),
+                'previous_from' => $prevStart->toDateString(),
+                'previous_to' => $prevEnd->toDateString(),
+                'days' => $days,
+            ],
+        ];
+    }
+
+    private function salesQuery($storeId, Carbon $from, Carbon $to)
+    {
+        return Order::where('store_id', $storeId)
+            ->whereBetween('created_at', [$from, $to])
+            ->whereNotIn('status', self::EXCLUDED_STATUSES);
+    }
+
+    private function periodTotals($storeId, Carbon $from, Carbon $to): array
+    {
+        $row = $this->salesQuery($storeId, $from, $to)
+            ->selectRaw('COUNT(*) as orders, COALESCE(SUM(total_amount), 0) as revenue, COALESCE(SUM(coupon_discount), 0) as discount')
+            ->selectRaw('COUNT(DISTINCT LOWER(customer_email)) as customers')
+            ->first();
+
+        $orders = (int) ($row->orders ?? 0);
+        $revenue = (float) ($row->revenue ?? 0);
+
+        return [
+            'revenue' => round($revenue, 2),
+            'orders' => $orders,
+            'aov' => $orders > 0 ? round($revenue / $orders, 2) : null,
+            'customers' => (int) ($row->customers ?? 0),
+            'discount' => round((float) ($row->discount ?? 0), 2),
+            'all_orders' => Order::where('store_id', $storeId)->whereBetween('created_at', [$from, $to])->count(),
+        ];
+    }
+
+    private function buildReport($storeId, array $range): array
+    {
+        $current = $this->periodTotals($storeId, $range['start'], $range['end']);
+        $previous = $this->periodTotals($storeId, $range['prevStart'], $range['prevEnd']);
+        $hasPreviousData = Order::where('store_id', $storeId)->where('created_at', '<', $range['start'])->exists();
+
+        return [
+            'totals' => $current,
+            'previous' => $hasPreviousData ? $previous : null,
+            'series' => $this->dailySeries($storeId, $range),
+            'topProducts' => [
+                'by_revenue' => $this->rangeTopProducts($storeId, $range, 'revenue'),
+                'by_units' => $this->rangeTopProducts($storeId, $range, 'units'),
+            ],
+            'customers' => $this->customerMix($storeId, $range),
+            'topCustomers' => $this->rangeTopCustomers($storeId, $range),
+            'statusBreakdown' => $this->statusBreakdown($storeId, $range),
+            'discounts' => $this->discountUsage($storeId, $range, $current),
+        ];
+    }
+
+    /**
+     * One row per day of the selected period, aligned with the same day-offset
+     * of the previous period so both can be drawn on one time axis.
+     */
+    private function dailySeries($storeId, array $range): array
+    {
+        $bucket = function (Carbon $from, Carbon $to) use ($storeId) {
+            return $this->salesQuery($storeId, $from, $to)
+                ->selectRaw('DATE(created_at) as day, COUNT(*) as orders, COALESCE(SUM(total_amount), 0) as revenue')
+                ->groupBy('day')
+                ->get()
+                ->keyBy(fn ($r) => (string) $r->day);
+        };
+
+        $cur = $bucket($range['start'], $range['end']);
+        $prev = $bucket($range['prevStart'], $range['prevEnd']);
+
+        $rows = [];
+        for ($i = 0; $i < $range['days']; $i++) {
+            $d = $range['start']->copy()->addDays($i)->toDateString();
+            $p = $range['prevStart']->copy()->addDays($i)->toDateString();
+            $rows[] = [
+                'date' => $d,
+                'previous_date' => $p,
+                'revenue' => round((float) ($cur[$d]->revenue ?? 0), 2),
+                'orders' => (int) ($cur[$d]->orders ?? 0),
+                'previous_revenue' => round((float) ($prev[$p]->revenue ?? 0), 2),
+                'previous_orders' => (int) ($prev[$p]->orders ?? 0),
+            ];
+        }
+
+        return $rows;
+    }
+
+    private function rangeTopProducts($storeId, array $range, string $by): array
+    {
+        return OrderItem::query()
+            ->join('orders', 'orders.id', '=', 'order_items.order_id')
+            ->where('orders.store_id', $storeId)
+            ->whereBetween('orders.created_at', [$range['start'], $range['end']])
+            ->whereNotIn('orders.status', self::EXCLUDED_STATUSES)
+            ->groupBy('order_items.product_id', 'order_items.product_name')
+            ->selectRaw('order_items.product_id as product_id, order_items.product_name as name')
+            ->selectRaw('SUM(order_items.quantity) as units, SUM(order_items.total_price) as revenue, COUNT(DISTINCT orders.id) as orders')
+            ->orderByDesc($by === 'units' ? 'units' : 'revenue')
+            ->limit(8)
+            ->get()
+            ->map(fn ($r) => [
+                'product_id' => $r->product_id,
+                'name' => $r->name,
+                'units' => (int) $r->units,
+                'revenue' => round((float) $r->revenue, 2),
+                'orders' => (int) $r->orders,
+            ])
+            ->values()
+            ->all();
+    }
+
+    /**
+     * New vs returning buyers, keyed by (lower-cased) order email so guest
+     * checkouts are counted too. "Returning" = ordered before the period.
+     */
+    private function customerMix($storeId, array $range): array
+    {
+        $buyers = $this->salesQuery($storeId, $range['start'], $range['end'])
+            ->selectRaw('LOWER(customer_email) as buyer, COUNT(*) as orders, COALESCE(SUM(total_amount), 0) as revenue')
+            ->groupBy('buyer')
+            ->get();
+
+        if ($buyers->isEmpty()) {
+            return ['new' => 0, 'returning' => 0, 'new_revenue' => 0, 'returning_revenue' => 0];
+        }
+
+        $returningKeys = Order::where('store_id', $storeId)
+            ->where('created_at', '<', $range['start'])
+            ->whereNotIn('status', self::EXCLUDED_STATUSES)
+            ->whereIn(DB::raw('LOWER(customer_email)'), $buyers->pluck('buyer')->all())
+            ->selectRaw('DISTINCT LOWER(customer_email) as buyer')
+            ->pluck('buyer')
+            ->flip();
+
+        $out = ['new' => 0, 'returning' => 0, 'new_revenue' => 0.0, 'returning_revenue' => 0.0];
+        foreach ($buyers as $b) {
+            $kind = isset($returningKeys[$b->buyer]) ? 'returning' : 'new';
+            $out[$kind]++;
+            $out[$kind . '_revenue'] += (float) $b->revenue;
+        }
+        $out['new_revenue'] = round($out['new_revenue'], 2);
+        $out['returning_revenue'] = round($out['returning_revenue'], 2);
+
+        return $out;
+    }
+
+    private function rangeTopCustomers($storeId, array $range): array
+    {
+        return $this->salesQuery($storeId, $range['start'], $range['end'])
+            ->selectRaw('LOWER(customer_email) as email, MAX(customer_id) as customer_id')
+            ->selectRaw('MAX(customer_first_name) as first_name, MAX(customer_last_name) as last_name')
+            ->selectRaw('COUNT(*) as orders, COALESCE(SUM(total_amount), 0) as revenue')
+            ->groupBy('email')
+            ->orderByDesc('revenue')
+            ->limit(5)
+            ->get()
+            ->map(fn ($r) => [
+                'customer_id' => $r->customer_id ? (int) $r->customer_id : null,
+                'name' => trim(($r->first_name ?? '') . ' ' . ($r->last_name ?? '')),
+                'email' => $r->email,
+                'orders' => (int) $r->orders,
+                'revenue' => round((float) $r->revenue, 2),
+            ])
+            ->values()
+            ->all();
+    }
+
+    private function statusBreakdown($storeId, array $range): array
+    {
+        return Order::where('store_id', $storeId)
+            ->whereBetween('created_at', [$range['start'], $range['end']])
+            ->selectRaw('status, COUNT(*) as orders, COALESCE(SUM(total_amount), 0) as amount')
+            ->groupBy('status')
+            ->orderByDesc('orders')
+            ->get()
+            ->map(fn ($r) => [
+                'status' => (string) $r->status,
+                'orders' => (int) $r->orders,
+                'amount' => round((float) $r->amount, 2),
+            ])
+            ->values()
+            ->all();
+    }
+
+    private function discountUsage($storeId, array $range, array $totals): array
+    {
+        $codes = $this->salesQuery($storeId, $range['start'], $range['end'])
+            ->whereNotNull('coupon_code')
+            ->where('coupon_code', '!=', '')
+            ->selectRaw('coupon_code as code, COUNT(*) as orders, COALESCE(SUM(coupon_discount), 0) as discount, COALESCE(SUM(total_amount), 0) as revenue')
+            ->groupBy('coupon_code')
+            ->orderByDesc('orders')
+            ->get();
+
+        $couponIds = \App\Models\StoreCoupon::where('store_id', $storeId)
+            ->whereIn('code', $codes->pluck('code')->all())
+            ->pluck('id', 'code');
+
+        $ordersWithCode = (int) $codes->sum('orders');
+
+        return [
+            'orders' => $ordersWithCode,
+            'discount' => round((float) $codes->sum('discount'), 2),
+            'revenue' => round((float) $codes->sum('revenue'), 2),
+            'share' => $totals['orders'] > 0 ? round($ordersWithCode / $totals['orders'] * 100, 1) : null,
+            'codes' => $codes->take(8)->map(fn ($r) => [
+                'code' => $r->code,
+                'coupon_id' => $couponIds[$r->code] ?? null,
+                'orders' => (int) $r->orders,
+                'discount' => round((float) $r->discount, 2),
+                'revenue' => round((float) $r->revenue, 2),
+            ])->values()->all(),
+        ];
     }
 
     private function getKeyMetrics($storeId)

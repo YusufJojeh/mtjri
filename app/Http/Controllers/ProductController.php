@@ -14,25 +14,68 @@ class ProductController extends BaseController
     /**
      * Display a listing of the products.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
 
+        // Optional, validated list filters (all read-only query params).
+        $filters = $request->validate([
+            'q' => 'nullable|string|max:100',
+            'status' => 'nullable|in:active,draft',
+            'stock' => 'nullable|in:in,low,out',
+            'category' => 'nullable|integer',
+            'sort' => 'nullable|in:newest,oldest,updated,name,price_asc,price_desc,stock_asc,stock_desc',
+        ]);
+        $q = trim((string) ($filters['q'] ?? ''));
+        $sort = $filters['sort'] ?? 'newest';
+
+        // Get low stock threshold from settings (default: 20)
+        $lowStockThreshold = (int) \App\Models\Setting::getSetting('low_stock_threshold', $user->id, $currentStoreId, 20);
+
+        $query = Product::with('category')->where('store_id', $currentStoreId);
+
+        if ($q !== '') {
+            $query->where(function ($w) use ($q) {
+                $w->where('name', 'like', '%' . $q . '%')->orWhere('sku', 'like', '%' . $q . '%');
+            });
+        }
+        if (($filters['status'] ?? null) === 'active') {
+            $query->where('is_active', true);
+        } elseif (($filters['status'] ?? null) === 'draft') {
+            $query->where('is_active', false);
+        }
+        match ($filters['stock'] ?? null) {
+            'out' => $query->where('stock', '<=', 0),
+            'low' => $query->where('stock', '>', 0)->where('stock', '<=', $lowStockThreshold),
+            'in' => $query->where('stock', '>', $lowStockThreshold),
+            default => null,
+        };
+        if (!empty($filters['category'])) {
+            $query->where('category_id', (int) $filters['category']);
+        }
+
+        match ($sort) {
+            'oldest' => $query->oldest(),
+            'updated' => $query->latest('updated_at'),
+            'name' => $query->orderBy('name'),
+            'price_asc' => $query->orderBy('price'),
+            'price_desc' => $query->orderByDesc('price'),
+            'stock_asc' => $query->orderBy('stock'),
+            'stock_desc' => $query->orderByDesc('stock'),
+            default => $query->latest(),
+        };
+        $query->orderByDesc('id');
+
         // Get products for the current store with category relationship and PAGINATION - Performance Fix
-        $products = Product::with('category')
-                        ->where('store_id', $currentStoreId)
-                        ->latest()
-                        ->paginate(50);
+        $products = $query->paginate(50)->withQueryString();
 
         // Get statistics from ALL products (not just paginated)
-        $totalProducts = Product::where('store_id', $currentStoreId)->count();
-        $activeProducts = Product::where('store_id', $currentStoreId)->where('is_active', true)->count();
-        // Get low stock threshold from settings (default: 20)
-        $lowStockThreshold = \App\Models\Setting::getSetting('low_stock_threshold', $user->id, $currentStoreId, 20);
-        $lowStockProducts = Product::where('store_id', $currentStoreId)->where('stock', '<=', $lowStockThreshold)->count();
-        $totalValue = Product::where('store_id', $currentStoreId)->selectRaw('SUM(price * stock) as total')->value('total') ?? 0;
-
+        $base = fn () => Product::where('store_id', $currentStoreId);
+        $totalProducts = $base()->count();
+        $activeProducts = $base()->where('is_active', true)->count();
+        $lowStockProducts = $base()->where('stock', '<=', $lowStockThreshold)->count();
+        $totalValue = $base()->selectRaw('SUM(price * stock) as total')->value('total') ?? 0;
 
         return Inertia::render('products/index', [
             'products' => $products,
@@ -41,7 +84,24 @@ class ProductController extends BaseController
                 'active' => $activeProducts,
                 'lowStock' => $lowStockProducts,
                 'totalValue' => $totalValue
-            ]
+            ],
+            // View counts across the whole catalog (independent of search/filters).
+            'counts' => [
+                'all' => $totalProducts,
+                'active' => $activeProducts,
+                'draft' => $totalProducts - $activeProducts,
+                'low' => $base()->where('stock', '>', 0)->where('stock', '<=', $lowStockThreshold)->count(),
+                'out' => $base()->where('stock', '<=', 0)->count(),
+            ],
+            'categories' => Category::where('store_id', $currentStoreId)->orderBy('name')->get(['id', 'name']),
+            'lowStockThreshold' => $lowStockThreshold,
+            'filters' => [
+                'q' => $q,
+                'status' => $filters['status'] ?? null,
+                'stock' => $filters['stock'] ?? null,
+                'category' => isset($filters['category']) ? (string) $filters['category'] : null,
+                'sort' => $sort,
+            ],
         ]);
     }
 
@@ -119,9 +179,53 @@ class ProductController extends BaseController
         // Format revenue for display
         $stats['formatted_revenue'] = formatStoreCurrency($stats['revenue'], $user->id, $currentStoreId);
 
+        // Read-only performance for this product (store-scoped, cancelled orders excluded).
+        $itemsFor = fn () => \App\Models\OrderItem::where('product_id', $product->id)
+            ->whereHas('order', fn ($o) => $o->where('store_id', $currentStoreId)->where('status', '!=', 'cancelled'));
+        $window = function (int $days) use ($itemsFor, $currentStoreId) {
+            $rows = $itemsFor()
+                ->whereHas('order', fn ($o) => $o->where('store_id', $currentStoreId)->where('created_at', '>=', now()->subDays($days)))
+                ->get(['order_id', 'quantity', 'total_price']);
+            return [
+                'units' => (int) $rows->sum('quantity'),
+                'revenue' => round((float) $rows->sum('total_price'), 2),
+                'orders' => $rows->pluck('order_id')->unique()->count(),
+            ];
+        };
+        $performance = [
+            'd30' => $window(30),
+            'd90' => $window(90),
+            'onOpenOrders' => (int) \App\Models\OrderItem::where('product_id', $product->id)
+                ->whereHas('order', fn ($o) => $o->where('store_id', $currentStoreId)->whereIn('status', ['pending', 'processing']))
+                ->sum('quantity'),
+        ];
+
+        $recentOrders = \App\Models\OrderItem::with('order:id,order_number,status,payment_status,created_at,customer_first_name,customer_last_name')
+            ->where('product_id', $product->id)
+            ->whereHas('order', fn ($o) => $o->where('store_id', $currentStoreId))
+            ->latest('id')
+            ->limit(6)
+            ->get(['id', 'order_id', 'quantity', 'total_price', 'product_variants'])
+            ->filter(fn ($i) => $i->order)
+            ->map(fn ($i) => [
+                'id' => $i->order->id,
+                'number' => $i->order->order_number,
+                'status' => $i->order->status,
+                'paymentStatus' => $i->order->payment_status,
+                'customer' => trim(($i->order->customer_first_name ?? '') . ' ' . ($i->order->customer_last_name ?? '')),
+                'createdAt' => optional($i->order->created_at)->toIso8601String(),
+                'quantity' => (int) $i->quantity,
+                'total' => (float) $i->total_price,
+            ])
+            ->sortByDesc('createdAt')
+            ->values();
+
         return Inertia::render('products/show', [
             'product' => $product,
-            'stats' => $stats
+            'stats' => $stats,
+            'performance' => $performance,
+            'recentOrders' => $recentOrders,
+            'lowStockThreshold' => (int) \App\Models\Setting::getSetting('low_stock_threshold', $user->id, $currentStoreId, 20),
         ]);
     }
 

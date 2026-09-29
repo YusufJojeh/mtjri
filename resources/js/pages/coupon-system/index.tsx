@@ -1,232 +1,371 @@
-import React, { useEffect, useState } from 'react';
-import { PageTemplate } from '@/components/page-template';
-import { Plus, RefreshCw, Download, Percent, Eye, Edit, Trash2, Copy } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useState } from 'react';
+import axios from 'axios';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { router, usePage } from '@inertiajs/react';
-import { useCurrencyFormatter } from '@/hooks/use-store-currency';
-import { Permission } from '@/components/Permission';
-import { usePermissions } from '@/hooks/usePermissions';
+import { AlertTriangle, Download, Eye, MoreHorizontal, Pencil, Plus, TicketPercent, Trash2 } from 'lucide-react';
+import { PageTemplate } from '@/components/page-template';
+import { PageHeader, EmptyState } from '@/components/ds/layout';
+import { DataTable, Pager, SearchInput, SegmentedTabs, Toolbar, useListQuery, type Column, type PageMeta } from '@/components/ds/data-table';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { toast } from '@/components/custom-toast';
+import { usePermissions } from '@/hooks/usePermissions';
+import { useCommerceFormat } from '@/hooks/use-commerce-format';
+import { DiscountCode, DiscountStateBadge, UsageMeter } from '@/components/discounts/discount-bits';
+import { deriveState, daysUntil, localDate, missingDates, num, valueLabel, type Discount, type DiscountState } from '@/components/discounts/discount-utils';
 
-export default function CouponSystem() {
-  const { t } = useTranslation();
-  const { coupons = { data: [] }, stats = { total: 0, active: 0, percentage: 0, flat: 0 }, flash } = usePage().props as any;
-  const [couponToDelete, setCouponToDelete] = useState<number | null>(null);
-  const formatCurrency = useCurrencyFormatter();
-  const { hasPermission } = usePermissions();
-  
+type View = 'all' | DiscountState;
 
-  
-  const handleDelete = () => {
-    if (couponToDelete) {
-      router.delete(route('store-coupons.destroy', couponToDelete));
-      setCouponToDelete(null);
-    }
-  };
+interface Filters {
+    search?: string;
+    view?: View;
+    per_page?: string | number;
+    page?: number;
+    [k: string]: string | number | undefined;
+}
 
-  const pageActions = [];
-  
-  if (hasPermission('export-coupon-system')) {
-    pageActions.push({
-      label: t('Export'),
-      icon: <Download className='h-4 w-4' />,
-      variant: 'outline' as const,
-      onClick: () => window.open(route('coupon-system.export'), '_blank')
-    });
-  }
-  
-  if (hasPermission('create-coupon-system')) {
-    pageActions.push({
-      label: t('Create Coupon'),
-      icon: <Plus className='h-4 w-4' />,
-      variant: 'default' as const,
-      onClick: () => router.visit(route('coupon-system.create'))
-    });
-  }
+interface Props {
+    coupons: { data: Discount[] } & PageMeta;
+    filters: Filters;
+    viewCounts?: Partial<Record<View, number>>;
+}
 
-  return (
-    <PageTemplate 
-      title={t('Coupon System')}
-      url='/coupon-system'
-      actions={pageActions}
-      breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Coupon System') }
-      ]}
-    >
-      <div className='space-y-4'>
-        {/* Stats Cards */}
-        <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>{t('Total Coupons')}</CardTitle>
-              <Percent className='h-4 w-4 text-muted-foreground' />
-            </CardHeader>
-            <CardContent>
-              <div className='text-2xl font-bold'>{stats.total || 0}</div>
-              <p className='text-xs text-muted-foreground'>{t('All coupons')}</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>{t('Active Coupons')}</CardTitle>
-              <Percent className='h-4 w-4 text-muted-foreground' />
-            </CardHeader>
-            <CardContent>
-              <div className='text-2xl font-bold'>{stats.active || 0}</div>
-              <p className='text-xs text-muted-foreground'>
-                {stats.total > 0 ? Math.round((stats.active / stats.total) * 100) : 0}% {t('active rate')}
-              </p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>{t('Percentage Coupons')}</CardTitle>
-              <Percent className='h-4 w-4 text-muted-foreground' />
-            </CardHeader>
-            <CardContent>
-              <div className='text-2xl font-bold'>{stats.percentage || 0}</div>
-              <p className='text-xs text-muted-foreground'>{t('Discount percentage')}</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>{t('Fixed Amount Coupons')}</CardTitle>
-              <Percent className='h-4 w-4 text-muted-foreground' />
-            </CardHeader>
-            <CardContent>
-              <div className='text-2xl font-bold'>{stats.flat || 0}</div>
-              <p className='text-xs text-muted-foreground'>{t('Fixed discount')}</p>
-            </CardContent>
-          </Card>
-        </div>
+export default function DiscountsIndex() {
+    const { t } = useTranslation();
+    const f = useCommerceFormat();
+    const { hasPermission } = usePermissions();
+    const { coupons, filters = {}, viewCounts = {} } = usePage().props as unknown as Props;
+    const rows = coupons?.data ?? [];
+    const view: View = (filters.view as View) || 'all';
+    const [pending, setPending] = useState<number | null>(null);
+    const [toDelete, setToDelete] = useState<Discount | null>(null);
+    const [deleting, setDeleting] = useState(false);
 
-        {/* Coupons List */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('Store Coupons')}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className='space-y-4'>
-              {!coupons || !coupons.data || coupons.data.length === 0 ? (
-                <div className='text-center py-8'>
-                  <Percent className='h-12 w-12 mx-auto text-muted-foreground opacity-50' />
-                  <p className='mt-2 text-muted-foreground'>{t('No coupons found')}</p>
-                  <Permission permission='create-coupon-system'>
-                    <Button 
-                      variant='outline' 
-                      className='mt-4' 
-                      onClick={() => router.visit(route('coupon-system.create'))}
-                    >
-                      <Plus className='h-4 w-4 mr-2' />
-                      {t('Create your first coupon')}
-                    </Button>
-                  </Permission>
+    const canCreate = hasPermission('create-coupon-system');
+    const canEdit = hasPermission('edit-coupon-system');
+    const canToggle = hasPermission('toggle-status-coupon-system');
+    const canDelete = hasPermission('delete-coupon-system');
+    const canExport = hasPermission('export-coupon-system');
+
+    const query = useListQuery<Filters>('coupon-system.index', { search: filters.search, view: filters.view, per_page: filters.per_page }, [
+        'coupons',
+        'filters',
+        'viewCounts',
+        'stats',
+    ]);
+
+    const stateOf = (c: Discount): DiscountState => c.state ?? deriveState(c);
+    const daysLeftOf = (c: Discount) => (c.days_left !== undefined ? c.days_left : daysUntil(c.expiry_date));
+    const usedOf = (c: Discount) => Math.max(c.performance?.orders ?? 0, c.used_count ?? 0);
+
+    const toggle = async (c: Discount) => {
+        setPending(c.id);
+        try {
+            const res = await axios.post(route('store-coupons.toggle-status', c.id), {}, { headers: { Accept: 'application/json' } });
+            const on = Boolean(res.data?.status);
+            toast.success(on ? t('{{name}} is now active', { name: c.name }) : t('{{name}} is paused', { name: c.name }));
+            router.reload({ only: ['coupons', 'viewCounts', 'stats'], onFinish: () => setPending(null) });
+        } catch {
+            toast.error(t('Could not change the status. Please try again.'));
+            setPending(null);
+        }
+    };
+
+    const confirmDelete = () => {
+        if (!toDelete) return;
+        setDeleting(true);
+        router.delete(route('store-coupons.destroy', toDelete.id), {
+            preserveScroll: true,
+            onFinish: () => {
+                setDeleting(false);
+                setToDelete(null);
+            },
+        });
+    };
+
+    const schedule = (c: Discount) => {
+        const from = c.start_date ? f.date(localDate(c.start_date)) : null;
+        const to = c.expiry_date ? f.date(localDate(c.expiry_date)) : null;
+        if (from && to) return t('{{from}} – {{to}}', { from, to });
+        if (from) return t('From {{date}}', { date: from });
+        if (to) return t('Until {{date}}', { date: to });
+        return t('No end date');
+    };
+
+    const conditions = (c: Discount) => {
+        const parts: string[] = [];
+        const min = num(c.minimum_spend);
+        const cap = num(c.maximum_spend);
+        if (min && min > 0) parts.push(t('Min. order {{amount}}', { amount: f.money(min) }));
+        if (cap && cap > 0) parts.push(t('Max. discount {{amount}}', { amount: f.money(cap) }));
+        return parts.length ? parts.join(' · ') : t('No minimum');
+    };
+
+    const datesWarning = (c: Discount) =>
+        c.status && missingDates(c) ? (
+            <span className="text-warning-fg inline-flex items-center gap-1 text-xs">
+                <AlertTriangle className="size-3" aria-hidden />
+                {t('Needs start and end dates to work at checkout')}
+            </span>
+        ) : null;
+
+    const perf = (c: Discount) => {
+        const p = c.performance;
+        if (!p || p.orders === 0) return <span className="text-muted-foreground text-sm">{t('Not used yet')}</span>;
+        return (
+            <div className="text-sm leading-5">
+                <div className="tabular-nums">
+                    {t('{{count}} orders', { count: p.orders })} · <span className="font-medium">{f.money(p.revenue)}</span>
                 </div>
-              ) : (
-                coupons.data.map((coupon: any) => (
-                  <div key={coupon.id} className='flex items-center justify-between p-4 border rounded-lg'>
-                    <div className='flex items-center space-x-4'>
-                      <div className='w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center'>
-                        <Percent className='h-6 w-6 text-primary' />
-                      </div>
-                      <div>
-                        <div className='flex items-center space-x-2'>
-                          <h3 className='font-semibold'>{coupon.name}</h3>
-                          <Badge variant={coupon.status ? 'default' : 'secondary'}>
-                            {coupon.status ? t('Active') : t('Inactive')}
-                          </Badge>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <code className='text-sm bg-muted px-2 py-1 rounded'>{coupon.code}</code>
-                          <Button variant='ghost' size='sm' onClick={() => navigator.clipboard.writeText(coupon.code)}>
-                            <Copy className='h-3 w-3' />
-                          </Button>
-                        </div>
-                        <div className='flex items-center space-x-4 mt-1'>
-                          <span className='text-xs text-muted-foreground'>
-                            {coupon.type === 'percentage' ? t('Percentage') : t('Fixed')}: 
-                            {coupon.type === 'percentage' ? `${coupon.discount_amount}%` : formatCurrency(coupon.discount_amount)}
-                          </span>
-                          <span className='text-xs text-muted-foreground'>
-                            {t('Used')}: {coupon.used_count}/{coupon.use_limit_per_coupon || t('Unlimited')}
-                          </span>
-                          {coupon.expiry_date && (
-                            <span className='text-xs text-muted-foreground'>
-                              {t('Expires')}: {new Date(coupon.expiry_date).toLocaleDateString()}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className='flex items-center space-x-2'>
-                      <Permission permission='view-coupon-system'>
-                        <Button variant='ghost' size='sm' onClick={() => router.visit(route('store-coupons.show', coupon.id))}>
-                          <Eye className='h-4 w-4' />
-                        </Button>
-                      </Permission>
-                      <Permission permission='edit-coupon-system'>
-                        <Button variant='ghost' size='sm' onClick={() => router.visit(route('coupon-system.edit', coupon.id))}>
-                          <Edit className='h-4 w-4' />
-                        </Button>
-                      </Permission>
-                      <Permission permission='toggle-status-coupon-system'>
-                        <Button 
-                          variant='ghost' 
-                          size='sm' 
-                          onClick={() => {
-                            router.post(route('store-coupons.toggle-status', coupon.id), {}, {
-                              preserveScroll: true
-                            });
-                          }}
-                        >
-                          {coupon.status ? t('Disable') : t('Enable')}
-                        </Button>
-                      </Permission>
-                      <Permission permission='delete-coupon-system'>
-                        <Button 
-                          variant='ghost' 
-                          size='sm' 
-                          onClick={() => setCouponToDelete(coupon.id)}
-                        >
-                          <Trash2 className='h-4 w-4' />
-                        </Button>
-                      </Permission>
-                    </div>
-                  </div>
-                ))
-              )}
+                <div className="text-muted-foreground text-xs tabular-nums">{t('{{amount}} given', { amount: f.money(p.discount) })}</div>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+        );
+    };
 
-      {/* Delete Confirmation Dialog */}
-      <Dialog open={!!couponToDelete} onOpenChange={(open) => !open && setCouponToDelete(null)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{t('Delete Coupon')}</DialogTitle>
-            <DialogDescription>
-              {t('Are you sure you want to delete this coupon? This action cannot be undone.')}
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant='outline' onClick={() => setCouponToDelete(null)}>
-              {t('Cancel')}
-            </Button>
-            <Button variant='destructive' onClick={handleDelete}>
-              {t('Delete')}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </PageTemplate>
-  );
+    const rowActions = (c: Discount) => (
+        <div className="flex items-center justify-end gap-1" data-no-row-click>
+            {canToggle && (
+                <Switch
+                    checked={Boolean(c.status)}
+                    disabled={pending === c.id}
+                    onCheckedChange={() => toggle(c)}
+                    aria-label={c.status ? t('Pause {{name}}', { name: c.name }) : t('Activate {{name}}', { name: c.name })}
+                    className={pending === c.id ? 'animate-pulse' : undefined}
+                />
+            )}
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="size-8" aria-label={t('Actions for {{name}}', { name: c.name })}>
+                        <MoreHorizontal className="size-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                        <Link href={route('store-coupons.show', c.id)}>
+                            <Eye className="size-4" /> {t('View details')}
+                        </Link>
+                    </DropdownMenuItem>
+                    {canEdit && (
+                        <DropdownMenuItem asChild>
+                            <Link href={route('coupon-system.edit', c.id)}>
+                                <Pencil className="size-4" /> {t('Edit')}
+                            </Link>
+                        </DropdownMenuItem>
+                    )}
+                    {canDelete && (
+                        <>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem variant="destructive" onSelect={() => setToDelete(c)}>
+                                <Trash2 className="size-4" /> {t('Delete')}
+                            </DropdownMenuItem>
+                        </>
+                    )}
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </div>
+    );
+
+    const columns: Column<Discount>[] = [
+        {
+            key: 'discount',
+            header: t('Discount'),
+            cell: (c) => (
+                <div className="min-w-0 space-y-1 py-2">
+                    <div className="truncate font-medium">{c.name}</div>
+                    <DiscountCode code={c.code} />
+                </div>
+            ),
+        },
+        {
+            key: 'value',
+            header: t('Customer gets'),
+            cell: (c) => (
+                <div className="leading-5">
+                    <div className="font-medium">{valueLabel(c, f, t)}</div>
+                    <div className="text-muted-foreground text-xs">{conditions(c)}</div>
+                </div>
+            ),
+        },
+        {
+            key: 'usage',
+            header: t('Usage'),
+            cell: (c) => <UsageMeter used={usedOf(c)} limit={c.use_limit_per_coupon} compact />,
+        },
+        { key: 'performance', header: t('Performance'), hideBelow: 'lg', cell: perf },
+        {
+            key: 'schedule',
+            header: t('Schedule'),
+            hideBelow: 'xl',
+            cell: (c) => (
+                <div className="space-y-0.5">
+                    <div className="text-sm whitespace-nowrap">{schedule(c)}</div>
+                    {datesWarning(c)}
+                </div>
+            ),
+        },
+        { key: 'state', header: t('Status'), cell: (c) => <DiscountStateBadge state={stateOf(c)} daysLeft={daysLeftOf(c)} /> },
+        { key: 'actions', header: <span className="sr-only">{t('Actions')}</span>, align: 'end', cell: rowActions },
+    ];
+
+    const mobileCard = (c: Discount) => (
+        <div className="space-y-2">
+            <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                    <div className="truncate font-medium">{c.name}</div>
+                    <div className="text-sm">
+                        {valueLabel(c, f, t)} <span className="text-muted-foreground text-xs">· {conditions(c)}</span>
+                    </div>
+                </div>
+                <DiscountStateBadge state={stateOf(c)} daysLeft={daysLeftOf(c)} />
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+                <code dir="ltr" className="bg-muted/60 rounded-md border px-2 py-0.5 font-mono text-xs font-medium">
+                    {c.code}
+                </code>
+                <span className="text-muted-foreground text-xs">{schedule(c)}</span>
+            </div>
+            <div className="grid grid-cols-2 items-end gap-3">
+                <UsageMeter used={usedOf(c)} limit={c.use_limit_per_coupon} />
+                <div className="text-end text-xs">
+                    {c.performance && c.performance.orders > 0 ? (
+                        <>
+                            <div className="font-medium tabular-nums">{f.money(c.performance.revenue)}</div>
+                            <div className="text-muted-foreground">{t('{{count}} orders', { count: c.performance.orders })}</div>
+                        </>
+                    ) : (
+                        <span className="text-muted-foreground">{t('Not used yet')}</span>
+                    )}
+                </div>
+            </div>
+            {datesWarning(c)}
+        </div>
+    );
+
+    const segments = [
+        { value: 'all', label: t('All'), count: viewCounts.all },
+        { value: 'active', label: t('Active'), count: viewCounts.active },
+        { value: 'scheduled', label: t('Scheduled'), count: viewCounts.scheduled },
+        { value: 'expired', label: t('Expired'), count: viewCounts.expired },
+        { value: 'paused', label: t('Paused'), count: viewCounts.paused },
+    ];
+
+    const filtered = Boolean(filters.search) || view !== 'all';
+    const totalAll = viewCounts.all ?? 0;
+
+    const header = (
+        <PageHeader
+            title={t('Discounts')}
+            description={t('Codes customers enter at checkout. Pause a code any time without losing its history.')}
+            actions={
+                <>
+                    {canExport && (
+                        <Button variant="outline" size="sm" className="h-9" onClick={() => window.open(route('coupon-system.export'), '_blank')}>
+                            <Download className="size-4" />
+                            {t('Export')}
+                        </Button>
+                    )}
+                    {canCreate && (
+                        <Button size="sm" className="h-9" asChild>
+                            <Link href={route('coupon-system.create')}>
+                                <Plus className="size-4" />
+                                {t('Create discount')}
+                            </Link>
+                        </Button>
+                    )}
+                </>
+            }
+        />
+    );
+
+    return (
+        <PageTemplate
+            title={t('Discounts')}
+            url="/coupon-system"
+            header={header}
+            breadcrumbs={[{ title: t('Dashboard'), href: route('dashboard') }, { title: t('Discounts') }]}
+        >
+            {totalAll === 0 && !filters.search ? (
+                <section className="bg-card rounded-xl border shadow-card">
+                    <EmptyState
+                        icon={<TicketPercent />}
+                        title={t('No discounts yet')}
+                        description={t('Create a code like WELCOME10 to reward first orders or run a limited-time sale.')}
+                        action={
+                            canCreate ? (
+                                <Button asChild>
+                                    <Link href={route('coupon-system.create')}>
+                                        <Plus className="size-4" />
+                                        {t('Create discount')}
+                                    </Link>
+                                </Button>
+                            ) : undefined
+                        }
+                    />
+                </section>
+            ) : (
+                <section className="bg-card overflow-hidden rounded-xl border shadow-card" aria-label={t('Discounts')}>
+                    <Toolbar>
+                        <SegmentedTabs label={t('Filter discounts')} segments={segments} value={view} onChange={(v) => query({ view: v as View })} />
+                        <SearchInput
+                            className="sm:w-64"
+                            value={filters.search ?? ''}
+                            onChange={(v) => query({ search: v })}
+                            placeholder={t('Search name or code')}
+                        />
+                    </Toolbar>
+                    <DataTable
+                        rows={rows}
+                        columns={columns}
+                        rowKey={(c) => c.id}
+                        rowHref={(c) => route('store-coupons.show', c.id)}
+                        mobileCard={mobileCard}
+                        caption={t('Discounts')}
+                        empty={
+                            <EmptyState
+                                compact
+                                icon={<TicketPercent />}
+                                title={filtered ? t('No discounts match') : t('No discounts yet')}
+                                description={filtered ? t('Try another view or search term.') : undefined}
+                                action={
+                                    filtered ? (
+                                        <Button variant="outline" size="sm" onClick={() => query({ search: '', view: 'all' })}>
+                                            {t('Clear filters')}
+                                        </Button>
+                                    ) : canCreate ? (
+                                        <Button size="sm" asChild>
+                                            <Link href={route('coupon-system.create')}>{t('Create discount')}</Link>
+                                        </Button>
+                                    ) : undefined
+                                }
+                            />
+                        }
+                    />
+                    <Pager meta={coupons} onPage={(page) => query({ page })} />
+                </section>
+            )}
+
+            <Dialog open={!!toDelete} onOpenChange={(open) => !open && !deleting && setToDelete(null)}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>{t('Delete this discount?')}</DialogTitle>
+                        <DialogDescription>
+                            {t('Customers will no longer be able to use {{code}}. Past orders keep their discount. This cannot be undone.', {
+                                code: toDelete?.code ?? '',
+                            })}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setToDelete(null)} disabled={deleting}>
+                            {t('Cancel')}
+                        </Button>
+                        <Button variant="destructive" onClick={confirmDelete} disabled={deleting}>
+                            {deleting ? t('Deleting…') : t('Delete discount')}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </PageTemplate>
+    );
 }

@@ -1,406 +1,300 @@
-import React, { useState } from 'react';
+import { FormEventHandler } from 'react';
+import { Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import { Loader2 } from 'lucide-react';
 import { PageTemplate } from '@/components/page-template';
-import { ArrowLeft, Save, Plus, Trash2 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useTranslation } from 'react-i18next';
-import { router } from '@inertiajs/react';
+import { DescriptionList, PageHeader, Panel } from '@/components/ds/layout';
+import { StatusBadge } from '@/components/ds/status-badge';
+import { orderStatusMeta, paymentStatusMeta } from '@/lib/commerce/status';
+import { useCommerceFormat } from '@/hooks/use-commerce-format';
 import { usePermissions } from '@/hooks/usePermissions';
+import { ORDER_STATUS_VALUES, PAYMENT_STATUS_VALUES, paymentMethodLabel } from '@/components/orders/order-meta';
 
 interface EditOrderProps {
-  order: {
-    id: number;
-    orderNumber: string;
-    status: string;
-    paymentStatus: string;
-    paymentMethod: string;
-    customer: {
-      id: number;
-      name: string;
-      email: string;
-      phone: string;
+    order: {
+        id: number;
+        orderNumber: string;
+        status: string;
+        paymentStatus: string;
+        paymentMethod: string;
+        customer: { id: number | null; name: string; email: string; phone: string };
+        shippingAddress: { address: string; city: string; state: string; postalCode: string; country: string };
+        items: Array<{ id: number; productId: number; name: string; quantity: number; price: number; variants?: Record<string, string> }>;
+        summary: { subtotal: number; shipping: number; tax: number; total: number };
+        shippingMethodId: number | null;
+        trackingNumber?: string;
+        notes?: string;
     };
-    shippingAddress: {
-      address: string;
-      city: string;
-      state: string;
-      postalCode: string;
-      country: string;
-    };
-    items: Array<{
-      id: number;
-      productId: number;
-      name: string;
-      quantity: number;
-      price: number;
-    }>;
-    summary: {
-      subtotal: number;
-      shipping: number;
-      tax: number;
-      total: number;
-    };
-    shippingMethodId: number;
-    trackingNumber?: string;
-    notes?: string;
-  };
-  customers: Array<{
-    id: number;
-    name: string;
-    email: string;
-  }>;
-  products: Array<{
-    id: number;
-    name: string;
-    price: number;
-    variants: Array<{
-      name: string;
-      values: string[];
-    }>;
-  }>;
-  shippingMethods: Array<{
-    id: number;
-    name: string;
-    cost: number;
-  }>;
+    customers: Array<{ id: number; name: string; email: string }>;
+    products: Array<{ id: number; name: string; price: number; variants: Array<{ name: string; values: string[] }> | null }>;
+    shippingMethods: Array<{ id: number; name: string; cost: number }>;
 }
 
-export default function EditOrder({ order, customers, products, shippingMethods }: EditOrderProps) {
-  const { t } = useTranslation();
-  const { hasPermission } = usePermissions();
-  // Ensure order.items is always an array
-  const safeOrderItems = Array.isArray(order.items) ? order.items : [];
-  const [orderItems, setOrderItems] = useState(safeOrderItems.map(item => ({
-    ...item,
-    variants: item.variants || {}
-  })));
-  const [formData, setFormData] = useState({
-    status: order.status,
-    payment_status: order.paymentStatus,
-    tracking_number: order.trackingNumber || '',
-    notes: order.notes || '',
-    items: orderItems,
-  });
+type ItemRow = EditOrderProps['order']['items'][number] & { variants: Record<string, string> };
 
-  const pageActions = [
-    {
-      label: t('Back'),
-      icon: <ArrowLeft className='h-4 w-4' />,
-      variant: 'outline' as const,
-      onClick: () => router.visit(route('orders.index'))
-    }
-  ];
-  
-  if (hasPermission('edit-orders')) {
-    pageActions.push({
-      label: t('Update Order'),
-      icon: <Save className='h-4 w-4' />,
-      variant: 'default' as const,
-      onClick: () => {
-        router.put(route('orders.update', order.id), formData);
-      }
+const selectCls =
+    'border-input bg-background focus-visible:ring-ring/40 h-9 w-full rounded-md border px-2.5 text-sm outline-none focus-visible:ring-[3px] disabled:opacity-60';
+
+export default function EditOrder({ order, products, shippingMethods }: EditOrderProps) {
+    const { t } = useTranslation();
+    const fmt = useCommerceFormat();
+    const { hasPermission } = usePermissions();
+    const canEdit = hasPermission('edit-orders');
+
+    // Same payload as before: status, payment_status, tracking_number, notes, items[] (id + variants).
+    const form = useForm<{
+        status: string;
+        payment_status: string;
+        tracking_number: string;
+        notes: string;
+        items: ItemRow[];
+    }>({
+        status: order.status,
+        payment_status: order.paymentStatus,
+        tracking_number: order.trackingNumber || '',
+        notes: order.notes || '',
+        items: (Array.isArray(order.items) ? order.items : []).map((item) => ({ ...item, variants: item.variants || {} })),
     });
-  }
 
-  const addOrderItem = () => {
-    setOrderItems([...orderItems, { id: Date.now(), productId: 0, name: '', quantity: 1, price: 0 }]);
-  };
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+        form.put(route('orders.update', order.id), { preserveScroll: true });
+    };
 
-  const removeOrderItem = (index: number) => {
-    setOrderItems(orderItems.filter((_, i) => i !== index));
-  };
+    const setVariant = (index: number, name: string, value: string) => {
+        const items = form.data.items.map((it, i) => (i === index ? { ...it, variants: { ...it.variants, [name]: value } } : it));
+        form.setData('items', items);
+    };
 
-  return (
-    <PageTemplate 
-      title={t('Edit Order') + ' ' + order.orderNumber}
-      url='/orders/edit'
-      actions={pageActions}
-      breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Order Management'), href: route('orders.index') },
-        { title: t('Edit Order') }
-      ]}
-    >
-      <div className='space-y-6'>
-        <Tabs defaultValue='customer' className='w-full'>
-          <TabsList className='grid w-full grid-cols-4'>
-            <TabsTrigger value='customer'>{t('Customer')}</TabsTrigger>
-            <TabsTrigger value='items'>{t('Items')}</TabsTrigger>
-            <TabsTrigger value='shipping'>{t('Shipping')}</TabsTrigger>
-            <TabsTrigger value='payment'>{t('Payment')}</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value='customer' className='space-y-4'>
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('Customer Information')}</CardTitle>
-              </CardHeader>
-              <CardContent className='space-y-4'>
-                <div>
-                  <Label htmlFor='customer'>{t('Select Customer')}</Label>
-                  <Select defaultValue={order.customer.id ? order.customer.id.toString() : ''}>
-                    <SelectTrigger>
-                      <SelectValue placeholder={t('Select Customer')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {customers.map((customer) => (
-                        <SelectItem key={customer.id} value={customer.id.toString()}>
-                          {customer.name} - {customer.email}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className='grid grid-cols-2 gap-4'>
-                  <div>
-                    <Label htmlFor='customer_name'>{t('Customer Name')}</Label>
-                    <Input id='customer_name' defaultValue={order.customer.name} />
-                  </div>
-                  <div>
-                    <Label htmlFor='customer_email'>{t('Email Address')}</Label>
-                    <Input id='customer_email' type='email' defaultValue={order.customer.email} />
-                  </div>
-                </div>
-                <div className='grid grid-cols-2 gap-4'>
-                  <div>
-                    <Label htmlFor='customer_phone'>{t('Phone Number')}</Label>
-                    <Input id='customer_phone' defaultValue={order.customer.phone} />
-                  </div>
-                  <div>
-                    <Label htmlFor='order_notes'>{t('Order Notes')}</Label>
-                    <Textarea 
-                      id='order_notes' 
-                      defaultValue={order.notes || ''} 
-                      onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+    const shippingMethod = shippingMethods.find((m) => m.id === order.shippingMethodId);
+    const address = order.shippingAddress;
+    const addressLines = [address.address, [address.city, address.state, address.postalCode].filter(Boolean).join(', '), address.country].filter(
+        (l) => l && String(l).trim(),
+    );
+    const errorList = Object.values(form.errors);
 
-          <TabsContent value='items' className='space-y-4'>
-            <Card>
-              <CardHeader>
-                <div className='flex items-center justify-between'>
-                  <CardTitle>{t('Order Items')}</CardTitle>
-                  <Button type='button' variant='outline' size='sm' onClick={addOrderItem}>
-                    <Plus className='h-4 w-4 mr-2' />
-                    {t('Add Item')}
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent className='space-y-4'>
-                {orderItems.map((item, index) => (
-                  <div key={index} className='border rounded-lg p-4 space-y-4'>
-                    <div className='flex items-center justify-between'>
-                      <h4 className='font-medium'>{t('Item {{number}}', { number: index + 1 })}</h4>
-                      {orderItems.length > 1 && (
-                        <Button
-                          type='button'
-                          variant='ghost'
-                          size='sm'
-                          onClick={() => removeOrderItem(index)}
-                        >
-                          <Trash2 className='h-4 w-4' />
-                        </Button>
-                      )}
-                    </div>
-                    <div className='grid grid-cols-3 gap-4'>
-                      <div>
-                        <Label>{t('Product')}</Label>
-                        <Select 
-                          defaultValue={item.productId ? item.productId.toString() : ''}
-                          onValueChange={(value) => {
-                            const newItems = [...orderItems];
-                            newItems[index].productId = parseInt(value);
-                            newItems[index].variants = {}; // Reset variants when product changes
-                            setOrderItems(newItems);
-                            setFormData(prev => ({ ...prev, items: newItems }));
-                          }}
-                        >
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {products.map((product) => (
-                              <SelectItem key={product.id} value={product.id.toString()}>
-                                {product.name} - ${product.price.toFixed(2)}
-                              </SelectItem>
+    return (
+        <PageTemplate
+            title={t('Edit order {{number}}', { number: order.orderNumber })}
+            url={route('orders.edit', order.id)}
+            width="narrow"
+            breadcrumbs={[
+                { title: t('Dashboard'), href: route('dashboard') },
+                { title: t('Orders'), href: route('orders.index') },
+                { title: order.orderNumber, href: route('orders.show', order.id) },
+                { title: t('Edit') },
+            ]}
+            header={
+                <PageHeader
+                    back={{ href: route('orders.show', order.id), label: t('Back to order') }}
+                    title={
+                        <span>
+                            {t('Edit order')} <bdi dir="ltr">{order.orderNumber}</bdi>
+                        </span>
+                    }
+                    meta={
+                        <div className="flex flex-wrap items-center gap-1.5">
+                            <StatusBadge meta={paymentStatusMeta(order.paymentStatus)} />
+                            <StatusBadge meta={orderStatusMeta(order.status)} />
+                        </div>
+                    }
+                />
+            }
+        >
+            <form onSubmit={submit} className="space-y-4 pb-20 md:pb-0">
+                {errorList.length > 0 && (
+                    <div role="alert" className="bg-danger-soft text-danger-fg rounded-lg px-3 py-2.5 text-sm">
+                        <p className="font-medium">{t('Please fix the following:')}</p>
+                        <ul className="mt-1 list-disc ps-5">
+                            {errorList.map((e, i) => (
+                                <li key={i}>{e}</li>
                             ))}
-                          </SelectContent>
-                        </Select>
-                        {/* Show variant selection if product has variants */}
-                        {item.productId > 0 && products.find(p => p.id === item.productId)?.variants?.length > 0 && (
-                          <div className='mt-2 space-y-2'>
-                            {products.find(p => p.id === item.productId)?.variants.map((variant, vIndex) => (
-                              <div key={vIndex}>
-                                <Label className='text-xs'>{variant.name}</Label>
-                                <Select onValueChange={(value) => {
-                                  const newItems = [...orderItems];
-                                  if (!newItems[index].variants) newItems[index].variants = {};
-                                  newItems[index].variants[variant.name] = value;
-                                  setOrderItems(newItems);
-                                  setFormData(prev => ({ ...prev, items: newItems }));
-                                }}>
-                                  <SelectTrigger className='h-8'>
-                                    <SelectValue placeholder={t('Select {{name}}', { name: variant.name })} />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {variant.values.map((value, valueIndex) => (
-                                      <SelectItem key={valueIndex} value={value}>
-                                        {value}
-                                      </SelectItem>
+                        </ul>
+                    </div>
+                )}
+
+                <div className="grid gap-4 lg:grid-cols-3">
+                    <div className="min-w-0 space-y-4 lg:col-span-2">
+                        <Panel title={t('Status')} description={t('Changes are saved when you select Save changes.')}>
+                            <div className="grid gap-4 sm:grid-cols-2">
+                                <div className="space-y-1.5">
+                                    <Label htmlFor="order_status">{t('Fulfillment status')}</Label>
+                                    <select
+                                        id="order_status"
+                                        className={selectCls}
+                                        value={form.data.status}
+                                        onChange={(e) => form.setData('status', e.target.value)}
+                                        disabled={!canEdit}
+                                    >
+                                        {ORDER_STATUS_VALUES.map((v) => (
+                                            <option key={v} value={v}>
+                                                {t(orderStatusMeta(v).label)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {form.errors.status && <p className="text-danger-fg text-xs">{form.errors.status}</p>}
+                                </div>
+                                <div className="space-y-1.5">
+                                    <Label htmlFor="payment_status">{t('Payment status')}</Label>
+                                    <select
+                                        id="payment_status"
+                                        className={selectCls}
+                                        value={form.data.payment_status}
+                                        onChange={(e) => form.setData('payment_status', e.target.value)}
+                                        disabled={!canEdit}
+                                    >
+                                        {PAYMENT_STATUS_VALUES.map((v) => (
+                                            <option key={v} value={v}>
+                                                {t(paymentStatusMeta(v).label)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {form.errors.payment_status && <p className="text-danger-fg text-xs">{form.errors.payment_status}</p>}
+                                    <p className="text-muted-foreground text-xs">{t('Recording a payment status does not charge or refund the customer.')}</p>
+                                </div>
+                            </div>
+                        </Panel>
+
+                        <Panel title={t('Shipping')}>
+                            <div className="space-y-4">
+                                <DescriptionList items={[{ label: t('Shipping method'), value: shippingMethod?.name || '—' }]} />
+                                <div className="space-y-1.5">
+                                    <Label htmlFor="tracking_number">{t('Tracking number')}</Label>
+                                    <Input
+                                        id="tracking_number"
+                                        dir="ltr"
+                                        value={form.data.tracking_number}
+                                        onChange={(e) => form.setData('tracking_number', e.target.value)}
+                                        maxLength={255}
+                                        disabled={!canEdit}
+                                    />
+                                    {form.errors.tracking_number && <p className="text-danger-fg text-xs">{form.errors.tracking_number}</p>}
+                                </div>
+                            </div>
+                        </Panel>
+
+                        <Panel title={t('Items')} description={t('Quantities and prices are fixed after checkout. You can adjust variant options.')} flush>
+                            <ul className="divide-y border-t">
+                                {form.data.items.map((item, index) => {
+                                    const product = products.find((p) => p.id === item.productId);
+                                    const variants = product?.variants || [];
+                                    return (
+                                        <li key={item.id} className="space-y-2 px-4 py-3 sm:px-5">
+                                            <div className="flex items-start justify-between gap-3 text-sm">
+                                                <div className="min-w-0">
+                                                    <p className="font-medium break-words">{item.name || product?.name}</p>
+                                                    <p className="text-muted-foreground text-xs tabular-nums">
+                                                        {fmt.number(item.quantity)} × {fmt.money(item.price)}
+                                                    </p>
+                                                </div>
+                                                <p className="shrink-0 font-medium tabular-nums">{fmt.money(item.quantity * item.price)}</p>
+                                            </div>
+                                            {variants.length > 0 && (
+                                                <div className="grid gap-2 sm:grid-cols-2">
+                                                    {variants.map((variant) => {
+                                                        const id = `item-${item.id}-${variant.name}`;
+                                                        return (
+                                                            <div key={variant.name} className="space-y-1">
+                                                                <Label htmlFor={id} className="text-xs">
+                                                                    {variant.name}
+                                                                </Label>
+                                                                <select
+                                                                    id={id}
+                                                                    className={selectCls}
+                                                                    value={item.variants?.[variant.name] ?? ''}
+                                                                    onChange={(e) => setVariant(index, variant.name, e.target.value)}
+                                                                    disabled={!canEdit}
+                                                                >
+                                                                    <option value="" disabled>
+                                                                        {t('Select {{name}}', { name: variant.name })}
+                                                                    </option>
+                                                                    {variant.values.map((v) => (
+                                                                        <option key={v} value={v}>
+                                                                            {v}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </Panel>
+
+                        <Panel title={t('Notes')}>
+                            <Label htmlFor="order_notes" className="sr-only">
+                                {t('Order notes')}
+                            </Label>
+                            <Textarea
+                                id="order_notes"
+                                rows={4}
+                                maxLength={1000}
+                                value={form.data.notes}
+                                onChange={(e) => form.setData('notes', e.target.value)}
+                                placeholder={t('Internal notes about this order')}
+                                disabled={!canEdit}
+                            />
+                            {form.errors.notes && <p className="text-danger-fg mt-1 text-xs">{form.errors.notes}</p>}
+                        </Panel>
+                    </div>
+
+                    <div className="min-w-0 space-y-4">
+                        <Panel title={t('Customer')} description={t('Captured at checkout')}>
+                            <div className="space-y-1 text-sm">
+                                <p className="font-medium">{order.customer.name?.trim() || t('Guest')}</p>
+                                {order.customer.email && (
+                                    <p className="text-muted-foreground truncate">
+                                        <bdi>{order.customer.email}</bdi>
+                                    </p>
+                                )}
+                                {order.customer.phone && (
+                                    <p className="text-muted-foreground">
+                                        <bdi dir="ltr">{order.customer.phone}</bdi>
+                                    </p>
+                                )}
+                            </div>
+                            {addressLines.length > 0 && (
+                                <address className="text-muted-foreground mt-3 border-t pt-3 text-sm leading-6 not-italic">
+                                    {addressLines.map((l, i) => (
+                                        <div key={i}>{l}</div>
                                     ))}
-                                  </SelectContent>
-                                </Select>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <div>
-                        <Label>{t('Quantity')}</Label>
-                        <Input type='number' min='1' defaultValue={item.quantity} />
-                      </div>
-                      <div>
-                        <Label>{t('Price')}</Label>
-                        <Input type='number' step='0.01' defaultValue={item.price} />
-                      </div>
+                                </address>
+                            )}
+                        </Panel>
+                        <Panel title={t('Payment')}>
+                            <DescriptionList
+                                items={[
+                                    { label: t('Method'), value: paymentMethodLabel(order.paymentMethod, t) || '—' },
+                                    { label: t('Subtotal'), value: <span className="tabular-nums">{fmt.money(order.summary.subtotal)}</span> },
+                                    { label: t('Shipping'), value: <span className="tabular-nums">{fmt.money(order.summary.shipping)}</span> },
+                                    { label: t('Tax'), value: <span className="tabular-nums">{fmt.money(order.summary.tax)}</span> },
+                                    { label: t('Total'), value: <span className="font-semibold tabular-nums">{fmt.money(order.summary.total)}</span> },
+                                ]}
+                            />
+                        </Panel>
                     </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </TabsContent>
+                </div>
 
-          <TabsContent value='shipping' className='space-y-4'>
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('Shipping Information')}</CardTitle>
-              </CardHeader>
-              <CardContent className='space-y-4'>
-                <div>
-                  <Label htmlFor='shipping_method'>{t('Shipping Method')}</Label>
-                  <Select defaultValue={order.shippingMethodId.toString()}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {shippingMethods.map((method) => (
-                        <SelectItem key={method.id} value={method.id.toString()}>
-                          {method.name} - ${method.cost.toFixed(2)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label htmlFor='shipping_address'>{t('Shipping Address')}</Label>
-                  <Textarea 
-                    id='shipping_address' 
-                    defaultValue={order.shippingAddress.address} 
-                    rows={3} 
-                  />
-                </div>
-                <div className='grid grid-cols-2 gap-4'>
-                  <div>
-                    <Label htmlFor='shipping_city'>{t('City')}</Label>
-                    <Input id='shipping_city' defaultValue={order.shippingAddress.city} />
-                  </div>
-                  <div>
-                    <Label htmlFor='shipping_postal'>{t('Postal Code')}</Label>
-                    <Input id='shipping_postal' defaultValue={order.shippingAddress.postalCode} />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor='tracking_number'>{t('Tracking Number')}</Label>
-                  <Input 
-                    id='tracking_number' 
-                    defaultValue={order.trackingNumber || ''} 
-                    onChange={(e) => setFormData(prev => ({ ...prev, tracking_number: e.target.value }))}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value='payment' className='space-y-4'>
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('Payment Information')}</CardTitle>
-              </CardHeader>
-              <CardContent className='space-y-4'>
-                <div className='grid grid-cols-2 gap-4'>
-                  <div>
-                    <Label htmlFor='payment_method'>{t('Payment Method')}</Label>
-                    <Select defaultValue={order.paymentMethod}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='credit_card'>{t('Credit Card')}</SelectItem>
-                        <SelectItem value='paypal'>{t('PayPal')}</SelectItem>
-                        <SelectItem value='bank_transfer'>{t('Bank Transfer')}</SelectItem>
-                        <SelectItem value='cash'>{t('Cash on Delivery')}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor='payment_status'>{t('Payment Status')}</Label>
-                    <Select defaultValue={order.paymentStatus} onValueChange={(value) => setFormData(prev => ({ ...prev, payment_status: value }))}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='pending'>{t('Pending')}</SelectItem>
-                        <SelectItem value='paid'>{t('Paid')}</SelectItem>
-                        <SelectItem value='failed'>{t('Failed')}</SelectItem>
-                        <SelectItem value='refunded'>{t('Refunded')}</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-                <div className='grid grid-cols-3 gap-4'>
-                  <div>
-                    <Label htmlFor='subtotal'>{t('Subtotal')}</Label>
-                    <Input id='subtotal' type='number' step='0.01' defaultValue={order.summary.subtotal.toFixed(2)} />
-                  </div>
-                  <div>
-                    <Label htmlFor='tax'>{t('Tax Amount')}</Label>
-                    <Input id='tax' type='number' step='0.01' defaultValue={order.summary.tax.toFixed(2)} />
-                  </div>
-                  <div>
-                    <Label htmlFor='total'>{t('Total Amount')}</Label>
-                    <Input id='total' type='number' step='0.01' defaultValue={order.summary.total.toFixed(2)} />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor='order_status'>{t('Order Status')}</Label>
-                  <Select defaultValue={order.status} onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='pending'>{t('Pending')}</SelectItem>
-                      <SelectItem value='processing'>{t('Processing')}</SelectItem>
-                      <SelectItem value='shipped'>{t('Shipped')}</SelectItem>
-                      <SelectItem value='delivered'>{t('Delivered')}</SelectItem>
-                      <SelectItem value='cancelled'>{t('Cancelled')}</SelectItem>
-                      <SelectItem value='completed'>{t('Completed')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </PageTemplate>
-  );
+                {canEdit && (
+                    <div className="bg-background/95 supports-[backdrop-filter]:bg-background/80 sticky bottom-14 z-10 -mx-4 flex items-center justify-end gap-2 border-t px-4 py-3 backdrop-blur md:bottom-0 md:mx-0 md:rounded-xl md:border">
+                        <Button variant="outline" asChild>
+                            <Link href={route('orders.show', order.id)}>{t('Discard')}</Link>
+                        </Button>
+                        <Button type="submit" disabled={form.processing || !form.isDirty}>
+                            {form.processing && <Loader2 className="animate-spin" aria-hidden />}
+                            {t('Save changes')}
+                        </Button>
+                    </div>
+                )}
+            </form>
+        </PageTemplate>
+    );
 }

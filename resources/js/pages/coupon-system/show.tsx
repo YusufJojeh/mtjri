@@ -1,232 +1,258 @@
-import React from 'react';
-import { PageTemplate } from '@/components/page-template';
-import { ArrowLeft, Edit, Copy, Users, ShoppingCart } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { router, usePage } from '@inertiajs/react';
-import { useCurrencyFormatter } from '@/hooks/use-store-currency';
+import { AlertTriangle, Pause, Pencil, Play, ShoppingBag } from 'lucide-react';
+import { PageTemplate } from '@/components/page-template';
+import { DescriptionList, EmptyState, MetricCard, PageHeader, Panel } from '@/components/ds/layout';
+import { StatusBadge } from '@/components/ds/status-badge';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from '@/components/custom-toast';
 import { usePermissions } from '@/hooks/usePermissions';
+import { useCommerceFormat } from '@/hooks/use-commerce-format';
+import { orderStatusMeta, paymentStatusMeta } from '@/lib/commerce/status';
+import { DiscountCode, DiscountStateBadge, UsageMeter } from '@/components/discounts/discount-bits';
+import { daysUntil, deriveState, localDate, missingDates, num, valueLabel, type Discount, type DiscountState } from '@/components/discounts/discount-utils';
 
-export default function ShowCoupon() {
-  const { t } = useTranslation();
-  const { coupon, stats, recentOrders } = usePage().props as any;
-  const formatCurrency = useCurrencyFormatter();
-  const { hasPermission } = usePermissions();
+interface Stats {
+    total_usage: number;
+    unique_users: number;
+    recent_usage: number;
+    discount_given?: number;
+    revenue?: number;
+    avg_order_value?: number | null;
+    state?: DiscountState;
+    last_used_at?: string | null;
+}
 
-  const pageActions = [
-    {
-      label: t('Back'),
-      icon: <ArrowLeft className='h-4 w-4' />,
-      variant: 'outline' as const,
-      onClick: () => router.visit(route('coupon-system.index'))
-    },
-    {
-      label: t('Copy Code'),
-      icon: <Copy className='h-4 w-4' />,
-      variant: 'outline' as const,
-      onClick: () => navigator.clipboard.writeText(coupon.code)
-    }
-  ];
-  
-  if (hasPermission('edit-coupon-system')) {
-    pageActions.push({
-      label: t('Edit Coupon'),
-      icon: <Edit className='h-4 w-4' />,
-      variant: 'default' as const,
-      onClick: () => router.visit(route('coupon-system.edit', coupon.id))
-    });
-  }
+interface RecentOrder {
+    id: number;
+    order_number: string;
+    customer_name: string;
+    total: number | string;
+    created_at?: string;
+    date?: string;
+    status?: string;
+    payment_status?: string;
+    coupon_discount?: number;
+}
 
-  return (
-    <PageTemplate 
-      title={t('Coupon Details')}
-      url='/coupon-system/show'
-      actions={pageActions}
-      breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Coupon System'), href: route('coupon-system.index') },
-        { title: t('Coupon Details') }
-      ]}
-    >
-      <div className='space-y-6'>
-        <div className='grid gap-6 md:grid-cols-3'>
-          <Card className='md:col-span-2'>
-            <CardHeader>
-              <CardTitle>{t('Coupon Information')}</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div>
-                <div className='flex items-center space-x-2 mb-2'>
-                  <h2 className='text-2xl font-bold'>{coupon.name}</h2>
-                  <Badge variant={coupon.status ? 'default' : 'secondary'}>
-                    {coupon.status ? t('Active') : t('Inactive')}
-                  </Badge>
-                </div>
-                <div className='flex items-center space-x-2 mb-4'>
-                  <code className='text-lg bg-muted px-3 py-2 rounded font-mono'>{coupon.code}</code>
-                  <Button variant='ghost' size='sm' onClick={() => navigator.clipboard.writeText(coupon.code)}>
-                    <Copy className='h-4 w-4' />
-                  </Button>
-                </div>
-                {coupon.description && (
-                  <p className='text-muted-foreground mb-4'>{coupon.description}</p>
-                )}
-                <div className='grid grid-cols-2 gap-4'>
-                  <div>
-                    <p className='text-sm font-medium text-muted-foreground'>{t('Discount Type')}</p>
-                    <p className='font-semibold'>
-                      {coupon.type === 'percentage' ? t('Percentage Discount') : t('Fixed Amount')}
-                    </p>
-                  </div>
-                  <div>
-                    <p className='text-sm font-medium text-muted-foreground'>{t('Discount Value')}</p>
-                    <p className='font-semibold text-green-600'>
-                      {coupon.type === 'percentage' 
-                        ? `${coupon.discount_amount}%` 
-                        : formatCurrency(coupon.discount_amount)}
-                    </p>
-                  </div>
-                  {coupon.start_date && (
-                    <div>
-                      <p className='text-sm font-medium text-muted-foreground'>{t('Start Date')}</p>
-                      <p>{new Date(coupon.start_date).toLocaleDateString()}</p>
+export default function DiscountShow() {
+    const { t } = useTranslation();
+    const f = useCommerceFormat();
+    const { hasPermission } = usePermissions();
+    const { coupon, stats, recentOrders = [] } = usePage().props as unknown as { coupon: Discount; stats?: Stats; recentOrders?: RecentOrder[] };
+    const [pending, setPending] = useState(false);
+
+    // The shared /coupon-system/{id} route renders without performance data; load the full view.
+    useEffect(() => {
+        if (!stats && coupon?.id) router.visit(route('store-coupons.show', coupon.id), { replace: true, preserveScroll: true });
+    }, [stats, coupon?.id]);
+
+    const state: DiscountState = stats?.state ?? deriveState(coupon);
+    const daysLeft = daysUntil(coupon.expiry_date);
+    const used = Math.max(stats?.total_usage ?? 0, coupon.used_count ?? 0);
+    const min = num(coupon.minimum_spend);
+    const cap = num(coupon.maximum_spend);
+    const canView = hasPermission('view-orders');
+
+    const toggle = async () => {
+        setPending(true);
+        try {
+            const res = await axios.post(route('store-coupons.toggle-status', coupon.id), {}, { headers: { Accept: 'application/json' } });
+            toast.success(res.data?.status ? t('{{name}} is now active', { name: coupon.name }) : t('{{name}} is paused', { name: coupon.name }));
+            router.reload({ onFinish: () => setPending(false) });
+        } catch {
+            toast.error(t('Could not change the status. Please try again.'));
+            setPending(false);
+        }
+    };
+
+    const header = (
+        <PageHeader
+            back={{ href: route('coupon-system.index'), label: t('Discounts') }}
+            title={coupon.name}
+            meta={<DiscountStateBadge state={state} daysLeft={daysLeft} />}
+            description={<DiscountCode code={coupon.code} size="lg" className="mt-1" />}
+            actions={
+                <>
+                    {hasPermission('toggle-status-coupon-system') && (
+                        <Button variant="outline" size="sm" className="h-9" onClick={toggle} disabled={pending}>
+                            {coupon.status ? <Pause className="size-4" /> : <Play className="size-4 rtl:-scale-x-100" />}
+                            {pending ? t('Saving…') : coupon.status ? t('Pause') : t('Activate')}
+                        </Button>
+                    )}
+                    {hasPermission('edit-coupon-system') && (
+                        <Button size="sm" className="h-9" asChild>
+                            <Link href={route('coupon-system.edit', coupon.id)}>
+                                <Pencil className="size-4" />
+                                {t('Edit')}
+                            </Link>
+                        </Button>
+                    )}
+                </>
+            }
+        />
+    );
+
+    const from = coupon.start_date ? f.date(localDate(coupon.start_date)) : null;
+    const to = coupon.expiry_date ? f.date(localDate(coupon.expiry_date)) : null;
+
+    const scheduleText = (() => {
+        switch (state) {
+            case 'paused':
+                return t('Paused. Customers can’t use this code until you activate it.');
+            case 'expired':
+                return t('Ended on {{date}}.', { date: to });
+            case 'scheduled':
+                return t('Starts on {{date}}.', { date: from });
+            default:
+                if (daysLeft !== null && daysLeft >= 0) return daysLeft === 0 ? t('Running now. Ends today.') : t('Running now. Ends in {{count}} days.', { count: daysLeft });
+                return t('Running now with no end date.');
+        }
+    })();
+
+    return (
+        <PageTemplate
+            title={coupon.name}
+            url="/coupon-system/show"
+            header={header}
+            width="narrow"
+            breadcrumbs={[
+                { title: t('Dashboard'), href: route('dashboard') },
+                { title: t('Discounts'), href: route('coupon-system.index') },
+                { title: coupon.name },
+            ]}
+        >
+            <div className="space-y-5">
+                {coupon.status && missingDates(coupon) ? (
+                    <div role="status" className="bg-warning-soft text-warning-fg flex items-start gap-2 rounded-xl px-4 py-3 text-sm">
+                        <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden />
+                        <span>{t('Checkout only accepts this code when it has both a start and an end date. Edit the discount to add them.')}</span>
                     </div>
-                  )}
-                  {coupon.expiry_date && (
-                    <div>
-                      <p className='text-sm font-medium text-muted-foreground'>{t('End Date')}</p>
-                      <p>{new Date(coupon.expiry_date).toLocaleDateString()}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                ) : null}
 
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('Usage Statistics')}</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <div className='text-center p-4 border rounded-lg'>
-                <div className='flex items-center justify-center mb-2'>
-                  <Users className='h-5 w-5 text-primary mr-2' />
-                  <span className='text-2xl font-bold'>{stats?.total_usage || coupon.used_count || 0}</span>
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                    <MetricCard label={t('Orders with this code')} value={stats ? f.number(stats.total_usage) : '—'} loading={!stats} hint={t('All time')} />
+                    <MetricCard label={t('Sales from these orders')} value={stats ? f.money(stats.revenue ?? 0) : '—'} loading={!stats} hint={t('Excludes cancelled and refunded')} />
+                    <MetricCard label={t('Discount given')} value={stats ? f.money(stats.discount_given ?? 0) : '—'} loading={!stats} hint={t('Total off customer orders')} />
+                    <MetricCard
+                        label={t('Customers')}
+                        value={stats ? f.number(stats.unique_users) : '—'}
+                        loading={!stats}
+                        hint={stats?.recent_usage ? t('{{count}} uses in the last 30 days', { count: stats.recent_usage }) : t('No uses in the last 30 days')}
+                    />
                 </div>
-                <p className='text-sm text-muted-foreground'>{t('Times Used')}</p>
-              </div>
-              <div className='text-center p-4 border rounded-lg'>
-                <div className='flex items-center justify-center mb-2'>
-                  <ShoppingCart className='h-5 w-5 text-primary mr-2' />
-                  <span className='text-2xl font-bold'>{formatCurrency(stats?.total_savings || 0)}</span>
+
+                <div className="grid gap-5 lg:grid-cols-2">
+                    <Panel title={t('What the customer gets')}>
+                        <p className="text-2xl font-semibold tracking-tight">{valueLabel(coupon, f, t)}</p>
+                        <p className="text-muted-foreground mt-1 text-sm">
+                            {coupon.type === 'percentage' ? t('Percentage off the order subtotal') : t('Fixed amount off the order subtotal')}
+                            {coupon.type === 'percentage' && cap ? ` · ${t('up to {{amount}}', { amount: f.money(cap) })}` : ''}
+                        </p>
+                        {coupon.description ? <p className="mt-3 border-t pt-3 text-sm">{coupon.description}</p> : null}
+                    </Panel>
+
+                    <Panel title={t('Eligibility & limits')}>
+                        <DescriptionList
+                            items={[
+                                { label: t('Minimum order'), value: min ? f.money(min) : t('No minimum') },
+                                { label: t('Maximum discount'), value: cap ? f.money(cap) : t('No cap') },
+                                { label: t('Total uses allowed'), value: coupon.use_limit_per_coupon ? f.number(coupon.use_limit_per_coupon) : t('Unlimited') },
+                                { label: t('Uses per customer'), value: coupon.use_limit_per_user ? f.number(coupon.use_limit_per_user) : t('Unlimited') },
+                            ]}
+                        />
+                    </Panel>
+
+                    <Panel title={t('Schedule')}>
+                        <p className="mb-3 text-sm">{scheduleText}</p>
+                        <DescriptionList
+                            items={[
+                                { label: t('Starts'), value: from ?? t('Not set') },
+                                { label: t('Ends'), value: to ?? t('Not set') },
+                                { label: t('Created'), value: f.date(coupon.created_at) },
+                                { label: t('Last updated'), value: f.date(coupon.updated_at) },
+                            ]}
+                        />
+                    </Panel>
+
+                    <Panel title={t('Usage & performance')}>
+                        <UsageMeter used={used} limit={coupon.use_limit_per_coupon} />
+                        <DescriptionList
+                            className="mt-4"
+                            items={[
+                                { label: t('Average order value'), value: stats?.avg_order_value ? f.money(stats.avg_order_value) : '—' },
+                                {
+                                    label: t('Average discount per order'),
+                                    value: stats && stats.total_usage > 0 ? f.money((stats.discount_given ?? 0) / stats.total_usage) : '—',
+                                },
+                                { label: t('Last used'), value: stats?.last_used_at ? f.relative(stats.last_used_at) : t('Never') },
+                            ]}
+                        />
+                    </Panel>
                 </div>
-                <p className='text-sm text-muted-foreground'>{t('Total Savings')}</p>
-              </div>
-              <div className='text-center p-4 border rounded-lg'>
-                <div className='flex items-center justify-center mb-2'>
-                  <span className='text-2xl font-bold'>{stats?.unique_users || 0}</span>
-                </div>
-                <p className='text-sm text-muted-foreground'>{t('Unique Users')}</p>
-              </div>
-              <div className='text-center p-4 border rounded-lg'>
-                <div className='flex items-center justify-center mb-2'>
-                  <span className='text-2xl font-bold'>{formatCurrency(stats?.avg_savings_per_use || 0)}</span>
-                </div>
-                <p className='text-sm text-muted-foreground'>{t('Avg. Savings per Use')}</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
-        <div className='grid gap-6 md:grid-cols-2'>
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('Usage Restrictions')}</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-3'>
-              <div className='flex justify-between'>
-                <span className='text-sm font-medium text-muted-foreground'>{t('Minimum Spend')}</span>
-                <span>{coupon.minimum_spend ? formatCurrency(coupon.minimum_spend) : t('No minimum')}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span className='text-sm font-medium text-muted-foreground'>{t('Maximum Spend')}</span>
-                <span>{coupon.maximum_spend ? formatCurrency(coupon.maximum_spend) : t('No maximum')}</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('Usage Limits')}</CardTitle>
-            </CardHeader>
-            <CardContent className='space-y-3'>
-              <div className='flex justify-between'>
-                <span className='text-sm font-medium text-muted-foreground'>{t('Usage Limit per Coupon')}</span>
-                <span>{coupon.use_limit_per_coupon || t('Unlimited')}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span className='text-sm font-medium text-muted-foreground'>{t('Usage Limit per User')}</span>
-                <span>{coupon.use_limit_per_user || t('Unlimited')}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span className='text-sm font-medium text-muted-foreground'>{t('Used Count')}</span>
-                <span className='font-semibold'>
-                  {coupon.used_count || 0} 
-                  {coupon.use_limit_per_coupon ? ` / ${coupon.use_limit_per_coupon}` : ''}
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {recentOrders && recentOrders.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('Recent Orders Using This Coupon')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className='space-y-3'>
-                {recentOrders.map((order: any) => (
-                  <div key={order.id} className='flex items-center justify-between p-3 border rounded-lg'>
-                    <div>
-                      <p className='font-medium'>{order.order_number}</p>
-                      <p className='text-sm text-muted-foreground'>{order.customer_name}</p>
-                      <p className='text-sm text-muted-foreground'>{order.date}</p>
-                    </div>
-                    <div className='text-right'>
-                      <p className='font-medium'>{formatCurrency(order.total)}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('Additional Information')}</CardTitle>
-          </CardHeader>
-          <CardContent className='space-y-3'>
-            <div className='flex justify-between'>
-              <span className='text-sm font-medium text-muted-foreground'>{t('Created Date')}</span>
-              <span>{new Date(coupon.created_at).toLocaleDateString()}</span>
+                <Panel title={t('Recent orders using this code')} flush>
+                    {!stats ? (
+                        <div className="space-y-2 px-4 pb-4">
+                            <Skeleton className="h-10 w-full" />
+                            <Skeleton className="h-10 w-full" />
+                        </div>
+                    ) : recentOrders.length === 0 ? (
+                        <EmptyState
+                            compact
+                            icon={<ShoppingBag />}
+                            title={t('No orders have used this code yet')}
+                            description={t('Share the code with customers, for example on social media or in your store banner.')}
+                            action={
+                                <Button variant="outline" size="sm" asChild>
+                                    <Link href={route('coupon-system.index')}>{t('Back to discounts')}</Link>
+                                </Button>
+                            }
+                        />
+                    ) : (
+                        <ul className="divide-y border-t" role="list">
+                            {recentOrders.map((o) => {
+                                const inner = (
+                                    <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
+                                        <div className="min-w-0">
+                                            <div className="flex flex-wrap items-center gap-2">
+                                                <bdi dir="ltr" className="font-medium tabular-nums">
+                                                    #{o.order_number}
+                                                </bdi>
+                                                {o.status && <StatusBadge meta={orderStatusMeta(o.status)} />}
+                                                {o.payment_status && <StatusBadge meta={paymentStatusMeta(o.payment_status)} className="hidden sm:inline-flex" />}
+                                            </div>
+                                            <div className="text-muted-foreground truncate text-xs">
+                                                {o.customer_name} · {o.created_at ? f.date(o.created_at) : o.date}
+                                            </div>
+                                        </div>
+                                        <div className="shrink-0 text-end">
+                                            <div className="font-medium tabular-nums">{f.money(o.total)}</div>
+                                            {o.coupon_discount ? (
+                                                <div className="text-muted-foreground text-xs tabular-nums">{t('{{amount}} off', { amount: f.money(o.coupon_discount) })}</div>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                );
+                                return (
+                                    <li key={o.id}>
+                                        {canView ? (
+                                            <Link href={route('orders.show', o.id)} className="hover:bg-muted/50 focus-visible:bg-muted block outline-none">
+                                                {inner}
+                                            </Link>
+                                        ) : (
+                                            inner
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    )}
+                </Panel>
             </div>
-            <div className='flex justify-between'>
-              <span className='text-sm font-medium text-muted-foreground'>{t('Last Updated')}</span>
-              <span>{new Date(coupon.updated_at).toLocaleDateString()}</span>
-            </div>
-            {stats?.recent_usage > 0 && (
-              <div className='flex justify-between'>
-                <span className='text-sm font-medium text-muted-foreground'>{t('Usage (Last 30 Days)')}</span>
-                <span className='font-semibold'>{stats.recent_usage}</span>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-    </PageTemplate>
-  );
+        </PageTemplate>
+    );
 }

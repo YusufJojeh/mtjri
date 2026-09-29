@@ -37,8 +37,23 @@ class StoreCouponController extends BaseController
             $query->where('status', $request->status);
         }
 
-        $perPage = $request->get('per_page', 10);
-        $coupons = $query->latest()->paginate($perPage);
+        // Lifecycle view (derived from status + schedule)
+        $view = in_array($request->get('view'), ['active', 'scheduled', 'expired', 'paused'], true) ? $request->get('view') : 'all';
+        $this->applyStateScope($query, $view);
+
+        $perPage = (int) $request->get('per_page', 10);
+        $perPage = $perPage > 0 && $perPage <= 100 ? $perPage : 10;
+        $coupons = $query->latest()->paginate($perPage)->withQueryString();
+
+        // Real per-coupon performance from orders that used each code
+        $performance = $this->performanceByCode($currentStoreId, $coupons->getCollection()->pluck('code')->all());
+        $coupons->getCollection()->transform(function ($coupon) use ($performance) {
+            $perf = $performance[$coupon->code] ?? ['orders' => 0, 'discount' => 0, 'revenue' => 0];
+            $coupon->setAttribute('performance', $perf);
+            $coupon->setAttribute('state', $this->couponState($coupon));
+            $coupon->setAttribute('days_left', $coupon->expiry_date ? (int) floor(now()->diffInDays($coupon->expiry_date, false)) : null);
+            return $coupon;
+        });
 
         // Get statistics
         $totalCoupons = StoreCoupon::where('store_id', $currentStoreId)->count();
@@ -46,16 +61,83 @@ class StoreCouponController extends BaseController
         $percentageCoupons = StoreCoupon::where('store_id', $currentStoreId)->where('type', 'percentage')->count();
         $flatCoupons = StoreCoupon::where('store_id', $currentStoreId)->where('type', 'flat')->count();
 
+        $viewCounts = ['all' => $totalCoupons];
+        foreach (['active', 'scheduled', 'expired', 'paused'] as $state) {
+            $viewCounts[$state] = $this->applyStateScope(StoreCoupon::where('store_id', $currentStoreId), $state)->count();
+        }
+
         return Inertia::render('coupon-system/index', [
             'coupons' => $coupons,
-            'filters' => $request->only(['search', 'type', 'status', 'per_page']),
+            'filters' => array_merge($request->only(['search', 'type', 'status', 'per_page']), ['view' => $view]),
             'stats' => [
                 'total' => $totalCoupons,
                 'active' => $activeCoupons,
                 'percentage' => $percentageCoupons,
                 'flat' => $flatCoupons
-            ]
+            ],
+            'viewCounts' => $viewCounts,
         ]);
+    }
+
+    /**
+     * Scope a coupon query to a derived lifecycle state.
+     * paused = switched off; expired = past expiry; scheduled = starts later; active = running now.
+     */
+    private function applyStateScope($query, string $state)
+    {
+        $now = now();
+        switch ($state) {
+            case 'paused':
+                return $query->where('status', false);
+            case 'expired':
+                return $query->where('status', true)->whereNotNull('expiry_date')->where('expiry_date', '<', $now);
+            case 'scheduled':
+                return $query->where('status', true)
+                    ->where(fn ($q) => $q->whereNull('expiry_date')->orWhere('expiry_date', '>=', $now))
+                    ->whereNotNull('start_date')->where('start_date', '>', $now);
+            case 'active':
+                return $query->where('status', true)
+                    ->where(fn ($q) => $q->whereNull('expiry_date')->orWhere('expiry_date', '>=', $now))
+                    ->where(fn ($q) => $q->whereNull('start_date')->orWhere('start_date', '<=', $now));
+        }
+        return $query;
+    }
+
+    private function couponState(StoreCoupon $coupon): string
+    {
+        if (!$coupon->status) {
+            return 'paused';
+        }
+        if ($coupon->expiry_date && $coupon->expiry_date->lt(now())) {
+            return 'expired';
+        }
+        if ($coupon->start_date && $coupon->start_date->gt(now())) {
+            return 'scheduled';
+        }
+        return 'active';
+    }
+
+    /**
+     * Orders, discount given and sales (excluding cancelled/refunded orders) per coupon code.
+     */
+    private function performanceByCode($storeId, array $codes): array
+    {
+        if (empty($codes)) {
+            return [];
+        }
+
+        return \App\Models\Order::where('store_id', $storeId)
+            ->whereIn('coupon_code', $codes)
+            ->groupBy('coupon_code')
+            ->selectRaw('coupon_code, COUNT(*) as orders, COALESCE(SUM(coupon_discount), 0) as discount')
+            ->selectRaw("COALESCE(SUM(CASE WHEN status NOT IN ('cancelled', 'refunded') THEN total_amount ELSE 0 END), 0) as revenue")
+            ->get()
+            ->mapWithKeys(fn ($r) => [$r->coupon_code => [
+                'orders' => (int) $r->orders,
+                'discount' => round((float) $r->discount, 2),
+                'revenue' => round((float) $r->revenue, 2),
+            ]])
+            ->all();
     }
 
     /**
@@ -152,14 +234,26 @@ class StoreCouponController extends BaseController
             'usage_percentage' => $storeCoupon->use_limit_per_coupon ? ($totalUsage / $storeCoupon->use_limit_per_coupon) * 100 : 0,
         ];
         
-        // Get recent orders using this coupon
-        $recentOrders = $orders->take(5)->map(function($order) {
+        // Real performance from the orders themselves (read-only)
+        $countedOrders = $orders->whereNotIn('status', ['cancelled', 'refunded']);
+        $stats['discount_given'] = round((float) $orders->sum('coupon_discount'), 2);
+        $stats['revenue'] = round((float) $countedOrders->sum('total_amount'), 2);
+        $stats['avg_order_value'] = $countedOrders->count() > 0 ? round((float) $countedOrders->avg('total_amount'), 2) : null;
+        $stats['state'] = $this->couponState($storeCoupon);
+        $stats['last_used_at'] = optional($orders->max('created_at'))->toIso8601String();
+
+        // Get recent orders using this coupon (newest first)
+        $recentOrders = $orders->sortByDesc('created_at')->take(10)->values()->map(function($order) {
             return [
                 'id' => $order->id,
                 'order_number' => $order->order_number,
                 'customer_name' => $order->customer_first_name . ' ' . $order->customer_last_name,
                 'total' => $order->total_amount,
-                'date' => $order->created_at->format('M j, Y')
+                'date' => $order->created_at->format('M j, Y'),
+                'created_at' => $order->created_at->toIso8601String(),
+                'status' => $order->status,
+                'payment_status' => $order->payment_status,
+                'coupon_discount' => (float) $order->coupon_discount,
             ];
         });
         

@@ -18,38 +18,156 @@ class CustomerController extends BaseController
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
-        
-        $perPage = $request->input('per_page', 10);
 
-        $customers = Customer::where('store_id', $currentStoreId)
-            ->with(['addresses'])
-            ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
-            
+        // Optional, validated list filters (invalid values are ignored).
+        $validator = \Validator::make($request->only(['q', 'status', 'group', 'sort', 'per_page']), [
+            'q' => 'nullable|string|max:100',
+            'status' => 'nullable|in:all,active,inactive',
+            'group' => 'nullable|string|max:50',
+            'sort' => 'nullable|in:newest,oldest,name,orders,spend,last_order',
+            'per_page' => 'nullable|integer|min:5|max:100',
+        ]);
+        $valid = $validator->valid();
+        $filters = [
+            'q' => trim((string) ($valid['q'] ?? '')),
+            'status' => $valid['status'] ?? 'all',
+            'group' => $valid['group'] ?? '',
+            'sort' => $valid['sort'] ?? 'newest',
+        ];
+        $perPage = (int) ($valid['per_page'] ?? 25);
+
+        // Read-only aggregate from real orders (the customers.total_* columns can be stale).
+        $orderAgg = \App\Models\Order::where('store_id', $currentStoreId)
+            ->whereNotNull('customer_id')
+            ->groupBy('customer_id')
+            ->selectRaw("customer_id,
+                COUNT(*) as orders_count,
+                SUM(CASE WHEN payment_status = 'paid' THEN total_amount ELSE 0 END) as lifetime_spend,
+                MAX(created_at) as last_order_at");
+
+        $base = Customer::where('customers.store_id', $currentStoreId);
+        if ($filters['q'] !== '') {
+            $term = '%' . $filters['q'] . '%';
+            $fullName = in_array(\DB::connection()->getDriverName(), ['sqlite', 'pgsql'])
+                ? "(COALESCE(customers.first_name, '') || ' ' || COALESCE(customers.last_name, ''))"
+                : "CONCAT(COALESCE(customers.first_name, ''), ' ', COALESCE(customers.last_name, ''))";
+            $base->where(function ($q) use ($term, $fullName) {
+                $q->where('customers.first_name', 'like', $term)
+                    ->orWhere('customers.last_name', 'like', $term)
+                    ->orWhere('customers.email', 'like', $term)
+                    ->orWhere('customers.phone', 'like', $term)
+                    ->orWhereRaw($fullName . ' LIKE ?', [$term]);
+            });
+        }
+        if ($filters['group'] !== '') {
+            $base->where('customers.customer_group', $filters['group']);
+        }
+
+        $statusCounts = [
+            'all' => (clone $base)->count(),
+            'active' => (clone $base)->where('customers.is_active', true)->count(),
+            'inactive' => (clone $base)->where('customers.is_active', false)->count(),
+        ];
+
+        if ($filters['status'] === 'active') {
+            $base->where('customers.is_active', true);
+        } elseif ($filters['status'] === 'inactive') {
+            $base->where('customers.is_active', false);
+        }
+
+        $list = $base->leftJoinSub($orderAgg, 'oa', 'oa.customer_id', '=', 'customers.id')
+            ->select('customers.*', 'oa.orders_count', 'oa.lifetime_spend', 'oa.last_order_at');
+
+        switch ($filters['sort']) {
+            case 'oldest':
+                $list->orderBy('customers.created_at', 'asc');
+                break;
+            case 'name':
+                $list->orderBy('customers.first_name')->orderBy('customers.last_name');
+                break;
+            case 'orders':
+                $list->orderByRaw('COALESCE(oa.orders_count, 0) DESC');
+                break;
+            case 'spend':
+                $list->orderByRaw('COALESCE(oa.lifetime_spend, 0) DESC');
+                break;
+            case 'last_order':
+                $list->orderByRaw('CASE WHEN oa.last_order_at IS NULL THEN 1 ELSE 0 END')->orderBy('oa.last_order_at', 'desc');
+                break;
+            default:
+                $list->orderBy('customers.created_at', 'desc');
+        }
+        $list->orderBy('customers.id', 'desc');
+
+        $customers = $list->paginate($perPage)->withQueryString();
+
+        $rows = collect($customers->items())->map(function ($c) {
+            return [
+                'id' => $c->id,
+                'first_name' => $c->first_name,
+                'last_name' => $c->last_name,
+                'full_name' => trim($c->first_name . ' ' . $c->last_name),
+                'initials' => strtoupper(mb_substr((string) $c->first_name, 0, 1) . mb_substr((string) $c->last_name, 0, 1)),
+                'email' => $c->email,
+                'phone' => $c->phone,
+                'avatar' => $c->avatar,
+                'is_active' => (bool) $c->is_active,
+                'customer_group' => $c->customer_group,
+                'created_at' => optional($c->created_at)->toIso8601String(),
+                'orders_count' => (int) ($c->orders_count ?? 0),
+                'lifetime_spend' => round((float) ($c->lifetime_spend ?? 0), 2),
+                'last_order_at' => $c->last_order_at ? \Carbon\Carbon::parse($c->last_order_at)->toIso8601String() : null,
+            ];
+        })->values();
+
         // Get statistics
         $totalCustomers = Customer::where('store_id', $currentStoreId)->count();
         $activeCustomers = Customer::where('store_id', $currentStoreId)->where('is_active', true)->count();
         $newThisMonth = Customer::where('store_id', $currentStoreId)
-            ->whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
+            ->where('created_at', '>=', now()->startOfMonth())
             ->count();
-        $totalSpent = Customer::where('store_id', $currentStoreId)
-            ->where('total_orders', '>', 0)
-            ->sum('total_spent');
-        $totalOrders = Customer::where('store_id', $currentStoreId)
-            ->where('total_orders', '>', 0)
-            ->sum('total_orders');
-        $avgOrderValue = $totalOrders > 0 ? $totalSpent / $totalOrders : 0;
+        // Real, order-derived facts (store-scoped).
+        $customersWithOrders = \App\Models\Order::where('store_id', $currentStoreId)
+            ->whereNotNull('customer_id')
+            ->distinct('customer_id')
+            ->count('customer_id');
+        $repeatCustomers = \DB::query()->fromSub(
+            \App\Models\Order::where('store_id', $currentStoreId)
+                ->whereNotNull('customer_id')
+                ->groupBy('customer_id')
+                ->havingRaw('COUNT(*) >= 2')
+                ->select('customer_id'),
+            'rc'
+        )->count();
+
+        $groups = Customer::where('store_id', $currentStoreId)
+            ->whereNotNull('customer_group')
+            ->where('customer_group', '!=', '')
+            ->distinct()
+            ->orderBy('customer_group')
+            ->pluck('customer_group')
+            ->values();
 
         return Inertia::render('customers/index', [
-            'customers' => $customers,
+            'customers' => $rows,
+            'pagination' => [
+                'current_page' => $customers->currentPage(),
+                'last_page' => $customers->lastPage(),
+                'per_page' => $customers->perPage(),
+                'total' => $customers->total(),
+                'from' => $customers->firstItem(),
+                'to' => $customers->lastItem(),
+            ],
+            'counts' => $statusCounts,
+            'groups' => $groups,
             'stats' => [
                 'totalCustomers' => $totalCustomers,
                 'activeCustomers' => $activeCustomers,
                 'newThisMonth' => $newThisMonth,
-                'avgOrderValue' => round($avgOrderValue, 2)
+                'customersWithOrders' => $customersWithOrders,
+                'repeatCustomers' => $repeatCustomers,
             ],
-            'filters' => $request->only(['per_page'])
+            'filters' => $filters,
         ]);
     }
 
@@ -147,47 +265,56 @@ class CustomerController extends BaseController
     {
         $user = Auth::user();
         $currentStoreId = getCurrentStoreId($user);
-        
+
         $customer = Customer::where('store_id', $currentStoreId)
             ->with(['addresses'])
             ->findOrFail($id);
-        
-        // Calculate dynamic customer statistics from actual orders
+
+        // Calculate customer statistics from actual orders (newest first)
         $orders = \App\Models\Order::where('customer_id', $customer->id)
-                                  ->where('store_id', $currentStoreId)
-                                  ->get();
-        
+            ->where('store_id', $currentStoreId)
+            ->withCount('items')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
+            ->get();
+
         $totalOrders = $orders->count();
-        $totalSpent = $orders->where('payment_status', 'paid')->sum('total_amount');
-        $avgOrderValue = $totalOrders > 0 ? $totalSpent / $totalOrders : 0;
+        $paidOrders = $orders->where('payment_status', 'paid');
+        $totalSpent = (float) $paidOrders->sum('total_amount');
+        // Average over paid orders only, so unpaid/cancelled orders don't dilute it.
+        $avgOrderValue = $paidOrders->count() > 0 ? $totalSpent / $paidOrders->count() : 0;
         $lastOrderDate = $orders->max('created_at');
         $pendingOrders = $orders->where('status', 'pending')->count();
-        
+
         // Add calculated stats to customer data
         $customer->total_orders = $totalOrders;
         $customer->total_spent = $totalSpent;
         $customer->avg_order_value = $avgOrderValue;
-        $customer->last_order_date = $lastOrderDate;
+        $customer->paid_orders = $paidOrders->count();
+        $customer->last_order_date = $lastOrderDate ? $lastOrderDate->toIso8601String() : null;
         $customer->pending_orders = $pendingOrders;
         $customer->full_name = $customer->first_name . ' ' . $customer->last_name;
-        $customer->initials = strtoupper(substr($customer->first_name, 0, 1) . substr($customer->last_name, 0, 1));
-        
+        $customer->initials = strtoupper(mb_substr((string) $customer->first_name, 0, 1) . mb_substr((string) $customer->last_name, 0, 1));
+
         $billingAddress = $customer->addresses->where('type', 'billing')->first();
         $shippingAddress = $customer->addresses->where('type', 'shipping')->first();
-        
+
         return Inertia::render('customers/show', [
             'customer' => $customer,
             'billingAddress' => $billingAddress,
             'shippingAddress' => $shippingAddress,
-            'recentOrders' => $orders->take(5)->map(function($order) {
+            'recentOrders' => $orders->take(50)->map(function ($order) {
                 return [
                     'id' => $order->id,
                     'order_number' => $order->order_number,
-                    'total' => $order->total_amount,
-                    'status' => $order->status,
-                    'date' => $order->created_at->format('M j, Y')
+                    'total' => (float) $order->total_amount,
+                    'status' => strtolower((string) $order->status),
+                    'payment_status' => strtolower((string) $order->payment_status),
+                    'items_count' => (int) $order->items_count,
+                    'created_at' => optional($order->created_at)->toIso8601String(),
+                    'date' => $order->created_at->format('M j, Y'),
                 ];
-            })
+            })->values(),
         ]);
     }
 

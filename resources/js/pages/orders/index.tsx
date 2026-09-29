@@ -1,253 +1,290 @@
-import React, { useState } from 'react';
-import { PageTemplate } from '@/components/page-template';
-import { Plus, RefreshCw, Download, ShoppingCart, Eye, Edit, Trash2, Package } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-
-import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react';
 import { router } from '@inertiajs/react';
-import { useCurrencyFormatter } from '@/hooks/use-store-currency';
-import { Permission } from '@/components/Permission';
+import { useTranslation } from 'react-i18next';
+import { AlertTriangle, Download, ShoppingCart } from 'lucide-react';
+import { PageTemplate } from '@/components/page-template';
+import { Button } from '@/components/ui/button';
+import { EmptyState, MetricCard, PageHeader, Panel } from '@/components/ds/layout';
+import { DataTable, Pager, SearchInput, SegmentedTabs, Toolbar, useListQuery, type Column, type PageMeta } from '@/components/ds/data-table';
+import { StatusBadge, ToneBadge } from '@/components/ds/status-badge';
+import { orderStatusMeta, paymentStatusMeta } from '@/lib/commerce/status';
+import { useCommerceFormat } from '@/hooks/use-commerce-format';
 import { usePermissions } from '@/hooks/usePermissions';
+import { orderIssue, paymentMethodLabel } from '@/components/orders/order-meta';
 
-interface OrdersProps {
-  orders: Array<{
+interface OrderRow {
     id: number;
     orderNumber: string;
     customer: string;
-    email: string;
+    email: string | null;
     total: number;
     status: string;
+    paymentStatus: string;
     items: number;
-    date: string;
-    paymentMethod: string;
-  }>;
-  stats: {
-    totalOrders: number;
-    pendingOrders: number;
-    totalRevenue: number;
-    avgOrderValue: number;
-  };
+    createdAt: string | null;
+    paymentMethod: string | null;
 }
 
-export default function Orders({ orders: ordersProp = [], stats: statsProp }: OrdersProps) {
-  const { t } = useTranslation();
-  const [orderToDelete, setOrderToDelete] = useState<number | null>(null);
-  const formatCurrency = useCurrencyFormatter();
-  const { hasPermission } = usePermissions();
+interface Filters {
+    q: string;
+    status: string;
+    payment: string;
+    view: string;
+    sort: string;
+    page?: number;
+    [key: string]: string | number | undefined;
+}
 
-  // Handle paginated orders - Laravel pagination returns an object with 'data' property
-  const orders = (() => {
-    if (!ordersProp) return [];
-    if (Array.isArray(ordersProp)) return ordersProp;
-    if (ordersProp && typeof ordersProp === 'object' && 'data' in ordersProp) {
-      return Array.isArray(ordersProp.data) ? ordersProp.data : [];
-    }
-    return [];
-  })();
+interface OrdersProps {
+    orders: OrderRow[];
+    pagination: PageMeta;
+    counts: Record<'all' | 'open' | 'unpaid' | 'to_ship' | 'shipped' | 'cancelled', number>;
+    filters?: Partial<Filters>;
+    stats: {
+        totalOrders: number;
+        pendingOrders: number;
+        totalRevenue: number;
+        avgOrderValue: number;
+    };
+}
 
-  // Ensure stats is always an object with safe defaults
-  const stats = statsProp && typeof statsProp === 'object' ? statsProp : {
-    totalOrders: 0,
-    pendingOrders: 0,
-    totalRevenue: 0,
-    avgOrderValue: 0
-  };
-  
-  const handleDelete = () => {
-    if (orderToDelete) {
-      router.delete(route('orders.destroy', orderToDelete));
-      setOrderToDelete(null);
-    }
-  };
+const selectCls =
+    'border-input bg-background focus-visible:ring-ring/40 h-9 rounded-lg border px-2.5 text-sm outline-none focus-visible:ring-[3px]';
 
-  const pageActions = [];
-  
-  if (hasPermission('export-orders')) {
-    pageActions.push({
-      label: t('Export'),
-      icon: <Download className='h-4 w-4' />,
-      variant: 'outline' as const,
-      onClick: () => window.open(route('orders.export'), '_blank')
-    });
-  }
+export default function Orders({ orders = [], pagination, counts, filters, stats }: OrdersProps) {
+    const { t } = useTranslation();
+    const fmt = useCommerceFormat();
+    const { hasPermission } = usePermissions();
+    const f: Filters = { q: '', status: '', payment: '', view: 'all', sort: 'newest', ...(filters || {}) };
+    const update = useListQuery<Filters>('orders.index', f, ['orders', 'pagination', 'counts', 'filters']);
+    const now = useMemo(() => Date.now(), [orders]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const getStatusVariant = (status: string) => {
-    switch (status) {
-      case 'Completed': return 'default';
-      case 'Processing': return 'secondary';
-      case 'Shipped': return 'outline';
-      case 'Cancelled': return 'destructive';
-      default: return 'secondary';
-    }
-  };
+    const segments = [
+        { value: 'all', label: t('All'), count: counts?.all },
+        { value: 'open', label: t('Open'), count: counts?.open },
+        { value: 'unpaid', label: t('Unpaid'), count: counts?.unpaid },
+        { value: 'to_ship', label: t('To ship'), count: counts?.to_ship },
+        { value: 'shipped', label: t('Shipped'), count: counts?.shipped },
+        { value: 'cancelled', label: t('Cancelled'), count: counts?.cancelled },
+    ];
 
-  return (
-    <PageTemplate 
-      title={t('Order Management')}
-      url='/orders'
-      actions={pageActions}
-      breadcrumbs={[
-        { title: t('Dashboard'), href: route('dashboard') },
-        { title: t('Order Management') }
-      ]}
-    >
-      <div className='space-y-4'>
-        {/* Stats Cards */}
-        <div className='grid gap-2 sm:gap-4 grid-cols-2 lg:grid-cols-4'>
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6'>
-              <CardTitle className='text-xs sm:text-sm font-medium'>{t('Total Orders')}</CardTitle>
-              <ShoppingCart className='h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0' />
-            </CardHeader>
-            <CardContent className='p-3 sm:p-6 pt-0'>
-              <div className='text-xl sm:text-2xl font-bold'>{stats?.totalOrders || 0}</div>
-              <p className='text-xs text-muted-foreground'>{t('Total orders in store')}</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6'>
-              <CardTitle className='text-xs sm:text-sm font-medium'>{t('Pending Orders')}</CardTitle>
-              <Package className='h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0' />
-            </CardHeader>
-            <CardContent className='p-3 sm:p-6 pt-0'>
-              <div className='text-xl sm:text-2xl font-bold'>{stats?.pendingOrders || 0}</div>
-              <p className='text-xs text-muted-foreground'>{t('Need attention')}</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6'>
-              <CardTitle className='text-xs sm:text-sm font-medium'>{t('Total Revenue')}</CardTitle>
-              <ShoppingCart className='h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0' />
-            </CardHeader>
-            <CardContent className='p-3 sm:p-6 pt-0'>
-              <div className='text-lg sm:text-xl lg:text-2xl font-bold break-words'>{formatCurrency(stats?.totalRevenue || 0)}</div>
-              <p className='text-xs text-muted-foreground'>{t('Total revenue')}</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6'>
-              <CardTitle className='text-xs sm:text-sm font-medium'>{t('Avg. Order Value')}</CardTitle>
-              <ShoppingCart className='h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0' />
-            </CardHeader>
-            <CardContent className='p-3 sm:p-6 pt-0'>
-              <div className='text-lg sm:text-xl lg:text-2xl font-bold break-words'>{formatCurrency(stats?.avgOrderValue || 0)}</div>
-              <p className='text-xs text-muted-foreground'>{t('Average order value')}</p>
-            </CardContent>
-          </Card>
-        </div>
+    const hasFilters = !!(f.q || f.status || f.payment || (f.view && f.view !== 'all'));
+    const storeHasOrders = (stats?.totalOrders ?? 0) > 0;
 
-        {/* Orders List */}
-        <Card>
-          <CardHeader className='p-3 sm:p-6'>
-            <CardTitle className='text-base sm:text-lg'>{t('Recent Orders')}</CardTitle>
-          </CardHeader>
-          <CardContent className='p-3 sm:p-6 pt-0'>
-            <div className='space-y-3 sm:space-y-4'>
-              {orders.length > 0 ? orders.map((order) => (
-                <div key={order.id} className='flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 border rounded-lg gap-3 sm:gap-4'>
-                  <div className='flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full min-w-0'>
-                    <div className='w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0'>
-                      <ShoppingCart className='h-6 w-6 text-primary' />
-                    </div>
-                    <div className='flex-1 min-w-0'>
-                      <div className='flex flex-col sm:flex-row sm:items-center sm:space-x-2 space-y-1 sm:space-y-0'>
-                        <h3 className='font-semibold text-sm sm:text-base truncate'>{order.orderNumber}</h3>
-                        <Badge variant={getStatusVariant(order.status)} className='text-xs flex-shrink-0'>
-                          {order.status}
-                        </Badge>
-                      </div>
-                      <p className='text-xs sm:text-sm text-muted-foreground mt-1 sm:mt-0 truncate'>{order.customer} • {order.email}</p>
-                      <div className='flex flex-wrap items-center gap-2 sm:gap-4 mt-1'>
-                        <span className='text-xs text-muted-foreground'>{formatCurrency(order.total)}</span>
-                        <span className='text-xs text-muted-foreground'>{t('{{items}} items', { items: order.items })}</span>
-                        <span className='text-xs text-muted-foreground'>{order.date}</span>
-                        <span className='text-xs text-muted-foreground'>{order.paymentMethod}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='flex items-center gap-2 mt-4 sm:mt-0 sm:ml-auto w-full sm:w-auto'>
-                    <Permission permission='view-orders'>
-                      <Button 
-                        variant='ghost' 
-                        size='sm' 
-                        onClick={() => router.visit(route('orders.show', order.id))}
-                        className='flex-1 sm:flex-none min-h-[44px] sm:min-h-0'
-                      >
-                        <Eye className='h-4 w-4 sm:mr-0' />
-                        <span className='ml-2 sm:hidden'>{t('View')}</span>
-                      </Button>
-                    </Permission>
-                    <Permission permission='edit-orders'>
-                      <Button 
-                        variant='ghost' 
-                        size='sm' 
-                        onClick={() => router.visit(route('orders.edit', order.id))}
-                        className='flex-1 sm:flex-none min-h-[44px] sm:min-h-0'
-                      >
-                        <Edit className='h-4 w-4 sm:mr-0' />
-                        <span className='ml-2 sm:hidden'>{t('Edit')}</span>
-                      </Button>
-                    </Permission>
-                    <Permission permission='delete-orders'>
-                      <Button 
-                        variant='ghost' 
-                        size='sm' 
-                        onClick={() => setOrderToDelete(order.id)}
-                        className='flex-1 sm:flex-none min-h-[44px] sm:min-h-0'
-                      >
-                        <Trash2 className='h-4 w-4 sm:mr-0' />
-                        <span className='ml-2 sm:hidden'>{t('Delete')}</span>
-                      </Button>
-                    </Permission>
-                  </div>
+    const dateCell = (iso: string | null) =>
+        iso ? (
+            <time dateTime={iso} title={fmt.dateTime(iso)} className="text-muted-foreground whitespace-nowrap">
+                {fmt.relative(iso)}
+            </time>
+        ) : (
+            <span className="text-muted-foreground">—</span>
+        );
+
+    const columns: Column<OrderRow>[] = [
+        {
+            key: 'number',
+            header: t('Order'),
+            cell: (o) => (
+                <span dir="ltr" className="font-medium whitespace-nowrap tabular-nums">
+                    {o.orderNumber}
+                </span>
+            ),
+        },
+        { key: 'date', header: t('Date'), cell: (o) => dateCell(o.createdAt) },
+        {
+            key: 'customer',
+            header: t('Customer'),
+            className: 'max-w-[220px]',
+            cell: (o) => (
+                <div className="min-w-0">
+                    <div className="truncate font-medium">{o.customer || t('Guest')}</div>
+                    {o.email && (
+                        <div className="text-muted-foreground truncate text-xs">
+                            <bdi>{o.email}</bdi>
+                        </div>
+                    )}
                 </div>
-              )) : (
-                <div className='text-center py-8'>
-                  <p className='text-muted-foreground'>{t('No orders found')}</p>
-                  <div className='mt-4 flex items-center justify-center gap-2'>
-                    <Permission permission='create-products'>
-                      <Button onClick={() => router.visit(route('products.create'))}>
-                        <Plus className='h-4 w-4 mr-2' />
-                        {t('Create Product')}
-                      </Button>
-                    </Permission>
-                    <Permission permission='view-products'>
-                      <Button variant='outline' onClick={() => router.visit(route('products.index'))}>
-                        {t('View Products')}
-                      </Button>
-                    </Permission>
-                  </div>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            ),
+        },
+        { key: 'payment', header: t('Payment'), cell: (o) => <StatusBadge meta={paymentStatusMeta(o.paymentStatus)} /> },
+        { key: 'status', header: t('Fulfillment'), cell: (o) => <StatusBadge meta={orderStatusMeta(o.status)} /> },
+        {
+            key: 'items',
+            header: t('Items'),
+            align: 'end',
+            hideBelow: 'lg',
+            cell: (o) => <span className="tabular-nums">{fmt.number(o.items)}</span>,
+        },
+        {
+            key: 'method',
+            header: t('Method'),
+            hideBelow: 'xl',
+            cell: (o) => <span className="text-muted-foreground whitespace-nowrap">{paymentMethodLabel(o.paymentMethod, t) || '—'}</span>,
+        },
+        {
+            key: 'issue',
+            header: <span className="sr-only">{t('Attention')}</span>,
+            cell: (o) => {
+                const issue = orderIssue(o, t, now);
+                return issue ? <ToneBadge tone={issue.tone} icon={<AlertTriangle aria-hidden />}>{issue.label}</ToneBadge> : null;
+            },
+        },
+        {
+            key: 'total',
+            header: t('Total'),
+            align: 'end',
+            cell: (o) => <span className="font-medium whitespace-nowrap tabular-nums">{fmt.money(o.total)}</span>,
+        },
+    ];
 
-      {/* Delete Confirmation Dialog */}
-      {orderToDelete && (
-        <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50'>
-          <div className='bg-white rounded-lg p-6 max-w-md w-full mx-4'>
-            <h3 className='text-lg font-semibold mb-2'>{t('Delete Order')}</h3>
-            <p className='text-sm text-gray-600 mb-4'>
-              {t('Are you sure you want to delete this order? This action cannot be undone.')}
-            </p>
-            <div className='flex justify-end space-x-2'>
-              <Button variant='outline' onClick={() => setOrderToDelete(null)}>
-                {t('Cancel')}
-              </Button>
-              <Button variant='destructive' onClick={handleDelete}>
-                {t('Delete')}
-              </Button>
+    const mobileCard = (o: OrderRow) => {
+        const issue = orderIssue(o, t, now);
+        return (
+            <div className="space-y-1.5">
+                <div className="flex items-baseline justify-between gap-3">
+                    <span dir="ltr" className="truncate text-sm font-semibold tabular-nums">
+                        {o.orderNumber}
+                    </span>
+                    <span className="shrink-0 text-sm font-semibold tabular-nums">{fmt.money(o.total)}</span>
+                </div>
+                <div className="text-muted-foreground flex items-baseline justify-between gap-3 text-xs">
+                    <span className="truncate">{o.customer || t('Guest')}</span>
+                    {o.createdAt && (
+                        <time dateTime={o.createdAt} className="shrink-0">
+                            {fmt.relative(o.createdAt)}
+                        </time>
+                    )}
+                </div>
+                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                    <StatusBadge meta={paymentStatusMeta(o.paymentStatus)} />
+                    <StatusBadge meta={orderStatusMeta(o.status)} />
+                    {issue && (
+                        <ToneBadge tone={issue.tone} icon={<AlertTriangle aria-hidden />}>
+                            {issue.label}
+                        </ToneBadge>
+                    )}
+                </div>
             </div>
-          </div>
-        </div>
-      )}
-    </PageTemplate>
-  );
+        );
+    };
+
+    const empty = hasFilters ? (
+        <EmptyState
+            icon={<ShoppingCart />}
+            title={t('No orders match these filters')}
+            description={t('Try a different search or view.')}
+            action={
+                <Button variant="outline" size="sm" onClick={() => update({ q: '', status: '', payment: '', view: 'all' })}>
+                    {t('Clear filters')}
+                </Button>
+            }
+        />
+    ) : (
+        <EmptyState
+            icon={<ShoppingCart />}
+            title={t('No orders yet')}
+            description={t('Orders placed in your storefront will appear here.')}
+            action={
+                hasPermission('view-products') ? (
+                    <Button variant="outline" size="sm" onClick={() => router.visit(route('products.index'))}>
+                        {t('Review your products')}
+                    </Button>
+                ) : undefined
+            }
+        />
+    );
+
+    return (
+        <PageTemplate
+            title={t('Orders')}
+            url="/orders"
+            breadcrumbs={[{ title: t('Dashboard'), href: route('dashboard') }, { title: t('Orders') }]}
+            header={
+                <PageHeader
+                    title={t('Orders')}
+                    description={t('Track payment and fulfillment for every order.')}
+                    actions={
+                        hasPermission('export-orders') ? (
+                            <Button variant="outline" size="sm" className="h-9" onClick={() => window.open(route('orders.export'), '_blank')}>
+                                <Download aria-hidden />
+                                {t('Export')}
+                            </Button>
+                        ) : undefined
+                    }
+                />
+            }
+        >
+            <div className="space-y-4">
+                {storeHasOrders && (
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                        <MetricCard label={t('Total orders')} value={fmt.number(stats.totalOrders)} />
+                        <MetricCard
+                            label={t('Pending orders')}
+                            value={fmt.number(stats.pendingOrders)}
+                            emphasis={stats.pendingOrders > 0 ? 'warning' : 'default'}
+                            hint={t('Awaiting processing')}
+                        />
+                        <div className="col-span-2 sm:col-span-1">
+                            <MetricCard label={t('Paid revenue')} value={fmt.money(stats.totalRevenue)} hint={t('All time, paid orders')} />
+                        </div>
+                    </div>
+                )}
+
+                <Panel flush className="overflow-hidden">
+                    <div className="border-b px-4 pb-3">
+                        <SegmentedTabs segments={segments} value={f.view || 'all'} onChange={(v) => update({ view: v })} label={t('Order views')} />
+                    </div>
+                    <Toolbar>
+                        <SearchInput
+                            value={f.q}
+                            onChange={(v) => update({ q: v })}
+                            placeholder={t('Search order #, customer or email')}
+                            className="w-full sm:max-w-xs"
+                        />
+                        <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center">
+                            <label className="sr-only" htmlFor="order-status-filter">
+                                {t('Fulfillment')}
+                            </label>
+                            <select id="order-status-filter" className={selectCls} value={f.status} onChange={(e) => update({ status: e.target.value })}>
+                                <option value="">{t('All statuses')}</option>
+                                <option value="pending">{t('Pending')}</option>
+                                <option value="processing">{t('Processing')}</option>
+                                <option value="shipped">{t('Shipped')}</option>
+                                <option value="delivered">{t('Delivered')}</option>
+                                <option value="cancelled">{t('Cancelled')}</option>
+                            </select>
+                            <label className="sr-only" htmlFor="order-payment-filter">
+                                {t('Payment')}
+                            </label>
+                            <select id="order-payment-filter" className={selectCls} value={f.payment} onChange={(e) => update({ payment: e.target.value })}>
+                                <option value="">{t('All payments')}</option>
+                                <option value="pending">{t('Unpaid')}</option>
+                                <option value="paid">{t('Paid')}</option>
+                                <option value="failed">{t('Payment failed')}</option>
+                                <option value="refunded">{t('Refunded')}</option>
+                            </select>
+                            <label className="sr-only" htmlFor="order-sort">
+                                {t('Sort')}
+                            </label>
+                            <select id="order-sort" className={selectCls} value={f.sort} onChange={(e) => update({ sort: e.target.value })}>
+                                <option value="newest">{t('Newest first')}</option>
+                                <option value="oldest">{t('Oldest first')}</option>
+                                <option value="total">{t('Highest total')}</option>
+                            </select>
+                        </div>
+                    </Toolbar>
+                    <DataTable
+                        rows={orders}
+                        columns={columns}
+                        rowKey={(o) => o.id}
+                        rowHref={(o) => route('orders.show', o.id)}
+                        mobileCard={mobileCard}
+                        caption={t('Orders')}
+                        empty={empty}
+                    />
+                    {orders.length > 0 && pagination && <Pager meta={pagination} onPage={(p) => update({ page: p })} />}
+                </Panel>
+            </div>
+        </PageTemplate>
+    );
 }
