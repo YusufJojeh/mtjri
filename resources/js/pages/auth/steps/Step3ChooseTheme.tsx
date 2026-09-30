@@ -190,7 +190,7 @@ export default function Step3ChooseTheme({ store, availableThemes, planInfo, onS
                             <Button type='submit' disabled={processing || !selectedTheme}>
                                 {processing ? (
                                     <>
-                                        <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                                        <Loader2 className='me-2 h-4 w-4 animate-spin' />
                                         {t('Saving...')}
                                     </>
                                 ) : (

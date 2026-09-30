@@ -387,7 +387,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
       description={t("Configure payment gateway for subscription plans")}
       action={
         <Button type="submit" form="payment-settings-form" size="sm" disabled={processing}>
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="h-4 w-4 me-2" />
           {processing ? t("Saving...") : t("Save Changes")}
         </Button>
       }
@@ -406,19 +406,19 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
               {/* Search and Filter Controls */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                  <Search className="absolute start-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
                     placeholder={t("Search payment methods...")}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-10"
+                    className="ps-10 pe-10"
                   />
                   {searchTerm && (
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0 hover:bg-muted"
+                      className="absolute end-2 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0 hover:bg-muted"
                       onClick={() => setSearchTerm('')}
                     >
                       <X className="h-3 w-3" />
@@ -448,7 +448,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
                         type="button"
                         variant="ghost"
                         size="sm"
-                        className="ml-1 h-3 w-3 p-0 hover:bg-transparent"
+                        className="ms-1 h-3 w-3 p-0 hover:bg-transparent"
                         onClick={() => setSearchTerm('')}
                       >
                         <X className="h-2 w-2" />
@@ -462,7 +462,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
                         type="button"
                         variant="ghost"
                         size="sm"
-                        className="ml-1 h-3 w-3 p-0 hover:bg-transparent"
+                        className="ms-1 h-3 w-3 p-0 hover:bg-transparent"
                         onClick={() => setStatusFilter('all')}
                       >
                         <X className="h-2 w-2" />

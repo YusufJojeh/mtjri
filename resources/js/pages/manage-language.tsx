@@ -119,7 +119,7 @@ export default function ManageLanguagePage() {
         <div className='md:w-64 flex-shrink-0'>
           <div className='sticky top-20'>
             <ScrollArea className='h-[calc(100vh-5rem)]'>
-              <div className='pr-4 space-y-1'>
+              <div className='pe-4 space-y-1'>
                 {languages.map((lang) => (
                   <Button
                     key={lang.code}
@@ -182,7 +182,7 @@ export default function ManageLanguagePage() {
                         </div>
                       ))}
                   </div>
-                  <div className='pt-6 text-right'>
+                  <div className='pt-6 text-end'>
                     <Button 
                       type='submit' 
                       disabled={saving}

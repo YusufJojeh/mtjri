@@ -233,7 +233,7 @@ export default function MediaLibraryModal({
             <ImageIcon className='h-5 w-5' />
             Media Library
             {safeFilteredMedia.length > 0 && (
-              <Badge variant='secondary' className='ml-2'>
+              <Badge variant='secondary' className='ms-2'>
                 {safeFilteredMedia.length}
               </Badge>
             )}
@@ -244,12 +244,12 @@ export default function MediaLibraryModal({
           {/* Header with Search and Upload */}
           <div className='flex flex-col sm:flex-row gap-3 flex-shrink-0 mb-4'>
             <div className='relative flex-1'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
+              <Search className='absolute start-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
               <Input
                 placeholder='Search media files...'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className='pl-10'
+                className='ps-10'
               />
             </div>
             
@@ -270,7 +270,7 @@ export default function MediaLibraryModal({
                   disabled={uploading}
                   size='sm'
                 >
-                  <Plus className='h-4 w-4 mr-2' />
+                  <Plus className='h-4 w-4 me-2' />
                   {uploading ? 'Uploading...' : 'Upload'}
                 </Button>
               </div>
@@ -331,7 +331,7 @@ export default function MediaLibraryModal({
                       onClick={() => document.getElementById('file-upload')?.click()}
                       disabled={uploading}
                     >
-                      <Plus className='h-4 w-4 mr-2' />
+                      <Plus className='h-4 w-4 me-2' />
                       Upload Images
                     </Button>
                   )}
@@ -373,7 +373,7 @@ export default function MediaLibraryModal({
                         <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors' />
                         
                         {/* File Name Tooltip */}
-                        <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity'>
+                        <div className='absolute bottom-0 start-0 end-0 bg-gradient-to-t from-black/70 to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                           <p className='text-xs text-white truncate' title={item.name}>
                             {item.name}
                           </p>

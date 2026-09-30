@@ -299,7 +299,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
       description={t("Customize your application's branding and appearance")}
       action={
         <Button onClick={saveSettings} disabled={isLoading} size="sm">
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="h-4 w-4 me-2" />
           {isLoading ? t('Saving...') : t('Save Changes')}
         </Button>
       }
@@ -313,7 +313,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
               onClick={() => setActiveSection('logos')}
               className="flex-1"
             >
-              <Upload className="h-4 w-4 mr-2" />
+              <Upload className="h-4 w-4 me-2" />
               {t("Logos")}
             </Button>
             <Button
@@ -322,7 +322,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
               onClick={() => setActiveSection('text')}
               className="flex-1"
             >
-              <FileText className="h-4 w-4 mr-2" />
+              <FileText className="h-4 w-4 me-2" />
               {t("Text")}
             </Button>
             <Button
@@ -331,7 +331,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
               onClick={() => setActiveSection('theme')}
               className="flex-1"
             >
-              <Palette className="h-4 w-4 mr-2" />
+              <Palette className="h-4 w-4 me-2" />
               {t("Theme")}
             </Button>
           </div>
@@ -484,7 +484,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                 {/* Theme Color Section */}
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <Palette className="h-5 w-5 mr-2 text-muted-foreground" />
+                    <Palette className="h-5 w-5 me-2 text-muted-foreground" />
                     <h3 className="text-base font-medium">{t("Theme Color")}</h3>
                   </div>
                   <Separator className="my-2" />
@@ -552,7 +552,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                 {/* Sidebar Section */}
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <SidebarIcon className="h-5 w-5 mr-2 text-muted-foreground" />
+                    <SidebarIcon className="h-5 w-5 me-2 text-muted-foreground" />
                     <h3 className="text-base font-medium">{t("Sidebar")}</h3>
                   </div>
                   <Separator className="my-2" />
@@ -576,7 +576,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                           >
                             {variant.charAt(0).toUpperCase() + variant.slice(1)}
                             {settings.sidebarVariant === variant && (
-                              <Check className="h-4 w-4 ml-2" />
+                              <Check className="h-4 w-4 ms-2" />
                             )}
                           </Button>
                         ))}
@@ -605,7 +605,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                           >
                             {style.name}
                             {settings.sidebarStyle === style.id && (
-                              <Check className="h-4 w-4 ml-2" />
+                              <Check className="h-4 w-4 ms-2" />
                             )}
                           </Button>
                         ))}
@@ -617,7 +617,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                 {/* Layout Section */}
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <Layout className="h-5 w-5 mr-2 text-muted-foreground" />
+                    <Layout className="h-5 w-5 me-2 text-muted-foreground" />
                     <h3 className="text-base font-medium">{t("Layout")}</h3>
                   </div>
                   <Separator className="my-2" />
@@ -638,7 +638,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                       >
                         {t("Left-to-Right")}
                         {settings.layoutDirection === "left" && (
-                          <Check className="h-4 w-4 ml-2" />
+                          <Check className="h-4 w-4 ms-2" />
                         )}
                       </Button>
                       <Button
@@ -654,7 +654,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                       >
                         {t("Right-to-Left")}
                         {settings.layoutDirection === "right" && (
-                          <Check className="h-4 w-4 ml-2" />
+                          <Check className="h-4 w-4 ms-2" />
                         )}
                       </Button>
                     </div>
@@ -664,7 +664,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                 {/* Mode Section */}
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <Moon className="h-5 w-5 mr-2 text-muted-foreground" />
+                    <Moon className="h-5 w-5 me-2 text-muted-foreground" />
                     <h3 className="text-base font-medium">{t("Theme Mode")}</h3>
                   </div>
                   <Separator className="my-2" />
@@ -684,7 +684,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                       >
                         {t("Light")}
                         {settings.themeMode === "light" && (
-                          <Check className="h-4 w-4 ml-2" />
+                          <Check className="h-4 w-4 ms-2" />
                         )}
                       </Button>
                       <Button
@@ -700,7 +700,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                       >
                         {t("Dark")}
                         {settings.themeMode === "dark" && (
-                          <Check className="h-4 w-4 ml-2" />
+                          <Check className="h-4 w-4 ms-2" />
                         )}
                       </Button>
                       <Button
@@ -716,7 +716,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                       >
                         {t("System")}
                         {settings.themeMode === "system" && (
-                          <Check className="h-4 w-4 ml-2" />
+                          <Check className="h-4 w-4 ms-2" />
                         )}
                       </Button>
                     </div>

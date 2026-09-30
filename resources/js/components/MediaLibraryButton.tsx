@@ -108,7 +108,7 @@ export default function MediaLibraryButton({
   return (
     <>
       <Button type='button' variant='outline' size='sm' onClick={handleOpen}>
-        <ImageIcon className='h-4 w-4 mr-2' />
+        <ImageIcon className='h-4 w-4 me-2' />
         {buttonText}
       </Button>
 
@@ -124,12 +124,12 @@ export default function MediaLibraryButton({
           <div className='space-y-4'>
             {/* Search */}
             <div className='relative'>
-              <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
+              <Search className='absolute start-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
               <Input
                 placeholder='Search images...'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className='pl-10'
+                className='ps-10'
               />
             </div>
 
@@ -181,7 +181,7 @@ export default function MediaLibraryButton({
                         <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-200' />
                         
                         {/* File Type Badge */}
-                        <div className='absolute top-2 left-2'>
+                        <div className='absolute top-2 start-2'>
                           <Badge variant='secondary' className='text-xs bg-background/95'>
                             {item.mime_type.split('/')[1].toUpperCase()}
                           </Badge>

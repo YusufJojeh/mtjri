@@ -141,7 +141,7 @@ export default function Blog() {
                     onClick={() => router.visit(route('blog.create'))} 
                     className='mt-4'
                   >
-                    <Plus className='h-4 w-4 mr-2' />
+                    <Plus className='h-4 w-4 me-2' />
                     {t('Create Post')}
                   </Button>
                 </Permission>
@@ -187,7 +187,7 @@ export default function Blog() {
                             )}
                           </div>
                         </div>
-                        <div className='flex items-center space-x-2 ml-4'>
+                        <div className='flex items-center space-x-2 ms-4'>
                           <Permission permission='view-blog'>
                             <Button variant='ghost' size='sm' onClick={() => router.visit(route('blog.show', post.id))}>
                               <Eye className='h-4 w-4' />

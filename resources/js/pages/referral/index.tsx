@@ -24,17 +24,17 @@ export default function Referral() {
     {
       title: t('Dashboard'),
       href: '#dashboard',
-      icon: <BarChart3 className='h-4 w-4 mr-2' />,
+      icon: <BarChart3 className='h-4 w-4 me-2' />,
     },
     {
       title: t('Payout Requests'),
       href: '#payout-requests',
-      icon: <DollarSign className='h-4 w-4 mr-2' />,
+      icon: <DollarSign className='h-4 w-4 me-2' />,
     },
     ...(userType === 'superadmin' ? [{
       title: t('Settings'),
       href: '#settings',
-      icon: <SettingsIcon className='h-4 w-4 mr-2' />,
+      icon: <SettingsIcon className='h-4 w-4 me-2' />,
     }] : [])
   ];
   
@@ -93,7 +93,7 @@ export default function Referral() {
         <div className='md:w-64 flex-shrink-0'>
           <div className='sticky top-20'>
             <ScrollArea className='h-[calc(100vh-5rem)]'>
-              <div className='pr-4 space-y-1'>
+              <div className='pe-4 space-y-1'>
                 {sidebarNavItems.map((item: any) => (
                   <Button
                     key={item.href}

@@ -116,7 +116,7 @@ export default function EmailTemplatesIndex({ templates, filters: pageFilters = 
       <Head title='Email Templates' />
       
       {/* Search section */}
-      <div className='bg-white rounded-lg shadow mb-4'>
+      <div className='rounded-xl border bg-card text-card-foreground shadow-card mb-4'>
         <div className='p-4'>
           <div className='flex items-center justify-between'>
             <form onSubmit={handleSearch} className='flex gap-2'>
@@ -165,7 +165,7 @@ export default function EmailTemplatesIndex({ templates, filters: pageFilters = 
       </div>
 
       {/* Content section */}
-      <div className='bg-white rounded-lg shadow overflow-hidden'>
+      <div className='rounded-xl border bg-card text-card-foreground shadow-card overflow-hidden'>
         <div className='overflow-x-auto'>
           <table className='w-full text-sm'>
             <thead>

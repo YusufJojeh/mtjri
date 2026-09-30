@@ -125,7 +125,7 @@ export default function Tax() {
                       className='mt-4' 
                       onClick={() => router.visit(route('tax.create'))}
                     >
-                      <Plus className='h-4 w-4 mr-2' />
+                      <Plus className='h-4 w-4 me-2' />
                       {t('Create your first tax rule')}
                     </Button>
                   </Permission>

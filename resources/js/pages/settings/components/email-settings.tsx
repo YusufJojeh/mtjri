@@ -112,7 +112,7 @@ export default function EmailSettings() {
       description={t("Configure email server settings for system notifications and communications")}
       action={
         <Button type="submit" form="email-settings-form" size="sm">
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="h-4 w-4 me-2" />
           {t("Save Changes")}
         </Button>
       }
@@ -322,12 +322,12 @@ export default function EmailSettings() {
                 >
                   {isSending ? (
                     <>
-                      <span className="animate-spin mr-2">◌</span>
+                      <span className="animate-spin me-2">◌</span>
                       {t("Sending...")}
                     </>
                   ) : (
                     <>
-                      <Send className="h-4 w-4 mr-2" />
+                      <Send className="h-4 w-4 me-2" />
                       {t("Send Test Email")}
                     </>
                   )}

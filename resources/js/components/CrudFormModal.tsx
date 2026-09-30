@@ -542,7 +542,7 @@ export function CrudFormModal({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description || ' '}</DialogDescription>
         </DialogHeader>
-        <ScrollArea className='max-h-[70vh] pr-4'>
+        <ScrollArea className='max-h-[70vh] pe-4'>
           <form onSubmit={handleSubmit} className='space-y-4'>
             {/* Price Summary Section */}
             {formConfig.priceSummary && (

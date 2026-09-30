@@ -61,10 +61,10 @@ export default function POSReceipt() {
       <table className='w-full mb-4'>
         <thead>
           <tr className='border-b'>
-            <th className='text-left py-1 text-sm'>Item</th>
+            <th className='text-start py-1 text-sm'>Item</th>
             <th className='text-center py-1 text-sm'>Qty</th>
-            <th className='text-right py-1 text-sm'>Price</th>
-            <th className='text-right py-1 text-sm'>Total</th>
+            <th className='text-end py-1 text-sm'>Price</th>
+            <th className='text-end py-1 text-sm'>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -72,8 +72,8 @@ export default function POSReceipt() {
             <tr key={item.id} className='border-b'>
               <td className='py-1 text-sm'>{item.name}</td>
               <td className='text-center py-1 text-sm'>{item.quantity}</td>
-              <td className='text-right py-1 text-sm'>${item.price.toFixed(2)}</td>
-              <td className='text-right py-1 text-sm'>${(item.price * item.quantity).toFixed(2)}</td>
+              <td className='text-end py-1 text-sm'>${item.price.toFixed(2)}</td>
+              <td className='text-end py-1 text-sm'>${(item.price * item.quantity).toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

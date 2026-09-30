@@ -580,7 +580,7 @@ export default function StoreContentEdit({
                   updateNestedField(currentPath, [...value, newItem]);
                 }}
               >
-                <Plus className='h-4 w-4 mr-1' />
+                <Plus className='h-4 w-4 me-1' />
                 {t('Add Item')}
               </Button>
             )}
@@ -628,7 +628,7 @@ export default function StoreContentEdit({
             <span className='w-1.5 h-1.5 rounded-full bg-primary' />
             {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
           </Label>
-          <div className='grid gap-6 pl-4 border-l-2 border-muted-foreground/10 ml-1'>
+          <div className='grid gap-6 ps-4 border-l-2 border-muted-foreground/10 ms-1'>
             {Object.entries(value).map(([subKey, subValue]) =>
               renderField(subKey, subValue, currentPath)
             )}
@@ -715,7 +715,7 @@ export default function StoreContentEdit({
                           onClick={() => handleRegenerate(sectionKey)}
                           className='border-red-300 text-red-700 hover:bg-red-100 dark:border-red-700 dark:text-red-300 dark:hover:bg-red-900/40'
                         >
-                          <RefreshCw className='h-4 w-4 mr-2' />
+                          <RefreshCw className='h-4 w-4 me-2' />
                           {t('Retry')}
                         </Button>
                       </div>
@@ -734,7 +734,7 @@ export default function StoreContentEdit({
                 disabled={processing || isGenerating || currentRegeneratingSection === sectionKey}
                 className='bg-background hover:bg-muted shadow-sm px-6'
               >
-                <RefreshCw className={`h-5 w-5 mr-2 ${currentRegeneratingSection === sectionKey ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`h-5 w-5 me-2 ${currentRegeneratingSection === sectionKey ? 'animate-spin' : ''}`} />
                 {currentRegeneratingSection === sectionKey ? t('Regenerating...') : t('Regenerate')}
               </Button>
             </div>
@@ -747,14 +747,14 @@ export default function StoreContentEdit({
   const pageActions = [
     {
       label: t('Back'),
-      icon: <ArrowLeft className='h-4 w-4 mr-2' />,
+      icon: <ArrowLeft className='h-4 w-4 me-2' />,
       variant: 'outline' as const,
       onClick: () => router.visit(route('stores.content.index')),
       className: 'px-6 py-5 rounded-lg shadow-sm font-semibold transition-all hover:bg-muted'
     },
     {
       label: processing || isGenerating ? t('Saving...') : t('Save Changes'),
-      icon: <Save className='h-4 w-4 mr-2' />,
+      icon: <Save className='h-4 w-4 me-2' />,
       variant: 'default' as const,
       onClick: (e?: React.MouseEvent | React.FormEvent) => {
         e?.preventDefault?.();
@@ -1249,13 +1249,13 @@ export default function StoreContentEdit({
       <div className='h-12 lg:hidden' />
 
       {/* Mobile Sticky Actions */}
-      <div className='fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/80 backdrop-blur-md border-t md:hidden flex gap-2'>
+      <div className='fixed bottom-0 start-0 end-0 z-50 p-4 bg-background/80 backdrop-blur-md border-t md:hidden flex gap-2'>
         <Button
           className='flex-1 shadow-lg'
           onClick={handleSubmit}
           disabled={processing || isGenerating}
         >
-          {processing || isGenerating ? <RefreshCw className='h-4 w-4 mr-2 animate-spin' /> : <Save className='h-4 w-4 mr-2' />}
+          {processing || isGenerating ? <RefreshCw className='h-4 w-4 me-2 animate-spin' /> : <Save className='h-4 w-4 me-2' />}
           {t('Save')}
         </Button>
       </div>

@@ -84,7 +84,7 @@ export function ProfileMenu() {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <Link href={route('profile')}>
-              <User className='mr-2 h-4 w-4' />
+              <User className='me-2 h-4 w-4' />
               <span>{t('Profile')}</span>
             </Link>
           </DropdownMenuItem>
@@ -99,7 +99,7 @@ export function ProfileMenu() {
               {(hasPermission('view-plans') || hasPermission('manage-plans')) && (
                 <DropdownMenuItem asChild>
                   <Link href={route('plans.index')}>
-                    <CreditCard className='mr-2 h-4 w-4' />
+                    <CreditCard className='me-2 h-4 w-4' />
                     <span>{t('Plan')}</span>
                   </Link>
                 </DropdownMenuItem>
@@ -107,7 +107,7 @@ export function ProfileMenu() {
               {(hasPermission('manage-plan-requests') || hasPermission('view-plan-requests')) && (
                 <DropdownMenuItem asChild>
                   <Link href={route('plan-requests.index')}>
-                    <CreditCard className='mr-2 h-4 w-4' />
+                    <CreditCard className='me-2 h-4 w-4' />
                     <span>{t('My Plan Request')}</span>
                   </Link>
                 </DropdownMenuItem>
@@ -115,7 +115,7 @@ export function ProfileMenu() {
               {(hasPermission('manage-plan-orders') || hasPermission('view-plan-orders')) && (
                 <DropdownMenuItem asChild>
                   <Link href={route('plan-orders.index')}>
-                    <CreditCard className='mr-2 h-4 w-4' />
+                    <CreditCard className='me-2 h-4 w-4' />
                     <span>{t('My Plan Orders')}</span>
                   </Link>
                 </DropdownMenuItem>
@@ -125,7 +125,7 @@ export function ProfileMenu() {
         )}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
-          <LogOut className='mr-2 h-4 w-4' />
+          <LogOut className='me-2 h-4 w-4' />
           <span>{t('Log out')}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

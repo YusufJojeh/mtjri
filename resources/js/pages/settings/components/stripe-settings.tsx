@@ -46,7 +46,7 @@ export default function StripeSettings() {
       description={t("Configure Stripe payment gateway integration for online payments")}
       action={
         <Button type="submit" form="stripe-settings-form" size="sm">
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="h-4 w-4 me-2" />
           {t("Save Changes")}
         </Button>
       }
@@ -77,7 +77,7 @@ export default function StripeSettings() {
                   href="https://dashboard.stripe.com/apikeys" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="ml-1 underline"
+                  className="ms-1 underline"
                 >
                   {t("Get your API keys")}
                 </a>
@@ -147,14 +147,14 @@ export default function StripeSettings() {
                     value={stripeSettings.secretKey}
                     onChange={(e) => handleStripeSettingsChange('secretKey', e.target.value)}
                     placeholder={stripeSettings.testMode ? 'sk_test_...' : 'sk_live_...'}
-                    className="font-mono text-sm pr-10"
+                    className="font-mono text-sm pe-10"
                     disabled={!stripeSettings.enabled}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-0 top-0 h-full px-3 text-muted-foreground"
+                    className="absolute end-0 top-0 h-full px-3 text-muted-foreground"
                     onClick={() => setShowSecretKey(!showSecretKey)}
                     disabled={!stripeSettings.enabled}
                   >
@@ -184,14 +184,14 @@ export default function StripeSettings() {
                     value={stripeSettings.webhookSecret}
                     onChange={(e) => handleStripeSettingsChange('webhookSecret', e.target.value)}
                     placeholder={t("whsec_...")}
-                    className="font-mono text-sm pr-10"
+                    className="font-mono text-sm pe-10"
                     disabled={!stripeSettings.enabled}
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-0 top-0 h-full px-3 text-muted-foreground"
+                    className="absolute end-0 top-0 h-full px-3 text-muted-foreground"
                     onClick={() => setShowWebhookSecret(!showWebhookSecret)}
                     disabled={!stripeSettings.enabled}
                   >

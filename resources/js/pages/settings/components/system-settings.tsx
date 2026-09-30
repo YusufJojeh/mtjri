@@ -109,7 +109,7 @@ export default function SystemSettings({
       description={t("Configure system-wide settings for your application")}
       action={
         <Button type="submit" form="system-settings-form" size="sm">
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="h-4 w-4 me-2" />
           {t("Save Changes")}
         </Button>
       }
@@ -176,7 +176,7 @@ export default function SystemSettings({
                     <SelectItem key={format} value={format}>
                       <div className="flex items-center justify-between w-full">
                         <span>{format}</span>
-                        <span className="text-muted-foreground text-sm ml-4">({example})</span>
+                        <span className="text-muted-foreground text-sm ms-4">({example})</span>
                       </div>
                     </SelectItem>
                   )) : (
@@ -207,7 +207,7 @@ export default function SystemSettings({
                     <SelectItem key={format} value={format}>
                       <div className="flex items-center justify-between w-full">
                         <span>{format}</span>
-                        <span className="text-muted-foreground text-sm ml-4">({example})</span>
+                        <span className="text-muted-foreground text-sm ms-4">({example})</span>
                       </div>
                     </SelectItem>
                   )) : (

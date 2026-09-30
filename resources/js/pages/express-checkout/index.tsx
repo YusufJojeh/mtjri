@@ -145,7 +145,7 @@ export default function ExpressCheckout() {
                         onClick={() => router.visit(route('express-checkout.create'))} 
                         className='mt-4'
                       >
-                        <Plus className='h-4 w-4 mr-2' />
+                        <Plus className='h-4 w-4 me-2' />
                         {t('Create Checkout')}
                       </Button>
                     </Permission>

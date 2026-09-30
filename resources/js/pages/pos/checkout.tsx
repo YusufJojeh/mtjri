@@ -152,10 +152,10 @@ export default function POSCheckout() {
                   <table className='w-full'>
                     <thead className='bg-muted'>
                       <tr>
-                        <th className='text-left p-3'>{t('Product')}</th>
+                        <th className='text-start p-3'>{t('Product')}</th>
                         <th className='text-center p-3'>{t('Quantity')}</th>
-                        <th className='text-right p-3'>{t('Price')}</th>
-                        <th className='text-right p-3'>{t('Total')}</th>
+                        <th className='text-end p-3'>{t('Price')}</th>
+                        <th className='text-end p-3'>{t('Total')}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -163,8 +163,8 @@ export default function POSCheckout() {
                         <tr key={item.id} className='border-t'>
                           <td className='p-3'>{item.name}</td>
                           <td className='text-center p-3'>{item.quantity}</td>
-                          <td className='text-right p-3'>${item.price.toFixed(2)}</td>
-                          <td className='text-right p-3'>${(item.price * item.quantity).toFixed(2)}</td>
+                          <td className='text-end p-3'>${item.price.toFixed(2)}</td>
+                          <td className='text-end p-3'>${(item.price * item.quantity).toFixed(2)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -202,11 +202,11 @@ export default function POSCheckout() {
                   <p className='text-muted-foreground'>{t('Order #{{id}} has been processed successfully', { id: order?.id || t('Unknown') })}</p>
                   <div className='flex space-x-2 mt-4'>
                     <Button variant='outline' onClick={() => router.visit(route('pos.index'))}>
-                      <ArrowLeft className='mr-2 h-4 w-4' />
+                      <ArrowLeft className='me-2 h-4 w-4' />
                       {t('New Sale')}
                     </Button>
                     <Button onClick={() => transactionId && router.visit(route('pos.receipt', transactionId))}>
-                      <Printer className='mr-2 h-4 w-4' />
+                      <Printer className='me-2 h-4 w-4' />
                       {t('Print Receipt')}
                     </Button>
                   </div>
@@ -231,12 +231,12 @@ export default function POSCheckout() {
                 >
                   {isProcessing ? (
                     <div className='flex items-center'>
-                      <div className='animate-spin mr-2 h-4 w-4 border-2 border-b-transparent rounded-full'></div>
+                      <div className='animate-spin me-2 h-4 w-4 border-2 border-b-transparent rounded-full'></div>
                       {t('Processing...')}
                     </div>
                   ) : (
                     <>
-                      <Receipt className='mr-2 h-4 w-4' />
+                      <Receipt className='me-2 h-4 w-4' />
                       {t('Complete Order - ${{amount}}', { amount: order?.total?.toFixed(2) || '0.00' })}
                     </>
                   )}

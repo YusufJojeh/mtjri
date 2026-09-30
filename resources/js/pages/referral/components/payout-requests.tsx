@@ -85,7 +85,7 @@ export default function PayoutRequests({ userType, payoutRequests, settings, sta
             <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
               <DialogTrigger asChild>
                 <Button disabled={stats.availableBalance < settings.threshold_amount}>
-                  <Plus className='h-4 w-4 mr-2' />
+                  <Plus className='h-4 w-4 me-2' />
                   {t('Request Payout')}
                 </Button>
               </DialogTrigger>
@@ -173,7 +173,7 @@ export default function PayoutRequests({ userType, payoutRequests, settings, sta
                           variant='outline'
                           onClick={() => handleApprove(request)}
                         >
-                          <Check className='h-4 w-4 mr-1' />
+                          <Check className='h-4 w-4 me-1' />
                           {t('Approve')}
                         </Button>
                         <Button
@@ -184,7 +184,7 @@ export default function PayoutRequests({ userType, payoutRequests, settings, sta
                             setShowRejectDialog(true);
                           }}
                         >
-                          <X className='h-4 w-4 mr-1' />
+                          <X className='h-4 w-4 me-1' />
                           {t('Reject')}
                         </Button>
                       </div>

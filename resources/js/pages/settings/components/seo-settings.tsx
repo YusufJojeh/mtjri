@@ -170,7 +170,7 @@ export default function SeoSettings({ settings = {} }: SeoSettingsProps) {
       description={t("Configure SEO settings to improve your website's search engine visibility")}
       action={
         <Button type="submit" form="seo-settings-form" size="sm">
-          <Save className="h-4 w-4 mr-2" />
+          <Save className="h-4 w-4 me-2" />
           {t("Save Changes")}
         </Button>
       }
@@ -200,7 +200,7 @@ export default function SeoSettings({ settings = {} }: SeoSettingsProps) {
               rows={3}
               required
             />
-            <div className="text-sm text-muted-foreground text-right">
+            <div className="text-sm text-muted-foreground text-end">
               {seoSettings.metaDescription.length}/160
             </div>
           </div>
@@ -266,7 +266,7 @@ export default function SeoSettings({ settings = {} }: SeoSettingsProps) {
                       variant="outline"
                       className="w-full justify-start"
                     >
-                      <Upload className="h-4 w-4 mr-2" />
+                      <Upload className="h-4 w-4 me-2" />
                       {(seoSettings.metaImage || uploadedFile) ? t("Change Image") : t("Upload Image")}
                     </Button>
                   </div>

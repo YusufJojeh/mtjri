@@ -43,7 +43,7 @@ export function PaymentInputField({
           value={displayValue}
           onChange={(e: any) => (e: any) => onChange(e.target.value)}
           placeholder={placeholder}
-          className={`font-mono text-sm ${isSecret ? 'pr-10' : ''} ${className}`}
+          className={`font-mono text-sm ${isSecret ? 'pe-10' : ''} ${className}`}
           readOnly={(window as any).isDemo && value}
         />
         {isSecret && (
@@ -51,7 +51,7 @@ export function PaymentInputField({
             type='button'
             variant='ghost'
             size='icon'
-            className='absolute right-0 top-0 h-full px-3 text-muted-foreground'
+            className='absolute end-0 top-0 h-full px-3 text-muted-foreground'
             onClick={() => {
               if ((window as any).isDemo) return false;
               setShowSecret(!showSecret);

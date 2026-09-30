@@ -129,10 +129,10 @@ export default function POSTransactions() {
         {/* Filters */}
         <div className='flex flex-col md:flex-row gap-4'>
           <div className='relative flex-1'>
-            <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
+            <Search className='absolute start-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
             <Input
               placeholder={t('Search transactions...')}
-              className='pl-8'
+              className='ps-8'
               value={searchTerm}
               onChange={(e) => setSearchTerm<any>(e.target.value)}
             />
@@ -153,11 +153,11 @@ export default function POSTransactions() {
               <table className='w-full'>
                 <thead>
                   <tr className='bg-muted/50'>
-                    <th className='p-3 text-left font-medium'>{t('Transaction ID')}</th>
-                    <th className='p-3 text-left font-medium'>{t('Date & Time')}</th>
-                    <th className='p-3 text-left font-medium'>{t('Customer')}</th>
-                    <th className='p-3 text-left font-medium'>{t('Items')}</th>
-                    <th className='p-3 text-right font-medium'>{t('Total')}</th>
+                    <th className='p-3 text-start font-medium'>{t('Transaction ID')}</th>
+                    <th className='p-3 text-start font-medium'>{t('Date & Time')}</th>
+                    <th className='p-3 text-start font-medium'>{t('Customer')}</th>
+                    <th className='p-3 text-start font-medium'>{t('Items')}</th>
+                    <th className='p-3 text-end font-medium'>{t('Total')}</th>
                     <th className='p-3 text-center font-medium'>{t('Status')}</th>
                     <th className='p-3 text-center font-medium'>{t('Actions')}</th>
                   </tr>
@@ -174,7 +174,7 @@ export default function POSTransactions() {
                       </td>
                       <td className='p-3'>{transaction.customer}</td>
                       <td className='p-3'>{transaction.items}</td>
-                      <td className='p-3 text-right'>{formatCurrency(transaction.total)}</td>
+                      <td className='p-3 text-end'>{formatCurrency(transaction.total)}</td>
                       <td className='p-3 text-center'>
                         <Badge variant={getStatusVariant(transaction.status)}>
                           {transaction.status}

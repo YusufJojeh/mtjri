@@ -491,7 +491,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
     if (currentPlan && currentPlan.id === plan.id && currentPlan.expires_at && new Date(currentPlan.expires_at) > new Date()) {
       return (
         <Button disabled className='w-full bg-green-100 text-green-800 border-green-200'>
-          <Crown className='h-4 w-4 mr-2' />
+          <Crown className='h-4 w-4 me-2' />
           {t('Already Subscribed')}
         </Button>
       );
@@ -500,7 +500,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
     if (plan.is_current) {
       return (
         <Button disabled className='w-full'>
-          <Crown className='h-4 w-4 mr-2' />
+          <Crown className='h-4 w-4 me-2' />
           {t('Current Plan')}
         </Button>
       );
@@ -519,7 +519,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
             variant='outline'
             className='w-full'
           >
-            <Zap className='h-4 w-4 mr-2' />
+            <Zap className='h-4 w-4 me-2' />
             {t('Start {{days}} Day Trial', { days: plan.trial_days })}
           </Button>
           {canSubscribe && (
@@ -544,7 +544,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
             variant='outline'
             className='w-full'
           >
-            <Clock className='h-4 w-4 mr-2' />
+            <Clock className='h-4 w-4 me-2' />
             {t('Request Plan')}
           </Button>
         )}
@@ -685,7 +685,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
                 <TabsTrigger value='monthly'>{t('Monthly')}</TabsTrigger>
                 <TabsTrigger value='yearly'>
                   {t('Yearly')} 
-                  <Badge variant='outline' className='ml-2 bg-green-100 text-green-800 border-green-200'>
+                  <Badge variant='outline' className='ms-2 bg-green-100 text-green-800 border-green-200'>
                     {t('Save 20%')}
                   </Badge>
                 </TabsTrigger>
@@ -693,7 +693,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
             </Tabs>
             <Permission permission='create-plans'>
               <Button className='w-full sm:w-auto' onClick={() => router.get(route('plans.create'))}>
-                <Plus className='h-4 w-4 mr-2' />
+                <Plus className='h-4 w-4 me-2' />
                 {t('Add Plan')}
               </Button>
             </Permission>
@@ -723,13 +723,13 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
                 overflow-hidden
               `}>
                 {/* Decorative background elements */}
-                <div className='absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full -mr-16 -mt-16 opacity-70'></div>
-                <div className='absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-primary/10 to-transparent rounded-full -ml-12 -mb-12 opacity-50'></div>
+                <div className='absolute top-0 end-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full -me-16 -mt-16 opacity-70'></div>
+                <div className='absolute bottom-0 start-0 w-24 h-24 bg-gradient-to-tr from-primary/10 to-transparent rounded-full -ms-12 -mb-12 opacity-50'></div>
               </div>
               
               {/* Recommended indicator */}
               {plan.recommended && (
-                <div className='absolute -top-4 left-0 right-0 flex justify-center z-20'>
+                <div className='absolute -top-4 start-0 end-0 flex justify-center z-20'>
                   <div className='bg-primary text-primary-foreground px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 text-sm font-medium'>
                     <Sparkles className='h-4 w-4' />
                     {t('Recommended')}
@@ -739,7 +739,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
               
               {/* Status indicator - Admin only */}
               {isAdmin && (
-                <div className='absolute top-4 right-4 z-10 flex gap-2'>
+                <div className='absolute top-4 end-4 z-10 flex gap-2'>
                   {plan.is_default && (
                     <div className='flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700'>
                       {t('Default')}
@@ -763,7 +763,7 @@ export default function Plans({ plans: initialPlans, billingCycle: initialBillin
               
               {/* Current plan indicator - Company only */}
               {!isAdmin && plan.is_current && (
-                <div className='absolute top-4 right-4 z-10'>
+                <div className='absolute top-4 end-4 z-10'>
                   <div className='flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary'>
                     <Crown className='h-3 w-3' />
                     {t('Current')}

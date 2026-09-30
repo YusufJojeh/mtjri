@@ -202,13 +202,13 @@ export default function BlogCategories() {
               <div className='relative flex-1 max-w-sm'>
                 <Input 
                   placeholder={t('Search categories...')} 
-                  className='pr-8' 
+                  className='pe-8' 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 {searchTerm && (
                   <button 
-                    className='absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground'
+                    className='absolute end-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground'
                     onClick={() => setSearchTerm('')}
                   >
                     <X className='h-4 w-4' />
@@ -229,13 +229,13 @@ export default function BlogCategories() {
                   onClick={() => setIsCreateDialogOpen(true)} 
                   className='mt-4'
                 >
-                  <Plus className='h-4 w-4 mr-2' />
+                  <Plus className='h-4 w-4 me-2' />
                   {t('Create Category')}
                 </Button>
               </div>
             ) : (
               <div className='relative overflow-x-auto'>
-                <table className='w-full text-sm text-left'>
+                <table className='w-full text-sm text-start'>
                   <thead className='text-xs uppercase bg-muted/50'>
                     <tr>
                       <th scope='col' className='px-6 py-3'>{t('Name')}</th>
@@ -243,7 +243,7 @@ export default function BlogCategories() {
                       <th scope='col' className='px-6 py-3'>{t('Description')}</th>
                       <th scope='col' className='px-6 py-3'>{t('Posts')}</th>
                       <th scope='col' className='px-6 py-3'>{t('Status')}</th>
-                      <th scope='col' className='px-6 py-3 text-right'>{t('Actions')}</th>
+                      <th scope='col' className='px-6 py-3 text-end'>{t('Actions')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -258,7 +258,7 @@ export default function BlogCategories() {
                           {category.is_active ? t('Active') : t('Inactive')}
                         </Badge>
                       </td>
-                      <td className='px-6 py-4 text-right'>
+                      <td className='px-6 py-4 text-end'>
                         <div className='flex justify-end space-x-2'>
                           <Button variant='ghost' size='sm' onClick={() => handleEdit(category)}>
                             <Edit className='h-4 w-4' />

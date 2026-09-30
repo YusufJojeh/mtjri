@@ -105,7 +105,7 @@ export default function AccountLayout({
                     <div className='h-12 w-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl'>
                       {userName.charAt(0)}
                     </div>
-                    <div className='ml-3'>
+                    <div className='ms-3'>
                       <p className='font-medium text-gray-900'>{userName}</p>
                       <p className='text-sm text-gray-500'>Customer</p>
                     </div>
@@ -124,7 +124,7 @@ export default function AccountLayout({
                             : 'text-gray-700 hover:bg-gray-50'
                         }`}
                       >
-                        <Icon className={`h-5 w-5 ${activeTab === tab.id ? 'text-white' : 'text-gray-500'} mr-3`} />
+                        <Icon className={`h-5 w-5 ${activeTab === tab.id ? 'text-white' : 'text-gray-500'} me-3`} />
                         <span>{tab.name}</span>
                       </Link>
                     );
@@ -133,9 +133,9 @@ export default function AccountLayout({
                     href={route('store.logout', (store as any)?.slug || store.theme || 'demo')}
                     method='post'
                     as='button'
-                    className='flex items-center px-4 py-3 rounded-md text-gray-700 hover:bg-gray-50 w-full text-left'
+                    className='flex items-center px-4 py-3 rounded-md text-gray-700 hover:bg-gray-50 w-full text-start'
                   >
-                    <LogOut className='h-5 w-5 text-gray-500 mr-3' />
+                    <LogOut className='h-5 w-5 text-gray-500 me-3' />
                     <span>Logout</span>
                   </Link>
                 </nav>

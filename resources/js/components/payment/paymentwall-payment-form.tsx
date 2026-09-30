@@ -190,7 +190,7 @@ export function PaymentWallPaymentForm({
           <div id='paymentwall-form-container' ref={paymentFormRef} className='min-h-[300px]'>
             {!brickLoaded && (
               <div className='flex items-center justify-center h-32'>
-                <Loader2 className='h-6 w-6 animate-spin mr-2' />
+                <Loader2 className='h-6 w-6 animate-spin me-2' />
                 <span>{t('Loading payment form...')}</span>
               </div>
             )}
@@ -228,7 +228,7 @@ export function PaymentWallPaymentForm({
               disabled
               className='flex-1'
             >
-              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              <Loader2 className='me-2 h-4 w-4 animate-spin' />
               {t('Loading...')}
             </Button>
           )}

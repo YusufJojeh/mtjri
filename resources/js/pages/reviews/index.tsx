@@ -160,7 +160,7 @@ export default function Reviews() {
                         <h4 className='font-medium text-sm mb-1'>{review.title}</h4>
                         <p className='text-sm'>{review.content}</p>
                       </div>
-                      <div className='flex items-center space-x-2 ml-4'>
+                      <div className='flex items-center space-x-2 ms-4'>
                         <Permission permission='view-reviews'>
                           <Button variant='ghost' size='sm' onClick={() => router.visit(route('reviews.show', review.id))}>
                             <Eye className='h-4 w-4' />
