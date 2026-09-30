@@ -15,6 +15,17 @@ export interface ProgressStep {
  * Folds run events into merchant-facing progress steps. Uses the server's
  * progress labels only — never tool names, arguments or model reasoning.
  */
+/** Merchant-facing step labels (English source strings, translated at render). */
+const LABEL = {
+    understanding: 'Understanding your question',
+    deciding: 'Deciding the next step',
+    resumed: 'Continuing after your decision',
+    stepFailed: 'A step could not be completed',
+    knowledgeFound: 'Found relevant knowledge',
+    knowledgeNone: 'No matching knowledge',
+    proposed: 'Prepared a change for your review',
+};
+
 const withoutModel = (steps: ProgressStep[]) => steps.filter((s) => s.kind !== 'model');
 
 export function reduceProgress(steps: ProgressStep[], e: RunEvent): ProgressStep[] {
@@ -30,10 +41,10 @@ export function reduceProgress(steps: ProgressStep[], e: RunEvent): ProgressStep
         case 'agent_started':
             return [];
         case 'agent_resumed':
-            return [...withoutModel(steps), { id: `r${e.seq}`, label: 'Continuing after your decision', state: 'done', kind: 'action' }];
+            return [...withoutModel(steps), { id: `r${e.seq}`, label: LABEL.resumed, state: 'done', kind: 'action' }];
         case 'model_started':
             // Transient: shown only until the next concrete step begins.
-            return [...withoutModel(steps), { id: `m${e.seq}`, label: steps.length ? 'Deciding the next step' : 'Understanding your question', state: 'active', kind: 'model' }];
+            return [...withoutModel(steps), { id: `m${e.seq}`, label: steps.length ? LABEL.deciding : LABEL.understanding, state: 'active', kind: 'model' }];
         case 'tool_started':
             return [...withoutModel(steps), { id: `t${e.seq}`, label, state: 'active', kind: 'tool' }];
         case 'tool_completed':
@@ -41,13 +52,13 @@ export function reduceProgress(steps: ProgressStep[], e: RunEvent): ProgressStep
         case 'tool_failed':
             return steps.some((s) => s.kind === 'tool' && s.state === 'active')
                 ? closeActive(steps, 'tool', 'failed')
-                : [...steps, { id: `f${e.seq}`, label: label || 'A step could not be completed', state: 'failed', kind: 'tool' }];
+                : [...steps, { id: `f${e.seq}`, label: label || LABEL.stepFailed, state: 'failed', kind: 'tool' }];
         case 'knowledge_search_completed': {
             const docs = Array.isArray(p.documents) ? (p.documents as string[]) : [];
-            return [...steps, { id: `k${e.seq}`, label: docs.length ? 'Found relevant knowledge' : 'No matching knowledge', state: 'done', kind: 'knowledge', detail: docs.join(', ') }];
+            return [...steps, { id: `k${e.seq}`, label: docs.length ? LABEL.knowledgeFound : LABEL.knowledgeNone, state: 'done', kind: 'knowledge', detail: docs.join(', ') }];
         }
         case 'action_proposed':
-            return [...withoutModel(steps), { id: `a${e.seq}`, label: 'Prepared a change for your review', state: 'done', kind: 'action', detail: typeof p.resource === 'string' ? p.resource : undefined }];
+            return [...withoutModel(steps), { id: `a${e.seq}`, label: LABEL.proposed, state: 'done', kind: 'action', detail: typeof p.resource === 'string' ? p.resource : undefined }];
         case 'agent_completed':
         case 'waiting_for_approval':
         case 'agent_failed':

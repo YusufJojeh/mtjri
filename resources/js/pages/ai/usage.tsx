@@ -16,7 +16,7 @@ interface PageProps {
     recent: Array<{ feature: string; provider: string; model: string | null; input_tokens: number; output_tokens: number; cost_usd: number; status: string; error_code: string | null; created_at: string }>;
 }
 
-const FEATURE: Record<string, string> = { copilot: 'Ask Tijraa', content_studio: 'Content Studio', knowledge: 'Knowledge', product_editor: 'Product editor' };
+const FEATURE: Record<string, string> = { copilot: 'Ask Tijraa', content_studio: 'Content Studio', content_editor: 'Product editor', knowledge: 'Knowledge' };
 
 export default function AiUsage() {
     const { t } = useTranslation();

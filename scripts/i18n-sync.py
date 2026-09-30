@@ -20,6 +20,35 @@ PATTERN = re.compile(r"""\bt\(\s*(['"])((?:\\.|(?!\1).)+)\1""")
 # Source-string tables consumed via t(meta.label) etc. (lib/commerce only).
 TABLE_PATTERN = re.compile(r"""\b(?:label|title|body)\s*:\s*(['"])((?:\\.|(?!\1).)+)\1""")
 
+# Tijraa label tables: every quoted value of a `key: 'Source string'` line.
+TABLE_FILES = ('components/tijraa/', 'components/dashboard/tijraa-home.tsx', 'pages/onboarding/', 'pages/ai/', 'pages/notifications/')
+TABLE_LINE = re.compile(r"""^\s*['"]?[\w-]+['"]?\s*:\s*(['"])([A-Z][^'"\n]*?)\1\s*,?\s*$""", re.M)
+TABLE_CTA = re.compile(r"""\bcta\s*:\s*(['"])((?:\\.|(?!\1).)+)\1""")
+TABLE_TRIPLE = re.compile(r"""\[\s*['"][\w-]+['"]\s*,\s*(['"])([A-Z][^'"\n]*?)\1""")
+# Merchant-facing strings the server sends as English templates (translated in the UI).
+PHP_SOURCES = {
+    'app/Ai/Tools': re.compile(r"""progressLabel\(\): string \{ return '([^']+)'"""),
+    'app/Services/Commerce/CommerceIntelligence.php': re.compile(r"""'([A-Z:](?:[^'\\\n]|\\.)* (?:[^'\\\n]|\\.)*)'"""),
+    'app/Ai/Actions': re.compile(r"""\$f\('\w+', '([^']+)'|'label' => '([^']+)'|=> '([A-Z][a-z]+(?: [a-z]+)*)',"""),
+    'app/Services/Notifications': re.compile(r"""notify\([^,]+, '\w+', '([^']+)'"""),
+    'app/Ai/Actions/ActionService.php': re.compile(r"""notify\(\$store, '\w+', '([^']+)'"""),
+    'app/Ai/Knowledge/KnowledgeService.php': re.compile(r"""notify\(\$doc->store, '\w+', '([^']+)'"""),
+    'app/Observers': re.compile(r"""notify\(\$store, '\w+', '([^']+)'(?:, '([^']+)')?"""),
+    'routes/console.php': re.compile(r"""notify\(\$store, '\w+', '([^']+)'"""),
+}
+
+def collect_php():
+    keys = set()
+    for rel, pat in PHP_SOURCES.items():
+        path = os.path.join(ROOT, rel)
+        files = [path] if os.path.isfile(path) else [os.path.join(d, f) for d, _, fs in os.walk(path) for f in fs if f.endswith('.php')]
+        for f in files:
+            for m in pat.finditer(open(f, encoding='utf-8').read()):
+                for g in m.groups():
+                    if g and not g.startswith(('App\\', 'Illuminate')) and len(g) > 2:
+                        keys.add(g.replace("\\'", "'"))
+    return keys
+
 def collect(paths):
     keys = set()
     for p in paths:
@@ -32,6 +61,8 @@ def collect(paths):
         for f in files:
             src = open(f, encoding='utf-8').read()
             pats = [PATTERN] + ([TABLE_PATTERN] if os.sep + 'lib' + os.sep + 'commerce' + os.sep in os.path.abspath(f) else [])
+            if any(t in f.replace(os.sep, '/') for t in TABLE_FILES):
+                pats += [TABLE_LINE, TABLE_TRIPLE, TABLE_PATTERN, TABLE_CTA]
             for pat in pats:
                 for m in pat.finditer(src):
                     keys.add(m.group(2).replace("\\'", "'").replace('\\"', '"'))
@@ -40,8 +71,10 @@ def collect(paths):
 def main():
     args = sys.argv[1:]
     check = '--check' in args
-    paths = [a for a in args if a != '--check']
+    paths = [a for a in args if a not in ('--check', '--php')]
     keys = collect(paths)
+    if '--php' in args:
+        keys |= collect_php()
     # Arabic source translations: every scripts/i18n/ar*.json file (one per workstream).
     ar_src = {}
     for name in sorted(os.listdir(AR_DIR)) if os.path.isdir(AR_DIR) else []:
