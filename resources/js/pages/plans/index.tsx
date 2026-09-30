@@ -43,6 +43,7 @@ import { Permission } from '@/components/Permission';
 import { usePermissions } from '@/hooks/usePermissions';
 
 interface Plan {
+  paymentMethods?: Record<string, unknown>;
   id: number;
   name: string;
   price: string | number;

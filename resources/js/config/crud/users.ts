@@ -16,7 +16,7 @@ export const usersConfig: CrudConfig = {
   },
   modalSize: 'lg',
   table: {
-    columns: ([] as any) || [
+    columns: [
       { 
         key: 'name', 
         label: t('Name'), 
@@ -53,7 +53,7 @@ export const usersConfig: CrudConfig = {
         render: columnRenderers.date() 
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('View'), 
         icon: 'Eye', 
@@ -100,7 +100,7 @@ export const usersConfig: CrudConfig = {
     }
   ],
   form: {
-    fields: ([] as any) || [
+    fields: [
       { name: 'name', label: t('Name'), type: 'text', required: true },
       { name: 'email', label: t('Email'), type: 'email', required: true },
       { 
@@ -120,7 +120,7 @@ export const usersConfig: CrudConfig = {
       { 
         name: 'roles', 
         label: t('Roles'), 
-        type: 'multiselect', 
+        type: 'multi-select', 
         options: [] // Will be populated dynamically
       }
     ]

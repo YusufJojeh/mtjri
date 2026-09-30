@@ -109,7 +109,7 @@ export default function CreateStore({ availableThemes = [], planPermissions = {}
                   </div>
                   <div>
                     <Label htmlFor='slug'>{t('Store Slug')}</Label>
-                    <Input id='slug' placeholder={t('tore-slug')} value={formData.slug} onChange={handleChange} />
+                    <Input id='slug' placeholder={t('store-slug')} value={formData.slug} onChange={handleChange} />
                     <p className='text-xs text-muted-foreground mt-1'>
                       {t('URL slug for your store. Leave empty to auto-generate from store name.')}
                     </p>

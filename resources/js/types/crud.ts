@@ -4,11 +4,12 @@ export interface EntityConfig {
     endpoint: string;
     permissions: {
       view: string;
-      create: string;
+      /** Omit when the entity cannot be created from the UI. */
+      create?: string;
       edit: string;
       delete: string;
     };
-    breadcrumbs: {
+    breadcrumbs?: {
       title: string;
       href?: string;
     }[];
@@ -53,6 +54,7 @@ export interface EntityConfig {
     key: string;
     label: string;
     type: 'select' | 'date' | 'daterange' | 'text' | 'number' | 'boolean';
+    placeholder?: string;
     options?: FilterOption[];
     relation?: {
       endpoint: string;
@@ -71,8 +73,12 @@ export interface EntityConfig {
   export interface FormField {
     name: string;
     label: string;
-    type: 'text' | 'email' | 'password' | 'select' | 'textarea' | 'radio' | 'checkbox' | 'switch' | 'file' | 'date' | 'number' | 'multi-select' | 'media-picker' | 'custom';
+    type: 'text' | 'email' | 'password' | 'time' | 'select' | 'textarea' | 'radio' | 'checkbox' | 'switch' | 'file' | 'date' | 'number' | 'multi-select' | 'media-picker' | 'custom';
     placeholder?: string;
+    /** Native numeric input bounds (number fields). */
+    min?: number;
+    max?: number;
+    step?: number;
     required?: boolean;
     defaultValue?: unknown;
     multiple?: boolean; // For media-picker and multi-select fields
@@ -113,6 +119,7 @@ export interface EntityConfig {
   
   export interface CrudConfig {
     entity: EntityConfig;
+    search?: { enabled: boolean; placeholder?: string; fields?: string[] };
     table: TableConfig;
     filters: FilterField[];
     form: FormConfig;

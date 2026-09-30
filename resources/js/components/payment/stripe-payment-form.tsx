@@ -18,7 +18,7 @@ interface StripePaymentFormProps {
   onCancel: () => void;
 }
 
-const CheckoutForm = ({ planId, couponCode, billingCycle, onSuccess, onCancel }: Omit<StripePaymentFormProps, 'tripeKey'>) => {
+const CheckoutForm = ({ planId, couponCode, billingCycle, onSuccess, onCancel }: Omit<StripePaymentFormProps, 'stripeKey'>) => {
   const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();

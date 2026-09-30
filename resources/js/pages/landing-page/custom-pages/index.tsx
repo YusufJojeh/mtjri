@@ -28,8 +28,25 @@ interface CustomPage {
   sort_order: number;
 }
 
-interface PageProps {
-  pages: CustomPage[];
+interface Paginated<T> {
+  data: T[];
+  from?: number;
+  to?: number;
+  total?: number;
+  links?: Array<{ url: string | null; label: string; active: boolean }>;
+}
+
+interface PageFilters {
+  search?: string;
+  sort_field?: string;
+  sort_direction?: 'asc' | 'desc';
+  per_page?: string | number;
+}
+
+interface PageProps extends Record<string, unknown> {
+  pages: Paginated<CustomPage>;
+  filters?: PageFilters;
+  auth?: { permissions?: string[] };
   flash?: {
     success?: string;
     error?: string;
@@ -37,7 +54,7 @@ interface PageProps {
 }
 
 export default function CustomPagesIndex() {
-  const { pages, flash, filters: pageFilters = {} } = usePage<PageProps>().props;
+  const { pages, flash, filters: pageFilters = {} as PageFilters, auth } = usePage<PageProps>().props;
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingPage, setEditingPage] = useState<CustomPage | null>(null);
   const [searchTerm, setSearchTerm] = useState(pageFilters.search || '');
@@ -52,7 +69,7 @@ export default function CustomPagesIndex() {
     content: '',
     meta_title: '',
     meta_description: '',
-    is_active: true,
+    is_active: true as boolean,
     sort_order: 0
   });
 
@@ -310,12 +327,13 @@ export default function CustomPagesIndex() {
         <CrudTable
           columns={columns}
           actions={actions}
-          data={pages?.data || pages || []}
+          data={pages?.data || []}
           from={pages?.from || 1}
           onAction={handleAction}
           sortField={pageFilters.sort_field}
           sortDirection={pageFilters.sort_direction}
           onSort={handleSort}
+          permissions={auth?.permissions ?? []}
         />
 
         {/* Pagination section */}

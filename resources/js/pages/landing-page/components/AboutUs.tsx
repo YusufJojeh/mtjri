@@ -15,8 +15,8 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   'heart': Heart,
   'award': Award,
   'lightbulb': Lightbulb,
-  'tar': Star,
-  'hield': Shield,
+  'star': Star,
+  'shield': Shield,
   'users': Users,
   'zap': Zap
 };

@@ -127,7 +127,7 @@ export default function HeroSection({
               {(content?.info_boxes || [
                 { icon: 'truck', title: 'Free Shipping', description: 'On orders over $50' },
                 { icon: 'refresh-cw', title: '30-Day Returns', description: 'Hassle-free returns' },
-                { icon: 'hield-check', title: 'Secure Checkout', description: '100% protected' }
+                { icon: 'shield-check', title: 'Secure Checkout', description: '100% protected' }
               ]).map((box: any, index: any) => (
                 <div key={index} className='flex items-center'>
                   <div className='bg-primary/10 p-2 rounded-full mr-3'>
@@ -142,7 +142,7 @@ export default function HeroSection({
                         <path fillRule='evenodd' d='M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z' clipRule='evenodd' />
                       </svg>
                     )}
-                    {box.icon === 'hield-check' && (
+                    {box.icon === 'shield-check' && (
                       <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5 text-primary' viewBox='0 0 20 20' fill='currentColor'>
                         <path fillRule='evenodd' d='M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z' clipRule='evenodd' />
                       </svg>

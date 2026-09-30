@@ -25,26 +25,29 @@ import { useBrand } from '@/contexts/BrandContext';
 import { THEME_COLORS } from '@/hooks/use-appearance';
 import { getImageUrl } from '@/utils/image-helper';
 
-interface Settings {
+interface LandingConfig {
+  sections: Array<{
+    key: string;
+    [key: string]: any;
+  }>;
+  theme?: any;
+  colors?: any;
+  seo?: any;
+  section_order?: string[];
+  section_visibility?: Record<string, boolean>;
+  [key: string]: any;
+}
+
+type Settings = {
   company_name: string;
   contact_email: string;
   contact_phone: string;
   contact_address: string;
-  config_sections?: {
-    sections: Array<{
-      key: string;
-      [key: string]: any;
-    }>;
-    theme?: any;
-    colors?: any;
-    seo?: any;
-    section_order?: string[];
-    section_visibility?: Record<string, boolean>;
-    [key: string]: any;
-  };
-}
+  config_sections?: LandingConfig;
+  [key: string]: any;
+};
 
-interface PageProps {
+interface PageProps extends Record<string, unknown> {
   settings: Settings;
   flash?: {
     success?: string;
@@ -114,42 +117,42 @@ export default function LandingPageSettings() {
     }
     
     setData('config_sections', {
-      ...data.config_sections,
+      ...(data.config_sections as LandingConfig),
       sections
     });
   };
 
   const updateThemeData = (updates: any) => {
     setData('config_sections', {
-      ...data.config_sections,
+      ...(data.config_sections as LandingConfig),
       theme: { ...(data as any)?.config_sections?.theme, ...updates }
     });
   };
 
   const updateColorsData = (updates: any) => {
     setData('config_sections', {
-      ...data.config_sections,
+      ...(data.config_sections as LandingConfig),
       colors: { ...(data as any)?.config_sections?.colors, ...updates }
     });
   };
 
   const updateSeoData = (updates: any) => {
     setData('config_sections', {
-      ...data.config_sections,
+      ...(data.config_sections as LandingConfig),
       seo: { ...(data as any)?.config_sections?.seo, ...updates }
     });
   };
 
   const updateSectionVisibility = (sectionKey: string, visible: boolean) => {
     setData('config_sections', {
-      ...data.config_sections,
+      ...(data.config_sections as LandingConfig),
       section_visibility: { ...(data as any)?.config_sections?.section_visibility, [sectionKey]: visible }
     });
   };
 
   const updateSectionOrder = (newOrder: string[]) => {
     setData('config_sections', {
-      ...data.config_sections,
+      ...(data.config_sections as LandingConfig),
       section_order: newOrder
     });
   };
@@ -2820,104 +2823,6 @@ export default function LandingPageSettings() {
               </div>
             )}
             
-            {/* Design Section */}
-            {activeSection === 'design' && (
-              <div className='space-y-6'>
-                <div className='space-y-4'>
-                  <div className='flex items-center'>
-                    <Palette className='h-5 w-5 mr-2 text-muted-foreground' />
-                    <h3 className='text-base font-medium'>{t('Colors & Theme')}</h3>
-                  </div>
-                  <Separator className='my-2' />
-                  
-                  <div className='grid grid-cols-3 gap-4'>
-                    <div className='space-y-3'>
-                      <Label htmlFor='primary_color'>{t('Primary Color')}</Label>
-                      <div className='flex gap-2'>
-                        <Input
-                          id='primary_color'
-                          type='color'
-                          value={(data as any)?.config_sections?.theme?.primary_color || '#3b82f6'}
-                          onChange={(e) => updateThemeData({ primary_color: e.target.value })}
-                          className='w-16 h-10 p-1'
-                        />
-                        <Input
-                          value={(data as any)?.config_sections?.theme?.primary_color || '#3b82f6'}
-                          onChange={(e) => updateThemeData({ primary_color: e.target.value })}
-                          placeholder='#3b82f6'
-                        />
-                      </div>
-                    </div>
-                    <div className='space-y-3'>
-                      <Label htmlFor='secondary_color'>{t('Secondary Color')}</Label>
-                      <div className='flex gap-2'>
-                        <Input
-                          id='secondary_color'
-                          type='color'
-                          value={(data as any)?.config_sections?.theme?.secondary_color || '#8b5cf6'}
-                          onChange={(e) => updateThemeData({ secondary_color: e.target.value })}
-                          className='w-16 h-10 p-1'
-                        />
-                        <Input
-                          value={(data as any)?.config_sections?.theme?.secondary_color || '#8b5cf6'}
-                          onChange={(e) => updateThemeData({ secondary_color: e.target.value })}
-                          placeholder='#8b5cf6'
-                        />
-                      </div>
-                    </div>
-                    <div className='space-y-3'>
-                      <Label htmlFor='accent_color'>{t('Accent Color')}</Label>
-                      <div className='flex gap-2'>
-                        <Input
-                          id='accent_color'
-                          type='color'
-                          value={(data as any)?.config_sections?.theme?.accent_color || '#10b981'}
-                          onChange={(e) => updateThemeData({ accent_color: e.target.value })}
-                          className='w-16 h-10 p-1'
-                        />
-                        <Input
-                          value={(data as any)?.config_sections?.theme?.accent_color || '#10b981'}
-                          onChange={(e) => updateThemeData({ accent_color: e.target.value })}
-                          placeholder='#10b981'
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='space-y-4'>
-                  <div className='flex items-center'>
-                    <Image className='h-5 w-5 mr-2 text-muted-foreground' />
-                    <h3 className='text-base font-medium'>{t('Images & Logos')}</h3>
-                  </div>
-                  <Separator className='my-2' />
-                  
-                  <div className='grid grid-cols-2 gap-4'>
-                    <div className='space-y-3'>
-                      <MediaPicker
-                        label={t('Logo (Light)')}
-                        value={getDisplayUrl((data as any)?.config_sections?.theme?.logo_light || '')}
-                        onChange={(value) => {
-                          updateThemeData({ logo_light: convertToRelativePath(value) });
-                        }}
-                        placeholder={t('Select light logo...')}
-                      />
-                    </div>
-                    <div className='space-y-3'>
-                      <MediaPicker
-                        label={t('Logo (Dark)')}
-                        value={getDisplayUrl((data as any)?.config_sections?.theme?.logo_dark || '')}
-                        onChange={(value) => {
-                          updateThemeData({ logo_dark: convertToRelativePath(value) });
-                        }}
-                        placeholder={t('Select dark logo...')}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Change Order Section */}
             {activeSection === 'order' && (
               <div className='space-y-6'>
@@ -2934,7 +2839,7 @@ export default function LandingPageSettings() {
                   
                   <div className='space-y-3'>
                     {((data as any)?.config_sections?.section_order || []).map((sectionKey: any, index: any) => {
-                      const sectionNames = {
+                      const sectionNames: Record<string, string> = {
                         header: t('Header'),
                         hero: t('Hero'),
                         features: t('Features'),
@@ -3052,7 +2957,7 @@ export default function LandingPageSettings() {
                     <Textarea
                       id='custom_css'
                       value={(data as any)?.config_sections?.custom_css || ''}
-                      onChange={(e) => setData('config_sections', { ...data.config_sections, custom_css: e.target.value })}
+                      onChange={(e) => setData('config_sections', { ...(data.config_sections as LandingConfig), custom_css: e.target.value })}
                       placeholder={t('Add your custom CSS here')}
                       rows={6}
                       className='font-mono text-sm'
@@ -3075,7 +2980,7 @@ export default function LandingPageSettings() {
                     <Textarea
                       id='custom_js'
                       value={(data as any)?.config_sections?.custom_js || ''}
-                      onChange={(e) => setData('config_sections', { ...data.config_sections, custom_js: e.target.value })}
+                      onChange={(e) => setData('config_sections', { ...(data.config_sections as LandingConfig), custom_js: e.target.value })}
                       placeholder={t('Add your custom JavaScript here')}
                       rows={6}
                       className='font-mono text-sm'

@@ -17,14 +17,14 @@ export const rolesConfig: CrudConfig = {
   modalSize: '5xl',
   description: t('Manage user roles and their permissions'),
   table: {
-    columns: ([] as any) || [
+    columns: [
       { key: 'label', label: t('Name'), sortable: true },
       { key: 'name', label: t('Slug'), sortable: true },
       { key: 'description', label: t('Description') },
       { 
         key: 'creator.name', 
         label: t('Created By'), 
-        render: (value, row) => ((row as any)?.(creator)?.(name)) || t('System')
+        render: (_value, row) => row?.creator?.name || t('System')
       },
       { 
         key: 'created_at', 
@@ -34,7 +34,7 @@ export const rolesConfig: CrudConfig = {
       }
       // Permissions column will be added dynamically in the Roles component
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('View'), 
         icon: 'Eye', 
@@ -61,7 +61,7 @@ export const rolesConfig: CrudConfig = {
   },
   filters: [],
   form: {
-    fields: ([] as any) || [
+    fields: [
       { name: 'label', label: t('Role Name'), type: 'text', required: true },
       { name: 'description', label: t('Description'), type: 'textarea' }
       // Permissions field will be added dynamically in the Roles component

@@ -16,7 +16,7 @@ export const planOrdersConfig: CrudConfig = {
   modalSize: '4xl',
   description: t('Manage plan orders and subscription requests'),
   table: {
-    columns: ([] as any) || [
+    columns: [
       { key: 'order_number', label: t('Order Number'), sortable: true },
       { 
         key: 'ordered_at', 
@@ -68,7 +68,7 @@ export const planOrdersConfig: CrudConfig = {
         }
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('Approve'), 
         icon: 'Check', 
@@ -88,7 +88,7 @@ export const planOrdersConfig: CrudConfig = {
   search: {
     enabled: true,
     placeholder: t('Search orders...'),
-    fields: ([] as any) || ['order_number', 'user.name', 'plan.name', 'coupon_code']
+    fields: ['order_number', 'user.name', 'plan.name', 'coupon_code']
   },
   filters: [
     {
@@ -104,6 +104,6 @@ export const planOrdersConfig: CrudConfig = {
     }
   ],
   form: {
-    fields: ([] as any) || []
+    fields: []
   }
 };

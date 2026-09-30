@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { usePage } from '@inertiajs/react';
 
-interface StorePageProps {
+interface StorePageProps extends Record<string, unknown> {
   store?: {
     id?: number;
     name?: string;

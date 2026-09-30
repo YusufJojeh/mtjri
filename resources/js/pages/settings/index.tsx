@@ -1,7 +1,6 @@
 import { PageTemplate } from '@/components/page-template';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { type NavItem } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import { Settings as SettingsIcon, Building, DollarSign, Users, RefreshCw, Palette, BookOpen, Award, FileText, Mail, Bell, Link2, CreditCard, Calendar, HardDrive, Shield, Bot, Cookie, Search, Webhook, Wallet } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -27,6 +26,13 @@ import WebhookSettings from './components/webhook-settings';
 import { useTranslation } from 'react-i18next';
 import { hasPermission } from '@/utils/permissions';
 
+interface SettingsNavItem {
+  title: string;
+  href: string;
+  icon: React.ReactNode;
+  permission?: string;
+}
+
 export default function Settings() {
   const { t } = useTranslation();
   const { systemSettings = {}, cacheSize = '0.00', timezones = {}, dateFormats = {}, timeFormats = {}, paymentSettings = {}, whatsappVariables = {}, telegramVariables = {}, webhooks = [], auth = {}, flash } = usePage().props as any;
@@ -36,7 +42,7 @@ export default function Settings() {
   // Removed manual handling to prevent duplicate messages
   
   // Define all possible sidebar navigation items
-  const allSidebarNavItems: (NavItem & { permission?: string })[] = [
+  const allSidebarNavItems: SettingsNavItem[] = [
     {
       title: t('System Settings'),
       href: '#system-settings',

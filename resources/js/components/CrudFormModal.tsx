@@ -264,7 +264,6 @@ export function CrudFormModal({
             onChange={(e) => handleChange(field.name, e.target.value)}
             required={field.required}
             className={errors[field.name] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-            disabled={mode === 'view'}
           />
         );
         
@@ -287,7 +286,6 @@ export function CrudFormModal({
             onChange={(e) => handleChange(field.name, e.target.value)}
             required={field.required}
             className={errors[field.name] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-            disabled={mode === 'view'}
           />
         );
       }
@@ -303,7 +301,6 @@ export function CrudFormModal({
             onChange={(e) => handleChange(field.name, e.target.value ? parseFloat(e.target.value) : '')}
             required={field.required}
             className={errors[field.name] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-            disabled={mode === 'view'}
           />
         );
         
@@ -317,7 +314,6 @@ export function CrudFormModal({
             onChange={(e) => handleChange(field.name, e.target.value)}
             required={field.required}
             className={errors[field.name] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-            disabled={mode === 'view'}
           />
         );
         
@@ -339,7 +335,6 @@ export function CrudFormModal({
           <Select
             value={currentValue}
             onValueChange={(value) => handleChange(field.name, value)}
-            disabled={mode === 'view'}
           >
             <SelectTrigger className={errors[field.name] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}>
               <SelectValue placeholder={field.placeholder || `Select ${field.label}`}>
@@ -374,7 +369,6 @@ export function CrudFormModal({
             <RadioGroup
               value={formData[field.name] || ''}
               onValueChange={(value) => handleChange(field.name, value)}
-              disabled={mode === 'view'}
               className='flex gap-4'
             >
               {field.options?.map((option) => (
@@ -395,7 +389,6 @@ export function CrudFormModal({
                 id={field.name}
                 checked={!!formData[field.name]}
                 onCheckedChange={(checked) => handleChange(field.name, checked)}
-                disabled={mode === 'view'}
               />
               <Label htmlFor={field.name} className='text-sm font-normal cursor-pointer'>
                 {field.label}
@@ -405,15 +398,6 @@ export function CrudFormModal({
         );
         
       case 'switch':
-        // In view mode, show text representation
-        if (mode === 'view') {
-          return (
-            <div className='p-2 border rounded-md bg-gray-50'>
-              {formData[field.name] ? 'Enabled' : 'Disabled'}
-            </div>
-          );
-        }
-        
         // In edit/create mode, show switch with label
         return (
           <div className={errors[field.name] ? 'p-3 border border-red-500 rounded-md' : ''}>
@@ -458,7 +442,6 @@ export function CrudFormModal({
                 }
               }}
               className={errors[field.name] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
-              disabled={mode === 'view'}
             />
             {mode === 'edit' && initialData[field.name] && (
               <div className='text-xs text-gray-500 mt-1'>

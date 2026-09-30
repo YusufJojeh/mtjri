@@ -2,6 +2,7 @@ import React from 'react';
 import { getImageUrl } from '@/utils/image-helper';
 
 interface Category {
+  href?: string;
   id: number;
   name: string;
   slug: string;

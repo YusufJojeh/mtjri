@@ -18,6 +18,7 @@ const encryptPlanId = (planId: number): string => {
 };
 
 interface Plan {
+  stats?: Record<string, number | string>;
   id: number;
   name: string;
   description: string;

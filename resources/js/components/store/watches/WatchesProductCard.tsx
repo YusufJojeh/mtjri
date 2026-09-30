@@ -7,6 +7,10 @@ import { useWishlist } from '@/contexts/WishlistContext';
 import { usePage, router } from '@inertiajs/react';
 
 interface Product {
+  average_rating?: number;
+  rating?: number;
+  reviews_count?: number;
+  total_reviews?: number;
   id: number;
   name: string;
   price: number;

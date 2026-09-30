@@ -49,7 +49,7 @@ export const defaultLandingPageSections = {
         {
           title: 'NFC Technology',
           description: 'Tap-to-share functionality with NFC-enabled devices.',
-          icon: 'martphone'
+          icon: 'smartphone'
         },
         {
           title: 'Analytics & Insights',

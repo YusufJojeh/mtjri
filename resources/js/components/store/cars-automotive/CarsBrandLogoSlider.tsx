@@ -7,9 +7,13 @@ interface BrandLogo {
 }
 
 interface BrandContent {
-  logos?: {
-    value: BrandLogo[];
-  };
+  bottom_button_link?: string;
+  bottom_button_text?: string;
+  bottom_description?: string;
+  bottom_title?: string;
+  description?: string;
+  title?: string;
+  logos?: BrandLogo[];
   stats?: any;
 }
 

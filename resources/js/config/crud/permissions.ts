@@ -16,7 +16,7 @@ export const permissionsConfig: CrudConfig = {
   },
   description: t('Manage system permissions for different modules'),
   table: {
-    columns: ([] as any) || [
+    columns: [
       { 
         key: 'module', 
         label: t('Module'), 
@@ -40,7 +40,7 @@ export const permissionsConfig: CrudConfig = {
         render: columnRenderers.date() 
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('View'), 
         icon: 'Eye', 
@@ -73,7 +73,7 @@ export const permissionsConfig: CrudConfig = {
     }
   ],
   form: {
-    fields: ([] as any) || [
+    fields: [
       { name: 'module', label: t('Module'), type: 'text', required: true },
       { 
         name: 'label', 

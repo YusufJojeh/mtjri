@@ -10,7 +10,7 @@ export const landingPageContactsConfig = {
     }
   },
   table: {
-    columns: ([] as any) || [
+    columns: [
       {
         key: 'name',
         label: 'Name',
@@ -33,7 +33,7 @@ export const landingPageContactsConfig = {
         sortable: true
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       {
         action: 'view',
         label: 'View',

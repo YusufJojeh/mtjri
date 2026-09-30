@@ -27,7 +27,7 @@ interface Newsletter {
   created_at: string;
 }
 
-interface PageProps {
+interface PageProps extends Record<string, unknown> {
   newsletter: Newsletter;
 }
 

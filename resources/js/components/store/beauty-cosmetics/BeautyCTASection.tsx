@@ -17,7 +17,7 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
     { icon: 'user-check', title: 'Skin Analysis', subtitle: 'Free personalized consultation' },
     { icon: 'calendar', title: 'Beauty Calendar', subtitle: 'Track your skincare routine' },
     { icon: 'gift', title: 'Beauty Box', subtitle: 'Monthly curated surprises' },
-    { icon: 'tar', title: 'Rewards Program', subtitle: 'Earn points with every purchase' }
+    { icon: 'star', title: 'Rewards Program', subtitle: 'Earn points with every purchase' }
   ];
 
   const getIcon = (iconName: string) => {
@@ -40,7 +40,7 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
             <path fillRule='evenodd' d='M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z' clipRule='evenodd' />
           </svg>
         );
-      case 'tar':
+      case 'star':
         return (
           <svg className='w-8 h-8' fill='currentColor' viewBox='0 0 20 20'>
             <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />

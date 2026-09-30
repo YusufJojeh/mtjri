@@ -51,7 +51,7 @@ interface Contact {
   created_at: string;
 }
 
-interface PageProps {
+interface PageProps extends Record<string, unknown> {
   contact: Contact;
 }
 

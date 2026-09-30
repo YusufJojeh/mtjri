@@ -16,6 +16,8 @@ interface ProductVariant {
 }
 
 interface Product {
+  rating?: number;
+  reviews_count?: number;
   id: number;
   name: string;
   sku?: string;

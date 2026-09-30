@@ -15,7 +15,7 @@ export const planRequestsConfig: CrudConfig = {
   modalSize: '4xl',
   description: t('Manage plan upgrade requests from users'),
   table: {
-    columns: ([] as any) || [
+    columns: [
       { key: 'user.name', label: t('Name'), sortable: true },
       { key: 'user.email', label: t('Email'), sortable: true },
       { key: 'plan.name', label: t('Plan Name'), sortable: true },
@@ -36,7 +36,7 @@ export const planRequestsConfig: CrudConfig = {
         render: columnRenderers.date() 
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('Approve'), 
         icon: 'Check', 
@@ -56,7 +56,7 @@ export const planRequestsConfig: CrudConfig = {
   search: {
     enabled: true,
     placeholder: t('Search plan requests...'),
-    fields: ([] as any) || ['user.name', 'user.email', 'plan.name']
+    fields: ['user.name', 'user.email', 'plan.name']
   },
   filters: [
     {
@@ -72,6 +72,6 @@ export const planRequestsConfig: CrudConfig = {
     }
   ],
   form: {
-    fields: ([] as any) || []
+    fields: []
   }
 };

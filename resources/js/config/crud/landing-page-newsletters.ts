@@ -10,7 +10,7 @@ export const landingPageNewslettersConfig = {
     }
   },
   table: {
-    columns: ([] as any) || [
+    columns: [
       {
         key: 'email',
         label: 'Email',
@@ -23,7 +23,7 @@ export const landingPageNewslettersConfig = {
         sortable: true
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       {
         action: 'delete',
         label: 'Delete',

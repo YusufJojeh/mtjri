@@ -6,6 +6,8 @@ import { useCart } from '@/contexts/CartContext';
 import { formatCurrency } from '@/utils/currency-formatter';
 
 interface Product {
+  is_active?: boolean;
+  stock?: number;
   id: number;
   name: string;
   slug: string;

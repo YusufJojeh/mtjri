@@ -16,7 +16,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
                 Array.isArray(content) ? content :
                 [
     { icon: 'nose', title: 'Scent Profiling', subtitle: 'Discover your fragrance personality' },
-    { icon: 'tar', title: 'VIP Rewards', subtitle: 'Exclusive member benefits' },
+    { icon: 'star', title: 'VIP Rewards', subtitle: 'Exclusive member benefits' },
     { icon: 'truck', title: 'White Glove Delivery', subtitle: 'Premium packaging & delivery' },
     { icon: 'users', title: 'Fragrance Concierge', subtitle: 'Personal shopping service' }
   ];
@@ -29,7 +29,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
             <path d='M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1s1-.45 1-1v-2.26c.31-.13.64-.24 1-.24s.69.11 1 .24V17c0 .55.45 1 1 1s1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5 0 2.76-2.24 5-5 5s-5-2.24-5-5c0-2.76 2.24-5 5-5z'/>
           </svg>
         );
-      case 'tar':
+      case 'star':
         return (
           <svg className='w-full h-full' fill='currentColor' viewBox='0 0 20 20'>
             <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />

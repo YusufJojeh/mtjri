@@ -14,7 +14,7 @@ export default function FashionCTASection({ content, ctaBoxes, bottomSection }: 
                 Array.isArray(content?.value) ? content.value :
                 Array.isArray(content) ? content :
                 [
-    { icon: 'parkles', title: 'Personal Styling', subtitle: 'Free styling consultation' },
+    { icon: 'sparkles', title: 'Personal Styling', subtitle: 'Free styling consultation' },
     { icon: 'heart', title: 'Wishlist Alerts', subtitle: 'Get notified when items go on sale' },
     { icon: 'gift', title: 'Gift Cards', subtitle: 'Perfect for fashion lovers' },
     { icon: 'users', title: 'VIP Membership', subtitle: 'Exclusive access & rewards' }
@@ -27,7 +27,7 @@ export default function FashionCTASection({ content, ctaBoxes, bottomSection }: 
           {boxes.map((box: any, index: any) => (
             <div key={index} className='text-center group cursor-pointer'>
               <div className='w-16 h-16 mx-auto mb-6 border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-300'>
-                {box.icon === 'parkles' && (
+                {box.icon === 'sparkles' && (
                   <svg className='w-8 h-8' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1} d='M5 3l14 9-14 9V3z' />
                   </svg>

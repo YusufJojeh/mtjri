@@ -15,7 +15,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
                 Array.isArray(content?.value) ? content.value :
                 Array.isArray(content) ? content :
                 [
-    { icon: 'martphone', title: 'Mobile Accessories', subtitle: 'Cases, chargers & more' },
+    { icon: 'smartphone', title: 'Mobile Accessories', subtitle: 'Cases, chargers & more' },
     { icon: 'headphones', title: 'Audio Gear', subtitle: 'Premium sound experience' },
     { icon: 'monitor', title: 'Gaming Setup', subtitle: 'Level up your gaming' },
     { icon: 'wifi', title: 'Smart Home', subtitle: 'Connected living solutions' }
@@ -23,7 +23,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'martphone':
+      case 'smartphone':
         return (
           <svg className='w-8 h-8' fill='currentColor' viewBox='0 0 20 20'>
             <path fillRule='evenodd' d='M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zM8 5a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zm1 9a1 1 0 100 2h2a1 1 0 100-2H9z' clipRule='evenodd' />

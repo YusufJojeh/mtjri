@@ -13,24 +13,13 @@ interface SocialLink {
 }
 
 interface FooterContent {
-  description?: { value: string };
-  menu1?: {
-    title: { value: string };
-    links: { value: FooterLink[] };
-  };
-  menu2?: {
-    title: { value: string };
-    links: { value: FooterLink[] };
-  };
-  contact?: {
-    address: { value: string };
-    phone: { value: string };
-    email: { value: string };
-  };
-  social_links?: {
-    value: SocialLink[];
-  };
-  copyright_text?: { value: string };
+  description?: string;
+  menu1?: { title?: string; links?: FooterLink[] };
+  menu2?: { title?: string; links?: FooterLink[] };
+  contact?: { title?: string; address?: string; phone?: string; email?: string };
+  business_hours?: { title?: string; hours?: Array<{ days: string; time: string; status: string }> };
+  social_links?: SocialLink[];
+  copyright_text?: string;
 }
 
 interface CarsFooterProps {
@@ -47,7 +36,7 @@ const socialIcons = {
 };
 
 export default function CarsFooter({ storeName, logo, content }: CarsFooterProps) {
-  const footerContent = content || {};
+  const footerContent: FooterContent = content || {};
   const currentYear = new Date().getFullYear();
   
 

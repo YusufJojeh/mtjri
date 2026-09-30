@@ -14,7 +14,7 @@ export const currenciesConfig: CrudConfig = {
     }
   },
   table: {
-    columns: ([] as any) || [
+    columns: [
       { 
         key: 'name', 
         label: t('Name'), 
@@ -40,7 +40,7 @@ export const currenciesConfig: CrudConfig = {
         type: 'boolean'
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('Edit'), 
         icon: 'Edit', 
@@ -60,7 +60,7 @@ export const currenciesConfig: CrudConfig = {
   },
   filters: [],
   form: {
-    fields: ([] as any) || [
+    fields: [
       { 
         name: 'name', 
         label: t('Currency Name'), 

@@ -10,7 +10,7 @@ interface StoreCurrency {
   thousands_separator: string;
 }
 
-interface PageProps {
+interface PageProps extends Record<string, unknown> {
   storeCurrency: StoreCurrency;
 }
 

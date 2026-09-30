@@ -393,7 +393,7 @@ export function PageCrudWrapper({
   });
 
   // Add the default 'Add New' button if allowed and user has permission
-  if (showAddButton && hasPermission(permissions, entity.permissions.create)) {
+  if (showAddButton && entity.permissions.create && hasPermission(permissions, entity.permissions.create)) {
     pageActions.push({
       label: `Add New ${entity.name.slice(0, -1).charAt(0).toUpperCase() + entity.name.slice(0, -1).slice(1)}`,
       icon: <PlusIcon className='h-4 w-4' />,

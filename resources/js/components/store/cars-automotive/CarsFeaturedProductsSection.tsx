@@ -18,8 +18,8 @@ interface Product {
 }
 
 interface FeaturedContent {
-  title?: { value: string };
-  description?: { value: string };
+  title?: string;
+  description?: string;
 }
 
 interface CarsFeaturedProductsSectionProps {

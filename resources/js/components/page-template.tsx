@@ -24,6 +24,8 @@ export interface PageTemplateProps {
     breadcrumbs?: BreadcrumbItem[];
     /** Render a custom header instead of the default title row. */
     header?: ReactNode;
+    /** A single custom action node rendered beside the title (legacy pages). */
+    action?: ReactNode;
     /** Constrain very wide pages; detail pages look better narrower. */
     width?: 'default' | 'narrow' | 'full';
 }
@@ -32,7 +34,7 @@ export interface PageTemplateProps {
  * Shared page frame for every merchant screen: consistent gutters, max
  * width and a compact title row. Legacy pages get the new look for free.
  */
-export function PageTemplate({ title, description, url, actions, children, noPadding = false, breadcrumbs, header, width = 'default' }: PageTemplateProps) {
+export function PageTemplate({ title, description, url, actions, action, children, noPadding = false, breadcrumbs, header, width = 'default' }: PageTemplateProps) {
     const pageBreadcrumbs: BreadcrumbItem[] = breadcrumbs || [{ title, href: url }];
 
     return (
@@ -53,19 +55,20 @@ export function PageTemplate({ title, description, url, actions, children, noPad
                                 <h1 className="text-foreground truncate text-xl font-semibold tracking-tight sm:text-[1.375rem]">{title}</h1>
                                 {description && <p className="text-muted-foreground text-sm">{description}</p>}
                             </div>
-                            {actions && actions.length > 0 && (
+                            {((actions && actions.length > 0) || action) && (
                                 <div className="flex flex-wrap items-center gap-2">
-                                    {actions.map((action, index) => (
+                                    {action}
+                                    {(actions ?? []).map((pageAction, index) => (
                                         <Button
                                             key={index}
-                                            variant={action.variant || 'outline'}
+                                            variant={pageAction.variant || 'outline'}
                                             size="sm"
-                                            onClick={action.onClick}
-                                            disabled={action.disabled}
-                                            className={cn('h-9 sm:h-8', action.className)}
+                                            onClick={pageAction.onClick}
+                                            disabled={pageAction.disabled}
+                                            className={cn('h-9 sm:h-8', pageAction.className)}
                                         >
-                                            {action.icon}
-                                            <span>{action.label}</span>
+                                            {pageAction.icon}
+                                            <span>{pageAction.label}</span>
                                         </Button>
                                     ))}
                                 </div>

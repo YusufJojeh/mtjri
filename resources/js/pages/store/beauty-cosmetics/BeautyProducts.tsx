@@ -10,6 +10,8 @@ import { formatCurrency } from '@/utils/currency-formatter';
 import { getImageUrl } from '@/utils/image-helper';
 
 interface Product {
+  rating?: number;
+  reviews_count?: number;
   id: number;
   name: string;
   price: number;

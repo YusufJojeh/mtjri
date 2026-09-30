@@ -12,8 +12,8 @@ interface Category {
 }
 
 interface CategoryContent {
-  title?: { value: string };
-  description?: { value: string };
+  title?: string;
+  description?: string;
 }
 
 interface CarsCategorySectionProps {

@@ -22,7 +22,6 @@ export function ProfileMenu() {
   const { auth } = usePage().props as any;
   const user = auth?.user;
   const { hasPermission } = usePermissions();
-  const permissions = auth?.permissions || [];
 
   const handleLogout = () => {
     router.post(route('logout'));
@@ -90,14 +89,14 @@ export function ProfileMenu() {
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        {(hasPermission(permissions, 'view-plans') || hasPermission(permissions, 'manage-plans') || 
-          hasPermission(permissions, 'manage-plan-requests') || hasPermission(permissions, 'view-plan-requests') ||
-          hasPermission(permissions, 'manage-plan-orders') || hasPermission(permissions, 'view-plan-orders')) && (
+        {(hasPermission('view-plans') || hasPermission('manage-plans') || 
+          hasPermission('manage-plan-requests') || hasPermission('view-plan-requests') ||
+          hasPermission('manage-plan-orders') || hasPermission('view-plan-orders')) && (
           <>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuLabel>{t('Plans')}</DropdownMenuLabel>
-              {(hasPermission(permissions, 'view-plans') || hasPermission(permissions, 'manage-plans')) && (
+              {(hasPermission('view-plans') || hasPermission('manage-plans')) && (
                 <DropdownMenuItem asChild>
                   <Link href={route('plans.index')}>
                     <CreditCard className='mr-2 h-4 w-4' />
@@ -105,7 +104,7 @@ export function ProfileMenu() {
                   </Link>
                 </DropdownMenuItem>
               )}
-              {(hasPermission(permissions, 'manage-plan-requests') || hasPermission(permissions, 'view-plan-requests')) && (
+              {(hasPermission('manage-plan-requests') || hasPermission('view-plan-requests')) && (
                 <DropdownMenuItem asChild>
                   <Link href={route('plan-requests.index')}>
                     <CreditCard className='mr-2 h-4 w-4' />
@@ -113,7 +112,7 @@ export function ProfileMenu() {
                   </Link>
                 </DropdownMenuItem>
               )}
-              {(hasPermission(permissions, 'manage-plan-orders') || hasPermission(permissions, 'view-plan-orders')) && (
+              {(hasPermission('manage-plan-orders') || hasPermission('view-plan-orders')) && (
                 <DropdownMenuItem asChild>
                   <Link href={route('plan-orders.index')}>
                     <CreditCard className='mr-2 h-4 w-4' />
@@ -151,7 +150,7 @@ export function ProfileMenu() {
               </span>
             </DropdownMenuItem>
           ))}
-          {hasPermission(permissions, 'manage-language') && (
+          {hasPermission('manage-language') && (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>

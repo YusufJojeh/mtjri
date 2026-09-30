@@ -18,8 +18,8 @@ interface Product {
 }
 
 interface TrendingContent {
-  title?: { value: string };
-  description?: { value: string };
+  title?: string;
+  description?: string;
 }
 
 interface CarsTrendingProductsSectionProps {

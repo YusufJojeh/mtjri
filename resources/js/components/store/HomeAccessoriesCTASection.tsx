@@ -9,9 +9,7 @@ interface CTABox {
 
 interface HomeAccessoriesCTASectionProps {
   content?: {
-    cta_boxes?: {
-      value: CTABox[];
-    };
+    cta_boxes?: CTABox[];
   };
   ctaBoxes?: CTABox[] | { value: CTABox[] };
 }
@@ -21,12 +19,12 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   palette: Palette,
   award: Award,
   users: Users,
-  'hopping-bag': ShoppingBag,
+  'shopping-bag': ShoppingBag,
   heart: Heart,
   star: Star,
   truck: Truck,
   'refresh-cw': RefreshCw,
-  'hield-check': Shield,
+  'shield-check': Shield,
   'credit-card': CreditCard,
   headphones: HeadphonesIcon
 };
@@ -36,10 +34,11 @@ export default function HomeAccessoriesCTASection({
   ctaBoxes
 }: HomeAccessoriesCTASectionProps) {
   // Get CTA boxes from props with fallback
-  const boxes = ctaBoxes?.value || ctaBoxes || content?.cta_boxes?.value || [
+  // Content may arrive as a plain list or wrapped as { value: [...] }.
+  const boxes = (Array.isArray(ctaBoxes) ? ctaBoxes : ctaBoxes?.value) || content?.cta_boxes || [
     { icon: 'truck', title: 'Free Shipping', subtitle: 'On all orders over $50' },
     { icon: 'refresh-cw', title: 'Easy Returns', subtitle: '30-day return policy' },
-    { icon: 'hield-check', title: 'Secure Payment', subtitle: '100% secure checkout' },
+    { icon: 'shield-check', title: 'Secure Payment', subtitle: '100% secure checkout' },
     { icon: 'users', title: '24/7 Support', subtitle: 'Dedicated customer service' }
   ];
 

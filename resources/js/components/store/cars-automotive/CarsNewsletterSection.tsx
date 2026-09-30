@@ -3,11 +3,12 @@ import { Mail, CheckCircle } from 'lucide-react';
 import { usePage } from '@inertiajs/react';
 
 interface NewsletterContent {
-  title?: { value: string };
-  subtitle?: { value: string };
-  placeholder_text?: { value: string };
-  button_text?: { value: string };
-  privacy_text?: { value: string };
+  features?: Array<{ title?: string; description?: string; icon?: string } | string>;
+  title?: string;
+  subtitle?: string;
+  placeholder_text?: string;
+  button_text?: string;
+  privacy_text?: string;
 }
 
 interface CarsNewsletterSectionProps {

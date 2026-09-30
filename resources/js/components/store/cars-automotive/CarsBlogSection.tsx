@@ -16,8 +16,9 @@ interface BlogPost {
 }
 
 interface BlogContent {
-  title?: { value: string };
-  description?: { value: string };
+  categories?: Array<{ name: string; slug?: string }>;
+  title?: string;
+  description?: string;
 }
 
 interface CarsBlogSectionProps {

@@ -20,7 +20,7 @@ export const couponsConfig: CrudConfig = {
   modalSize: '4xl',
   description: t('Manage discount coupons and promotional codes'),
   table: {
-    columns: ([] as any) || [
+    columns: [
       { key: 'name', label: t('Name'), sortable: true },
       { 
         key: 'type', 
@@ -103,7 +103,7 @@ export const couponsConfig: CrudConfig = {
         }
       }
     ],
-    actions: ([] as any) || [
+    actions: [
       { 
         label: t('Edit'), 
         icon: 'Edit', 
@@ -121,7 +121,7 @@ export const couponsConfig: CrudConfig = {
   search: {
     enabled: true,
     placeholder: t('Search coupons...'),
-    fields: ([] as any) || ['name', 'code']
+    fields: ['name', 'code']
   },
   filters: [
     {
@@ -146,7 +146,7 @@ export const couponsConfig: CrudConfig = {
     }
   ],
   form: {
-    fields: ([] as any) || [
+    fields: [
       { 
         name: 'name', 
         label: t('Coupon Name'), 

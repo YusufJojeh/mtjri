@@ -19,7 +19,7 @@ const getIcon = (iconName: string) => {
     'refresh-cw': <RefreshCw className='h-8 w-8' />,
     'credit-card': <CreditCard className='h-8 w-8' />,
     headphones: <HeadphonesIcon className='h-8 w-8' />,
-    'hield-check': <Shield className='h-8 w-8' />,
+    'shield-check': <Shield className='h-8 w-8' />,
     star: <Star className='h-8 w-8' />
   };
   return icons[iconName] || <Truck className='h-8 w-8' />;

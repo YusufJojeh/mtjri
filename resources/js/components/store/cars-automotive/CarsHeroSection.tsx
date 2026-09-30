@@ -6,21 +6,19 @@ import { UnsplashAttribution } from '@/components/UnsplashAttribution';
 import { triggerUnsplashDownload, isUnsplashImage, getUnsplashAttributionData } from '@/utils/unsplash';
 
 interface HeroContent {
-  badge_text?: { value: string };
-  title?: { value: string };
-  subtitle?: { value: string };
-  button_text?: { value: string };
-  button_link?: { value: string };
-  secondary_button_text?: { value: string };
-  secondary_button_link?: { value: string };
+  badge_text?: string;
+  title?: string;
+  subtitle?: string;
+  button_text?: string;
+  button_link?: string;
+  secondary_button_text?: string;
+  secondary_button_link?: string;
   image?: string | UnsplashImageData;
-  info_boxes?: {
-    value: Array<{
-      icon: string;
-      title: string;
-      description: string;
-    }>;
-  };
+  info_boxes?: Array<{
+    icon: string;
+    title: string;
+    description: string;
+  }>;
 }
 
 interface CarsHeroSectionProps {
@@ -29,7 +27,7 @@ interface CarsHeroSectionProps {
 
 const iconMap = {
   zap: Zap,
-  'hield-check': ShieldCheck,
+  'shield-check': ShieldCheck,
   wrench: Wrench,
 };
 

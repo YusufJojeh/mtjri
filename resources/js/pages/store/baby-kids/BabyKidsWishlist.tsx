@@ -9,6 +9,7 @@ import { formatCurrency, getCurrencies } from '@/utils/currency-formatter';
 import BabyKidsProductCard from '@/components/store/baby-kids/BabyKidsProductCard';
 
 interface Product {
+  slug?: string;
   id: number;
   product_id?: number;
   name: string;
