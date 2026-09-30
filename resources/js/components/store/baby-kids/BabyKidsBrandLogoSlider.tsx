@@ -57,7 +57,7 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
           
           {/* Stats Grid */}
           <div className='grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16'>
-            {stats.map((stat, index) => (
+            {stats.map((stat: any, index: any) => (
               <div
                 key={index}
                 className='group bg-white/80 backdrop-blur-sm rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2'
@@ -110,7 +110,7 @@ export default function BabyKidsBrandLogoSlider({ content }: BabyKidsBrandLogoSl
           <div className='relative overflow-hidden'>
             <div className='flex animate-scroll space-x-12 lg:space-x-16'>
               {/* First set of logos */}
-              {logos.concat(logos).map((logo, index) => (
+              {logos.concat(logos).map((logo: any, index: any) => (
                 <div
                   key={index}
                   className='flex-shrink-0 w-32 h-20 lg:w-40 lg:h-24 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center group'

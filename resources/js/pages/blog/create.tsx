@@ -47,7 +47,7 @@ export default function CreateBlog() {
       });
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -55,28 +55,28 @@ export default function CreateBlog() {
     }));
   };
 
-  const handleSwitchChange = (name, checked) => {
+  const handleSwitchChange = (name: any, checked: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: checked
     }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: any, value: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const handleContentChange = (value) => {
+  const handleContentChange = (value: any) => {
     setFormData(prev => ({
       ...prev,
       content: value
     }));
   };
 
-  const handleFeaturedImageChange = (value) => {
+  const handleFeaturedImageChange = (value: any) => {
     setFormData(prev => ({
       ...prev,
       featured_image: value

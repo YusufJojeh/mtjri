@@ -51,7 +51,7 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
               
               {/* Social Links */}
               <div className='flex space-x-6'>
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social: any, index: any) => (
                   <a
                     key={index}
                     href={social.url || '#'}
@@ -122,7 +122,7 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
                       { name: 'Size Guide', href: '/size-guide' },
                       { name: 'Shipping & Returns', href: '/shipping' },
                       { name: 'Contact Us', href: '/contact' }
-                    ]).map((link, index) => (
+                    ]).map((link: any, index: any) => (
                       <li key={index}>
                         <a href={link.href} className='text-gray-600 hover:text-gray-900 transition-colors font-light text-sm'>
                           {link.name}
@@ -141,7 +141,7 @@ export default function FashionFooter({ storeName = 'Fashion Store', logo, conte
                       { name: 'About Us', href: '/about' },
                       { name: 'Careers', href: '/careers' },
                       { name: 'Press', href: '/press' }
-                    ]).map((link, index) => (
+                    ]).map((link: any, index: any) => (
                       <li key={index}>
                         <a href={link.href} className='text-gray-600 hover:text-gray-900 transition-colors font-light text-sm'>
                           {link.name}

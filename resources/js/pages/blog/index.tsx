@@ -50,7 +50,7 @@ export default function Blog() {
     }
   };
 
-  const handleDelete = (post) => {
+  const handleDelete = (post: any) => {
     setSelectedPost(post);
     setIsDeleteDialogOpen(true);
   };

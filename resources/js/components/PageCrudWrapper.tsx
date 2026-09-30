@@ -200,7 +200,7 @@ export function PageCrudWrapper({
     if (entity.name === 'roles') {
       // Extract permission names from the permissions array if they're objects
       if (processedFormData.permissions && Array.isArray(processedFormData.permissions)) {
-        const permissionNames = processedFormData.permissions.map(p => {
+        const permissionNames = processedFormData.permissions.map((p: any) => {
           if (typeof p === 'object' && p !== null && p.name) {
             return p.name;
           }
@@ -226,7 +226,7 @@ export function PageCrudWrapper({
     // Fix permissions format for other entities
     else if (processedFormData.permissions && Array.isArray(processedFormData.permissions)) {
       const permissionsObj = {};
-      processedFormData.permissions.forEach((id, index) => {
+      processedFormData.permissions.forEach((id: any, index: any) => {
         permissionsObj[index] = String(id);
       });
       processedFormData.permissions = permissionsObj;

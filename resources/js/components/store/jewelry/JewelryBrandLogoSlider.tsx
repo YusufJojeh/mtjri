@@ -29,7 +29,7 @@ export default function JewelryBrandLogoSlider({ content }: JewelryBrandLogoSlid
 
         {/* Logo Grid */}
         <div className='grid grid-cols-2 md:grid-cols-4 gap-12 items-center'>
-          {logos.map((logo, index) => (
+          {logos.map((logo: any, index: any) => (
             <div key={index} className='group flex items-center justify-center p-8 hover:bg-stone-50 transition-colors duration-300'>
               <img
                 src={getImageUrl(logo.image)}

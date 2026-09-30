@@ -87,7 +87,7 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
             
             {/* Social Links */}
             <div className='flex space-x-4'>
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social: any, index: any) => (
                 <a
                   key={index}
                   href={social.url || '#'}
@@ -111,7 +111,7 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
                 { name: 'Shipping & Returns', href: '/shipping' },
                 { name: 'Contact Us', href: '/contact' },
                 { name: 'Ingredient Guide', href: '/ingredients' }
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a 
                     href={link.href}
@@ -135,7 +135,7 @@ export default function BeautyFooter({ storeName = 'Beauty Store', logo, content
                 { name: 'Careers', href: '/careers' },
                 { name: 'Press', href: '/press' },
                 { name: 'Privacy Policy', href: '/privacy' }
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a 
                     href={link.href}

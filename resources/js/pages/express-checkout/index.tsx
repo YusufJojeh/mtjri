@@ -38,12 +38,12 @@ export default function ExpressCheckout() {
     totalRevenue: 0
   };
 
-  const handleDelete = (checkout) => {
+  const handleDelete = (checkout: any) => {
     setSelectedCheckout(checkout);
     setIsDeleteDialogOpen(true);
   };
 
-  const handleSettings = (checkout) => {
+  const handleSettings = (checkout: any) => {
     setSelectedCheckout(checkout);
     setIsSettingsDialogOpen(true);
   };
@@ -152,7 +152,7 @@ export default function ExpressCheckout() {
                   </div>
                 ) : (
                   <div className='space-y-4'>
-                    {checkouts.map((checkout) => (
+                    {checkouts.map((checkout: any) => (
                       <div key={checkout.id} className='flex items-center justify-between p-4 border rounded-lg'>
                         <div className='flex items-center space-x-4'>
                           <div className='w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center'>

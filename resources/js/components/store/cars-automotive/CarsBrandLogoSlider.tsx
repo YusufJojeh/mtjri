@@ -42,7 +42,7 @@ export default function CarsBrandLogoSlider({ content }: CarsBrandLogoSliderProp
 
         {/* Brand Logos */}
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16'>
-          {logos.map((logo, index) => (
+          {logos.map((logo: any, index: any) => (
             <div
               key={index}
               className='group bg-white p-6 hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 hover:border-red-600'

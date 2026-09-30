@@ -60,7 +60,7 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
                 { platform: 'twitter', url: '' },
                 { platform: 'instagram', url: '' },
                 { platform: 'linkedin', url: '' }
-              ]).map((social, index) => (
+              ]).map((social: any, index: any) => (
                 <a
                   key={index}
                   href={social.url || '#'}
@@ -102,7 +102,7 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
                 { name: 'Warranty', href: '/warranty' },
                 { name: 'Returns', href: '/returns' },
                 { name: 'Setup Guide', href: '/setup' }
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -129,7 +129,7 @@ export default function ElectronicsFooter({ storeName, logo, content }: Electron
                 { name: 'Careers', href: '/careers' },
                 { name: 'Press', href: '/press' },
                 { name: 'Privacy Policy', href: '/privacy' }
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a
                     href={link.href}

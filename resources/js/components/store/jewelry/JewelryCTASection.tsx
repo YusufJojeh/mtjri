@@ -66,7 +66,7 @@ export default function JewelryCTASection({ content, ctaBoxes, bottomSection }: 
     <section className='py-24 bg-stone-100'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div key={index} className='group text-center p-8 bg-white hover:bg-stone-50 transition-colors duration-300 border border-stone-200 hover:border-amber-300'>
               {/* Icon */}
               <div className='w-16 h-16 bg-stone-100 group-hover:bg-amber-700 flex items-center justify-center mx-auto mb-6 transition-colors duration-300'>

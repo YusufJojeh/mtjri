@@ -96,7 +96,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
               
               {/* Social Links */}
               <div className='flex space-x-4'>
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social: any, index: any) => (
                   <a
                     key={index}
                     href={social.url || '#'}
@@ -129,7 +129,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                   { name: 'Care Instructions', href: '/care-guide' },
                   { name: 'Contact Us', href: '/contact' },
                   { name: 'Safety Info', href: '/safety' }
-                ]).map((link, index) => (
+                ]).map((link: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={link.href}
@@ -161,7 +161,7 @@ export default function BabyKidsFooter({ storeName, logo, content }: BabyKidsFoo
                   { name: 'Our Mission', href: '/mission' },
                   { name: 'Sustainability', href: '/sustainability' },
                   { name: 'Privacy Policy', href: '/privacy' }
-                ]).map((link, index) => (
+                ]).map((link: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={link.href}

@@ -71,7 +71,7 @@ export default function JewelryNewsletterSection({ content }: JewelryNewsletterS
                 { title: 'Exclusive collection previews' },
                 { title: 'VIP event invitations' },
                 { title: 'Personal styling consultations' }
-              ]).map((feature, index) => (
+              ]).map((feature: any, index: any) => (
                 <div key={index} className='flex items-center space-x-3'>
                   <div className='w-2 h-2 bg-yellow-600'></div>
                   <span className='text-neutral-700'>{feature.title}</span>

@@ -39,7 +39,7 @@ export default function PerfumeBlogSection({ posts = [], content, storeSlug }: P
         {/* Blog Categories */}
         {content?.categories && (
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-16'>
-            {content.categories.map((category, index) => {
+            {content.categories.map((category: any, index: any) => {
               const getIcon = (iconName: string) => {
                 switch (iconName) {
                   case 'parkles':

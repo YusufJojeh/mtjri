@@ -54,7 +54,7 @@ export default function JewelryFooter({ storeName = 'Luxury Jewelry', logo, cont
               { name: 'Sizing Guide', href: '/sizing' },
               { name: 'Heritage', href: '/heritage' },
               { name: 'Contact', href: '/contact' }
-            ]).map((link, index) => (
+            ]).map((link: any, index: any) => (
               <a key={index} href={link.href} className='text-neutral-600 hover:text-yellow-700 transition-colors text-sm font-medium'>
                 {link.name}
               </a>

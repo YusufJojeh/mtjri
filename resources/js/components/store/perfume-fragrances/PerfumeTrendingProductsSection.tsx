@@ -154,7 +154,7 @@ export default function PerfumeTrendingProductsSection({
                     title: 'Personal Journey',
                     description: 'Find your signature scent with our personalized consultation and fragrance matching service.'
                   }
-                ]).map((step, index) => (
+                ]).map((step: any, index: any) => (
                   <div key={index} className='text-center'>
                     <div className='w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg'>
                       <svg className='w-10 h-10 text-purple-800' fill='currentColor' viewBox='0 0 20 20'>

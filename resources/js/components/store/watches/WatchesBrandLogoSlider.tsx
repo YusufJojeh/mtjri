@@ -35,7 +35,7 @@ export default function WatchesBrandLogoSlider({ content }: WatchesBrandLogoSlid
 
         {/* Logo Grid */}
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center'>
-          {logos.map((logo, index) => (
+          {logos.map((logo: any, index: any) => (
             <div key={index} className='flex items-center justify-center group'>
               <img
                 src={logo.image ? getImageUrl(logo.image) : `https://placehold.co/200x80/f8fafc/64748b?text=Brand+${index + 1}`}

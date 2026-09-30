@@ -85,7 +85,7 @@ const CheckoutForm = ({ planId, couponCode, billingCycle, onSuccess, onCancel }:
           id='cardholder-name'
           type='text'
           value={cardholderName}
-          onChange={(e: any) => (e) => setCardholderName(e.target.value)}
+          onChange={(e: any) => (e: any) => setCardholderName(e.target.value)}
           placeholder={t('Enter cardholder name')}
           required
         />

@@ -71,7 +71,7 @@ export default function ElectronicsCTASection({ content, ctaBoxes, bottomSection
 
         {/* CTA Boxes Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div
               key={index}
               className='group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden'

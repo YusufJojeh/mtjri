@@ -78,7 +78,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                     alert(t('Please complete the reCAPTCHA verification'));
                     return;
                 }
-                transform((data) => ({
+                transform((data: any) => ({
                     ...data,
                     recaptcha_token: token
                 }));

@@ -44,7 +44,7 @@ export default function WatchesCTASection({ content, ctaBoxes, bottomSection }: 
       <div className='container mx-auto px-4'>
         {/* CTA Boxes */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div key={index} className='text-center group cursor-pointer'>
               <div className='w-16 h-16 mx-auto mb-6 bg-amber-500 flex items-center justify-center group-hover:bg-amber-400 transition-colors duration-300'>
                 {getIcon(box.icon)}

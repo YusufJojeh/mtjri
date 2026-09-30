@@ -55,7 +55,7 @@ function BabyKidsProductDetailContent({
 
     // Parse additional images first if they exist (comma-separated)
     if (product.images) {
-      const imageUrls = product.images.split(',').map(url => url.trim()).filter(url => url && url !== '');
+      const imageUrls = product.images.split(',').map((url: any) => url.trim()).filter((url: any) => url && url !== '');
       imageList.push(...imageUrls);
     }
 
@@ -89,7 +89,7 @@ function BabyKidsProductDetailContent({
   const handleAddToCart = async () => {
     if (hasVariants) {
       const allVariantsSelected = productVariants.every(
-        variant => ((selectedVariants as any)[variant.name])
+        (variant: any) => ((selectedVariants as any)[variant.name])
       );
       if (!allVariantsSelected) {
         alert('Please select all options');
@@ -285,7 +285,7 @@ function BabyKidsProductDetailContent({
                           }
                         })();
                         
-                        return productVariants.map((variant) => (
+                        return productVariants.map((variant: any) => (
                           <div key={variant.name}>
                             <label className='block text-sm font-bold text-gray-700 mb-2 capitalize'>
                               {variant.name}

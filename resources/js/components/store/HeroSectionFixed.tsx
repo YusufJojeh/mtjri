@@ -128,7 +128,7 @@ export default function HeroSection({
                 { icon: 'truck', title: 'Free Shipping', description: 'On orders over $50' },
                 { icon: 'refresh-cw', title: '30-Day Returns', description: 'Hassle-free returns' },
                 { icon: 'hield-check', title: 'Secure Checkout', description: '100% protected' }
-              ]).map((box, index) => (
+              ]).map((box: any, index: any) => (
                 <div key={index} className='flex items-center'>
                   <div className='bg-primary/10 p-2 rounded-full mr-3'>
                     {box.icon === 'truck' && (

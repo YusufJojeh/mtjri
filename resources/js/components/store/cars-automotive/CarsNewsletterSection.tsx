@@ -143,7 +143,7 @@ export default function CarsNewsletterSection({ content }: CarsNewsletterSection
               { number: '1', title: 'New Arrivals', description: 'Be first to know about latest automotive parts and accessories' },
               { number: '2', title: 'Exclusive Deals', description: 'Get access to subscriber-only discounts and promotions' },
               { number: '3', title: 'Expert Tips', description: 'Receive installation guides and maintenance advice from pros' }
-            ]).map((feature, index) => (
+            ]).map((feature: any, index: any) => (
               <div key={index} className='text-center'>
                 <div className='w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4'>
                   <span className='text-white font-bold'>{feature.number}</span>

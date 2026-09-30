@@ -203,7 +203,7 @@ export function AuthorizeNetPaymentForm({
             <Input
               id='cardholder_name'
               value={cardData.cardholder_name}
-              onChange={(e: any) => (e) => handleInputChange('cardholder_name', e.target.value)}
+              onChange={(e: any) => (e: any) => handleInputChange('cardholder_name', e.target.value)}
               placeholder={t('Enter cardholder name')}
               className={validationErrors.cardholder_name ? 'border-red-500' : ''}
             />
@@ -217,7 +217,7 @@ export function AuthorizeNetPaymentForm({
             <Input
               id='card_number'
               value={cardData.card_number}
-              onChange={(e: any) => (e) => handleInputChange('card_number', e.target.value)}
+              onChange={(e: any) => (e: any) => handleInputChange('card_number', e.target.value)}
               placeholder='1234 5678 9012 3456'
               maxLength={23}
               className={validationErrors.card_number ? 'border-red-500' : ''}
@@ -233,7 +233,7 @@ export function AuthorizeNetPaymentForm({
               <Input
                 id='expiry_month'
                 value={cardData.expiry_month}
-                onChange={(e: any) => (e) => handleInputChange('expiry_month', e.target.value)}
+                onChange={(e: any) => (e: any) => handleInputChange('expiry_month', e.target.value)}
                 placeholder='MM'
                 maxLength={2}
                 className={validationErrors.expiry_month ? 'border-red-500' : ''}
@@ -247,7 +247,7 @@ export function AuthorizeNetPaymentForm({
               <Input
                 id='expiry_year'
                 value={cardData.expiry_year}
-                onChange={(e: any) => (e) => handleInputChange('expiry_year', e.target.value)}
+                onChange={(e: any) => (e: any) => handleInputChange('expiry_year', e.target.value)}
                 placeholder='YY'
                 maxLength={2}
                 className={validationErrors.expiry_year ? 'border-red-500' : ''}
@@ -261,7 +261,7 @@ export function AuthorizeNetPaymentForm({
               <Input
                 id='cvv'
                 value={cardData.cvv}
-                onChange={(e: any) => (e) => handleInputChange('cvv', e.target.value)}
+                onChange={(e: any) => (e: any) => handleInputChange('cvv', e.target.value)}
                 placeholder='123'
                 maxLength={4}
                 className={validationErrors.cvv ? 'border-red-500' : ''}

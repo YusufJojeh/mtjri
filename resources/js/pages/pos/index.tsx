@@ -66,9 +66,9 @@ export default function POS() {
     }
   }, []);
 
-  const handleCustomerChange = (customerId) => {
+  const handleCustomerChange = (customerId: any) => {
     setSelectedCustomer(customerId);
-    const customer = customers.find(c => c.id === customerId);
+    const customer = customers.find((c: any) => c.id === customerId);
     if (customer) {
       localStorage.setItem('pos_customer', JSON.stringify(customer));
     } else {
@@ -132,7 +132,7 @@ export default function POS() {
     if (!item) return;
     
     // Find the product to check stock
-    const product = products.find(p => p.id === item.productId);
+    const product = products.find((p: any) => p.id === item.productId);
     if (product && quantity > product.stock) {
       alert(t('Only {{count}} items available in stock', { count: product.stock }));
       return;
@@ -202,10 +202,10 @@ export default function POS() {
     return calculateSubtotal() + calculateTax();
   };
 
-  const selectedCustomerData = customers.find(c => c.id === selectedCustomer);
+  const selectedCustomerData = customers.find((c: any) => c.id === selectedCustomer);
 
   const filteredProducts = products
-    .filter(product => {
+    .filter((product: any) => {
       // Filter by category
       const categoryMatch = activeCategory === 'all' || product.category === activeCategory;
       
@@ -244,7 +244,7 @@ export default function POS() {
                   <SelectValue placeholder={t('Select customer')} />
                 </SelectTrigger>
                 <SelectContent>
-                  {customers.map((customer) => (
+                  {customers.map((customer: any) => (
                     <SelectItem key={customer.id} value={customer.id}>
                       {customer.name}
                     </SelectItem>
@@ -273,7 +273,7 @@ export default function POS() {
                           </tr>
                         </thead>
                         <tbody>
-                          {products.map((product) => (
+                          {products.map((product: any) => (
                             <tr key={product.id} className='border-b hover:bg-muted/50'>
                               <td className='py-2 px-2'>{product.name}</td>
                               <td className='text-center py-2 px-2'>{product.stock}</td>
@@ -335,7 +335,7 @@ export default function POS() {
           </div>
 
           <div className='flex overflow-x-auto pb-2 space-x-2'>
-            {categories.map(category => (
+            {categories.map((category: any) => (
               <Button
                 key={category.id}
                 variant={activeCategory === category.id ? 'default' : 'outline'}
@@ -348,7 +348,7 @@ export default function POS() {
           </div>
 
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-            {filteredProducts.map(product => (
+            {filteredProducts.map((product: any) => (
               <Card 
                 key={product.id} 
                 className={`${product.stock > 0 ? 'cursor-pointer hover:border-primary' : 'opacity-60'} transition-colors`}

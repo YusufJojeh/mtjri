@@ -170,7 +170,7 @@ export default function CarsBlogSection({ posts, content, storeSlug }: CarsBlogS
 
         {/* Featured Categories */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
-          {categories.map((category, index) => {
+          {categories.map((category: any, index: any) => {
             const IconComponent = iconMap[category.icon as keyof typeof iconMap] || Wrench;
             return (
               <div key={index} className='text-center p-8 bg-white border-2 border-gray-200 hover:border-red-600 hover:bg-red-600 transition-all duration-300 cursor-pointer group'>

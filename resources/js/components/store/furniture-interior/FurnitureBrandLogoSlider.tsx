@@ -64,7 +64,7 @@ function FurnitureBrandLogoSlider({ content }: FurnitureBrandLogoSliderProps) {
             { number: '25+', label: 'Years Experience' },
             { number: '10K+', label: 'Happy Customers' },
             { number: '99%', label: 'Satisfaction Rate' }
-          ]).map((stat, index) => (
+          ]).map((stat: any, index: any) => (
             <div key={index} className='text-center group'>
               <div className='text-3xl lg:text-4xl font-bold text-slate-900 mb-3 group-hover:text-amber-800 transition-colors duration-300'>{stat.number}</div>
               <p className='text-slate-700 text-base font-medium'>{stat.label}</p>

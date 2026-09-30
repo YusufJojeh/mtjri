@@ -156,7 +156,7 @@ export function ToyyibPayPaymentForm({
             <Input
               id='name'
               value={customerDetails.name}
-              onChange={(e: any) => (e) => {
+              onChange={(e: any) => (e: any) => {
                 setCustomerDetails(prev => ({ ...prev, name: e.target.value }));
                 if (errors.name) setErrors(prev => ({ ...prev, name: '' }));
               }}
@@ -175,7 +175,7 @@ export function ToyyibPayPaymentForm({
               id='email'
               type='email'
               value={customerDetails.email}
-              onChange={(e: any) => (e) => {
+              onChange={(e: any) => (e: any) => {
                 setCustomerDetails(prev => ({ ...prev, email: e.target.value }));
                 if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
               }}
@@ -193,7 +193,7 @@ export function ToyyibPayPaymentForm({
             <Input
               id='phone'
               value={customerDetails.phone}
-              onChange={(e: any) => (e) => {
+              onChange={(e: any) => (e: any) => {
                 const formatted = formatPhoneNumber(e.target.value);
                 setCustomerDetails(prev => ({ ...prev, phone: formatted }));
                 if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));

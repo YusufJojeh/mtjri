@@ -181,7 +181,7 @@ export default function Footer({
                 <span className='absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary'></span>
               </h3>
               <ul className='space-y-3'>
-                {footerContent.menu?.links?.map((link, linkIndex) => (
+                {footerContent.menu?.links?.map((link: any, linkIndex: any) => (
                   <li key={linkIndex}>
                     <a href={link.href} className='text-gray-400 hover:text-white transition-colors flex items-center'>
                       <span className='mr-2 text-primary'>›</span>

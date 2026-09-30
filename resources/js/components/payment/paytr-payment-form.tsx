@@ -143,7 +143,7 @@ export function PayTRPaymentForm({
             <Input
               id='name'
               value={customerDetails.name}
-              onChange={(e: any) => (e) => setCustomerDetails(prev => ({ ...prev, name: e.target.value }))}
+              onChange={(e: any) => (e: any) => setCustomerDetails(prev => ({ ...prev, name: e.target.value }))}
               placeholder={t('Enter full name')}
               required
             />
@@ -155,7 +155,7 @@ export function PayTRPaymentForm({
               id='email'
               type='email'
               value={customerDetails.email}
-              onChange={(e: any) => (e) => setCustomerDetails(prev => ({ ...prev, email: e.target.value }))}
+              onChange={(e: any) => (e: any) => setCustomerDetails(prev => ({ ...prev, email: e.target.value }))}
               placeholder={t('Enter email address')}
               required
             />
@@ -166,7 +166,7 @@ export function PayTRPaymentForm({
             <Input
               id='phone'
               value={customerDetails.phone}
-              onChange={(e: any) => (e) => setCustomerDetails(prev => ({ ...prev, phone: e.target.value }))}
+              onChange={(e: any) => (e: any) => setCustomerDetails(prev => ({ ...prev, phone: e.target.value }))}
               placeholder='+905xxxxxxxxx'
               required
             />
@@ -180,7 +180,7 @@ export function PayTRPaymentForm({
             <Input
               id='address'
               value={customerDetails.address}
-              onChange={(e: any) => (e) => setCustomerDetails(prev => ({ ...prev, address: e.target.value }))}
+              onChange={(e: any) => (e: any) => setCustomerDetails(prev => ({ ...prev, address: e.target.value }))}
               placeholder={t('Enter address (optional)')}
             />
           </div>

@@ -88,7 +88,7 @@ function FurnitureTrendingProductsSection({
               { step: '02', title: 'Design', description: '3D visualization and planning' },
               { step: '03', title: 'Selection', description: 'Curating the perfect pieces' },
               { step: '04', title: 'Installation', description: 'Professional setup and styling' }
-            ]).map((item, index) => (
+            ]).map((item: any, index: any) => (
               <div key={index} className='text-center group'>
                 <div className='w-20 h-20 bg-yellow-100 text-yellow-800 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-xl group-hover:scale-110 group-hover:bg-yellow-200 transition-all duration-500'>
                   {item.step}

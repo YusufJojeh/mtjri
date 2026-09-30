@@ -28,7 +28,7 @@ export default function FashionBrandLogoSlider({ content }: FashionBrandLogoSlid
         </div>
         
         <div className='flex items-center justify-center space-x-12 md:space-x-16 opacity-60 hover:opacity-80 transition-opacity duration-300'>
-          {logos.map((logo, index) => (
+          {logos.map((logo: any, index: any) => (
             <div key={index} className='flex-shrink-0'>
               <img
                 src={getImageUrl(logo.image)}

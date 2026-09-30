@@ -42,7 +42,7 @@ export default function BrandLogoSlider({
   ];
   
   // Use dynamic content if available, otherwise fallback to brands prop or placeholders
-  const dynamicBrands = content?.logos ? content.logos.map((logo, index) => ({
+  const dynamicBrands = content?.logos ? content.logos.map((logo: any, index: any) => ({
     id: index + 1,
     name: `Brand ${index + 1}`,
     logo: logo.image,

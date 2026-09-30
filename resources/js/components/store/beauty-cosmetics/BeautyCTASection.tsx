@@ -59,7 +59,7 @@ export default function BeautyCTASection({ content, ctaBoxes }: BeautyCTASection
     <section className='py-20 bg-gradient-to-br from-rose-50 to-pink-50'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div 
               key={index}
               className='group bg-white rounded-3xl p-8 text-center shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2'

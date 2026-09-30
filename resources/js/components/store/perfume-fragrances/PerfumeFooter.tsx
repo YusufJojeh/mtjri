@@ -81,7 +81,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   {platform: 'youtube', url: '#'},
                   {platform: 'pinterest', url: '#'},
                   {platform: 'tiktok', url: '#'}
-                ]).map((social, index) => (
+                ]).map((social: any, index: any) => (
                   <a
                     key={index}
                     href={social.url || '#'}
@@ -106,7 +106,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   {name: 'Fragrance Samples', href: '/samples'},
                   {name: 'Gift Services', href: '/gifts'},
                   {name: 'Fragrance Care', href: '/care-guide'}
-                ]).map((link, index) => (
+                ]).map((link: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={link.href}
@@ -130,7 +130,7 @@ export default function PerfumeFooter({ storeName, logo, content }: PerfumeFoote
                   {name: 'Perfumers', href: '/perfumers'},
                   {name: 'Sustainability', href: '/sustainability'},
                   {name: 'Privacy Policy', href: '/privacy'}
-                ]).map((link, index) => (
+                ]).map((link: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={link.href}

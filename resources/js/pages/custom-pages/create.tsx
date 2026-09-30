@@ -34,7 +34,7 @@ export default function CreateCustomPage() {
     follow_links: true
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -42,21 +42,21 @@ export default function CreateCustomPage() {
     }));
   };
 
-  const handleSwitchChange = (name, checked) => {
+  const handleSwitchChange = (name: any, checked: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: checked
     }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: any, value: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const handleContentChange = (value) => {
+  const handleContentChange = (value: any) => {
     setFormData(prev => ({
       ...prev,
       content: value
@@ -207,7 +207,7 @@ export default function CreateCustomPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value='null'>{t('None')}</SelectItem>
-                      {parentPages && parentPages.map((page) => (
+                      {parentPages && parentPages.map((page: any) => (
                         <SelectItem key={page.id} value={page.id.toString()}>
                           {page.title}
                         </SelectItem>

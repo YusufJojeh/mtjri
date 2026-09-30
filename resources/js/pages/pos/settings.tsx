@@ -42,7 +42,7 @@ export default function POSSettings() {
   });
   
   // Handle input changes
-  const handleChange = (name, value) => {
+  const handleChange = (name: any, value: any) => {
     setFormData({
       ...formData,
       [name]: value
@@ -50,7 +50,7 @@ export default function POSSettings() {
   };
   
   // Handle switch changes
-  const handleSwitchChange = (name) => {
+  const handleSwitchChange = (name: any) => {
     setFormData({
       ...formData,
       [name]: !formData[name]
@@ -124,7 +124,7 @@ export default function POSSettings() {
                       </SelectTrigger>
                       <SelectContent>
                         {currencies && currencies.length > 0 ? (
-                          currencies.map((currency) => (
+                          currencies.map((currency: any) => (
                             <SelectItem key={currency.value} value={currency.value}>
                               {currency.label}
                             </SelectItem>

@@ -165,7 +165,7 @@ export default function ElectronicsNewsletterSection({ content }: ElectronicsNew
               { title: 'Latest Releases', description: 'Be first to know about new gadgets' },
               { title: 'Exclusive Deals', description: 'Special discounts for subscribers' },
               { title: 'Expert Reviews', description: 'In-depth product analysis' }
-            ]).map((feature, index) => (
+            ]).map((feature: any, index: any) => (
               <div key={index} className='text-center'>
                 <div className='w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4'>
                   <svg className='w-8 h-8 text-cyan-400' fill='currentColor' viewBox='0 0 20 20'>

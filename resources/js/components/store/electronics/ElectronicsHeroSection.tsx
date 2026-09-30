@@ -77,7 +77,7 @@ export default function ElectronicsHeroSection({ content }: ElectronicsHeroSecti
                 { icon: 'zap', title: 'Fast Charging', description: 'Quick power solutions' },
                 { icon: 'hield', title: '2-Year Warranty', description: 'Extended protection' },
                 { icon: 'cpu', title: 'Latest Tech', description: 'Cutting-edge innovation' }
-              ]).map((box, index) => (
+              ]).map((box: any, index: any) => (
                 <div key={index} className='bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20'>
                   <div className='w-8 h-8 mb-3 text-cyan-400'>
                     {box.icon === 'zap' && (

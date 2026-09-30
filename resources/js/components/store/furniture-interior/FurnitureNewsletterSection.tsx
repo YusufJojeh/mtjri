@@ -79,7 +79,7 @@ const FurnitureNewsletterSection: React.FC<FurnitureNewsletterSectionProps> = ({
                     { text: 'New handcrafted arrivals' },
                     { text: 'Design tips & inspiration' }, 
                     { text: 'Exclusive member offers' }
-                  ]).map((benefit, index) => (
+                  ]).map((benefit: any, index: any) => (
                     <div key={index} className='flex items-center gap-3'>
                       <div className='w-2 h-2 bg-amber-600 rounded-full flex-shrink-0'></div>
                       <span className='text-slate-700 font-medium'>{benefit.text}</span>

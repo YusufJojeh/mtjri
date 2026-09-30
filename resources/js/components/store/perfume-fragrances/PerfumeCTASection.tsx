@@ -80,7 +80,7 @@ export default function PerfumeCTASection({ content, ctaBoxes, bottomSection }: 
 
         {/* CTA Boxes Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div
               key={index}
               className='group relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-purple-100 hover:border-purple-200 transform hover:-translate-y-2'

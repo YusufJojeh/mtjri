@@ -90,7 +90,7 @@ export function SkrillPaymentForm({
               id='email'
               type='email'
               value={email}
-              onChange={(e: any) => (e) => setEmail(e.target.value)}
+              onChange={(e: any) => (e: any) => setEmail(e.target.value)}
               placeholder={t('Enter your email address')}
               required
             />

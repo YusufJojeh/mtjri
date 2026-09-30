@@ -32,7 +32,7 @@ export default function BlogCategories() {
   
   // Filter categories based on search term
   const categories = searchTerm
-    ? allCategories.filter(cat =>
+    ? allCategories.filter((cat: any) =>
         cat.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         cat.description.toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -247,7 +247,7 @@ export default function BlogCategories() {
                     </tr>
                   </thead>
                   <tbody>
-                  {categories.map((category) => (
+                  {categories.map((category: any) => (
                     <tr key={category.id} className='border-b hover:bg-muted/30'>
                       <td className='px-6 py-4 font-medium'>{category.name}</td>
                       <td className='px-6 py-4 font-mono text-xs'>{category.slug}</td>

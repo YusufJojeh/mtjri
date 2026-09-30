@@ -101,7 +101,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 {platform: 'twitter', url: 'https://twitter.com'},
                 {platform: 'instagram', url: 'https://instagram.com'},
                 {platform: 'youtube', url: 'https://youtube.com'}
-              ]).map((social, index) => {
+              ]).map((social: any, index: any) => {
                 const IconComponent = socialIcons[social.platform as keyof typeof socialIcons];
                 if (!IconComponent || !social.url) return null;
                 
@@ -134,7 +134,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 {name: 'Shipping & Returns', href: '/shipping'},
                 {name: 'Contact Support', href: '/contact'},
                 {name: 'Technical Help', href: '/technical-help'}
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -162,7 +162,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                 {name: 'Careers', href: '/careers'},
                 {name: 'Press', href: '/press'},
                 {name: 'Privacy Policy', href: '/privacy'}
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -218,7 +218,7 @@ export default function CarsFooter({ storeName, logo, content }: CarsFooterProps
                   { days: 'Mon - Fri', time: '8:00 AM - 6:00 PM', status: 'open' },
                   { days: 'Saturday', time: '9:00 AM - 4:00 PM', status: 'open' },
                   { days: 'Sunday', time: 'Closed', status: 'closed' }
-                ]).map((schedule, index) => (
+                ]).map((schedule: any, index: any) => (
                   <div key={index} className='flex justify-between text-xs'>
                     <span className='text-gray-300'>{schedule.days}</span>
                     <span className={schedule.status === 'closed' ? 'text-gray-500' : 'text-red-400'}>

@@ -100,7 +100,7 @@ export default function LandingPageSettings() {
   });
 
   const getSectionData = (key: string) => {
-    return (data as any)?.config_sections?.sections?.find(section => section.key === key) || {};
+    return (data as any)?.config_sections?.sections?.find((section: any) => section.key === key) || {};
   };
 
   const updateSectionData = (key: string, updates: any) => {
@@ -721,7 +721,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('hero').stats || []).map((stat, index) => (
+                    {(getSectionData('hero').stats || []).map((stat: any, index: any) => (
                       <div key={index} className='grid grid-cols-2 gap-4 p-4 border rounded-lg'>
                         <div className='space-y-3'>
                           <Label htmlFor={`hero_stats_${index}_value`}>{t('Value')}</Label>
@@ -755,7 +755,7 @@ export default function LandingPageSettings() {
                               size='sm'
                               className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                               onClick={() => {
-                                const newStats = (getSectionData('hero').stats || []).filter((_, i) => i !== index);
+                                const newStats = (getSectionData('hero').stats || []).filter((_: any, i: any) => i !== index);
                                 updateSectionData('hero', { stats: newStats });
                               }}
                             >
@@ -1039,7 +1039,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('screenshots').screenshots_list || []).map((screenshot, index) => (
+                    {(getSectionData('screenshots').screenshots_list || []).map((screenshot: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -1053,7 +1053,7 @@ export default function LandingPageSettings() {
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
                               const screenshotsList = getSectionData('screenshots').screenshots_list || [];
-                              const newScreenshots = screenshotsList.filter((_, i) => i !== index);
+                              const newScreenshots = screenshotsList.filter((_: any, i: any) => i !== index);
                               updateSectionData('screenshots', { screenshots_list: newScreenshots });
                             }}
                           >
@@ -1206,7 +1206,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('why_choose_us').reasons || []).map((reason, index) => (
+                    {(getSectionData('why_choose_us').reasons || []).map((reason: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -1219,7 +1219,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newReasons = (getSectionData('why_choose_us').reasons || []).filter((_, i) => i !== index);
+                              const newReasons = (getSectionData('why_choose_us').reasons || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('why_choose_us', { reasons: newReasons });
                             }}
                           >
@@ -1333,7 +1333,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('why_choose_us').stats || []).map((stat, index) => (
+                    {(getSectionData('why_choose_us').stats || []).map((stat: any, index: any) => (
                       <div key={index} className='grid grid-cols-3 gap-4 p-4 border rounded-lg'>
                         <div className='space-y-3'>
                           <Label htmlFor={`stat_${index}_value`}>{t('Value')}</Label>
@@ -1387,7 +1387,7 @@ export default function LandingPageSettings() {
                               size='sm'
                               className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                               onClick={() => {
-                                const newStats = (getSectionData('why_choose_us').stats || []).filter((_, i) => i !== index);
+                                const newStats = (getSectionData('why_choose_us').stats || []).filter((_: any, i: any) => i !== index);
                                 updateSectionData('why_choose_us', { stats: newStats });
                               }}
                             >
@@ -1525,7 +1525,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('team').members || []).map((member, index) => (
+                    {(getSectionData('team').members || []).map((member: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -1538,7 +1538,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newMembers = (getSectionData('team').members || []).filter((_, i) => i !== index);
+                              const newMembers = (getSectionData('team').members || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('team', { members: newMembers });
                             }}
                           >
@@ -1766,7 +1766,7 @@ export default function LandingPageSettings() {
                       />
                     </div>
                     
-                    {(getSectionData('testimonials').trust_stats || []).map((stat, index) => (
+                    {(getSectionData('testimonials').trust_stats || []).map((stat: any, index: any) => (
                       <div key={index} className='grid grid-cols-3 gap-4 p-4 border rounded-lg'>
                         <div className='space-y-3'>
                           <Label htmlFor={`trust_stat_${index}_value`}>{t('Value')}</Label>
@@ -1819,7 +1819,7 @@ export default function LandingPageSettings() {
                               size='sm'
                               className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                               onClick={() => {
-                                const newStats = (getSectionData('testimonials').trust_stats || []).filter((_, i) => i !== index);
+                                const newStats = (getSectionData('testimonials').trust_stats || []).filter((_: any, i: any) => i !== index);
                                 updateSectionData('testimonials', { trust_stats: newStats });
                               }}
                             >
@@ -1858,7 +1858,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('testimonials').testimonials || []).map((testimonial, index) => (
+                    {(getSectionData('testimonials').testimonials || []).map((testimonial: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -1871,7 +1871,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newTestimonials = (getSectionData('testimonials').testimonials || []).filter((_, i) => i !== index);
+                              const newTestimonials = (getSectionData('testimonials').testimonials || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('testimonials', { testimonials: newTestimonials });
                             }}
                           >
@@ -2128,7 +2128,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('faq').faqs || []).map((faq, index) => (
+                    {(getSectionData('faq').faqs || []).map((faq: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -2141,7 +2141,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newFaqs = (getSectionData('faq').faqs || []).filter((_, i) => i !== index);
+                              const newFaqs = (getSectionData('faq').faqs || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('faq', { faqs: newFaqs });
                             }}
                           >
@@ -2269,7 +2269,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('newsletter').benefits || []).map((benefit, index) => (
+                    {(getSectionData('newsletter').benefits || []).map((benefit: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -2282,7 +2282,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newBenefits = (getSectionData('newsletter').benefits || []).filter((_, i) => i !== index);
+                              const newBenefits = (getSectionData('newsletter').benefits || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('newsletter', { benefits: newBenefits });
                             }}
                           >
@@ -2494,7 +2494,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('contact').faqs || []).map((faq, index) => (
+                    {(getSectionData('contact').faqs || []).map((faq: any, index: any) => (
                       <div key={index} className='p-4 border rounded-lg space-y-4'>
                         <div className='flex items-center justify-between'>
                           <h4 className='font-medium'>{t('FAQ')} {index + 1}</h4>
@@ -2504,7 +2504,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newFaqs = (getSectionData('contact').faqs || []).filter((_, i) => i !== index);
+                              const newFaqs = (getSectionData('contact').faqs || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('contact', { faqs: newFaqs });
                             }}
                           >
@@ -2632,7 +2632,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-4'>
-                    {(getSectionData('footer').social_links || []).map((social, index) => (
+                    {(getSectionData('footer').social_links || []).map((social: any, index: any) => (
                       <div key={index} className='bg-gray-50 border border-gray-200 rounded-xl p-5'>
                         <div className='flex items-center justify-between mb-4'>
                           <h4 className='font-semibold text-gray-900 flex items-center gap-2'>
@@ -2645,7 +2645,7 @@ export default function LandingPageSettings() {
                             size='sm'
                             className='text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200'
                             onClick={() => {
-                              const newSocials = (getSectionData('footer').social_links || []).filter((_, i) => i !== index);
+                              const newSocials = (getSectionData('footer').social_links || []).filter((_: any, i: any) => i !== index);
                               updateSectionData('footer', { social_links: newSocials });
                             }}
                           >
@@ -2933,7 +2933,7 @@ export default function LandingPageSettings() {
                   </div>
                   
                   <div className='space-y-3'>
-                    {((data as any)?.config_sections?.section_order || []).map((sectionKey, index) => {
+                    {((data as any)?.config_sections?.section_order || []).map((sectionKey: any, index: any) => {
                       const sectionNames = {
                         header: t('Header'),
                         hero: t('Hero'),

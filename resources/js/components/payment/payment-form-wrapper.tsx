@@ -228,7 +228,7 @@ export function PaymentFormWrapper({
                   name='payment-method'
                   value={method.id}
                   checked={selectedMethod === method.id}
-                  onChange={(e: any) => (e) => setSelectedMethod(e.target.value)}
+                  onChange={(e: any) => (e: any) => setSelectedMethod(e.target.value)}
                   className='mr-3'
                 />
                 <span className='font-medium'>{method.name}</span>

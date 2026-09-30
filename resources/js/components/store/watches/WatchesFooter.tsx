@@ -85,7 +85,7 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
                 { name: 'Warranty & Service', href: '/warranty' },
                 { name: 'Contact Experts', href: '/contact' },
                 { name: 'Authentication', href: '/authentication' }
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -109,7 +109,7 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
                 { name: 'Careers', href: '/careers' },
                 { name: 'Press', href: '/press' },
                 { name: 'Privacy Policy', href: '/privacy' }
-              ]).map((link, index) => (
+              ]).map((link: any, index: any) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -142,7 +142,7 @@ export default function WatchesFooter({ storeName, logo, content }: WatchesFoote
                 { platform: 'youtube', url: '' },
                 { platform: 'facebook', url: '' },
                 { platform: 'twitter', url: '' }
-              ]).map((social, index) => (
+              ]).map((social: any, index: any) => (
                 <a
                   key={index}
                   href={social.url || '#'}

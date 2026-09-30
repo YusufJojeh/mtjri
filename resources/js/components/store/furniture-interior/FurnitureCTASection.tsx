@@ -64,7 +64,7 @@ function FurnitureCTASection({ content, ctaBoxes, bottomSection }: FurnitureCTAS
       <div className='container mx-auto px-6 lg:px-12'>
         {/* CTA Boxes Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-20'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div
               key={index}
               className='group bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-10 text-center hover:shadow-2xl transition-all duration-500 border-2 border-yellow-200 shadow-lg transform hover:-translate-y-3 hover:scale-105'

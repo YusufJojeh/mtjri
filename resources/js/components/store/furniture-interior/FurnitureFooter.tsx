@@ -73,7 +73,7 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
                   { platform: 'pinterest', url: '' },
                   { platform: 'houzz', url: '' },
                   { platform: 'youtube', url: '' }
-                ]).map((social, index) => (
+                ]).map((social: any, index: any) => (
                   <a
                     key={index}
                     href={social.url || '#'}
@@ -98,7 +98,7 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
                   { name: 'Delivery & Setup', href: '/delivery' },
                   { name: 'Care Instructions', href: '/care' },
                   { name: 'Contact Support', href: '/contact' }
-                ]).map((link, index) => (
+                ]).map((link: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={link.href}
@@ -125,7 +125,7 @@ function FurnitureFooter({ storeName, logo, content }: FurnitureFooterProps) {
                   { name: 'Design Team', href: '/designers' },
                   { name: 'Showrooms', href: '/showrooms' },
                   { name: 'Privacy Policy', href: '/privacy' }
-                ]).map((link, index) => (
+                ]).map((link: any, index: any) => (
                   <li key={index}>
                     <Link
                       href={link.href}

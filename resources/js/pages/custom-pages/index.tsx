@@ -125,7 +125,7 @@ export default function CustomPages() {
                 </div>
               ) : (
                 <div className='space-y-4'>
-                  {pages.map((page) => (
+                  {pages.map((page: any) => (
                     <div key={page.id} className='flex items-center justify-between p-4 border rounded-lg'>
                       <div className='flex items-center space-x-4'>
                         <div className='w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center'>

@@ -27,7 +27,7 @@ export default function ShowBlog() {
     }
   ];
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: any) => {
     if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
@@ -185,7 +185,7 @@ export default function ShowBlog() {
             </CardHeader>
             <CardContent>
               <div className='flex flex-wrap gap-2'>
-                {blog.tags.map((tag) => (
+                {blog.tags.map((tag: any) => (
                   <Badge key={tag.id} variant='outline'>
                     {tag.name}
                   </Badge>
@@ -202,7 +202,7 @@ export default function ShowBlog() {
             </CardHeader>
             <CardContent>
               <div className='space-y-4'>
-                {blog.comments.map((comment) => (
+                {blog.comments.map((comment: any) => (
                   <div key={comment.id} className='p-3 border rounded-lg'>
                     <div className='flex items-center justify-between mb-2'>
                       <span className='font-medium'>

@@ -70,7 +70,7 @@ export default function ManageLanguagePage() {
   };
 
   // Save language data to backend
-  const handleSave = (e) => {
+  const handleSave = (e: any) => {
     // Prevent default form submission behavior
     if (e) e.preventDefault();
     

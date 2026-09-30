@@ -21,7 +21,7 @@ export default function POSTransactions() {
   
   const filteredTransactions = useMemo(() => {
     if (!searchTerm) return transactions;
-    return transactions.filter(transaction => 
+    return transactions.filter((transaction: any) => 
       transaction.transaction_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
       transaction.customer.toLowerCase().includes(searchTerm.toLowerCase())
     );

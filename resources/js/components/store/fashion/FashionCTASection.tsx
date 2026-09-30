@@ -24,7 +24,7 @@ export default function FashionCTASection({ content, ctaBoxes, bottomSection }: 
     <section className='py-24 bg-black text-white'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          {boxes.map((box, index) => (
+          {boxes.map((box: any, index: any) => (
             <div key={index} className='text-center group cursor-pointer'>
               <div className='w-16 h-16 mx-auto mb-6 border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors duration-300'>
                 {box.icon === 'parkles' && (

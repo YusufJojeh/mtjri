@@ -132,7 +132,7 @@ function CarsProductDetailContent({
   
   // Check if all required variants are selected
   const allVariantsSelected = !hasVariants ||
-    (productVariants && productVariants.every(variant => ((selectedVariants as any)[variant.name])));
+    (productVariants && productVariants.every((variant: any) => ((selectedVariants as any)[variant.name])));
 
   return (
     <StoreLayout
@@ -287,7 +287,7 @@ function CarsProductDetailInner({
                 {/* Thumbnail Gallery */}
                 {productImages.length > 1 && (
                   <div className='grid grid-cols-4 gap-4'>
-                    {productImages.map((image, index) => (
+                    {productImages.map((image: any, index: any) => (
                       <button
                         key={index}
                         onClick={() => setSelectedImage(index)}
@@ -370,7 +370,7 @@ function CarsProductDetailInner({
                 {/* Variants */}
                 {hasVariants && productVariants && (
                   <div className='space-y-6 mb-8'>
-                    {productVariants.map((variant) => (
+                    {productVariants.map((variant: any) => (
                       <div key={variant.name}>
                         <h3 className='text-sm font-black tracking-widest uppercase mb-4 text-gray-900'>
                           {variant.name}

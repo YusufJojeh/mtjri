@@ -48,7 +48,7 @@ export default function EditCustomPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -56,21 +56,21 @@ export default function EditCustomPage() {
     }));
   };
 
-  const handleSwitchChange = (name, checked) => {
+  const handleSwitchChange = (name: any, checked: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: checked
     }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: any, value: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const handleContentChange = (value) => {
+  const handleContentChange = (value: any) => {
     setFormData(prev => ({
       ...prev,
       content: value
@@ -219,7 +219,7 @@ export default function EditCustomPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value='null'>{t('None')}</SelectItem>
-                      {parentPages && parentPages.map((parentPage) => (
+                      {parentPages && parentPages.map((parentPage: any) => (
                         <SelectItem key={parentPage.id} value={parentPage.id.toString()}>
                           {parentPage.title}
                         </SelectItem>

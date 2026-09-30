@@ -58,7 +58,7 @@ export default function InfoBoxesSection({
   
   // Handle both extracted values and original structure
   const contentArray = Array.isArray(content) ? content : (content?.value || content);
-  const displayBoxes = contentArray ? contentArray.map((box, index) => ({
+  const displayBoxes = contentArray ? contentArray.map((box: any, index: any) => ({
     id: index + 1,
     icon: getIcon(box.icon),
     title: box.title,

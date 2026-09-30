@@ -274,7 +274,7 @@ function CarsWishlistInner() {
               <p className='text-gray-600'>Premium parts selected by our automotive experts</p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-              {relatedProducts.slice(0, 4).map((product) => (
+              {relatedProducts.slice(0, 4).map((product: any) => (
                 <CarsProductCard
                   key={product.id}
                   product={{

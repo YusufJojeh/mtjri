@@ -142,7 +142,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
 
               {/* Privacy Text */}
               <div className='mt-6 flex items-center justify-center space-x-4 text-sm text-gray-500'>
-                {(content?.privacy_features || ['✓ No spam, ever', '✓ Unsubscribe anytime', '✓ 50K+ happy subscribers']).map((feature, index) => (
+                {(content?.privacy_features || ['✓ No spam, ever', '✓ Unsubscribe anytime', '✓ 50K+ happy subscribers']).map((feature: any, index: any) => (
                   <span key={index}>{feature}</span>
                 ))}
               </div>
@@ -153,7 +153,7 @@ function BeautyNewsletterSection({ content }: BeautyNewsletterSectionProps) {
                   { icon: '🎁', title: 'Exclusive Offers', description: 'Member-only discounts & early access' },
                   { icon: '✨', title: 'Beauty Tips', description: 'Weekly tutorials & expert advice' },
                   { icon: '💌', title: 'New Arrivals', description: 'First to know about latest products' }
-                ]).map((benefit, index) => (
+                ]).map((benefit: any, index: any) => (
                   <div key={index} className='flex flex-col items-center text-center'>
                     <div className='w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-3'>
                       <span className='text-xl'>{benefit.icon}</span>

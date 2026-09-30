@@ -34,7 +34,7 @@ export default function EditExpressCheckout() {
     cancel_redirect_url: checkout.cancel_redirect_url || ''
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -42,7 +42,7 @@ export default function EditExpressCheckout() {
     }));
   };
 
-  const handleTypeChange = (value) => {
+  const handleTypeChange = (value: any) => {
     setCheckoutType(value);
     setFormData(prev => ({
       ...prev,
@@ -50,14 +50,14 @@ export default function EditExpressCheckout() {
     }));
   };
 
-  const handleSwitchChange = (name, checked) => {
+  const handleSwitchChange = (name: any, checked: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: checked
     }));
   };
 
-  const handlePaymentMethodChange = (method, checked) => {
+  const handlePaymentMethodChange = (method: any, checked: any) => {
     setFormData(prev => {
       let methods = [...(prev.payment_methods || [])];
       
@@ -74,7 +74,7 @@ export default function EditExpressCheckout() {
     });
   };
 
-  const handleDefaultPaymentChange = (value) => {
+  const handleDefaultPaymentChange = (value: any) => {
     setFormData(prev => ({
       ...prev,
       default_payment_method: value

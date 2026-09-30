@@ -105,7 +105,7 @@ export default function POSCheckout() {
       } else {
         setIsProcessing(false);
         if (data.outOfStockItems && data.outOfStockItems.length > 0) {
-          const itemNames = data.outOfStockItems.map(item => 
+          const itemNames = data.outOfStockItems.map((item: any) => 
             `${item.name} (requested: ${item.requested}, available: ${item.available})`
           ).join('\n');
           alert(`Some items are out of stock:\n${itemNames}`);

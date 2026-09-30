@@ -121,7 +121,7 @@ function BeautyProductDetailContent({
   };
   
   const allVariantsSelected = !hasVariants ||
-    (productVariants && productVariants.every(variant => ((selectedVariants as any)[variant.name])));
+    (productVariants && productVariants.every((variant: any) => ((selectedVariants as any)[variant.name])));
 
   const handleAddToCart = async () => {
     if (!isInStock) return;
@@ -275,7 +275,7 @@ function BeautyProductDetailContent({
                   {/* Variants */}
                   {hasVariants && productVariants && (
                     <div className='space-y-4'>
-                      {productVariants.map((variant) => (
+                      {productVariants.map((variant: any) => (
                         <div key={variant.name} className='bg-white/60 backdrop-blur-sm rounded-xl p-5'>
                           <h3 className='text-base font-semibold text-gray-900 mb-3'>{variant.name}</h3>
                           <div className='flex flex-wrap gap-3'>

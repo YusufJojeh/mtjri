@@ -107,7 +107,7 @@ export default function CarsHeroSection({ content }: CarsHeroSectionProps) {
 
           {/* Info Boxes */}
           <div className='space-y-6'>
-            {heroContent.info_boxes?.map((box, index) => {
+            {heroContent.info_boxes?.map((box: any, index: any) => {
               const IconComponent = iconMap[box.icon as keyof typeof iconMap] || Zap;
               return (
                 <div key={index} className='flex items-start space-x-6 bg-black/60 backdrop-blur-md p-8 border border-gray-700 hover:border-red-600 transition-colors'>

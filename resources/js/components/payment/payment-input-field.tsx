@@ -41,7 +41,7 @@ export function PaymentInputField({
           id={id}
           type={inputType}
           value={displayValue}
-          onChange={(e: any) => (e) => onChange(e.target.value)}
+          onChange={(e: any) => (e: any) => onChange(e.target.value)}
           placeholder={placeholder}
           className={`font-mono text-sm ${isSecret ? 'pr-10' : ''} ${className}`}
           readOnly={(window as any).isDemo && value}

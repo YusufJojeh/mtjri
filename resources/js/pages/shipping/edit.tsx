@@ -38,7 +38,7 @@ export default function EditShipping() {
     handling_fee: shipping.handling_fee || 0
   });
   
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -46,14 +46,14 @@ export default function EditShipping() {
     }));
   };
 
-  const handleSwitchChange = (name, checked) => {
+  const handleSwitchChange = (name: any, checked: any) => {
     setFormData(prev => ({
       ...prev,
       [name]: checked
     }));
   };
 
-  const handleSelectChange = (name, value) => {
+  const handleSelectChange = (name: any, value: any) => {
     if (name === 'type') {
       setShippingType(value);
     }
