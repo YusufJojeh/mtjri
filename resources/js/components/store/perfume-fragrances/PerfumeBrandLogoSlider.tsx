@@ -93,7 +93,7 @@ export default function PerfumeBrandLogoSlider({ content }: PerfumeBrandLogoSlid
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes scroll-infinite {
           0% {
             transform: translateX(0);

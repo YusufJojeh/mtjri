@@ -36,7 +36,7 @@ interface Props {
 
 export default function Countries() {
   const { t } = useTranslation();
-  const { countries, filters: pageFilters = {} } = usePage().props as Props;
+  const { countries, filters: pageFilters = {} } = usePage().props as unknown as Props;
   
   const [searchTerm, setSearchTerm] = useState(pageFilters.search || '');
   const [selectedStatus, setSelectedStatus] = useState(pageFilters.status || 'all');

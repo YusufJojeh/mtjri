@@ -36,7 +36,7 @@ interface Stats {
 export default function Reviews() {
   const { t } = useTranslation();
   const { props } = usePage();
-  const { reviews, stats } = props as { reviews: Review[]; stats: Stats };
+  const { reviews, stats } = props as unknown as { reviews: Review[]; stats: Stats };
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [reviewToDelete, setReviewToDelete] = useState<Review | null>(null);
   const { hasPermission } = usePermissions();

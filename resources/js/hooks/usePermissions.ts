@@ -11,7 +11,7 @@ interface AuthData {
 }
 
 export function usePermissions() {
-  const { auth } = usePage().props as { auth: AuthData };
+  const { auth } = usePage().props as unknown as { auth: AuthData };
   
   const permissions = useMemo(() => auth?.permissions || [], [auth?.permissions]);
   const roles = useMemo(() => auth?.roles || [], [auth?.roles]);

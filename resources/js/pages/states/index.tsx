@@ -41,7 +41,7 @@ interface Props {
 
 export default function States() {
   const { t } = useTranslation();
-  const { states, filters: pageFilters = {}, countries: pageCountries = [] } = usePage().props as Props;
+  const { states, filters: pageFilters = {}, countries: pageCountries = [] } = usePage().props as unknown as Props;
   
   const [searchTerm, setSearchTerm] = useState(pageFilters.search || '');
   const [selectedStatus, setSelectedStatus] = useState(pageFilters.status || 'all');

@@ -28,7 +28,7 @@ export default function BeautyLogin({
   const { data, setData, post, processing, errors } = useForm({
     email: '',
     password: '',
-    remember: false,
+    remember: false as boolean,
   });
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -19,15 +19,14 @@ export default function ForgotPassword({ status }: { status?: string }) {
     const [recaptchaToken, setRecaptchaToken] = useState<string>('');
     const { themeColor, customColor } = useBrand();
     const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
-    const { data, setData, post, processing, errors } = useForm<{ email: string; recaptcha_token?: string }>({
+    const { data, setData, post, processing, errors, transform } = useForm<{ email: string; recaptcha_token?: string }>({
         email: '',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('password.email'), {
-            data: { ...data, recaptcha_token: recaptchaToken },
-        });
+        transform((formData) => ({ ...formData, recaptcha_token: recaptchaToken }));
+        post(route('password.email'));
     };
 
     return (

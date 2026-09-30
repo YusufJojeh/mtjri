@@ -157,7 +157,7 @@ export default function HeroSection({
       </div>
       
       {/* Add CSS for grid pattern */}
-      <style jsx>{`
+      <style>{`
         .bg-grid-pattern {
           background-image: 
             linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),

@@ -104,7 +104,7 @@ export default function BrandLogoSlider({
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .brand-slider {
           width: fit-content;
         }

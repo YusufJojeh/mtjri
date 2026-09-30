@@ -26,7 +26,7 @@ interface Stats {
 export default function NewsletterSubscribers() {
   const { t } = useTranslation();
   const { props } = usePage();
-  const { subscribers, stats } = props as { subscribers: Subscriber[]; stats: Stats };
+  const { subscribers, stats } = props as unknown as { subscribers: Subscriber[]; stats: Stats };
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [subscriberToDelete, setSubscriberToDelete] = useState<Subscriber | null>(null);
   const { hasPermission } = usePermissions();

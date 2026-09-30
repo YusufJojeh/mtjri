@@ -30,7 +30,7 @@ interface Review {
 export default function ShowReview() {
   const { t } = useTranslation();
   const { props } = usePage();
-  const { review } = props as { review: Review };
+  const { review } = props as unknown as { review: Review };
   const [showResponseForm, setShowResponseForm] = useState(false);
   const formatCurrency = useCurrencyFormatter();
   

@@ -31,7 +31,7 @@ export default function BeautyRegister({
     email: '',
     password: '',
     password_confirmation: '',
-    terms: false,
+    terms: false as boolean,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
