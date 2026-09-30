@@ -10,7 +10,9 @@ interface FurnitureHeroSectionProps {
     badge_text?: string;
     title?: string;
     subtitle?: string;
+    button_text?: string;
     button_link?: string;
+    secondary_button_text?: string;
     secondary_button_link?: string;
     image?: string | UnsplashImageData; // Updated type
     stats?: Array<{
@@ -47,8 +49,9 @@ const FurnitureHeroSection: React.FC<FurnitureHeroSectionProps> = ({ content = {
   useEffect(() => {
     setIsVisible(true);
     // Trigger Unsplash download if image is an Unsplash image
-    if (isUnsplashImage(content?.image)) {
-      triggerUnsplashDownload(content?.image, appName);
+    const heroImage = content?.image;
+    if (isUnsplashImage(heroImage)) {
+      triggerUnsplashDownload(heroImage, appName);
     }
   }, [content?.image]);
 

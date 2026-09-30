@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Heart, ShoppingCart } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 interface Product {
@@ -243,7 +244,7 @@ export default function ProductGrid({
       )}
       
       {/* Animation styles */}
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in-up {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }

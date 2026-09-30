@@ -14,6 +14,7 @@ interface Product {
   reviews_count?: number;
   id: number;
   name: string;
+  slug: string;
   price: number;
   sale_price?: number | null;
   cover_image: string;
@@ -603,7 +604,7 @@ export default function BeautyProducts({
                     ) : (
                       <BeautyProductCard
                         key={product.id}
-                        product={product}
+                        product={product as any}
                         storeSettings={storeSettings}
                         currencies={currencies}
                       />

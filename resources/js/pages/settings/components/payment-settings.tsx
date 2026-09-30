@@ -143,7 +143,7 @@ interface PaymentSettings {
   payfast_merchant_key: string;
   payfast_passphrase: string;
   payfast_mode: 'sandbox' | 'live';
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 interface PaymentSettingsProps {
@@ -1805,7 +1805,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
                     <div className="text-xs text-muted-foreground">
                       <p className="font-medium mb-1">{t("Order Variables:")} ({whatsappVariables?.orderVariables?.length || 0})</p>
                       <div className="grid grid-cols-3 gap-x-4 gap-y-1 text-xs">
-                        {(whatsappVariables?.orderVariables?.length ?? 0) > 0 ? (
+                        {whatsappVariables?.orderVariables && whatsappVariables.orderVariables.length > 0 ? (
                           whatsappVariables.orderVariables.map((variable) => (
                             <span key={variable}>{`{${variable}}`}</span>
                           ))
@@ -1832,7 +1832,7 @@ export default function PaymentSettings({ settings = {}, whatsappVariables = {},
                     <div className="text-xs text-muted-foreground">
                       <p className="font-medium mb-1">{t("Item Variables:")} ({whatsappVariables?.itemVariables?.length || 0})</p>
                       <div className="grid grid-cols-3 gap-x-4 gap-y-1 text-xs">
-                        {(whatsappVariables?.itemVariables?.length ?? 0) > 0 ? (
+                        {whatsappVariables?.itemVariables && whatsappVariables.itemVariables.length > 0 ? (
                           whatsappVariables.itemVariables.map((variable) => (
                             <span key={variable}>{`{${variable}}`}</span>
                           ))

@@ -9,7 +9,7 @@ interface FurnitureBlogSectionProps {
 
 function FurnitureBlogSection({ posts = [], content }: FurnitureBlogSectionProps) {
   const { props } = usePage();
-  const store = props.store || {};
+  const store = (props.store || {}) as { slug?: string; name?: string };
   
   return (
     <section className='py-20 lg:py-28 bg-white'>

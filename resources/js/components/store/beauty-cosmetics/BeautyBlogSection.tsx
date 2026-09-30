@@ -26,7 +26,7 @@ interface BeautyBlogSectionProps {
 
 export default function BeautyBlogSection({ posts = [], content }: BeautyBlogSectionProps) {
   const { props } = usePage();
-  const store = props.store || {};
+  const store = (props.store || {}) as { slug?: string; name?: string };
   const displayPosts = posts.slice(0, 3);
 
   const formatDate = (dateString: string) => {

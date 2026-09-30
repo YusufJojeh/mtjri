@@ -60,7 +60,7 @@ function CarsWishlistInner() {
   const { props } = usePage<CarsWishlistProps & Record<string, unknown>>();
   const storeSettings = props.storeSettings || {};
   const currencies = getCurrencies(props.currencies);
-  const store = props.store || {};
+  const store = (props.store || {}) as { slug?: string; name?: string };
   const relatedProducts = props.relatedProducts || [];
   
   const { items, removeFromWishlist, loading } = useWishlist();

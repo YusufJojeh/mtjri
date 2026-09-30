@@ -16,7 +16,7 @@ const FurnitureFeaturedProductsSection: React.FC<FurnitureFeaturedProductsSectio
   currencies 
 }) => {
   const { props } = usePage();
-  const store = props.store || {};
+  const store = (props.store || {}) as { slug?: string; name?: string };
   const storeSlug = (props.store as any)?.slug || 'furniture-store';
   
   return (

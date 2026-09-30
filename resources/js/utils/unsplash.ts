@@ -43,7 +43,7 @@ export function isUnsplashImage(image: string | UnsplashImageData | null | undef
   return typeof image === 'object' && image !== null && 'unsplash_id' in image && 'download_location' in image;
 }
 
-export function getUnsplashAttributionData(image: UnsplashImageData | null | undefined, appName: string) {
+export function getUnsplashAttributionData(image: string | UnsplashImageData | null | undefined, appName: string) {
   if (!isUnsplashImage(image)) {
     return null;
   }

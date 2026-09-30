@@ -12,6 +12,7 @@ import { getImageUrl } from '@/utils/image-helper';
 interface Product {
   id: number;
   name: string;
+  slug: string;
   price: number;
   sale_price?: number | null;
   cover_image: string;
@@ -583,7 +584,7 @@ export default function CarsProducts({
                       ) : (
                         <CarsProductCard
                           key={product.id}
-                          product={product}
+                          product={product as any}
                           storeSettings={storeSettings}
                           currencies={currencies}
                         />
