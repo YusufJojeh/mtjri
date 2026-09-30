@@ -1,18 +1,24 @@
 import type { LucideIcon } from 'lucide-react';
 import {
     BarChart3,
+    BookOpen,
     Boxes,
+    ClipboardCheck,
     CreditCard,
     FileText,
+    Gauge,
     Gift,
     Home,
     Image,
     LayoutTemplate,
+    ListChecks,
     Megaphone,
     Newspaper,
     Package,
+    PenLine,
     Percent,
     Settings,
+    Sparkles,
     ShoppingCart,
     Smartphone,
     Star,
@@ -56,6 +62,7 @@ export function buildMerchantNav({ t, can, isCompany, feature }: Ctx): MerchantN
 
     const home: MerchantNavItem[] = [];
     if (isCompany || can('manage-dashboard')) home.push({ id: 'home', title: t('Home'), href: route('dashboard'), icon: Home });
+    if (can('manage-onboarding')) home.push({ id: 'onboarding', title: t('Setup guide'), href: route('onboarding.index'), icon: ListChecks });
     groups.push({ id: 'home', items: home });
 
     const commerce: MerchantNavItem[] = [];
@@ -82,7 +89,12 @@ export function buildMerchantNav({ t, can, isCompany, feature }: Ctx): MerchantN
     groups.push({ id: 'growth', label: t('Growth'), items: growth });
 
     const intel: MerchantNavItem[] = [];
+    if (can('use-ai-copilot')) intel.push({ id: 'copilot', title: t('Ask Tijraa'), href: route('copilot.index'), icon: Sparkles });
+    if (can('view-ai-actions')) intel.push({ id: 'ai-actions', title: t('AI Actions'), href: route('ai-actions.index'), icon: ClipboardCheck });
+    if (can('view-knowledge')) intel.push({ id: 'knowledge', title: t('Knowledge'), href: route('knowledge.index'), icon: BookOpen });
+    if (can('use-content-studio')) intel.push({ id: 'studio', title: t('Content Studio'), href: route('ai.studio'), icon: PenLine });
     if (any('view-analytics', 'manage-analytics')) intel.push({ id: 'analytics', title: t('Analytics'), href: route('analytics.index'), icon: BarChart3 });
+    if (can('view-ai-usage')) intel.push({ id: 'ai-usage', title: t('AI usage'), href: route('ai.usage'), icon: Gauge });
     groups.push({ id: 'intelligence', label: t('Intelligence'), items: intel });
 
     const store: MerchantNavItem[] = [];

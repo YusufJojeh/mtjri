@@ -59,6 +59,6 @@ class SearchKnowledge extends Tool
             'section' => $h['heading'],
             'excerpt' => mb_substr($h['excerpt'], 0, 240),
             'url' => route('knowledge.show', $h['document_uuid']),
-        ])->unique('label')->values()->all(), 1);
+        ])->unique('label')->values()->all(), knowledgeSearches: 1);
     }
 }

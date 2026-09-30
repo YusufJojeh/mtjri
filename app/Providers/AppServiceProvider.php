@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // One AI provider/embedder resolution per process (also the test seam).
+        $this->app->singleton(\App\Ai\AiManager::class);
+        $this->app->singleton(\App\Ai\Tools\ToolRegistry::class);
+
         $this->app->singleton(\App\Services\WebhookService::class);
         $this->app->bind(\App\Contracts\OpenAIContentGenerator::class, \App\Services\OpenAIContentGeneratorService::class);
     }
@@ -42,6 +46,10 @@ class AppServiceProvider extends ServiceProvider
         
         // Register the PlanObserver
         Plan::observe(PlanObserver::class);
+
+        // Tijraa store notifications
+        \App\Models\Order::observe(\App\Observers\OrderNotificationObserver::class);
+        \App\Models\Product::observe(\App\Observers\ProductStockObserver::class);
         
 
 

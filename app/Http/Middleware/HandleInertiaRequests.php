@@ -213,6 +213,9 @@ class HandleInertiaRequests extends Middleware
                 'is_enabled' => $referralEnabled,
             ],
 
+            // Tijraa platform indicators (bell, Action Center badge, AI availability)
+            'tijraa' => fn () => $skipDb ? null : $this->tijraaProps($request),
+
             'is_demo' => config('app.is_demo', false),
 
             // backward compatibility
@@ -451,6 +454,32 @@ class HandleInertiaRequests extends Middleware
             ];
         } catch (\Throwable $e) {
             return $default;
+        }
+    }
+
+    private function tijraaProps(Request $request): ?array
+    {
+        $user = $request->user();
+        if (! $user || $user->type === 'superadmin') {
+            return null;
+        }
+        try {
+            $storeId = getCurrentStoreId($user);
+            if (! $storeId) {
+                return null;
+            }
+
+            return [
+                'unread_notifications' => $user->can('view-notifications')
+                    ? \App\Models\Ai\MerchantNotification::where('user_id', $user->id)->where('store_id', $storeId)->whereNull('read_at')->count() : 0,
+                'pending_actions' => $user->can('view-ai-actions')
+                    ? \App\Models\Ai\AgentAction::where('store_id', $storeId)->where('status', 'pending')->where(fn ($q) => $q->whereNull('expires_at')->orWhere('expires_at', '>', now()))->count() : 0,
+                'ai' => app(\App\Ai\AiManager::class)->describe(),
+            ];
+        } catch (\Throwable $e) {
+            report($e);
+
+            return null;
         }
     }
 }
