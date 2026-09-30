@@ -2,7 +2,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { router } from '@inertiajs/react';
 import axios from 'axios';
 import { Command } from 'cmdk';
-import { CornerDownLeft, ExternalLink, Loader2, Package, Percent, Plus, Search, ShoppingCart, UserRound } from 'lucide-react';
+import { CornerDownLeft, ExternalLink, Loader2, Package, Percent, Plus, Search, ShoppingCart, Sparkles, UserRound } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCommerceFormat } from '@/hooks/use-commerce-format';
@@ -113,6 +113,7 @@ export function CommandPalette({ groups, actions }: Props) {
     const q = query.trim().toLowerCase();
     const matchedNav = q ? navItems.filter((n) => n.title.toLowerCase().includes(q) || n.group.toLowerCase().includes(q)) : navItems.slice(0, 6);
     const matchedActions = q ? actions.filter((a) => a.label.toLowerCase().includes(q)) : actions;
+    const canAsk = groups.some((g) => g.items.some((i) => i.id === 'copilot'));
     const hasRemote = results.orders.length + results.products.length + results.customers.length > 0;
 
     const go = (href: string, external?: boolean) => {
@@ -142,7 +143,17 @@ export function CommandPalette({ groups, actions }: Props) {
                             <kbd className="text-muted-foreground hidden rounded border px-1.5 py-0.5 text-[10px] font-medium sm:inline">Esc</kbd>
                         </div>
                         <Command.List className="max-h-[min(60vh,420px)] overflow-y-auto p-2">
-                            {q.length >= 2 && !loading && !hasRemote && matchedNav.length === 0 && matchedActions.length === 0 && (
+                            {canAsk && query.trim().length >= 3 && (
+                                <Command.Group heading={t('Ask Tijraa')} className="[&_[cmdk-group-heading]]:text-muted-foreground mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold">
+                                    <Command.Item value="ask-tijraa" onSelect={() => go(route('copilot.index', { q: query.trim() }))} className={itemCls}>
+                                        <Sparkles className="text-ai" />
+                                        <span className="min-w-0 flex-1 truncate">
+                                            {t('Ask Tijraa')}: <span className="font-medium">“{query.trim()}”</span>
+                                        </span>
+                                    </Command.Item>
+                                </Command.Group>
+                            )}
+                            {q.length >= 2 && !loading && !hasRemote && !(canAsk && q.length >= 3) && matchedNav.length === 0 && matchedActions.length === 0 && (
                                 <p className="text-muted-foreground px-3 py-8 text-center text-sm">{failed ? t('Search is unavailable right now') : t('No matches for “{{q}}”', { q: query.trim() })}</p>
                             )}
 

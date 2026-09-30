@@ -55,6 +55,16 @@ abstract class ProposalTool extends Tool
             return ToolResult::error('invalid_proposal', 'The proposal was rejected by validation: ' . implode('; ', $e->errors) . '. Fix the values and try again.');
         }
 
+        if ($ctx->run && $action->agent_run_id !== $ctx->run->id) {
+            // Identical change already awaiting review from another conversation:
+            // point to it instead of pausing this run on someone else's action.
+            return new ToolResult([
+                'status' => 'already_pending',
+                'action_id' => $action->uuid,
+                'message' => 'An identical change is already waiting for the merchant in the AI Action Center. Do not propose it again; tell the merchant it is waiting for their review.',
+            ], 'Identical change already awaiting review', [['kind' => 'store_data', 'label' => 'AI Action awaiting review', 'url' => route('ai-actions.index', ['action' => $action->uuid], false)]]);
+        }
+
         return new ToolResult([
             'status' => 'pending_approval',
             'action_id' => $action->uuid,

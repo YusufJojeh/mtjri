@@ -48,7 +48,7 @@ class KnowledgeController extends Controller
             'document' => AiPresenter::document($document),
             'versions' => $document->versions()->orderByDesc('version')->get(['version', 'char_count', 'created_at'])->map(fn ($v) => ['version' => $v->version, 'chars' => $v->char_count, 'created_at' => $v->created_at?->toIso8601String()]),
             'ingestions' => $document->ingestionRuns()->latest('id')->limit(10)->get(['status', 'stage', 'error', 'metrics', 'started_at', 'finished_at'])->map(fn ($r) => [
-                'status' => $r->status, 'stage' => $r->stage, 'error' => $r->error, 'metrics' => $r->metrics,
+                'status' => $r->status, 'stage' => $r->stage, 'error' => $r->error ? \Illuminate\Support\Str::after($r->error, ': ') : null, 'metrics' => $r->metrics,
                 'started_at' => $r->started_at?->toIso8601String(), 'finished_at' => $r->finished_at?->toIso8601String(),
             ]),
             'chunks' => $version ? $document->chunks()->where('version_id', $version->id)->orderBy('chunk_index')->limit(60)->get(['chunk_index', 'heading', 'content', 'token_count'])->map(fn ($c) => ['index' => $c->chunk_index, 'heading' => $c->heading, 'preview' => mb_substr($c->content, 0, 400), 'tokens' => $c->token_count]) : [],

@@ -155,3 +155,20 @@ test('SSE stream replays only events after Last-Event-ID', function () {
     expect($body)->not->toContain("id: 1\n")->not->toContain("id: 2\n")->toContain("id: 3\n")->toContain("id: {$total}\n")->toContain('event: stream_end');
     expect($body)->not->toContain('get_store_summary'); // no raw tool names
 });
+
+test('an identical pending proposal from another conversation is referenced, not re-attached', function () {
+    $args = ['product_id' => $this->product->id, 'field' => 'description', 'text' => 'A hand-finished brass lamp with a warm glow.', 'goal' => 'Copy'];
+    $this->model->push(QueuedProvider::tool('propose_product_copy', $args));
+    $first = startRun($this);
+    expect($first['status'])->toBe('waiting_for_approval');
+
+    $this->model->push(QueuedProvider::tool('propose_product_copy', $args))
+        ->push(function ($messages) {
+            expect(collect($messages)->last()['content'])->toContain('already_pending');
+
+            return QueuedProvider::final('That change is already waiting for your review.');
+        });
+    $second = startRun($this);
+    expect($second['status'])->toBe('completed')->and($second['actions'])->toBeEmpty();
+    expect(AgentAction::count())->toBe(1);
+});

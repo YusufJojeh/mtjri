@@ -44,7 +44,7 @@ class ActionCenterController extends Controller
                 'data' => collect($page->items())->map(fn ($a) => AiPresenter::action($a, $request->user())),
                 'current_page' => $page->currentPage(),
                 'last_page' => $page->lastPage(),
-                'total' => $page->total(),
+                'total' => $page->total(), 'per_page' => $page->perPage(), 'from' => $page->firstItem(), 'to' => $page->lastItem(),
             ],
             'selected' => $selected ? AiPresenter::action($selected, $request->user()) : null,
         ]);

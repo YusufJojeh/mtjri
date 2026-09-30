@@ -142,7 +142,9 @@ class CopilotController extends Controller
                         $run = $this->runner->advance($run);
                     }
                     $replay();
-                    if ($run->isTerminal()) {
+                    // Paused runs end the stream (the client re-subscribes cheaply) so a
+                    // run waiting on a human never holds a server worker.
+                    if ($run->isTerminal() || $run->status === AgentRun::STATUS_WAITING) {
                         break;
                     }
                     if (microtime(true) - $beat >= 15) {

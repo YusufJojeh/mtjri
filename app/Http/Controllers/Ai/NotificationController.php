@@ -20,7 +20,7 @@ class NotificationController extends Controller
 
         return Inertia::render('notifications/index', [
             'filter' => $filter,
-            'notifications' => ['data' => collect($page->items())->map(fn ($n) => $this->present($n)), 'current_page' => $page->currentPage(), 'last_page' => $page->lastPage(), 'total' => $page->total()],
+            'notifications' => ['data' => collect($page->items())->map(fn ($n) => $this->present($n)), 'current_page' => $page->currentPage(), 'last_page' => $page->lastPage(), 'total' => $page->total(), 'per_page' => $page->perPage(), 'from' => $page->firstItem(), 'to' => $page->lastItem()],
             'unread' => $this->query($request, 'unread')->count(),
         ]);
     }

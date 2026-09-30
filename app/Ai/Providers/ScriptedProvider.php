@@ -33,6 +33,9 @@ class ScriptedProvider implements LlmProvider
 
     public function chat(array $messages, array $tools = [], array $options = []): LlmResponse
     {
+        if ($tools === []) {
+            return $this->draftText($messages);
+        }
         $available = array_column($tools, 'name');
         [$merchant, $turn] = $this->currentTurn($messages);
         $arabic = (bool) preg_match('/\p{Arabic}/u', $merchant);
@@ -241,6 +244,24 @@ class ScriptedProvider implements LlmProvider
             'recommended_actions' => [],
             'follow_up_questions' => [],
         ];
+    }
+
+    /** Content drafting (no tools): deterministic copy built only from the provided facts. */
+    private function draftText(array $messages): LlmResponse
+    {
+        $prompt = (string) (collect($messages)->last()['content'] ?? '');
+        preg_match('/Resource: (.+?) \(/u', $prompt, $r);
+        $name = trim($r[1] ?? 'This product');
+        $usesKnowledge = str_contains($prompt, '[K1]');
+        if (str_contains($prompt, 'Write SEO metadata')) {
+            $text = "Title: " . mb_substr($name, 0, 55) . "\nDescription: " . mb_substr("Discover {$name}. Thoughtfully chosen, clearly described and ready to order today.", 0, 155) . "\nKeywords: " . mb_strtolower($name) . ', shop online, home, gifts, quality';
+        } else {
+            $text = "{$name} is chosen for everyday use and made to last.\n\nIt brings a practical, well-finished touch to your home, and is easy to pair with the rest of your space.";
+        }
+        $text .= "\nUsed: " . ($usesKnowledge ? 'K1' : 'none');
+        $in = (int) ceil(mb_strlen(json_encode($messages, JSON_UNESCAPED_UNICODE)) / 4);
+
+        return new LlmResponse($text, [], $in, (int) ceil(mb_strlen($text) / 4), 'scripted', 'stop');
     }
 
     private function respond(array $messages, array $calls): LlmResponse

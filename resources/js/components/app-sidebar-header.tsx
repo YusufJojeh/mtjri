@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { ExternalLink, PanelLeft, Plus, Search } from 'lucide-react';
 import { openCommandPalette } from '@/components/shell/command-palette';
 import { useMerchantShell } from '@/components/shell/use-merchant-shell';
+import { NotificationBell } from '@/components/tijraa/notifications';
 
 export function AppSidebarHeader({ breadcrumbs: _breadcrumbs }: { breadcrumbs?: unknown }) {
     const { t } = useTranslation();
@@ -78,6 +79,8 @@ export function AppSidebarHeader({ breadcrumbs: _breadcrumbs }: { breadcrumbs?: 
                         </a>
                     </Button>
                 )}
+
+                {!isSuperAdmin && <NotificationBell />}
 
                 <ProfileMenu />
             </div>
