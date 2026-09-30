@@ -65,11 +65,11 @@ export function CrudTable({
     
     if (sortField === column.key) {
       return sortDirection === 'asc' ? 
-        <ChevronUp className='ml-1 h-4 w-4' /> : 
-        <ChevronDown className='ml-1 h-4 w-4' />;
+        <ChevronUp className='h-3.5 w-3.5 text-foreground' /> : 
+        <ChevronDown className='h-3.5 w-3.5 text-foreground' />;
     }
     
-    return <ChevronsUpDown className='ml-1 h-4 w-4 opacity-50' />;
+    return <ChevronsUpDown className='h-3.5 w-3.5 opacity-40 transition-opacity group-hover/sort:opacity-80' />;
   };
 
   const handleSort = (column: TableColumn) => {
@@ -111,7 +111,7 @@ export function CrudTable({
     const visibleActions = getVisibleActionsForRow(row);
     
     return (
-      <div className='flex items-center justify-end space-x-2'>
+      <div className='flex items-center justify-end gap-1'>
         {visibleActions.map((action, index) => {
           const IconComponent = (LucidIcons as any)[action.icon] as React.ElementType;
 
@@ -125,15 +125,16 @@ export function CrudTable({
               <TooltipProvider key={index}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Link href={href} target={action.openInNewTab ? '_blank' : undefined}>
-                      <Button 
-                        variant='ghost' 
-                        size='icon' 
-                        className={cn('h-8 w-8', action.className)}
-                      >
+                    <Button
+                      asChild
+                      variant='ghost'
+                      size='icon'
+                      className={cn('h-8 w-8 text-muted-foreground hover:text-foreground', action.className)}
+                    >
+                      <Link href={href} target={action.openInNewTab ? '_blank' : undefined} aria-label={action.label}>
                         <IconComponent size={16} />
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{action.label}</p>
@@ -155,8 +156,9 @@ export function CrudTable({
                   <Button 
                     variant='ghost' 
                     size='icon' 
-                    className={cn('h-8 w-8', action.className)} 
+                    className={cn('h-8 w-8 text-muted-foreground hover:text-foreground', action.className)} 
                     onClick={() => onAction(action.action!, row)}
+                    aria-label={action.label}
                   >
                     <IconComponent size={16} />
                   </Button>
@@ -202,7 +204,7 @@ export function CrudTable({
         
       case 'image':
         if (!value) {
-          return <div className='text-center text-gray-400'>{t('No image')}</div>;
+          return <div className='text-center text-xs text-muted-foreground'>{t('No image')}</div>;
         }
         return (
           <div className='flex justify-center'>
@@ -240,7 +242,7 @@ export function CrudTable({
         return (
           <Link 
             href={href} 
-            className={col.linkClassName || 'text-blue-600 hover:underline'}
+            className={col.linkClassName || 'font-medium text-primary underline-offset-4 hover:underline'}
             target={col.openInNewTab ? '_blank' : undefined}
           >
             {value}
@@ -283,51 +285,56 @@ export function CrudTable({
 
   // Desktop table view
   return (
-    <div className='border-collapse'>
+    <div>
       <div className='overflow-x-auto'>
         <Table>
           <TableHeader>
-            <TableRow className='bg-gray-50 border-b'>
-              <TableHead className='w-12 py-2.5 font-semibold'>#</TableHead>
+            <TableRow className='bg-muted/50 hover:bg-muted/50'>
+              <TableHead className='w-12'>#</TableHead>
               {columns.map((column) => (
                 <TableHead 
                   key={column.key}
-                  className={cn(
-                    'py-2.5 font-semibold',
-                    column.sortable && 'cursor-pointer select-none',
-                    column.className
-                  )}
-                  onClick={() => handleSort(column)}
+                  className={column.className}
+                  aria-sort={
+                    column.sortable && sortField === column.key
+                      ? sortDirection === 'asc' ? 'ascending' : 'descending'
+                      : undefined
+                  }
                 >
-                  <div className='flex items-center whitespace-nowrap'>
-                    {column.label}
-                    {renderSortIcon(column)}
-                  </div>
+                  {column.sortable && onSort ? (
+                    <button
+                      type='button'
+                      onClick={() => handleSort(column)}
+                      className='group/sort -mx-1 inline-flex items-center gap-1 whitespace-nowrap rounded px-1 py-0.5 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50'
+                    >
+                      {column.label}
+                      {renderSortIcon(column)}
+                    </button>
+                  ) : (
+                    <div className='flex items-center whitespace-nowrap'>{column.label}</div>
+                  )}
                 </TableHead>
               ))}
               {hasAnyVisibleActions && (
-                <TableHead className='w-24 py-2.5 font-semibold text-right flex-shrink-0 whitespace-nowrap'>{t('Actions')}</TableHead>
+                <TableHead className='w-24 text-end'>{t('Actions')}</TableHead>
               )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {data.length > 0 ? (
               data.map((row, index) => (
-                <TableRow key={row.id || index} className='hover:bg-gray-50 border-b'>
-                  <TableCell className='font-medium py-2.5 flex-shrink-0'>{from + index}</TableCell>
+                <TableRow key={row.id || index}>
+                  <TableCell className='text-muted-foreground'>{from + index}</TableCell>
                   {columns.map((col) => (
                     <TableCell 
                       key={col.key}
-                      className={cn(
-                        'py-2.5',
-                        col.className
-                      )}
+                      className={col.className}
                     >
                       {renderCellContent(row, col)}
                     </TableCell>
                   ))}
                   {hasAnyVisibleActions && (
-                    <TableCell className='py-2.5 text-right flex-shrink-0'>
+                    <TableCell className='py-2 text-end'>
                       {renderActionButtons(row)}
                     </TableCell>
                   )}

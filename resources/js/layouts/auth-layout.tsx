@@ -13,6 +13,8 @@ interface AuthLayoutProps {
     icon?: ReactNode;
     status?: string;
     statusType?: 'success' | 'error';
+    /** `wide` for multi-column flows such as the register stepper. */
+    size?: 'default' | 'wide';
 }
 
 export default function AuthLayout({
@@ -22,6 +24,7 @@ export default function AuthLayout({
     icon,
     status,
     statusType = 'success',
+    size = 'default',
 }: AuthLayoutProps) {
     const [mounted, setMounted] = useState(false);
     const { logoLight, logoDark, themeColor, customColor } = useBrand();
@@ -45,7 +48,7 @@ export default function AuthLayout({
     return (
         <div
             data-public-shell
-            className='relative flex min-h-screen w-full items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'
+            className='relative isolate flex min-h-screen w-full items-center justify-center bg-background'
             data-testid='auth-shell'
             style={
                 {
@@ -63,7 +66,7 @@ export default function AuthLayout({
                 <div className='absolute -bottom-40 -left-40 h-[28rem] w-[28rem] rounded-full bg-sky-400/15 blur-3xl dark:bg-sky-500/10' />
             </div>
 
-            <div className='relative flex w-full flex-col items-center justify-center gap-6 p-4 sm:p-6 md:p-12'>
+            <div className='relative flex min-h-screen w-full flex-col items-center justify-center gap-6 p-4 sm:p-6 md:p-12'>
                 {/* Brand + language: a normal row on phones, pinned to the corners from md up. */}
                 <div className='flex w-full max-w-2xl items-center justify-between md:contents'>
                     <Link
@@ -80,33 +83,33 @@ export default function AuthLayout({
                     </div>
                 </div>
 
-                <div 
-                    className={`w-full max-w-2xl transition-all duration-700 ${
-                        mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                    }`}
-                >
-                    <div className='rounded-2xl border border-slate-200/90 bg-white/95 p-6 shadow-xl sm:p-8 shadow-slate-900/10 backdrop-blur-md dark:border-slate-700 dark:bg-slate-800/95 md:p-10'>
-                        <div className='text-center mb-6'>
+                {/* CSS-driven entrance so the form is visible before hydration. */}
+                <div className={`w-full ${size === 'wide' ? 'max-w-4xl' : 'max-w-md'} animate-in fade-in-0 slide-in-from-bottom-2 duration-500 ease-out`}>
+                    <div className='rounded-2xl border bg-card/95 p-6 text-card-foreground shadow-pop backdrop-blur-md sm:p-8'>
+                        <div className='mb-6 text-center'>
                             {icon && (
                                 <div 
-                                    className='mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full'
-                                    style={{ backgroundColor: `${primaryColor}20` }}
+                                    className='mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full'
+                                    style={{ backgroundColor: `color-mix(in srgb, ${primaryColor} 12%, transparent)` }}
                                 >
                                     {icon}
                                 </div>
                             )}
-                            <h1 className='mb-2 text-2xl font-bold text-slate-900 sm:text-3xl dark:text-white'>{title}</h1>
+                            <h1 className='mb-1.5 text-2xl font-semibold tracking-tight text-foreground'>{title}</h1>
                             {description && (
-                                <p className='text-base text-slate-600 sm:text-lg dark:text-slate-400'>{description}</p>
+                                <p className='text-sm text-muted-foreground sm:text-base'>{description}</p>
                             )}
                         </div>
                         
                         {status && (
-                            <div className={`mb-6 text-center text-sm font-medium ${
-                                statusType === 'success' 
-                                    ? 'text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800/30' 
-                                    : 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800/30'
-                            } p-3 rounded-lg border`}>
+                            <div
+                                role={statusType === 'error' ? 'alert' : 'status'}
+                                className={`mb-6 rounded-lg border p-3 text-center text-sm font-medium ${
+                                    statusType === 'success'
+                                        ? 'border-success/30 bg-success-soft text-success-fg'
+                                        : 'border-danger/30 bg-danger-soft text-danger-fg'
+                                }`}
+                            >
                                 {status}
                             </div>
                         )}
