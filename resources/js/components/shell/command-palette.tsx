@@ -47,6 +47,7 @@ export function CommandPalette({ groups, actions }: Props) {
     const [results, setResults] = useState<SearchResults>(EMPTY);
     const [loading, setLoading] = useState(false);
     const [failed, setFailed] = useState(false);
+    const [selected, setSelected] = useState('');
     const abortRef = useRef<AbortController | null>(null);
 
     useEffect(() => {
@@ -116,6 +117,25 @@ export function CommandPalette({ groups, actions }: Props) {
     const canAsk = groups.some((g) => g.items.some((i) => i.id === 'copilot'));
     const hasRemote = results.orders.length + results.products.length + results.customers.length > 0;
 
+    // Keep Enter on the best match: the first search result, then the first action/page.
+    // "Ask Tijraa" is only the default when nothing else matches.
+    const firstValue = results.orders[0]
+        ? `order-${results.orders[0].id}`
+        : results.products[0]
+          ? `product-${results.products[0].id}`
+          : results.customers[0]
+            ? `customer-${results.customers[0].id}`
+            : matchedActions[0]
+              ? `action-${matchedActions[0].id}`
+              : matchedNav[0]
+                ? `nav-${matchedNav[0].id}`
+                : canAsk && q.length >= 3
+                  ? 'ask-tijraa'
+                  : '';
+    useEffect(() => {
+        setSelected(firstValue);
+    }, [firstValue]);
+
     const go = (href: string, external?: boolean) => {
         setOpen(false);
         if (external) window.open(href, '_blank', 'noopener,noreferrer');
@@ -131,7 +151,7 @@ export function CommandPalette({ groups, actions }: Props) {
                     className="bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-[0.98] fixed start-1/2 top-3 z-50 w-[calc(100%-1.5rem)] max-w-xl -translate-x-1/2 overflow-hidden rounded-xl border shadow-pop sm:top-[12vh] rtl:translate-x-1/2"
                 >
                     <DialogPrimitive.Title className="sr-only">{t('Search and commands')}</DialogPrimitive.Title>
-                    <Command shouldFilter={false} loop label={t('Search and commands')}>
+                    <Command shouldFilter={false} loop value={selected} onValueChange={setSelected} label={t('Search and commands')}>
                         <div className="flex items-center gap-2 border-b px-3">
                             {loading ? <Loader2 className="text-muted-foreground size-4 animate-spin" aria-hidden /> : <Search className="text-muted-foreground size-4" aria-hidden />}
                             <Command.Input
@@ -143,16 +163,6 @@ export function CommandPalette({ groups, actions }: Props) {
                             <kbd className="text-muted-foreground hidden rounded border px-1.5 py-0.5 text-[10px] font-medium sm:inline">Esc</kbd>
                         </div>
                         <Command.List className="max-h-[min(60vh,420px)] overflow-y-auto p-2">
-                            {canAsk && query.trim().length >= 3 && (
-                                <Command.Group heading={t('Ask Tijraa')} className="[&_[cmdk-group-heading]]:text-muted-foreground mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold">
-                                    <Command.Item value="ask-tijraa" onSelect={() => go(route('copilot.index', { q: query.trim() }))} className={itemCls}>
-                                        <Sparkles className="text-ai" />
-                                        <span className="min-w-0 flex-1 truncate">
-                                            {t('Ask Tijraa')}: <span className="font-medium">“{query.trim()}”</span>
-                                        </span>
-                                    </Command.Item>
-                                </Command.Group>
-                            )}
                             {q.length >= 2 && !loading && !hasRemote && !(canAsk && q.length >= 3) && matchedNav.length === 0 && matchedActions.length === 0 && (
                                 <p className="text-muted-foreground px-3 py-8 text-center text-sm">{failed ? t('Search is unavailable right now') : t('No matches for “{{q}}”', { q: query.trim() })}</p>
                             )}
@@ -221,6 +231,16 @@ export function CommandPalette({ groups, actions }: Props) {
                                             </Command.Item>
                                         );
                                     })}
+                                </Command.Group>
+                            )}
+                            {canAsk && query.trim().length >= 3 && (
+                                <Command.Group heading={t('Ask Tijraa')} className="[&_[cmdk-group-heading]]:text-muted-foreground mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold">
+                                    <Command.Item value="ask-tijraa" onSelect={() => go(route('copilot.index', { q: query.trim() }))} className={itemCls}>
+                                        <Sparkles className="text-ai" />
+                                        <span className="min-w-0 flex-1 truncate">
+                                            {t('Ask Tijraa')}: <span className="font-medium">“{query.trim()}”</span>
+                                        </span>
+                                    </Command.Item>
                                 </Command.Group>
                             )}
                         </Command.List>
