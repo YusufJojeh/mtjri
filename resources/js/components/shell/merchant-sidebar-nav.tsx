@@ -1,9 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     SidebarGroup,
     SidebarGroupLabel,
     SidebarMenu,
+    SidebarMenuBadge,
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarMenuSub,
@@ -15,7 +17,9 @@ import { activeNavId, pathOf, type MerchantNavGroup } from './merchant-nav';
 
 export function MerchantSidebarNav({ groups }: { groups: MerchantNavGroup[] }) {
     const page = usePage();
+    const { t } = useTranslation();
     const { isMobile, setOpenMobile } = useSidebar();
+    const pending = (page.props as { tijraa?: { pending_actions?: number } | null }).tijraa?.pending_actions ?? 0;
     const currentPath = page.url.split('?')[0];
     const activeId = useMemo(() => activeNavId(groups, currentPath), [groups, currentPath]);
 
@@ -49,6 +53,12 @@ export function MerchantSidebarNav({ groups }: { groups: MerchantNavGroup[] }) {
                                             <span>{item.title}</span>
                                         </Link>
                                     </SidebarMenuButton>
+                                    {item.id === 'ai-actions' && pending > 0 && (
+                                        <SidebarMenuBadge className="bg-warning-soft text-warning-fg rounded-full px-1.5 text-[11px] tabular-nums">
+                                            <span aria-hidden>{pending}</span>
+                                            <span className="sr-only">{t('{{count}} changes to review', { count: pending })}</span>
+                                        </SidebarMenuBadge>
+                                    )}
                                     {item.children && active && (
                                         <SidebarMenuSub className="me-0 border-s-sidebar-border">
                                             {item.children.map((c) => {
