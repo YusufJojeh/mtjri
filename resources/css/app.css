@@ -15,8 +15,17 @@
 
 @theme {
     /* Bundled via @fontsource-variable/instrument-sans (same-origin; avoids Bunny CDN latency / interventions) */
+    /* Latin glyphs come from Instrument Sans; Arabic glyphs (the default
+       locale) fall through to Noto Sans Arabic via its unicode-range. */
     --font-sans:
-        'Instrument Sans Variable', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        'Instrument Sans Variable', 'Instrument Sans', 'Noto Sans Arabic Variable', 'Noto Sans Arabic', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Motion: ease-out for things entering, ease-in-out for things moving
+       on screen, drawer curve for sheets. Keep UI motion under ~250ms. */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -240,48 +249,61 @@
         @apply bg-background text-foreground;
     }
     
-    /* Custom thin scrollbar */
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    ::selection {
+        background-color: color-mix(in oklab, var(--primary) 22%, transparent);
+    }
+
+    /* Fallback focus indicator for raw interactive elements that don't
+       style their own; primitives override this with a ring. */
+    :where(a, button, [role='button'], summary, [tabindex]:not([tabindex='-1'])):focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+    }
+
+    /* Thin, token-driven scrollbars that recede until needed */
     * {
         scrollbar-width: thin;
-        scrollbar-color: #9ca3af #f3f4f6;
+        scrollbar-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent) transparent;
     }
-    
+
     *::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+        width: 8px;
+        height: 8px;
     }
-    
+
     *::-webkit-scrollbar-track {
-        background: #f3f4f6;
-        border-radius: 3px;
+        background: transparent;
     }
-    
+
     *::-webkit-scrollbar-thumb {
-        background: #9ca3af;
-        border-radius: 3px;
+        background-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+        background-clip: padding-box;
+        border: 2px solid transparent;
+        border-radius: 9999px;
     }
-    
+
     *::-webkit-scrollbar-thumb:hover {
-        background: #6b7280;
+        background-color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
     }
-    
-    /* Dark mode scrollbar */
-    .dark * {
-        scrollbar-color: #4b5563 #1f2937;
-    }
-    
-    .dark *::-webkit-scrollbar-track {
-        background: #1f2937;
-    }
-    
-    .dark *::-webkit-scrollbar-thumb {
-        background: #4b5563;
-    }
-    
-    .dark *::-webkit-scrollbar-thumb:hover {
-        background: #6b7280;
-    }
-    
+
     /* Ensure all text inputs have proper dark mode styling */
     .dark input[type="text"],
     .dark input[type="email"],
@@ -387,8 +409,7 @@
 /* Ensure all tables in dark mode have proper styling */
 .dark [role="table"],
 .dark table {
-  --tw-border-opacity: 1;
-  border-color: rgba(55, 65, 81, var(--tw-border-opacity));
+  border-color: var(--border);
 }
 
 .dark [role="row"],
@@ -497,13 +518,14 @@
   }
 
   .scrollbar-custom::-webkit-scrollbar-track {
-    background-color: #f9fafb; /* Tailwind: gray-50 */
+    background-color: transparent;
   }
 
   .scrollbar-custom::-webkit-scrollbar-thumb {
-    background-color: #d1d5db; /* Tailwind: gray-300 */
+    background-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+    background-clip: padding-box;
     border-radius: 9999px;
-    border: 2px solid #f9fafb;
+    border: 2px solid transparent;
   }
 
 /* Theme Preview Hover Effect */
@@ -584,3 +606,16 @@
 }
 
 /* Sidebar colours come from the --sidebar* tokens (light and dark). */
+
+/* Respect reduced motion globally: keep opacity/colour feedback, drop
+   movement. Individual components can still opt in to essential motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
