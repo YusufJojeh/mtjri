@@ -205,7 +205,7 @@ export default function POSCheckout() {
                       <ArrowLeft className='mr-2 h-4 w-4' />
                       {t('New Sale')}
                     </Button>
-                    <Button onClick={() => router.visit(route('pos.receipt', transactionId))}>
+                    <Button onClick={() => transactionId && router.visit(route('pos.receipt', transactionId))}>
                       <Printer className='mr-2 h-4 w-4' />
                       {t('Print Receipt')}
                     </Button>

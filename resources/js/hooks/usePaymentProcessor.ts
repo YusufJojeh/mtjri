@@ -45,9 +45,9 @@ export function usePaymentProcessor(options: UsePaymentProcessorOptions = {}) {
     
     router.post(route(routeName), formattedData, {
       onSuccess: (page) => {
-        // Check if there"'s'" a success message in the response
-        if (page.props?.flash?.success) {
-          toast.success(page.props.flash.success);
+        // Check if there's a success message in the response
+        if ((page.props?.flash as { success?: string } | undefined)?.success) {
+          toast.success((page.props.flash as { success?: string }).success!);
         } else {
           toast.success(t('Payment successful'));
         }

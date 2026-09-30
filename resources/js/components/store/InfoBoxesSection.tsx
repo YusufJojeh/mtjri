@@ -13,7 +13,7 @@ interface InfoBoxesSectionProps {
   content?: any[];
 }
 
-const getIcon = (iconName: string) => {
+const getIcon = (iconName: string): React.ReactNode => {
   const icons = {
     truck: <Truck className='h-8 w-8' />,
     'refresh-cw': <RefreshCw className='h-8 w-8' />,
@@ -22,7 +22,7 @@ const getIcon = (iconName: string) => {
     'shield-check': <Shield className='h-8 w-8' />,
     star: <Star className='h-8 w-8' />
   };
-  return icons[iconName] || <Truck className='h-8 w-8' />;
+  return (icons as Record<string, React.ReactNode>)[iconName] || <Truck className='h-8 w-8' />;
 };
 
 export default function InfoBoxesSection({
@@ -57,7 +57,7 @@ export default function InfoBoxesSection({
   ];
   
   // Handle both extracted values and original structure
-  const contentArray = Array.isArray(content) ? content : (content?.value || content);
+  const contentArray: any[] = Array.isArray(content) ? content : ((content as any)?.value || content || []);
   const displayBoxes = contentArray ? contentArray.map((box: any, index: any) => ({
     id: index + 1,
     icon: getIcon(box.icon),

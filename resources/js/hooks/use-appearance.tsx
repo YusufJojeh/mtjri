@@ -204,10 +204,10 @@ export function useAppearance() {
     
     const updateCustomColor = useCallback((hexColor: string, setAsActive = false) => {
         setThemeSettings(prev => {
-            const newSettings = { 
+            const newSettings: ThemeSettings = { 
                 ...prev, 
                 customColor: hexColor,
-                ...(setAsActive && { themeColor: 'custom' })
+                ...(setAsActive ? { themeColor: 'custom' as ThemeColor } : {})
             };
             
             // Store in localStorage

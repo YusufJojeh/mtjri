@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageTemplate } from '@/components/page-template';
+import { PageTemplate, type PageAction } from '@/components/page-template';
 import { ArrowLeft, Save } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -27,7 +27,7 @@ interface Review {
 export default function EditReview() {
   const { t } = useTranslation();
   const { props } = usePage();
-  const { review } = props as { review: Review };
+  const { review } = props as unknown as { review: Review };
   const { hasPermission } = usePermissions();
   
   const { data, setData, put, processing, errors } = useForm({
@@ -38,7 +38,7 @@ export default function EditReview() {
     store_response: review.store_response || '',
   });
 
-  const pageActions = [
+  const pageActions: PageAction[] = [
     {
       label: t('Back'),
       icon: <ArrowLeft className='h-4 w-4' />,

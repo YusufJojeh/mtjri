@@ -30,7 +30,7 @@ export default function BabyKidsRegister({
     email: '',
     password: '',
     password_confirmation: '',
-    terms: false,
+    terms: false as boolean,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -319,7 +319,7 @@ export default function BabyKidsRegister({
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }

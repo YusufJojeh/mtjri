@@ -31,7 +31,7 @@ export default function Register({ referralCode, planId }: { referralCode?: stri
     const [recaptchaToken, setRecaptchaToken] = useState<string>('');
     const { themeColor, customColor } = useBrand();
     const primaryColor = accessibleBrand(themeColor === 'custom' ? customColor : THEME_COLORS[themeColor as keyof typeof THEME_COLORS]);
-    const { data, setData, post, processing, errors, reset } = useForm<RegisterForm>({
+    const { data, setData, post, processing, errors, reset, transform } = useForm<RegisterForm>({
         name: '',
         email: '',
         password: '',
@@ -43,9 +43,9 @@ export default function Register({ referralCode, planId }: { referralCode?: stri
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
+        transform((formData) => ({ ...formData, recaptcha_token: recaptchaToken }));
         post(route('register'), {
-            data: { ...data, recaptcha_token: recaptchaToken },
-            onFinish: () => reset("password', 'password_confirmation"),
+            onFinish: () => reset('password', 'password_confirmation'),
         });
     };
 

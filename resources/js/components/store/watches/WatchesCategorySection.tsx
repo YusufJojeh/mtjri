@@ -1,3 +1,4 @@
+import { usePage } from '@inertiajs/react';
 import React from 'react';
 import { getImageUrl } from '@/utils/image-helper';
 
@@ -16,6 +17,8 @@ interface WatchesCategorySectionProps {
 }
 
 export default function WatchesCategorySection({ categories, content }: WatchesCategorySectionProps) {
+  const { props } = usePage();
+  const storeSlug = (props.store as any)?.slug || 'watches-store';
   if (!categories || categories.length === 0) {
     return null;
   }

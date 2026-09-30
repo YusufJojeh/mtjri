@@ -47,7 +47,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
     const [isDemo, setIsDemo] = useState<boolean>(false);
     const [hoveredStore, setHoveredStore] = useState<string | null>(null);
     
-    const { data, setData, post, processing, errors, reset } = useForm<LoginForm>({
+    const { data, setData, post, processing, errors, reset, transform } = useForm<LoginForm>({
         email: '',
         password: '',
         remember: false,
@@ -92,8 +92,8 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
             }
         }
         
-        const formData = { ...data, recaptcha_token: recaptchaToken };
-        post(route('login'), formData, {
+        transform((formData) => ({ ...formData, recaptcha_token: recaptchaToken }));
+        post(route('login'), {
             onFinish: () => reset('password'),
         });
     };

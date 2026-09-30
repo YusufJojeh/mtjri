@@ -133,7 +133,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode; storeId: number
       console.log('✅ API Success:', response.data);
       await refreshCart();
     } catch (error) {
-      console.error('❌ API Error:', error.response?.data || error.message);
+      console.error('❌ API Error:', (error as any)?.response?.data || (error as any)?.message);
     } finally {
       setLoading(false);
     }

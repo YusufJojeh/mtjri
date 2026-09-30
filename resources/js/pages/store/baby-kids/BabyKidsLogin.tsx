@@ -26,7 +26,7 @@ export default function BabyKidsLogin({
   const { data, setData, post, processing, errors } = useForm({
     email: '',
     password: '',
-    remember: false,
+    remember: false as boolean,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -226,7 +226,7 @@ export default function BabyKidsLogin({
           </div>
         </div>
 
-        <style jsx>{`
+        <style>{`
           @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
