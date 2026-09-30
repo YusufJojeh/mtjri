@@ -1,7 +1,6 @@
 import { PageTemplate } from '@/components/page-template';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { type NavItem } from '@/types';
 import { useEffect, useRef, useState } from 'react';
 import { BarChart3, DollarSign, Users, Gift, Settings as SettingsIcon, Copy, Check } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -21,7 +20,7 @@ export default function Referral() {
   
 
   
-  const sidebarNavItems: NavItem[] = [
+  const sidebarNavItems: { title: string; href: string; icon: React.ReactNode }[] = [
     {
       title: t('Dashboard'),
       href: '#dashboard',

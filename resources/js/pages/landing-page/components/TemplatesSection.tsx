@@ -183,7 +183,7 @@ export default function TemplatesSection({ settings, brandColor }: TemplatesSect
         </div>
 
         {/* Templates container based on layout */}
-        {(layout === 'carousel' || layout === 'lider') && (
+        {(layout === 'carousel' || layout === 'slider') && (
           // Carousel/Slider layout
           <div className='relative mb-12'>
             {/* Slider navigation */}
@@ -247,133 +247,9 @@ export default function TemplatesSection({ settings, brandColor }: TemplatesSect
           </div>
         )}
 
-        {layout === 'grid' && (
-          // Grid layout
-          <div className='mb-12'>
-            <div className={`grid grid-cols-1 ${
-              columns === 1 ? '' : 
-              columns === 2 ? 'md:grid-cols-2' : 
-              columns === 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 
-              'md:grid-cols-2 lg:grid-cols-4'} gap-6`}
-            >
-              {templates_list
-                .filter(template => template && template.name)
-                .map((template, index) => (
-                  <TemplateCard key={index} template={template} />
-                ))}
-            </div>
-          </div>
-        )}
 
-        {layout === 'list' && (
-          // List layout
-          <div className='mb-12'>
-            <div className='space-y-6'>
-              {templates_list
-                .filter(template => template && template.name)
-                .map((template, index) => (
-                <div 
-                  key={index} 
-                  className='bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg flex flex-col md:flex-row group'
-                >
-                  <div className='md:w-2/5 h-48 md:h-72 overflow-hidden relative'>
-                    {/* Template Preview using StorePreview */}
-                    <div className='w-full h-full overflow-hidden bg-gray-50 border-r border-gray-200'>
-                      {(() => {
-                        const templateData = getBusinessTemplate(template.name);
-                        
-                        // Create mock business data for preview
-                        const mockBusiness = {
-                          name: template.name.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-                          business_type: template.name,
-                          config_sections: templateData?.defaultData || {},
-                          template_config: {
-                            sections: templateData?.defaultData || {},
-                            sectionSettings: templateData?.defaultData || {}
-                          }
-                        };
-                        
-                        return (
-                          <div 
-                            className='w-full h-full' 
-                            style={{ 
-                              overflow: 'hidden',
-                              position: 'relative'
-                            }}
-                          >
-                            <div 
-                              className='w-[140%] transform scale-[0.85] origin-top group-hover:animate-scroll-y' 
-                              style={{ 
-                                marginTop: '-10px', 
-                                marginLeft: '-20%',
-                                transition: 'none'
-                              }}
-                            >
-                              <StorePreview
-                                businessType={template.name}
-                                data={mockBusiness}
-                              />
-                            </div>
-                          </div>
-                        );
-                      })()}
-                    </div>
-                    
-                    {/* Preview button overlay */}
-                    <div className='absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-center justify-center opacity-0 hover:opacity-100'>
-                      <button 
-                        onClick={() => openPreview(template.name)}
-                        className='p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors'
-                        aria-label='Preview template'
-                      >
-                        <Eye className='h-4 w-4' />
-                      </button>
-                    </div>
-                  </div>
-                  <div className='p-6 md:w-3/5'>
-                    <div className='flex items-center justify-between mb-2'>
-                      <h3 className='text-xl font-semibold capitalize'>{template.name.replace(/-/g, ' ')}</h3>
-                      <span className='inline-block px-2 py-1 rounded-full text-xs capitalize' 
-                            style={{ backgroundColor: `${brandColor}15`, color: brandColor }}>
-                        {template.category}
-                      </span>
-                    </div>
-                    <p className='text-gray-600 mb-4'>
-                      {template.category === 'business' ? 'Professional business card template' : 
-                       template.category === 'creative' ? 'Creative and unique design' : 
-                       template.category === 'technology' ? 'Modern tech-focused template' : 
-                       template.category === 'professional' ? 'Clean professional layout' : 
-                       template.category === 'medical' ? 'Healthcare professional template' :
-                       template.category === 'food' ? 'Restaurant and food service template' :
-                       template.category === 'health' ? 'Health and wellness template' :
-                       template.category === 'beauty' ? 'Beauty and cosmetics template' :
-                       template.category === 'services' ? 'Service provider template' :
-                       template.category === 'leisure' ? 'Travel and leisure template' :
-                       template.category === 'entertainment' ? 'Entertainment industry template' :
-                       'Professionally designed template'}
-                    </p>
-                    <button 
-                      onClick={() => openPreview(template.name)}
-                      className='inline-flex items-center text-sm font-medium transition-colors'
-                      style={{ color: brandColor }}
-                    >
-                      Preview Template
-                      <svg 
-                        xmlns='http://www.w3.org/2000/svg' 
-                        className='h-4 w-4 ml-1' 
-                        fill='none' 
-                        viewBox='0 0 24 24' 
-                        stroke='currentColor'
-                      >
-                        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+
+
 
         {cta_text && (
           <div className='text-center'>

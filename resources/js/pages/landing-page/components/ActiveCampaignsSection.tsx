@@ -37,7 +37,7 @@ export default function ActiveCampaignsSection({
   }
   // Static layout settings - no dynamic data
   const layout = 'grid';
-  const columns = 3;
+  const columns: number = 3;
   const maxDisplay = 6;
   const showViewAll = false;
   const backgroundColor = '#f8fafc';

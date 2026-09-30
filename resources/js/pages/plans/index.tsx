@@ -57,6 +57,9 @@ interface Plan {
     users: number | string;
     storage: string;
     templates: number | string;
+    stores?: number | string;
+    users_per_store?: number | string;
+    products_per_store?: number | string;
   };
   status: boolean;
   recommended?: boolean;

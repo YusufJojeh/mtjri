@@ -9,6 +9,7 @@ import { ChevronsUpDown } from 'lucide-react';
 
 export function NavUser({ position }: { position: 'left' | 'right' }) {
     const { auth } = usePage<SharedData>().props;
+    if (!auth.user) return null;
     const { state } = useSidebar();
     const isMobile = useIsMobile();
 

@@ -17,7 +17,7 @@ import { RichTextEditor } from '@/components/ui/rich-text-editor';
 export default function EditBlog() {
   const { t } = useTranslation();
   const { blog } = usePage().props as any;
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Array<{ id: number; name: string }>>([]);
   const [formData, setFormData] = useState({
     title: blog.title || '',
     slug: blog.slug || '',
