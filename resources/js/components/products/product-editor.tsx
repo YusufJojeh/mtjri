@@ -20,6 +20,7 @@ import MediaPicker from '@/components/MediaPicker';
 import { cn } from '@/lib/utils';
 import { effectivePrice } from './product-bits';
 import { clip, useAiField } from './use-ai-field';
+import type { ComposeRequest } from '@/lib/commerce/ai';
 
 
 export interface ProductFormData {
@@ -185,9 +186,9 @@ export function ProductEditor({ mode, product, categories, taxes, submit }: Prod
     };
 
     /* ---- Contextual AI ---- */
-    const descAi = useAiField({ maxLength: 350 });
-    const specAi = useAiField({ maxLength: 250, creativity: 'low' });
-    const detailsAi = useAiField({ maxLength: 300 });
+    const descAi = useAiField();
+    const specAi = useAiField();
+    const detailsAi = useAiField();
     const aiFor: Record<AiFieldKey, ReturnType<typeof useAiField>> = { description: descAi, specifications: specAi, details: detailsAi };
 
     const categoryName = categories.find((c) => String(c.id) === formData.category_id)?.name;
@@ -208,33 +209,32 @@ export function ProductEditor({ mode, product, categories, taxes, submit }: Prod
         return len > 0 && len <= IMPROVE_LIMIT[k];
     };
 
-    const buildPrompt = (k: AiFieldKey): string | null => {
+    const buildRequest = (k: AiFieldKey): ComposeRequest | null => {
         if (!formData.name.trim()) return null;
-        const current = plain(k);
         const improve = canImprove(k);
-        const f = facts();
-        const specsHint = k !== 'specifications' && plain('specifications') ? `Specifications: ${clip(plain('specifications'), 200)}` : '';
-        const rules = 'Plain text only: no markdown, headings, emojis or quotes. Use only the facts given; never invent materials, sizes, certifications or claims.';
-        let head: string;
+        let instructions: string;
         if (k === 'description') {
-            head = improve
+            instructions = improve
                 ? 'Improve this product description for an online store: clearer and more persuasive, same facts, similar length. Separate paragraphs with a blank line.'
                 : 'Write a product description for an online store in 2 short paragraphs separated by a blank line.';
         } else if (k === 'details') {
-            head = improve
+            instructions = improve
                 ? 'Improve this "additional details" text for a product page: clearer and better organised, same facts, similar length.'
                 : 'Write a short "additional details" section for a product page (care, use and what is included), 2 to 4 short lines.';
         } else {
-            head = 'Tidy these product specifications into consistent "Label: value" lines, one per line. Keep every fact, add nothing.';
+            instructions = 'Tidy these product specifications into consistent "Label: value" lines, one per line. Keep every fact, add nothing.';
         }
-        const parts = [head, rules, ...f];
-        if (specsHint) parts.push(specsHint);
-        if (k !== 'description' && plain('description')) parts.push(`Description: ${clip(plain('description'), 200)}`);
-        if (improve) parts.push(`Current text:\n${current}`);
-        let prompt = parts.join('\n');
-        // Stay within the endpoint limit: shed optional context before the current text.
-        if (prompt.length > 1000) prompt = [head, rules, ...f, improve ? `Current text:\n${current}` : ''].join('\n');
-        return prompt.slice(0, 1000);
+        const extra: string[] = [];
+        if (k !== 'specifications' && plain('specifications')) extra.push(`Specifications: ${clip(plain('specifications'), 300)}`);
+        if (k !== 'description' && plain('description')) extra.push(`Description: ${clip(plain('description'), 300)}`);
+        return {
+            scope: 'product',
+            label: clip(formData.name, 120),
+            facts: [...facts(), ...extra].join('\n'),
+            current: improve ? plain(k) : '',
+            field: k,
+            instructions,
+        };
     };
 
     const acceptAi = (k: AiFieldKey, value: string) => {
@@ -257,7 +257,7 @@ export function ProductEditor({ mode, product, categories, taxes, submit }: Prod
                 size="sm"
                 className="text-ai-fg hover:bg-ai-soft hover:text-ai-fg h-8"
                 disabled={ai.busy || (k === 'specifications' && !improve)}
-                onClick={() => ai.run(buildPrompt(k))}
+                onClick={() => ai.run(buildRequest(k))}
                 title={k === 'specifications' && !improve ? t('Too long for AI tidying') : undefined}
             >
                 {ai.busy ? <Loader2 className="animate-spin" /> : <Sparkles />}
@@ -278,7 +278,7 @@ export function ProductEditor({ mode, product, categories, taxes, submit }: Prod
                 state={ai.state}
                 onAccept={(v) => acceptAi(k, v)}
                 onReject={ai.reset}
-                onRegenerate={() => ai.run(buildPrompt(k))}
+                onRegenerate={() => ai.run(buildRequest(k))}
                 acceptHint={
                     longRewrite
                         ? t('Your text is long, so this is a fresh draft rather than an edit. Accepting replaces the field — nothing is saved until you save the product')

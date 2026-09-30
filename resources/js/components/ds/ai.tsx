@@ -44,7 +44,7 @@ export function DiffView({ before, after, className }: { before: string; after: 
 export type ProposalState =
     | { status: 'idle' }
     | { status: 'generating' }
-    | { status: 'ready'; value: string }
+    | { status: 'ready'; value: string; knowledge?: Array<{ document_uuid: string; document: string; version: number; heading: string | null }> }
     | { status: 'error'; code: AiErrorCode }
     | { status: 'applied' };
 
@@ -166,6 +166,21 @@ export function AiProposal({ field, current, state, onAccept, onReject, onRegene
                         <p className="max-h-72 overflow-auto text-sm leading-6 whitespace-pre-wrap">{proposal}</p>
                     </div>
                 </div>
+            )}
+
+            {state.knowledge && state.knowledge.length > 0 && (
+                <p className="text-muted-foreground mt-2 text-xs">
+                    <span className="font-medium">{t('Knowledge used')}:</span>{' '}
+                    {state.knowledge.map((k, i) => (
+                        <span key={k.document_uuid + i}>
+                            {i > 0 && ' · '}
+                            <a href={route('knowledge.show', k.document_uuid)} className="underline-offset-2 hover:underline">
+                                {k.document} v{k.version}
+                                {k.heading ? ` — ${k.heading}` : ''}
+                            </a>
+                        </span>
+                    ))}
+                </p>
             )}
 
             <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

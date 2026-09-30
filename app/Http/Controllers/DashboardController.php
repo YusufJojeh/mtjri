@@ -100,6 +100,7 @@ class DashboardController extends Controller
         $currentStore = Store::find($storeId);
         $dashboardData = $this->getDashboardData($storeId);
         $dashboardData['commandCenter'] = $this->getCommandCenter($storeId, $user);
+        $dashboardData['tijraa'] = $this->getTijraaSummary($currentStore, $user);
         
         return Inertia::render('dashboard', [
             'dashboardData' => $dashboardData,
@@ -626,5 +627,42 @@ class DashboardController extends Controller
         };
         
         return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Tijraa platform summary for the home screen: persisted commerce insights
+     * (refreshed at most every 30 minutes), pending AI actions, knowledge
+     * health and setup progress. Each part respects the viewer's permissions.
+     */
+    private function getTijraaSummary(Store $store, $user): array
+    {
+        $out = ['ai' => app(\App\Ai\AiManager::class)->describe(), 'can_ask' => $user->can('use-ai-copilot')];
+        try {
+            if (\Illuminate\Support\Facades\Cache::add("tijraa:insights-refreshed:{$store->id}", 1, now()->addMinutes(30))) {
+                \App\Services\Commerce\CommerceIntelligence::for($store)->refresh();
+            }
+            $out['insights'] = \App\Models\Ai\CommerceInsight::forStore($store->id)->open()
+                ->orderByRaw("CASE severity WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'medium' THEN 2 WHEN 'low' THEN 3 ELSE 4 END")
+                ->orderByDesc('estimated_impact')->limit(6)
+                ->get(['id', 'type', 'severity', 'title', 'description', 'params', 'estimated_impact', 'action_url', 'detected_at'])
+                ->map(fn ($i) => $i->toArray() + ['action_url' => $i->action_url ? parse_url($i->action_url, PHP_URL_PATH) . (($q = parse_url($i->action_url, PHP_URL_QUERY)) ? '?' . $q : '') : null]);
+        } catch (\Throwable $e) {
+            report($e);
+            $out['insights'] = [];
+        }
+        if ($user->can('view-ai-actions')) {
+            $pending = \App\Models\Ai\AgentAction::forStore($store->id)->where('status', 'pending')->where(fn ($q) => $q->whereNull('expires_at')->orWhere('expires_at', '>', now()));
+            $out['pending_actions'] = ['count' => (clone $pending)->count(), 'latest' => (clone $pending)->latest('id')->limit(3)->get(['uuid', 'type', 'resource_label', 'goal', 'created_at'])];
+        }
+        if ($user->can('view-knowledge')) {
+            $docs = \App\Models\Ai\KnowledgeDocument::forStore($store->id)->selectRaw('status, count(*) as c')->groupBy('status')->pluck('c', 'status');
+            $out['knowledge'] = ['ready' => (int) ($docs['ready'] ?? 0), 'failed' => (int) ($docs['failed'] ?? 0), 'processing' => (int) (($docs['processing'] ?? 0) + ($docs['uploading'] ?? 0))];
+        }
+        if ($user->can('manage-onboarding')) {
+            $flow = \App\Services\Commerce\StoreOnboarding::for($store);
+            $out['onboarding'] = ['progress' => $flow->progress(), 'todo' => collect($flow->steps())->where('status', 'todo')->take(4)->map(fn ($s) => ['id' => $s['id'], 'required' => $s['required']])->values()];
+        }
+
+        return $out;
     }
 }

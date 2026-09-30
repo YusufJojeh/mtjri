@@ -4,6 +4,7 @@ import { Boxes, ExternalLink, FileText, Images, Info, Layers, Pencil, ReceiptTex
 import { useTranslation } from 'react-i18next';
 import { PageTemplate } from '@/components/page-template';
 import { DescriptionList, EmptyState, PageHeader, Panel, SectionLabel } from '@/components/ds/layout';
+import { AskTijraaButton } from '@/components/tijraa/ask-button';
 import { StatusBadge, ToneBadge } from '@/components/ds/status-badge';
 import { Timeline } from '@/components/ds/timeline';
 import { ACTIVE_STATUS, STOCK_STATUS, orderStatusMeta, stockState } from '@/lib/commerce/status';
@@ -111,6 +112,7 @@ export default function ShowProduct() {
                     }
                     actions={
                         <>
+                            <AskTijraaButton type="product" id={product.id} />
                             {storefrontUrl && product.is_active && (
                                 <Button variant="outline" size="sm" asChild className="h-9 sm:h-8">
                                     <a href={storefrontUrl} target="_blank" rel="noopener noreferrer">

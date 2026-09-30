@@ -72,6 +72,7 @@ return [
         'feature_share' => [
             'copilot' => 1.0,
             'content_studio' => 0.6,
+            'content_editor' => 0.6,
             'knowledge' => 0.4,
         ],
     ],

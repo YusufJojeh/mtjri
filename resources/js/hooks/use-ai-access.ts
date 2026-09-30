@@ -17,9 +17,11 @@ interface UserLike {
  * `not_configured` error state rather than being hidden.
  */
 export function useAiAccess(): boolean {
-    const { auth } = usePage().props as unknown as { auth?: { user?: UserLike; roles?: string[] } };
+    const { auth } = usePage().props as unknown as { auth?: { user?: UserLike; roles?: string[]; permissions?: string[] } };
     const user = auth?.user;
     if (!user) return false;
+    // Drafting runs through Tijraa's content service, which requires this permission.
+    if (auth?.permissions && !auth.permissions.includes('use-content-studio')) return false;
     if (user.type === 'superadmin' || user.type === 'super admin') return true;
     const owner = user.type === 'company' ? user : user.creator;
     return !!owner && !!owner.plan && Number(owner.plan_is_active) === 1 && owner.plan.enable_chatgpt === 'on';

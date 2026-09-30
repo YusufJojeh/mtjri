@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { AlertTriangle, Pause, Pencil, Play, ShoppingBag } from 'lucide-react';
 import { PageTemplate } from '@/components/page-template';
 import { DescriptionList, EmptyState, MetricCard, PageHeader, Panel } from '@/components/ds/layout';
+import { AskTijraaButton } from '@/components/tijraa/ask-button';
 import { StatusBadge } from '@/components/ds/status-badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -74,6 +75,7 @@ export default function DiscountShow() {
             description={<DiscountCode code={coupon.code} size="lg" className="mt-1" />}
             actions={
                 <>
+                    <AskTijraaButton type="discount" id={coupon.id} className="h-9" />
                     {hasPermission('toggle-status-coupon-system') && (
                         <Button variant="outline" size="sm" className="h-9" onClick={toggle} disabled={pending}>
                             {coupon.status ? <Pause className="size-4" /> : <Play className="size-4 rtl:-scale-x-100" />}

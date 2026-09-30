@@ -59,6 +59,27 @@ class ContentStudioController extends Controller
         return response()->json($result);
     }
 
+    /** Draft from unsaved editor content (product/blog/page forms). Nothing is saved. */
+    public function compose(Request $request, ContentDraftService $drafts): JsonResponse
+    {
+        $data = $request->validate([
+            'scope' => 'required|in:product,blog,page',
+            'label' => 'required|string|max:160',
+            'facts' => 'nullable|string|max:1500',
+            'current' => 'nullable|string|max:3000',
+            'field' => 'required|in:description,details,specifications,seo',
+            'instructions' => 'nullable|string|max:600',
+        ]);
+        $this->authorizeScope($request, $data['scope'], true);
+        try {
+            $result = $drafts->compose($this->currentStore($request), $request->user(), $data['scope'], $data['label'], (string) ($data['facts'] ?? ''), (string) ($data['current'] ?? ''), $data['field'], (string) ($data['instructions'] ?? ''), 'content_editor', (string) Str::uuid());
+        } catch (AiProviderException $e) {
+            return response()->json(['error' => $e->errorCode, 'message' => $this->providerMessage($e->errorCode)], $e->errorCode === 'budget_exhausted' ? 402 : 503);
+        }
+
+        return response()->json($result);
+    }
+
     public function apply(Request $request, ActionService $actions): JsonResponse
     {
         $data = $this->validated($request, [
@@ -101,10 +122,11 @@ class ContentStudioController extends Controller
         ] + $extra);
     }
 
-    private function authorizeScope(Request $request, string $scope): void
+    private function authorizeScope(Request $request, string $scope, bool $orCreate = false): void
     {
         $perm = ['product' => 'edit-products', 'blog' => 'edit-blog', 'page' => 'edit-custom-pages'][$scope];
-        abort_unless($request->user()->can($perm), 403);
+        $create = ['product' => 'create-products', 'blog' => 'create-blog', 'page' => 'create-custom-pages'][$scope];
+        abort_unless($request->user()->can($perm) || ($orCreate && $request->user()->can($create)), 403);
     }
 
     private function cleanKnowledge(array $items): array

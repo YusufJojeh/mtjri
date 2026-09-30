@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { AiProposal, type ProposalState } from '@/components/ds/ai';
 import { Button } from '@/components/ui/button';
 import { useAiAccess } from '@/hooks/use-ai-access';
-import { AiError, generateText, parseSeoProposal } from '@/lib/commerce/ai';
+import { AiError, composeDraft } from '@/lib/commerce/ai';
 import { htmlToText } from '@/lib/commerce/diff';
 
 type Field = 'title' | 'description' | 'keywords';
@@ -28,7 +28,7 @@ const LIMITS: Record<Field, number | null> = { title: 60, description: 160, keyw
  * nothing is saved until the merchant saves the post or page.
  */
 export function AiSeoAssist({ kind, subject, contentHtml, current, fields = ['title', 'description'], onApply }: Props) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const allowed = useAiAccess();
     const [states, setStates] = useState<Record<Field, ProposalState>>({ title: { status: 'idle' }, description: { status: 'idle' }, keywords: { status: 'idle' } });
     const abortRef = useRef<AbortController | null>(null);
@@ -43,25 +43,25 @@ export function AiSeoAssist({ kind, subject, contentHtml, current, fields = ['ti
         const ctrl = new AbortController();
         abortRef.current = ctrl;
         setAll({ status: 'generating' });
-        const body = htmlToText(contentHtml).replace(/\s+/g, ' ').slice(0, 600);
-        const prompt = [
-            `Write SEO metadata for a ${kind} titled "${subject.slice(0, 120)}".`,
-            body ? `Content: ${body}` : '',
-            'Reply exactly in this format, keeping the labels Title, Description and Keywords in English:',
-            'Title: <max 60 characters>',
-            'Description: <max 155 characters, persuasive, no quotes>',
-            fields.includes('keywords') ? 'Keywords: <5-8 comma-separated keywords>' : '',
-        ]
-            .filter(Boolean)
-            .join('\n');
+        const body = htmlToText(contentHtml).replace(/\s+/g, ' ').slice(0, 1200);
         try {
-            const raw = await generateText({ prompt, language: i18n.language, creativity: 'low', maxLength: 220, signal: ctrl.signal });
-            const parsed = parseSeoProposal(raw);
+            const res = await composeDraft(
+                {
+                    scope: kind === 'blog post' ? 'blog' : 'page',
+                    label: subject.slice(0, 160) || t('Untitled'),
+                    facts: body ? `Content: ${body}` : '',
+                    current: [current.title && `Title: ${current.title}`, current.description && `Description: ${current.description}`].filter(Boolean).join('\n'),
+                    field: 'seo',
+                    instructions: fields.includes('keywords') ? 'Include 5-8 keywords.' : '',
+                },
+                ctrl.signal,
+            );
+            const parsed = { title: res.fields.title ?? '', description: res.fields.description ?? '', keywords: res.fields.keywords ?? '' };
             setStates((prev) => {
                 const next = { ...prev };
                 fields.forEach((f) => {
                     const v = parsed[f];
-                    next[f] = v ? { status: 'ready', value: v } : { status: 'error', code: 'empty_response' };
+                    next[f] = v ? { status: 'ready', value: v, knowledge: res.knowledge_used } : { status: 'error', code: 'empty_response' };
                 });
                 return next;
             });

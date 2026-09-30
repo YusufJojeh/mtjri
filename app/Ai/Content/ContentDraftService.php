@@ -33,6 +33,23 @@ class ContentDraftService
     public function draft(Store $store, User $user, string $scope, int $resourceId, string $field, string $instructions = '', string $feature = 'content_studio', ?string $traceId = null): array
     {
         [$resource, $facts, $current] = $this->resource($store, $scope, $resourceId, $field);
+
+        return $this->generate($store, $user, $scope, $resource, $facts, $current, $field, $instructions, $feature, $traceId);
+    }
+
+    /**
+     * Draft from unsaved editor content (e.g. a product being created). Same
+     * provider, rules, knowledge retrieval, budget and ledger as draft().
+     */
+    public function compose(Store $store, User $user, string $scope, string $label, string $facts, string $current, string $field, string $instructions = '', string $feature = 'content_editor', ?string $traceId = null): array
+    {
+        $resource = ['type' => $scope, 'id' => null, 'label' => mb_substr(trim($label), 0, 160) ?: 'Untitled'];
+
+        return $this->generate($store, $user, $scope, $resource, mb_substr($facts, 0, 1500), mb_substr($current, 0, 3000), $field, $instructions, $feature, $traceId);
+    }
+
+    private function generate(Store $store, User $user, string $scope, array $resource, string $facts, string $current, string $field, string $instructions, string $feature, ?string $traceId): array
+    {
         $this->budget->assertAvailable($store, $feature);
 
         $prefs = StoreOnboarding::for($store)->aiPreferences();

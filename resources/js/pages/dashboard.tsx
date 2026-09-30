@@ -8,6 +8,7 @@ import { Link, router, usePage } from '@inertiajs/react';
 import QRCode from 'react-qr-code';
 import { useCurrencyFormatter } from '@/hooks/use-store-currency';
 import { MerchantDashboard, type CommandCenter } from '@/components/dashboard/merchant-dashboard';
+import type { TijraaSummary } from '@/components/dashboard/tijraa-home';
 import { EmptyState, Panel } from '@/components/ds/layout';
 
 interface Props {
@@ -345,6 +346,7 @@ export default function Dashboard({ dashboardData, currentStore, storeUrl, isSup
           data={commandCenter}
           store={{ name: currentStore.name, slug: currentStore.slug }}
           userName={auth?.user?.name}
+          tijraa={(dashboardData as { tijraa?: TijraaSummary }).tijraa}
         />
       ) : null}
       {storeUrl && (

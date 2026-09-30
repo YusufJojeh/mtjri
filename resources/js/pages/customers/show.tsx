@@ -6,6 +6,7 @@ import { PageTemplate } from '@/components/page-template';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DescriptionList, EmptyState, MetricCard, PageHeader, Panel, SectionLabel } from '@/components/ds/layout';
+import { AskTijraaButton } from '@/components/tijraa/ask-button';
 import { DataTable, type Column } from '@/components/ds/data-table';
 import { StatusBadge, ToneBadge } from '@/components/ds/status-badge';
 import { Timeline, type TimelineEvent } from '@/components/ds/timeline';
@@ -240,6 +241,7 @@ export default function ShowCustomer() {
                         }
                         actions={
                             <>
+                                <AskTijraaButton type="customer" id={customer.id} className="h-9" />
                                 {hasPermission('delete-customers') && (
                                     <Button variant="outline" size="sm" className="text-danger-fg h-9" onClick={() => setConfirmDelete(true)}>
                                         <Trash2 aria-hidden />

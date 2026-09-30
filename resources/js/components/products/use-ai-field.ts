@@ -1,11 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import type { ProposalState } from '@/components/ds/ai';
-import { AiError, generateText } from '@/lib/commerce/ai';
-
-/** Prompt budget: the endpoint rejects prompts over 1000 characters. */
-export const AI_PROMPT_LIMIT = 1000;
+import { AiError, composeDraft, type ComposeRequest } from '@/lib/commerce/ai';
 
 export const clip = (s: string, n: number) => {
     const clean = s.replace(/\s+/g, ' ').trim();
@@ -26,17 +22,16 @@ export function cleanAiText(raw: string): string {
  * One AI proposal lifecycle for one form field. Generating never touches the
  * field; the caller applies the value only when the merchant accepts.
  */
-export function useAiField(opts: { maxLength: number; creativity?: 'low' | 'medium' | 'high' }) {
-    const { i18n } = useTranslation();
+export function useAiField() {
     const [state, setState] = useState<ProposalState>({ status: 'idle' });
     const ctrl = useRef<AbortController | null>(null);
 
     useEffect(() => () => ctrl.current?.abort(), []);
 
     const run = useCallback(
-        async (prompt: string | null) => {
+        async (req: ComposeRequest | null) => {
             ctrl.current?.abort();
-            if (!prompt) {
+            if (!req) {
                 setState({ status: 'error', code: 'validation' });
                 return;
             }
@@ -44,23 +39,16 @@ export function useAiField(opts: { maxLength: number; creativity?: 'low' | 'medi
             ctrl.current = c;
             setState({ status: 'generating' });
             try {
-                const text = cleanAiText(
-                    await generateText({
-                        prompt: prompt.slice(0, AI_PROMPT_LIMIT),
-                        language: i18n.language || 'en',
-                        creativity: opts.creativity ?? 'medium',
-                        maxLength: opts.maxLength,
-                        signal: c.signal,
-                    }),
-                );
+                const res = await composeDraft(req, c.signal);
+                const text = cleanAiText(res.fields.text ?? '');
                 if (c.signal.aborted) return;
-                setState(text ? { status: 'ready', value: text } : { status: 'error', code: 'empty_response' });
+                setState(text ? { status: 'ready', value: text, knowledge: res.knowledge_used } : { status: 'error', code: 'empty_response' });
             } catch (e) {
                 if (axios.isCancel(e) || c.signal.aborted) return;
                 setState({ status: 'error', code: e instanceof AiError ? e.code : 'network' });
             }
         },
-        [i18n.language, opts.maxLength, opts.creativity],
+        [],
     );
 
     const reset = useCallback(() => {

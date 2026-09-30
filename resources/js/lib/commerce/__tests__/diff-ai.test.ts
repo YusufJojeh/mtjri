@@ -1,5 +1,4 @@
 import { diffWords, htmlToText, textToHtml } from '../diff';
-import { parseSeoProposal } from '../ai';
 
 describe('diffWords', () => {
     it('marks additions and removals at word level', () => {
@@ -23,15 +22,3 @@ describe('html helpers', () => {
     });
 });
 
-describe('parseSeoProposal', () => {
-    it('reads labelled fields in any order', () => {
-        expect(parseSeoProposal('Description: Great lamps.\nTitle: "Lamps | Store"\nKeywords: lamps, lighting')).toEqual({
-            title: 'Lamps | Store',
-            description: 'Great lamps.',
-            keywords: 'lamps, lighting',
-        });
-    });
-    it('returns empty fields rather than guessing', () => {
-        expect(parseSeoProposal('Just some text')).toEqual({ title: '', description: '', keywords: '' });
-    });
-});

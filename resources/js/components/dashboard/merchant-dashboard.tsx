@@ -3,25 +3,23 @@ import {
     AlertTriangle,
     ArrowRight,
     CheckCircle2,
-    Circle,
     Clock,
     CreditCard,
     Download,
-    Lightbulb,
     PackageX,
     Percent,
     ShoppingBag,
     Timer,
     Truck,
 } from 'lucide-react';
-import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { EmptyState, MetricCard, PageHeader, Panel } from '@/components/ds/layout';
 import { StatusBadge, ToneBadge, toneClasses } from '@/components/ds/status-badge';
 import { Button } from '@/components/ui/button';
 import { useCommerceFormat } from '@/hooks/use-commerce-format';
 import { usePermissions } from '@/hooks/usePermissions';
-import { computeInsights, type CommandCenterData } from '@/lib/commerce/insights';
+import { type CommandCenterData } from '@/lib/commerce/command-center';
+import { AskTijraaBar, TijraaIntelligence, type TijraaSummary } from '@/components/dashboard/tijraa-home';
 import { orderStatusMeta, paymentStatusMeta, type Tone } from '@/lib/commerce/status';
 import { percentChange } from '@/lib/commerce/format';
 import { cn } from '@/lib/utils';
@@ -55,6 +53,7 @@ interface Props {
     data: CommandCenter;
     store: { name: string; slug?: string } | null;
     userName?: string;
+    tijraa?: TijraaSummary;
 }
 
 const severityTone: Record<AttentionItem['severity'], Tone> = { critical: 'danger', high: 'warning', medium: 'warning', low: 'info' };
@@ -76,27 +75,15 @@ function greetingKey(date: Date) {
     return 'Good evening';
 }
 
-export function MerchantDashboard({ data, store, userName }: Props) {
+export function MerchantDashboard({ data, store, userName, tijraa }: Props) {
     const { t } = useTranslation();
     const fmt = useCommerceFormat();
     const { hasPermission } = usePermissions();
     const canOrders = hasPermission('view-orders') || hasPermission('manage-orders');
     const canProducts = hasPermission('view-products') || hasPermission('manage-products');
 
-    const insights = useMemo(
-        () =>
-            computeInsights(data, t, fmt, {
-                product: (id) => route('products.show', id),
-                productEdit: hasPermission('edit-products') ? (id) => route('products.edit', id) : undefined,
-                createDiscount: hasPermission('create-coupon-system') ? route('coupon-system.create') : undefined,
-                analytics: hasPermission('view-analytics') ? route('analytics.index') : undefined,
-            }),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [data, t, fmt],
-    );
 
     const k = data.kpis;
-    const setupRemaining = data.setup.filter((s) => !s.done);
     const attentionCopy = (a: AttentionItem): { title: string; impact: string; action: string } => {
         const amount = a.amount ? fmt.money(a.amount) : '';
         switch (a.id) {
@@ -117,13 +104,6 @@ export function MerchantDashboard({ data, store, userName }: Props) {
             default:
                 return { title: String(a.id), impact: '', action: t('Open') };
         }
-    };
-
-    const setupCopy: Record<string, string> = {
-        product: t('Add your first product'),
-        shipping: t('Set up a shipping method'),
-        discount: t('Create a launch discount'),
-        first_order: t('Receive your first order'),
     };
 
     const todayChange = percentChange(data.today.sales, data.yesterdaySameTime.sales);
@@ -154,6 +134,8 @@ export function MerchantDashboard({ data, store, userName }: Props) {
                     </>
                 }
             />
+
+            {tijraa && <AskTijraaBar summary={tijraa} />}
 
             {/* KPI strip */}
             <section aria-label={t('Key metrics')} className="grid grid-cols-2 gap-3 lg:grid-cols-5">
@@ -355,70 +337,7 @@ export function MerchantDashboard({ data, store, userName }: Props) {
                 </Panel>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-3">
-                <Panel
-                    title={t('Insights')}
-                    description={t('Rules applied to your last {{days}} days of store data', { days: data.periodDays })}
-                    icon={<Lightbulb />}
-                    className={setupRemaining.length ? 'lg:col-span-2' : 'lg:col-span-3'}
-                    flush
-                >
-                    {insights.length === 0 ? (
-                        <EmptyState compact title={t('Nothing unusual right now')} description={t('Insights appear when sales, stock or customer patterns change meaningfully')} />
-                    ) : (
-                        <ul className={cn('grid divide-y', !setupRemaining.length && 'lg:grid-cols-2 lg:divide-y-0')} role="list">
-                            {insights.map((ins) => (
-                                <li key={ins.id} className="flex gap-3 px-4 py-3 sm:px-5">
-                                    <span className={cn('mt-1.5 size-2 shrink-0 rounded-full', { 'bg-success': ins.tone === 'success', 'bg-warning': ins.tone === 'warning', 'bg-danger': ins.tone === 'danger', 'bg-info': ins.tone === 'info' })} aria-hidden />
-                                    <div className="min-w-0 space-y-1">
-                                        <p className="text-sm font-medium">{ins.title}</p>
-                                        <p className="text-muted-foreground text-sm">{ins.why}</p>
-                                        <p className="text-muted-foreground text-xs">
-                                            <span className="font-medium">{t('Evidence')}</span> · <span className="tabular-nums">{ins.evidence}</span>
-                                        </p>
-                                        {ins.action && (
-                                            <Link href={ins.action.href} className="inline-flex items-center gap-1 text-xs font-medium hover:underline">
-                                                {ins.action.label}
-                                                <ArrowRight className="size-3 rtl:rotate-180" aria-hidden />
-                                            </Link>
-                                        )}
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </Panel>
-
-                {setupRemaining.length > 0 && (
-                    <Panel
-                        title={t('Store setup')}
-                        description={t('{{done}} of {{total}} complete', { done: data.setup.length - setupRemaining.length, total: data.setup.length })}
-                    >
-                        <div className="bg-muted mb-3 h-1.5 overflow-hidden rounded-full" role="progressbar" aria-valuemin={0} aria-valuemax={data.setup.length} aria-valuenow={data.setup.length - setupRemaining.length} aria-label={t('Store setup')}>
-                            <div className="bg-primary h-full rounded-full" style={{ width: `${((data.setup.length - setupRemaining.length) / data.setup.length) * 100}%` }} />
-                        </div>
-                        <ul className="space-y-1" role="list">
-                            {data.setup.map((s) => (
-                                <li key={s.id}>
-                                    {s.done || !s.href ? (
-                                        <span className={cn('flex items-center gap-2 py-1.5 text-sm', s.done && 'text-muted-foreground line-through decoration-1')}>
-                                            {s.done ? <CheckCircle2 className="text-success size-4" aria-hidden /> : <Circle className="text-muted-foreground size-4" aria-hidden />}
-                                            {setupCopy[s.id] ?? s.id}
-                                            <span className="sr-only">{s.done ? t('Done') : t('Not done')}</span>
-                                        </span>
-                                    ) : (
-                                        <Link href={s.href} className="hover:bg-muted -mx-2 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium">
-                                            <Circle className="text-muted-foreground size-4" aria-hidden />
-                                            <span className="flex-1">{setupCopy[s.id] ?? s.id}</span>
-                                            <ArrowRight className="text-muted-foreground size-3.5 rtl:rotate-180" aria-hidden />
-                                        </Link>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                    </Panel>
-                )}
-            </div>
+            {tijraa && <TijraaIntelligence summary={tijraa} />}
         </div>
     );
 }

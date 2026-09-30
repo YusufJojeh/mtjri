@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { AlertTriangle, ArrowUpRight, ImageOff, Mail, Phone } from 'lucide-react';
 import { PageTemplate } from '@/components/page-template';
 import { DescriptionList, PageHeader, Panel, SectionLabel } from '@/components/ds/layout';
+import { AskTijraaButton } from '@/components/tijraa/ask-button';
 import { StatusBadge, ToneBadge } from '@/components/ds/status-badge';
 import { Timeline, type TimelineEvent } from '@/components/ds/timeline';
 import { orderStatusMeta, paymentStatusMeta } from '@/lib/commerce/status';
@@ -181,7 +182,12 @@ export default function ShowOrder({ order }: OrderShowProps) {
                             </span>
                         ) : undefined
                     }
-                    actions={<OrderStatusActions order={order} onError={setActionError} />}
+                    actions={
+                        <>
+                            <AskTijraaButton type="order" id={order.id} />
+                            <OrderStatusActions order={order} onError={setActionError} />
+                        </>
+                    }
                 />
             }
         >

@@ -4,6 +4,7 @@ use App\Ai\AiPermissions as P;
 use App\Http\Controllers\Ai\ActionCenterController;
 use App\Http\Controllers\Ai\ContentStudioController;
 use App\Http\Controllers\Ai\CopilotController;
+use App\Http\Controllers\Ai\InsightController;
 use App\Http\Controllers\Ai\KnowledgeController;
 use App\Http\Controllers\Ai\NotificationController;
 use App\Http\Controllers\Ai\OnboardingController;
@@ -27,6 +28,9 @@ Route::middleware('permission:' . P::USE_COPILOT)->group(function () {
     Route::post('copilot/runs/{run}/cancel', [CopilotController::class, 'cancel'])->name('copilot.runs.cancel');
     Route::get('copilot/runs/{run}/trace', [CopilotController::class, 'trace'])->name('copilot.runs.trace');
 });
+
+// Commerce intelligence
+Route::post('insights/{insight}/dismiss', [InsightController::class, 'dismiss'])->name('insights.dismiss');
 
 // AI Action Center
 Route::middleware('permission:' . P::VIEW_ACTIONS)->group(function () {
@@ -56,6 +60,7 @@ Route::middleware('permission:' . P::VIEW_KNOWLEDGE)->group(function () {
 Route::middleware('permission:' . P::USE_CONTENT_STUDIO)->group(function () {
     Route::get('ai/studio', [ContentStudioController::class, 'index'])->name('ai.studio');
     Route::post('ai/content/draft', [ContentStudioController::class, 'draft'])->middleware('throttle:30,1')->name('ai.content.draft');
+    Route::post('ai/content/compose', [ContentStudioController::class, 'compose'])->middleware('throttle:30,1')->name('ai.content.compose');
     Route::post('ai/content/apply', [ContentStudioController::class, 'apply'])->middleware('permission:' . P::APPROVE_ACTIONS)->name('ai.content.apply');
 });
 

@@ -210,7 +210,7 @@ class ScriptedProvider implements LlmProvider
     private function answer(array $calls, array $turn, bool $ar): array
     {
         $findings = [];
-        if (preg_match_all('/"title":"((?:[^"\\\\]|\\\\.)*)","description"/u', $calls['get_commerce_insights']['result'] ?? '', $m)) {
+        if (preg_match_all('/"title":"((?:[^"\\\\]|\\\\.)*)","detail"/u', $calls['get_commerce_insights']['result'] ?? '', $m)) {
             foreach (array_slice($m[1], 0, 3) as $t) {
                 $findings[] = ['text' => (string) json_decode('"' . $t . '"'), 'source' => 'store_data'];
             }
@@ -238,10 +238,26 @@ class ScriptedProvider implements LlmProvider
             $summary = $ar ? 'لم أجد بيانات كافية لتقديم توصية مبنية على الأدلة.' : 'I did not find enough evidence in your store data to recommend a change.';
         }
 
+        // Recommendations follow deterministically from insight types present in the data.
+        $recs = [];
+        $insights = $calls['get_commerce_insights']['result'] ?? '';
+        $map = [
+            'product_sales_decline' => ['Run a short discount on declining products', 'Units sold dropped versus the previous 30 days.', 'high', true],
+            'out_of_stock' => ['Restock products that are selling out', 'Out-of-stock products cannot be bought.', 'high', false],
+            'failed_payments' => ['Follow up on failed payments', 'Revenue is at risk until customers retry.', 'high', false],
+            'seo_gap' => ['Add search metadata to posts and pages', 'Missing titles and descriptions hurt search visibility.', 'medium', true],
+            'content_gap' => ['Improve thin product descriptions', 'Short copy converts worse.', 'medium', true],
+        ];
+        foreach ($map as $type => [$title, $why, $prio, $prep]) {
+            if (str_contains($insights, '"type":"' . $type . '"')) {
+                $recs[] = ['title' => $title, 'why' => $why, 'priority' => $prio, 'can_prepare' => $prep];
+            }
+        }
+
         return [
             'executive_answer' => $summary,
             'key_findings' => array_slice($findings, 0, 6),
-            'recommended_actions' => [],
+            'recommended_actions' => array_slice($recs, 0, 3),
             'follow_up_questions' => [],
         ];
     }
