@@ -236,10 +236,10 @@ export default function ElectronicsOrderConfirmation({
                         </div>
                       )}
                       
-                      {orderData.discount && orderData.discount > 0 && (
+                      {(orderData.discount ?? 0) > 0 && (
                         <div className='flex justify-between text-green-600'>
                           <span>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
-                          <span className='font-semibold'>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
+                          <span className='font-semibold'>-{formatCurrency((orderData.discount ?? 0), storeSettings, currencies)}</span>
                         </div>
                       )}
                       
@@ -279,10 +279,10 @@ export default function ElectronicsOrderConfirmation({
                       <div className='text-gray-900'>
                         {orderData.shipping_address && (
                           <>
-                            <p className='font-semibold'>{orderData.shipping_address.name}</p>
-                            <p>{orderData.shipping_address.street}</p>
-                            <p>{orderData.shipping_address.city}, {orderData.shipping_address.state} {orderData.shipping_address.zip}</p>
-                            <p>{orderData.shipping_address.country}</p>
+                            <p className='font-semibold'>{orderData.shipping_address?.name}</p>
+                            <p>{orderData.shipping_address?.street}</p>
+                            <p>{orderData.shipping_address?.city}, {orderData.shipping_address?.state} {orderData.shipping_address?.zip}</p>
+                            <p>{orderData.shipping_address?.country}</p>
                           </>
                         )}
                       </div>

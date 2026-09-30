@@ -93,24 +93,24 @@ export default function CarsCTASection({ content, ctaBoxes }: CarsCTASectionProp
           <div className='absolute top-0 left-0 w-full h-1 bg-white'></div>
           <div className='absolute bottom-0 left-0 w-full h-1 bg-white'></div>
           
-          <h3 className='text-4xl font-black text-white mb-6 tracking-tight'>{ctaContent.bottom_title?.value || ctaContent.bottom_title || 'Ready to Boost Your Performance?'}</h3>
+          <h3 className='text-4xl font-black text-white mb-6 tracking-tight'>{ctaContent.bottom_title || 'Ready to Boost Your Performance?'}</h3>
           <p className='text-xl text-red-100 mb-10 max-w-2xl mx-auto leading-relaxed'>
-            {ctaContent.bottom_description?.value || ctaContent.bottom_description || 'Join thousands of automotive enthusiasts who trust our expertise for their performance needs'}
+            {ctaContent.bottom_description || 'Join thousands of automotive enthusiasts who trust our expertise for their performance needs'}
           </p>
           
           <div className='flex flex-col sm:flex-row gap-6 justify-center items-center'>
             <a
-              href={ctaContent.primary_button_link?.value || ctaContent.primary_button_link || route('store.products', storeSlug)}
+              href={ctaContent.primary_button_link || route('store.products', storeSlug)}
               className='inline-flex items-center px-10 py-4 bg-white text-red-600 hover:bg-gray-900 hover:text-white font-bold tracking-wider uppercase transition-colors'
             >
-              {ctaContent.primary_button_text?.value || ctaContent.primary_button_text || 'Shop Performance Parts'}
+              {ctaContent.primary_button_text || 'Shop Performance Parts'}
               <ArrowRight className='h-5 w-5 ml-3' />
             </a>
             <a
-              href={ctaContent.secondary_button_link?.value || ctaContent.secondary_button_link || '/contact'}
+              href={ctaContent.secondary_button_link || '/contact'}
               className='inline-flex items-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-black font-bold tracking-wider uppercase transition-colors'
             >
-              {ctaContent.secondary_button_text?.value || ctaContent.secondary_button_text || 'Get Expert Consultation'}
+              {ctaContent.secondary_button_text || 'Get Expert Consultation'}
               <Phone className='h-5 w-5 ml-3' />
             </a>
           </div>

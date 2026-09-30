@@ -215,16 +215,16 @@ export default function BeautyOrderConfirmation({
                     {/* Order Summary */}
                     <div className='mt-8 bg-rose-50 rounded-2xl p-6'>
                       <div className='space-y-3'>
-                        {orderData.subtotal && orderData.discount > 0 && (
+                        {orderData.subtotal && (orderData.discount ?? 0) > 0 && (
                           <div className='flex justify-between text-gray-600'>
                             <span>Subtotal</span>
                             <span>{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                           </div>
                         )}
-                        {orderData.discount && orderData.discount > 0 && (
+                        {(orderData.discount ?? 0) > 0 && (
                           <div className='flex justify-between text-green-600'>
                             <span>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
-                            <span>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
+                            <span>-{formatCurrency((orderData.discount ?? 0), storeSettings, currencies)}</span>
                           </div>
                         )}
                         {orderData.shipping && orderData.shipping > 0 && (
@@ -265,10 +265,10 @@ export default function BeautyOrderConfirmation({
                         <div>
                           <p className='text-sm font-medium text-gray-500 mb-3'>Shipping Address</p>
                           <p className='text-gray-900 leading-relaxed'>
-                            {orderData.shipping_address.name}<br />
-                            {orderData.shipping_address.street}<br />
-                            {orderData.shipping_address.city}, {orderData.shipping_address.state} {orderData.shipping_address.zip}<br />
-                            {orderData.shipping_address.country}
+                            {orderData.shipping_address?.name}<br />
+                            {orderData.shipping_address?.street}<br />
+                            {orderData.shipping_address?.city}, {orderData.shipping_address?.state} {orderData.shipping_address?.zip}<br />
+                            {orderData.shipping_address?.country}
                           </p>
                         </div>
                       </div>

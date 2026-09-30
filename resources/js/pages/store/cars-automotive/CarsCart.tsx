@@ -138,10 +138,10 @@ function CarsCartContent({
                                 <span className='bg-red-600 text-white px-3 py-1 text-xs font-bold uppercase tracking-wider'>
                                   {item.category?.name || 'Auto Part'}
                                 </span>
-                                <div className={`flex items-center gap-2 ${item.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                                  <div className={`w-2 h-2 rounded-full ${item.stock > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                                <div className={`flex items-center gap-2 ${(item.stock ?? 0) > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                  <div className={`w-2 h-2 rounded-full ${(item.stock ?? 0) > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
                                   <span className='text-sm font-medium'>
-                                    {item.stock > 0 ? `${item.stock} in stock` : 'Out of stock'}
+                                    {(item.stock ?? 0) > 0 ? `${(item.stock ?? 0)} in stock` : 'Out of stock'}
                                   </span>
                                 </div>
                               </div>
@@ -169,7 +169,7 @@ function CarsCartContent({
                                   <div className='flex flex-wrap gap-2 mb-3'>
                                     {Object.entries(variants).map(([key, value]) => (
                                       <span key={key} className='bg-red-100 text-red-700 px-3 py-1 text-sm font-medium rounded'>
-                                        {key}: {value}
+                                        {key}: {String(value)}
                                       </span>
                                     ))}
                                   </div>
@@ -201,7 +201,7 @@ function CarsCartContent({
                                 <span className='text-sm font-medium text-gray-700 mr-4'>Qty:</span>
                                 <div className='flex items-center border-2 border-gray-300 rounded'>
                                   <button 
-                                    onClick={() => handleQuantityChange(item.id, item.quantity - 1, item.stock)}
+                                    onClick={() => handleQuantityChange(item.id, item.quantity - 1, (item.stock ?? 0))}
                                     disabled={loading || item.quantity <= 1}
                                     className='w-10 h-10 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                                   >
@@ -211,8 +211,8 @@ function CarsCartContent({
                                     {item.quantity}
                                   </div>
                                   <button 
-                                    onClick={() => handleQuantityChange(item.id, item.quantity + 1, item.stock)}
-                                    disabled={loading || item.quantity >= item.stock}
+                                    onClick={() => handleQuantityChange(item.id, item.quantity + 1, (item.stock ?? 0))}
+                                    disabled={loading || item.quantity >= (item.stock ?? 0)}
                                     className='w-10 h-10 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
                                   >
                                     <Plus className='h-4 w-4' />

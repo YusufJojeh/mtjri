@@ -56,7 +56,7 @@ function PlansSection({ plans, settings, brandColor = '#3b82f6' }: PlansSectionP
   });
 
   // Default plans if none provided
-  const defaultPlans = [
+  const defaultPlans: Plan[] = [
     {
       id: 1,
       name: 'Starter',

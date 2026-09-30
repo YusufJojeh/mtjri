@@ -120,7 +120,7 @@ const FurnitureProductCard: React.FC<FurnitureProductCardProps> = ({ product, st
             </span>
           )}
           
-          {(product.total_reviews > 0 || product.reviews_count > 0) && (
+          {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
             <div className='flex items-center gap-1'>
               <div className='flex'>
                 {[...Array(5)].map((_, i) => {

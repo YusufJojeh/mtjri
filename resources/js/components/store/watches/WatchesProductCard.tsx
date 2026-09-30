@@ -37,12 +37,12 @@ interface WatchesProductCardProps {
 
 export default function WatchesProductCard({ product, storeSlug, storeSettings = {}, currencies = [], showDeleteIcon = false }: WatchesProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const { props } = usePage();
+  const { props } = usePage() as { props: { store?: { slug?: string } } };
   const finalStoreSlug = storeSlug || props.store?.slug;
   const hasDiscount = product.sale_price && product.sale_price < product.price;
   const discountPercentage = hasDiscount ? Math.round(((product.price - product.sale_price!) / product.price) * 100) : 0;
   const isOutOfStock = !product.is_active || product.stock <= 0;
-  const isInStock = product.stock > 0 && product.is_active;
+  const isInStock = (product.stock ?? 0) > 0 && product.is_active;
   const hasVariants = product.variants && 
     ((Array.isArray(product.variants) && product.variants.length > 0) ||
      (typeof product.variants === 'string' && product.variants.trim() !== '' && product.variants !== '[]'));
@@ -178,7 +178,7 @@ export default function WatchesProductCard({ product, storeSlug, storeSettings =
           </div>
           
           {/* Reviews */}
-          {(product.total_reviews > 0 || product.reviews_count > 0) && (
+          {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
             <div className='flex items-center space-x-1'>
               {[...Array(5)].map((_, i) => {
                 const rating = product.average_rating || product.rating || 0;
@@ -203,7 +203,6 @@ export default function WatchesProductCard({ product, storeSlug, storeSettings =
           product={product}
           storeSlug={storeSlug}
           className='w-full py-3 bg-slate-900 text-white font-medium tracking-wider uppercase text-sm hover:bg-slate-800 transition-colors duration-300 disabled:bg-slate-400'
-          disabled={!isInStock}
           isShowOption={hasVariants}
         />
       </div>

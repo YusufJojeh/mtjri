@@ -136,7 +136,7 @@ export default function FashionProductCard({
         </Link>
         
         {/* Rating */}
-        {(product.total_reviews > 0 || product.reviews_count > 0) && (
+        {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
           <div className='flex items-center justify-center mb-3'>
             <div className='flex'>
               {[1, 2, 3, 4, 5].map((star: any) => {

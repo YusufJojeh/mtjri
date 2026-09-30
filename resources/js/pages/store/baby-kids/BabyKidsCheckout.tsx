@@ -323,7 +323,7 @@ export default function BabyKidsCheckout({
       return 0;
     }
     
-    return parseFloat(selectedShipping.cost) + parseFloat(selectedShipping.handling_fee || 0);
+    return Number(selectedShipping.cost) + Number(selectedShipping.handling_fee || 0);
   };
   
   // Calculate updated cart summary

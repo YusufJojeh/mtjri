@@ -7,6 +7,7 @@ export interface User {
     avatar?: string;
     type?: string;
     current_store?: number | string;
+    email_verified_at?: string | null;
 }
 
 export interface SharedData {

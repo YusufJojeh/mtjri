@@ -218,10 +218,10 @@ export default function FurnitureOrderConfirmation({
                             <span>{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                           </div>
                         )}
-                        {orderData.discount && orderData.discount > 0 && (
+                        {(orderData.discount ?? 0) > 0 && (
                           <div className='flex justify-between text-green-600'>
                             <span>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
-                            <span>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
+                            <span>-{formatCurrency((orderData.discount ?? 0), storeSettings, currencies)}</span>
                           </div>
                         )}
                         {orderData.shipping && orderData.shipping > 0 && (
@@ -262,10 +262,10 @@ export default function FurnitureOrderConfirmation({
                           <p className='text-slate-900 leading-relaxed'>
                             {orderData.shipping_address ? (
                               <>
-                                {orderData.shipping_address.name}<br />
-                                {orderData.shipping_address.street}<br />
-                                {orderData.shipping_address.city}, {orderData.shipping_address.state} {orderData.shipping_address.zip}<br />
-                                {orderData.shipping_address.country}
+                                {orderData.shipping_address?.name}<br />
+                                {orderData.shipping_address?.street}<br />
+                                {orderData.shipping_address?.city}, {orderData.shipping_address?.state} {orderData.shipping_address?.zip}<br />
+                                {orderData.shipping_address?.country}
                               </>
                             ) : 'N/A'}
                           </p>

@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { usePage, router } from '@inertiajs/react';
 
 // Define the brand settings interface
-export interface BrandSettings {
+export type BrandSettings = {
   logoDark: string;
   logoLight: string;
   favicon: string;
@@ -30,7 +30,8 @@ export interface BrandSettings {
   sidebarStyle: string;
   layoutDirection: LayoutPosition;
   themeMode: Appearance;
-}
+  [key: string]: string;
+};
 
 // Default brand settings
 export const DEFAULT_BRAND_SETTINGS: BrandSettings = {
@@ -269,7 +270,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
 
     // Save to database using Inertia
     router.post(route('settings.brand.update'), {
-      settings: settings
+      settings: { ...settings }
     }, {
       preserveScroll: true,
       onSuccess: () => {
@@ -568,7 +569,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                             className="h-10 justify-start"
                             style={{
                               backgroundColor: settings.sidebarVariant === variant ?
-                                (settings.themeColor === 'custom' ? settings.customColor : null) :
+                                (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                                 'transparent'
                             }}
                             onClick={() => handleSidebarVariantChange(variant)}
@@ -597,7 +598,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                             className="h-10 justify-start"
                             style={{
                               backgroundColor: settings.sidebarStyle === style.id ?
-                                (settings.themeColor === 'custom' ? settings.customColor : null) :
+                                (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                                 'transparent'
                             }}
                             onClick={() => handleSidebarStyleChange(style.id)}
@@ -630,7 +631,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                         className="h-10 justify-start"
                         style={{
                           backgroundColor: settings.layoutDirection === "left" ?
-                            (settings.themeColor === 'custom' ? settings.customColor : null) :
+                            (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                             'transparent'
                         }}
                         onClick={() => handleLayoutDirectionChange("left")}
@@ -646,7 +647,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                         className="h-10 justify-start"
                         style={{
                           backgroundColor: settings.layoutDirection === "right" ?
-                            (settings.themeColor === 'custom' ? settings.customColor : null) :
+                            (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                             'transparent'
                         }}
                         onClick={() => handleLayoutDirectionChange("right")}
@@ -676,7 +677,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                         className="h-10 justify-start"
                         style={{
                           backgroundColor: settings.themeMode === "light" ?
-                            (settings.themeColor === 'custom' ? settings.customColor : null) :
+                            (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                             'transparent'
                         }}
                         onClick={() => handleThemeModeChange("light")}
@@ -692,7 +693,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                         className="h-10 justify-start"
                         style={{
                           backgroundColor: settings.themeMode === "dark" ?
-                            (settings.themeColor === 'custom' ? settings.customColor : null) :
+                            (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                             'transparent'
                         }}
                         onClick={() => handleThemeModeChange("dark")}
@@ -708,7 +709,7 @@ export default function BrandSettings({ userSettings }: BrandSettingsProps) {
                         className="h-10 justify-start"
                         style={{
                           backgroundColor: settings.themeMode === "system" ?
-                            (settings.themeColor === 'custom' ? settings.customColor : null) :
+                            (settings.themeColor === 'custom' ? settings.customColor : undefined) :
                             'transparent'
                         }}
                         onClick={() => handleThemeModeChange("system")}

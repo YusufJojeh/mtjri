@@ -168,8 +168,8 @@ function PerfumeCheckout({
   const [billingState, setBillingState] = useState(userData.address.state);
   const [billingZip, setBillingZip] = useState(userData.address.zip);
   const [billingCountry, setBillingCountry] = useState(userData.address.country);
-  const [billingStates, setBillingStates] = useState([]);
-  const [billingCities, setBillingCities] = useState([]);
+  const [billingStates, setBillingStates] = useState<any[]>([]);
+  const [billingCities, setBillingCities] = useState<any[]>([]);
   const [loadingBillingStates, setLoadingBillingStates] = useState(false);
   const [loadingBillingCities, setLoadingBillingCities] = useState(false);
   

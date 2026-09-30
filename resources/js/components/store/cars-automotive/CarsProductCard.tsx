@@ -16,6 +16,8 @@ interface Product {
   price: number;
   sale_price?: number;
   cover_image?: string;
+  slug?: string;
+  href?: string;
   stock: number;
   is_active: boolean;
   variants?: any;
@@ -107,7 +109,7 @@ export default function CarsProductCard({ product, storeSettings = {}, currencie
               {product.category.name}
             </span>
           )}
-          {(product.total_reviews > 0 || product.reviews_count > 0) && (
+          {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
             <div className='flex items-center'>
               {[1, 2, 3, 4, 5].map((star: any) => (
                 <Star key={star} className={`h-3 w-3 ${star <= Math.floor(product.average_rating || product.rating || 0) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />

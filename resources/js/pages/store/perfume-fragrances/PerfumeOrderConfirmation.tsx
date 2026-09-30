@@ -238,10 +238,10 @@ export default function PerfumeOrderConfirmation({
                           <span className='font-medium text-white'>{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                         </div>
                       )}
-                      {orderData.discount && orderData.discount > 0 && (
+                      {(orderData.discount ?? 0) > 0 && (
                         <div className='flex justify-between text-green-400 border-b border-purple-700 pb-2'>
                           <span className='font-medium'>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
-                          <span className='font-medium'>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
+                          <span className='font-medium'>-{formatCurrency((orderData.discount ?? 0), storeSettings, currencies)}</span>
                         </div>
                       )}
                       {orderData.shipping && orderData.shipping > 0 && (
@@ -284,10 +284,10 @@ export default function PerfumeOrderConfirmation({
                           <p className='text-gray-900 leading-relaxed'>
                             {orderData.shipping_address ? (
                               <>
-                                {orderData.shipping_address.name}<br />
-                                {orderData.shipping_address.street}<br />
-                                {orderData.shipping_address.city}, {orderData.shipping_address.state} {orderData.shipping_address.zip}<br />  
-                                {orderData.shipping_address.country}
+                                {orderData.shipping_address?.name}<br />
+                                {orderData.shipping_address?.street}<br />
+                                {orderData.shipping_address?.city}, {orderData.shipping_address?.state} {orderData.shipping_address?.zip}<br />  
+                                {orderData.shipping_address?.country}
                               </>
                             ) : 'N/A'}
                           </p>

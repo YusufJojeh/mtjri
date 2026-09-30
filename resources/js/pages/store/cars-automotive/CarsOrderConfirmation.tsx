@@ -235,10 +235,10 @@ export default function CarsOrderConfirmation({
                           <span className='font-black text-white'>{formatCurrency(orderData.subtotal, storeSettings, currencies)}</span>
                         </div>
                       )}
-                      {orderData.discount && orderData.discount > 0 && (
+                      {(orderData.discount ?? 0) > 0 && (
                         <div className='flex justify-between text-green-400 border-b border-gray-700 pb-2'>
                           <span className='font-bold tracking-wider uppercase'>Discount {orderData.coupon_code && `(${orderData.coupon_code})`}</span>
-                          <span className='font-black'>-{formatCurrency(orderData.discount, storeSettings, currencies)}</span>
+                          <span className='font-black'>-{formatCurrency((orderData.discount ?? 0), storeSettings, currencies)}</span>
                         </div>
                       )}
                       {orderData.shipping && orderData.shipping > 0 && (
@@ -279,10 +279,10 @@ export default function CarsOrderConfirmation({
                         <div>
                           <p className='text-sm font-black tracking-wider uppercase text-red-600 mb-3'>Installation Address</p>
                           <p className='text-gray-900 leading-relaxed font-medium'>
-                            {orderData.shipping_address.name}<br />
-                            {orderData.shipping_address.street}<br />
-                            {orderData.shipping_address.city}, {orderData.shipping_address.state} {orderData.shipping_address.zip}<br />
-                            {orderData.shipping_address.country}
+                            {orderData.shipping_address?.name}<br />
+                            {orderData.shipping_address?.street}<br />
+                            {orderData.shipping_address?.city}, {orderData.shipping_address?.state} {orderData.shipping_address?.zip}<br />
+                            {orderData.shipping_address?.country}
                           </p>
                         </div>
                       </div>

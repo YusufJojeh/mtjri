@@ -118,7 +118,7 @@ export default function PerfumeProductCard({ product, storeSettings, currencies 
         </Link>
 
         {/* Rating */}
-        {(product.total_reviews > 0 || product.reviews_count > 0) && (
+        {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
           <div className='flex items-center mb-3'>
             <div className='flex items-center'>
               {[...Array(5)].map((_, i) => {

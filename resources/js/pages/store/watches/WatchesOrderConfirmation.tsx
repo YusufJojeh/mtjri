@@ -244,7 +244,7 @@ export default function WatchesOrderConfirmation({
                               </tr>
                             );
                           })}
-                          {orderData.subtotal && orderData.discount && orderData.discount > 0 && (
+                          {orderData.subtotal && (orderData.discount ?? 0) > 0 && (
                             <tr>
                               <td colSpan={3} className='px-6 py-4 text-right text-sm text-slate-600'>
                                 Subtotal
@@ -254,13 +254,13 @@ export default function WatchesOrderConfirmation({
                               </td>
                             </tr>
                           )}
-                          {orderData.discount && orderData.discount > 0 && (
+                          {(orderData.discount ?? 0) > 0 && (
                             <tr>
                               <td colSpan={3} className='px-6 py-4 text-right text-sm text-green-600'>
                                 Discount {orderData.coupon_code && `(${orderData.coupon_code})`}
                               </td>
                               <td className='px-6 py-4 text-right text-sm text-green-600'>
-                                -{formatCurrency(orderData.discount, storeSettings, currencies)}
+                                -{formatCurrency((orderData.discount ?? 0), storeSettings, currencies)}
                               </td>
                             </tr>
                           )}
@@ -315,10 +315,10 @@ export default function WatchesOrderConfirmation({
                           <p className='text-sm text-slate-900 leading-relaxed'>
                             {orderData.shipping_address ? (
                               <>
-                                {orderData.shipping_address.name}<br />
-                                {orderData.shipping_address.street}<br />
-                                {orderData.shipping_address.city}, {orderData.shipping_address.state} {orderData.shipping_address.zip}<br />  
-                                {orderData.shipping_address.country}
+                                {orderData.shipping_address?.name}<br />
+                                {orderData.shipping_address?.street}<br />
+                                {orderData.shipping_address?.city}, {orderData.shipping_address?.state} {orderData.shipping_address?.zip}<br />  
+                                {orderData.shipping_address?.country}
                               </>
                             ) : 'N/A'}
                           </p>

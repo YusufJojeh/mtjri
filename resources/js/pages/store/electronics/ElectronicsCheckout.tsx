@@ -62,8 +62,8 @@ function ElectronicsCheckoutContent({
     zip: user?.address?.zip || '',
     country: user?.address?.country || '',
   });
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [states, setStates] = useState<any[]>([]);
+  const [cities, setCities] = useState<any[]>([]);
   const [loadingStates, setLoadingStates] = useState(false);
   const [loadingCities, setLoadingCities] = useState(false);
   const [selectedCountryName, setSelectedCountryName] = useState('');
@@ -176,7 +176,7 @@ function ElectronicsCheckoutContent({
   };
 
   const selectedShipping = shippingMethods.find(method => method.id === selectedShippingId);
-  const shippingCost = selectedShipping ? parseFloat(selectedShipping.cost) + parseFloat(selectedShipping.handling_fee || 0) : 0;
+  const shippingCost = selectedShipping ? Number(selectedShipping.cost) + Number(selectedShipping.handling_fee || 0) : 0;
   const discount = couponApplied ? couponDiscount : cartSummary.discount;
   const total = cartSummary.subtotal + shippingCost + cartSummary.tax - discount;
   

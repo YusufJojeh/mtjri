@@ -135,8 +135,8 @@ function CarsCheckout({
   const [shippingState, setShippingState] = useState(userData.address.state);
   const [shippingZip, setShippingZip] = useState(userData.address.zip);
   const [shippingCountry, setShippingCountry] = useState(userData.address.country);
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [states, setStates] = useState<any[]>([]);
+  const [cities, setCities] = useState<any[]>([]);
   const [loadingStates, setLoadingStates] = useState(false);
   const [loadingCities, setLoadingCities] = useState(false);
   const [selectedCountryName, setSelectedCountryName] = useState('');
@@ -169,8 +169,8 @@ function CarsCheckout({
   const [billingState, setBillingState] = useState(userData.address.state);
   const [billingZip, setBillingZip] = useState(userData.address.zip);
   const [billingCountry, setBillingCountry] = useState(userData.address.country);
-  const [billingStates, setBillingStates] = useState([]);
-  const [billingCities, setBillingCities] = useState([]);
+  const [billingStates, setBillingStates] = useState<any[]>([]);
+  const [billingCities, setBillingCities] = useState<any[]>([]);
   const [loadingBillingStates, setLoadingBillingStates] = useState(false);
   const [loadingBillingCities, setLoadingBillingCities] = useState(false);
   
@@ -417,7 +417,7 @@ function CarsCheckout({
       return 0;
     }
     
-    return parseFloat(selectedShipping.cost) + parseFloat(selectedShipping.handling_fee || 0);
+    return Number(selectedShipping.cost) + Number(selectedShipping.handling_fee || 0);
   };
   
   // Calculate updated cart summary

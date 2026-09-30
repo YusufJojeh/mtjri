@@ -14,7 +14,7 @@ interface JewelryProductCardProps {
 function JewelryProductCard({ product, storeSettings, currencies }: JewelryProductCardProps) {
   const { props } = usePage();
   const finalStoreSettings = storeSettings || props.storeSettings || {};
-  const finalCurrencies = currencies || props.currencies || [];
+  const finalCurrencies: any[] = currencies || (props.currencies as any) || [];
   const [imageError, setImageError] = useState(false);
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
@@ -131,7 +131,7 @@ function JewelryProductCard({ product, storeSettings, currencies }: JewelryProdu
           )}
         </div>
         
-        {(product.total_reviews > 0 || product.reviews_count > 0) && (
+        {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
           <div className='flex items-center justify-center space-x-1'>
             {[...Array(5)].map((_, i) => {
               const rating = product.average_rating || product.rating || 0;

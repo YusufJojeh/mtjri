@@ -135,8 +135,8 @@ export default function WatchesCheckout({
   const [shippingState, setShippingState] = useState(userData.address.state);
   const [shippingZip, setShippingZip] = useState(userData.address.zip);
   const [shippingCountry, setShippingCountry] = useState(userData.address.country);
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [states, setStates] = useState<any[]>([]);
+  const [cities, setCities] = useState<any[]>([]);
   const [loadingStates, setLoadingStates] = useState(false);
   const [loadingCities, setLoadingCities] = useState(false);
   const [selectedCountryName, setSelectedCountryName] = useState('');

@@ -133,8 +133,8 @@ export default function BeautyCheckout({
   const [shippingState, setShippingState] = useState(userData.address.state);
   const [shippingZip, setShippingZip] = useState(userData.address.zip);
   const [shippingCountry, setShippingCountry] = useState(userData.address.country);
-  const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [states, setStates] = useState<any[]>([]);
+  const [cities, setCities] = useState<any[]>([]);
   const [loadingStates, setLoadingStates] = useState(false);
   const [loadingCities, setLoadingCities] = useState(false);
   const [selectedCountryName, setSelectedCountryName] = useState('');
@@ -300,7 +300,7 @@ export default function BeautyCheckout({
     if (selectedShipping.type === 'free_shipping' && cartSummary.subtotal >= (selectedShipping.min_order_amount || 0)) {
       return 0;
     }
-    return parseFloat(selectedShipping.cost) + parseFloat(selectedShipping.handling_fee || 0);
+    return Number(selectedShipping.cost) + Number(selectedShipping.handling_fee || 0);
   };
   
   const shippingCost = getShippingCost();

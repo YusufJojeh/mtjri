@@ -4,7 +4,7 @@ import { Link, usePage, router } from '@inertiajs/react';
 import AddToCartButton from './AddToCartButton';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { getImageUrl } from '@/utils/image-helper';
-import { formatCurrency } from '@/utils/currency-formatter';
+import { formatCurrency, type Currency } from '@/utils/currency-formatter';
 
 interface ProductProps {
   id: number;
@@ -49,7 +49,7 @@ export default function ProductCard({
   const { props } = usePage();
   const storeSlug = (props.store as any)?.slug || props.theme || 'home-accessories';
   const finalStoreSettings = storeSettings || props.storeSettings || {};
-  const finalCurrencies = currencies || props.currencies || [];
+  const finalCurrencies: (Currency | { code?: string; symbol?: string; name?: string })[] = currencies || (props.currencies as any) || [];
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   
   const [isHovered, setIsHovered] = useState(false);
@@ -58,7 +58,7 @@ export default function ProductCard({
   const isProductInWishlist = isInWishlist(id);
   
   const hasVariants = variants && Array.isArray(variants) && variants.length > 0;
-  const isOnSale = sale_price && parseFloat(sale_price) < parseFloat(price);
+  const isOnSale = !!sale_price && sale_price < price;
   const isInStock = stock > 0 && is_active;
   
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -173,7 +173,7 @@ export default function ProductCard({
           </Link>
           
           {/* Rating */}
-          {total_reviews > 0 && (
+          {(total_reviews ?? 0) > 0 && (
             <div className='flex items-center -mt-1'>
               <div className='flex'>
                 {[1, 2, 3, 4, 5].map((star: any) => {

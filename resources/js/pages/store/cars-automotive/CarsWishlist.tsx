@@ -10,7 +10,7 @@ import { useCart } from '@/contexts/CartContext';
 
 import { formatCurrency, getCurrencies } from '@/utils/currency-formatter';
 
-interface CarsWishlistProps {
+interface CarsWishlistProps extends Record<string, unknown> {
   store: any;
   storeContent?: any;
   wishlistItems: any[];
@@ -35,7 +35,7 @@ function CarsWishlistContent({
   isLoggedIn = false,
   customPages = [],
 }: CarsWishlistProps) {
-  const { props } = usePage();
+  const { props } = usePage<CarsWishlistProps & Record<string, unknown>>();
   const storeSettings = props.storeSettings || {};
   const currencies = getCurrencies(props.currencies);
   
@@ -57,7 +57,7 @@ function CarsWishlistContent({
 }
 
 function CarsWishlistInner() {
-  const { props } = usePage();
+  const { props } = usePage<CarsWishlistProps & Record<string, unknown>>();
   const storeSettings = props.storeSettings || {};
   const currencies = getCurrencies(props.currencies);
   const store = props.store || {};

@@ -38,12 +38,12 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
   const { props } = usePage();
   const storeSlug = (props as any).store?.slug || 'beauty-demo';
   const finalStoreSettings = storeSettings || props.storeSettings || {};
-  const finalCurrencies = currencies || props.currencies || [];
+  const finalCurrencies: any[] = currencies || (props.currencies as any) || [];
   const { isInWishlist, toggleWishlist, loading: wishlistLoading } = useWishlist();
   const { addToCart, loading: cartLoading } = useCart();
   
   const isProductInWishlist = isInWishlist(product.id);
-  const isOutOfStock = !product.is_active || product.stock <= 0;
+  const isOutOfStock = !product.is_active || (product.stock ?? 0) <= 0;
 
   const fallbackImage = `https://placehold.co/300x400/fdf2f8/ec4899?text=${encodeURIComponent(product.name)}`;
 
@@ -147,7 +147,7 @@ export default function BeautyProductCard({ product, storeSettings, currencies }
         </h3>
 
         {/* Rating Stars */}
-        {(product.total_reviews > 0 || product.reviews_count > 0) && (
+        {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0) && (
           <div className='flex items-center mb-3'>
             <div className='flex'>
               {[...Array(5)].map((_, i) => {

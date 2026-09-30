@@ -216,7 +216,7 @@ function BeautyProductDetailContent({
                     <h1 className='text-3xl lg:text-4xl font-light text-gray-900 mb-4 leading-tight'>{product.name}</h1>
                     
                     {/* Rating */}
-                    {((product.total_reviews ?? 0) > 0 || product.reviews_count > 0 || (product.reviews && product.reviews.length > 0)) && (
+                    {((product.total_reviews ?? 0) > 0 || (product.reviews_count ?? 0) > 0 || (product.reviews && product.reviews.length > 0)) && (
                       <div className='flex items-center mb-4'>
                         <div className='flex'>
                           {[1, 2, 3, 4, 5].map((star) => {
