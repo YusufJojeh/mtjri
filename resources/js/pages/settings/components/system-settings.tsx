@@ -56,15 +56,15 @@ export default function SystemSettings({
     if (Object.keys(settingsData).length > 0) {
       // Create merged settings object
       const mergedSettings = Object.keys(defaultSettings).reduce((acc, key) => {
-        acc[key] = settingsData[key] || defaultSettings[key];
+        acc[key] = (settingsData as Record<string, unknown>)[key] ?? (defaultSettings as Record<string, unknown>)[key];
         return acc;
-      }, {} as Record<string, string>);
+      }, {} as Record<string, unknown>);
       
       setSystemSettings(prevSettings => ({
         ...prevSettings,
         ...mergedSettings,
-        emailVerification: mergedSettings.emailVerification === 'true' || mergedSettings.emailVerification === true || mergedSettings.emailVerification === '1',
-        landingPageEnabled: mergedSettings.landingPageEnabled === 'true' || mergedSettings.landingPageEnabled === true || mergedSettings.landingPageEnabled === '1' || (mergedSettings.landingPageEnabled === undefined ? defaultSettings.landingPageEnabled : false)
+        emailVerification: mergedSettings.emailVerification === 'true' || (mergedSettings.emailVerification as unknown) === true || mergedSettings.emailVerification === '1',
+        landingPageEnabled: mergedSettings.landingPageEnabled === 'true' || (mergedSettings.landingPageEnabled as unknown) === true || mergedSettings.landingPageEnabled === '1' || (mergedSettings.landingPageEnabled === undefined ? defaultSettings.landingPageEnabled : false)
       }));
     }
   }, [settingsData]);

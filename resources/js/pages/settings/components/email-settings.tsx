@@ -74,8 +74,8 @@ export default function EmailSettings() {
       onSuccess: (page) => {
         setIsSending(false);
         toast.dismiss();
-        const successMessage = page.props.flash?.success;
-        const errorMessage = page.props.flash?.error;
+        const successMessage = (page.props.flash as { success?: string; error?: string } | undefined)?.success;
+        const errorMessage = (page.props.flash as { success?: string; error?: string } | undefined)?.error;
         
         if (successMessage) {
           setTestResult({ success: true, message: successMessage });

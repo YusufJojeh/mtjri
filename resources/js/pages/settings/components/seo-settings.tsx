@@ -45,7 +45,7 @@ export default function SeoSettings({ settings = {} }: SeoSettingsProps) {
   useEffect(() => {
     if (Object.keys(settingsData).length > 0) {
       const mergedSettings = Object.keys(defaultSettings).reduce((acc, key) => {
-        acc[key] = settingsData[key] || defaultSettings[key];
+        acc[key] = (settingsData as Record<string, string>)[key] || (defaultSettings as Record<string, string>)[key];
         return acc;
       }, {} as Record<string, string>);
       
@@ -142,7 +142,7 @@ export default function SeoSettings({ settings = {} }: SeoSettingsProps) {
       preserveScroll: true,
       onSuccess: (page) => {
         // Update settings with new values from server
-        const newSettings = page.props.systemSettings || page.props.settings || {};
+        const newSettings = (page.props.systemSettings || page.props.settings || {}) as Record<string, string>;
         setSeoSettings(prev => ({
           ...prev,
           metaKeywords: newSettings.metaKeywords || prev.metaKeywords,
