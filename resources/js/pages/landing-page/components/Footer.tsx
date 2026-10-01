@@ -44,7 +44,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
     ],
     company: [
       { name: t('public.nav.about'), href: route('about') },
-      { name: t('landing.footer.nav.contact', 'Contact'), href: route('contact') },
+      { name: t('public.nav.contact'), href: route('contact') },
     ],
     support: [
       { name: t('documentation.title', 'Documentation'), href: route('documentation.index') },
@@ -71,7 +71,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
     <footer data-testid='landing-footer' className='bg-gray-900 text-white'>
 {!hideCta && (
       <div className='border-b border-white/10 bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-950'>
-        <div className='container mx-auto flex flex-col items-center gap-6 px-4 py-14 text-center md:flex-row md:justify-between md:text-left'>
+        <div className='container mx-auto flex flex-col items-center gap-6 px-4 py-14 text-center md:flex-row md:justify-between md:text-start'>
           <div className='max-w-xl'>
             <h2 className='text-2xl font-bold tracking-tight md:text-3xl'>{t('landing.footer.ctaTitle')}</h2>
             <p className='mt-2 text-zinc-400'>{t('landing.footer.ctaSubtitle')}</p>
@@ -100,7 +100,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
         <div className='container mx-auto grid gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4'>
           <div>
             <h3 className='text-xs font-semibold uppercase tracking-wider text-zinc-500'>
-              {t('landing.footer.columns.product', 'Product')}
+              {t('public.footer.product')}
             </h3>
             <ul className='mt-4 space-y-2 text-sm'>
               {footerNav.product.map((item) => (
@@ -117,7 +117,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
           </div>
           <div>
             <h3 className='text-xs font-semibold uppercase tracking-wider text-zinc-500'>
-              {t('landing.footer.columns.company', 'Company')}
+              {t('public.footer.company')}
             </h3>
             <ul className='mt-4 space-y-2 text-sm'>
               {footerNav.company.map((item) => (
@@ -134,7 +134,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
           </div>
           <div>
             <h3 className='text-xs font-semibold uppercase tracking-wider text-zinc-500'>
-              {t('landing.footer.columns.support', 'Support')}
+              {t('public.footer.support')}
             </h3>
             <ul className='mt-4 space-y-2 text-sm'>
               {footerNav.support.map((item) => (
@@ -151,7 +151,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
           </div>
           <div className='space-y-3 text-sm text-zinc-400'>
             <h3 className='text-xs font-semibold uppercase tracking-wider text-zinc-500'>
-              {t('landing.footer.columns.contact', 'Contact')}
+              {t('public.footer.contact')}
             </h3>
             {settings.contact_email ? (
               <a
@@ -184,22 +184,22 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
           <div className='flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6'>
             {/* Copyright and Legal Links */}
             <div className='flex flex-col md:flex-row items-center gap-3 md:gap-6'>
-              <div className='text-gray-400 text-sm text-center md:text-left'>
-                © {currentYear} {settings.company_name}. {t('All rights reserved.')}
+              <div className='text-gray-400 text-sm text-center md:text-start'>
+                © {currentYear} {settings.company_name}. {t('public.footer.rights')}
               </div>
               <div className='flex items-center gap-4 text-sm'>
                 <Link 
                   href={route('privacy')}
                   className='text-gray-400 hover:text-white transition-colors'
                 >
-                  {t('Privacy Policy')}
+                  {t('public.legal.privacy.title')}
                 </Link>
                 <span className='text-gray-600'>•</span>
                 <Link 
                   href={route('terms')}
                   className='text-gray-400 hover:text-white transition-colors'
                 >
-                  {t('Terms of Service')}
+                  {t('public.legal.terms.title')}
                 </Link>
               </div>
             </div>
@@ -207,7 +207,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hi
             {/* Social Links */}
             {socialLinks.length > 0 && (
               <div className='flex items-center gap-3 md:gap-4'>
-                <span className='text-gray-400 text-sm hidden sm:inline'>{t('Follow us:')}</span>
+                <span className='text-gray-400 text-sm hidden sm:inline'>{t('public.footer.followUs')}</span>
                 <div className='flex gap-2 md:gap-3'>
                   {socialLinks.map((social) => {
                     const IconComponent = iconMap[social.icon] || Facebook;

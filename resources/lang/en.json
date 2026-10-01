@@ -2775,7 +2775,8 @@
                 "about-us": "About Us",
                 "contact-us": "Contact Us",
                 "features": "Features",
-                "faq": "FAQ"
+                "faq": "FAQ",
+                "refund-policy": "Refund Policy"
             }
         }
     },
@@ -3891,7 +3892,8 @@
             "templates": "Templates",
             "pricing": "Pricing",
             "about": "About",
-            "faq": "FAQ"
+            "faq": "FAQ",
+            "contact": "Contact"
         },
         "landing": {
             "allFeatures": "Explore all features",
@@ -4269,6 +4271,125 @@
                     "answer": "The assistant only reads the data of the store you're working in to answer your questions. Your store data isn't shared with other merchants."
                 }
             }
+        },
+        "legal": {
+            "eyebrow": "Legal",
+            "lastUpdated": "Last updated: {{date}}",
+            "contactTitle": "Contact Us",
+            "contactLink": "contact page",
+            "contactAfter": ".",
+            "privacy": {
+                "title": "Privacy Policy",
+                "description": "Privacy Policy for {{company}}",
+                "contactBefore": "If you have questions about this Privacy Policy, please contact us via our",
+                "sections": [
+                    {
+                        "title": "Introduction",
+                        "body": "Welcome to {{company}}. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services."
+                    },
+                    {
+                        "title": "Information We Collect",
+                        "body": "We collect information that you provide directly to us, such as when you create an account, make a purchase, or contact us for support. This may include:",
+                        "items": [
+                            "Name and contact information",
+                            "Payment and billing information",
+                            "Account credentials",
+                            "Communication preferences"
+                        ]
+                    },
+                    {
+                        "title": "How We Use Your Information",
+                        "body": "We use the information we collect to:",
+                        "items": [
+                            "Provide, maintain, and improve our services",
+                            "Process transactions and send related information",
+                            "Send you technical notices and support messages",
+                            "Respond to your comments and questions",
+                            "Monitor and analyze trends and usage"
+                        ]
+                    },
+                    {
+                        "title": "Information Sharing",
+                        "body": "We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:",
+                        "items": [
+                            "With your consent",
+                            "To comply with legal obligations",
+                            "To protect our rights and safety",
+                            "With service providers who assist us in operating our services"
+                        ]
+                    },
+                    {
+                        "title": "Data Security",
+                        "body": "We implement appropriate technical and organizational security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security."
+                    },
+                    {
+                        "title": "Your Rights",
+                        "body": "You have the right to:",
+                        "items": [
+                            "Access your personal information",
+                            "Correct inaccurate data",
+                            "Request deletion of your data",
+                            "Object to processing of your data",
+                            "Data portability"
+                        ]
+                    }
+                ]
+            },
+            "terms": {
+                "title": "Terms of Service",
+                "description": "Terms of Service for {{company}}",
+                "contactBefore": "If you have any questions about these Terms of Service, please contact us via our",
+                "sections": [
+                    {
+                        "title": "Acceptance of Terms",
+                        "body": "By accessing and using {{company}}, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service."
+                    },
+                    {
+                        "title": "Use License",
+                        "body": "Permission is granted to temporarily use our services for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:",
+                        "items": [
+                            "Modify or copy the materials",
+                            "Use the materials for any commercial purpose",
+                            "Attempt to decompile or reverse engineer any software",
+                            "Remove any copyright or other proprietary notations"
+                        ]
+                    },
+                    {
+                        "title": "User Accounts",
+                        "body": "When you create an account with us, you must provide information that is accurate, complete, and current at all times. You are responsible for safeguarding the password and for all activities that occur under your account."
+                    },
+                    {
+                        "title": "Prohibited Uses",
+                        "body": "You may not use our service:",
+                        "items": [
+                            "In any way that violates any applicable law or regulation",
+                            "To transmit any malicious code or viruses",
+                            "To impersonate or attempt to impersonate the company",
+                            "In any way that infringes upon the rights of others"
+                        ]
+                    },
+                    {
+                        "title": "Payment Terms",
+                        "body": "All fees are payable in advance. By purchasing a subscription, you agree to pay the fees specified. Subscriptions automatically renew unless cancelled. Refunds are subject to our refund policy."
+                    },
+                    {
+                        "title": "Intellectual Property",
+                        "body": "The service and its original content, features, and functionality are owned by {{company}} and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws."
+                    },
+                    {
+                        "title": "Limitation of Liability",
+                        "body": "In no event shall {{company}}, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the service."
+                    }
+                ]
+            }
+        },
+        "footer": {
+            "product": "Product",
+            "company": "Company",
+            "support": "Support",
+            "contact": "Contact",
+            "rights": "All rights reserved.",
+            "followUs": "Follow us:"
         }
     }
 }

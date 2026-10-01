@@ -103,7 +103,7 @@ export default function Header({ settings, customPages = [], brandColor = PUBLIC
     { key: 'pricing', name: t('public.nav.pricing'), href: route('pricing') },
     { key: 'about', name: t('public.nav.about'), href: route('about') },
     { key: 'docs', name: t('documentation.title', 'Documentation'), href: route('documentation.index') },
-    { key: 'contact', name: t('landing.header.contact', 'Contact'), href: route('contact') },
+    { key: 'contact', name: t('public.nav.contact'), href: route('contact') },
     ...customPages
       .filter((page) => !EXCLUDED_CUSTOM_SLUGS.includes(page.slug))
       .map((page) => ({
