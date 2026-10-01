@@ -34,9 +34,11 @@ interface PlansSectionProps {
   brandColor?: string;
   plans: Plan[];
   settings?: any;
+  /** Hide the section title/subtitle when the page already has its own hero. */
+  hideHeading?: boolean;
 }
 
-function PlansSection({ plans, settings, brandColor = '#3b82f6' }: PlansSectionProps) {
+function PlansSection({ plans, settings, brandColor = '#3b82f6', hideHeading = false }: PlansSectionProps) {
   const { t } = useTranslation();
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const reduce = useReducedMotion() ?? false;
@@ -136,7 +138,10 @@ function PlansSection({ plans, settings, brandColor = '#3b82f6' }: PlansSectionP
 
 
   return (
-    <section id='pricing' className='bg-gradient-to-b from-white via-slate-50/40 to-white py-12 sm:py-16 lg:py-20'>
+    <section
+      id='pricing'
+      className={hideHeading ? 'pb-12 sm:pb-16 lg:pb-20' : 'bg-gradient-to-b from-white via-slate-50/40 to-white py-12 sm:py-16 lg:py-20'}
+    >
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <motion.div
           className='mb-8 text-center sm:mb-12 lg:mb-16'
@@ -146,20 +151,24 @@ function PlansSection({ plans, settings, brandColor = '#3b82f6' }: PlansSectionP
           variants={landingContainer}
           custom={reduce}
         >
-          <motion.h2
-            variants={landingFadeUp}
-            custom={reduce}
-            className='mb-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl'
-          >
-            {t('landing.pricing.title')}
-          </motion.h2>
-          <motion.p
-            variants={landingFadeUp}
-            custom={reduce}
-            className='mx-auto mb-8 max-w-3xl text-lg font-medium leading-relaxed text-slate-600'
-          >
-            {t('landing.pricing.subtitle')}
-          </motion.p>
+          {!hideHeading && (
+            <>
+              <motion.h2
+                variants={landingFadeUp}
+                custom={reduce}
+                className='mb-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl'
+              >
+                {t('landing.pricing.title')}
+              </motion.h2>
+              <motion.p
+                variants={landingFadeUp}
+                custom={reduce}
+                className='mx-auto mb-8 max-w-3xl text-lg font-medium leading-relaxed text-slate-600'
+              >
+                {t('landing.pricing.subtitle')}
+              </motion.p>
+            </>
+          )}
 
           <motion.div variants={landingFadeUp} custom={reduce} className='flex items-center justify-center gap-4'>
             <span className={`text-sm ${billingCycle === 'monthly' ? 'font-semibold text-slate-900' : 'text-slate-500'}`}>
@@ -175,7 +184,7 @@ function PlansSection({ plans, settings, brandColor = '#3b82f6' }: PlansSectionP
             >
               <span
                 className={`inline-block h-4 w-4 rounded-full bg-white motion-safe:transition-transform motion-safe:duration-300 ${
-                  billingCycle === 'yearly' ? 'translate-x-6' : 'translate-x-1'
+                  billingCycle === 'yearly' ? 'translate-x-6 rtl:-translate-x-6' : 'translate-x-1 rtl:-translate-x-1'
                 }`}
               />
             </button>

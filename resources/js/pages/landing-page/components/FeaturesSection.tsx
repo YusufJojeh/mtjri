@@ -1,6 +1,7 @@
 import React from 'react';
-import { QrCode, Smartphone, Share2, BarChart3, Globe, Shield, Star, Zap, Users, Lock, Wifi, Heart, Layers, Clock } from 'lucide-react';
+import { ArrowRight, QrCode, Smartphone, Share2, BarChart3, Globe, Shield, Star, Zap, Users, Lock, Wifi, Heart, Layers, Clock } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import {
     LANDING_VIEWPORT,
@@ -146,6 +147,17 @@ export default function FeaturesSection({ settings, brandColor = '#3b82f6' }: Fe
                             </motion.article>
                         );
                     })}
+                </div>
+
+                <div className='mt-10 text-center'>
+                    <Link
+                        href={route('features')}
+                        className='group inline-flex items-center gap-1.5 rounded-lg text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-offset-2'
+                        style={{ color: primaryColor }}
+                    >
+                        {t('public.landing.allFeatures')}
+                        <ArrowRight className='public-arrow h-4 w-4 rtl:-scale-x-100' aria-hidden />
+                    </Link>
                 </div>
             </div>
         </section>

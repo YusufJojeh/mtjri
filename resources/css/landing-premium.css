@@ -173,7 +173,8 @@
     }
 
     :is([data-landing-page], [data-public-shell]) .landing-cta-depth:active {
-        transform: translateY(0);
+        transform: scale(0.97);
+        transition-duration: 120ms;
     }
 
     :is([data-landing-page], [data-public-shell]) footer .landing-cta-depth:hover {

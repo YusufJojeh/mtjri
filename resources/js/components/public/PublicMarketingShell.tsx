@@ -30,6 +30,8 @@ interface PublicMarketingShellProps {
     customPages?: CustomPageNav[];
     /** Extra top padding under fixed header (default 4rem) */
     mainClassName?: string;
+    /** Hide the footer's CTA strip when the page ends with its own call to action. */
+    hideFooterCta?: boolean;
 }
 
 export default function PublicMarketingShell({
@@ -37,6 +39,7 @@ export default function PublicMarketingShell({
     settings,
     customPages = [],
     mainClassName = 'pt-16',
+    hideFooterCta = false,
 }: PublicMarketingShellProps) {
     const { i18n } = useTranslation();
     const page = usePage<{ auth?: { user?: unknown } }>();
@@ -91,7 +94,7 @@ export default function PublicMarketingShell({
 
                 <main className={mainClassName}>{children}</main>
 
-                <Footer settings={footerSettings as any} brandColor={colors.primary} />
+                <Footer settings={footerSettings as any} brandColor={colors.primary} hideCta={hideFooterCta} />
             </div>
         </ThemeColorProvider>
     );

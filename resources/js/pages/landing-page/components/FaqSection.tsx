@@ -123,6 +123,15 @@ export default function FaqSection({ faqs: _faqs, settings, brandColor = '#3b82f
                     >
                         {t('landing.faq.contactUs')}
                     </Link>
+                    <div className='mt-4'>
+                        <Link
+                            href={route('faq')}
+                            className='text-sm font-semibold underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-current'
+                            style={{ color: primaryColor }}
+                        >
+                            {t('public.landing.allQuestions')}
+                        </Link>
+                    </div>
                 </motion.div>
             </div>
         </section>

@@ -19,9 +19,11 @@ interface FooterProps {
       };
     };
   };
+  /** Skip the CTA strip when the page already ends with its own call to action. */
+  hideCta?: boolean;
 }
 
-export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY }: FooterProps) {
+export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY, hideCta = false }: FooterProps) {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   
@@ -34,21 +36,19 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY }: 
   const primaryColor = colors.primary || brandColor;
   const accentColor = colors.accent || PUBLIC_BRAND_ACCENT;
 
-  const home = route('home');
-  const hash = (id: string) => `${home}#${id}`;
-
   const footerNav = {
     product: [
-      { name: t('landing.footer.nav.features', 'Features'), href: hash('features') },
-      { name: t('landing.footer.nav.pricing', 'Pricing'), href: hash('pricing') },
-      { name: t('landing.footer.nav.templates', 'Templates'), href: hash('templates') },
+      { name: t('public.nav.features'), href: route('features') },
+      { name: t('public.nav.templates'), href: route('templates') },
+      { name: t('public.nav.pricing'), href: route('pricing') },
     ],
     company: [
-      { name: t('landing.footer.nav.about', 'About'), href: hash('about') },
+      { name: t('public.nav.about'), href: route('about') },
       { name: t('landing.footer.nav.contact', 'Contact'), href: route('contact') },
     ],
     support: [
       { name: t('documentation.title', 'Documentation'), href: route('documentation.index') },
+      { name: t('public.nav.faq'), href: route('faq') },
     ],
   };
 
@@ -69,6 +69,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY }: 
 
   return (
     <footer data-testid='landing-footer' className='bg-gray-900 text-white'>
+{!hideCta && (
       <div className='border-b border-white/10 bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-950'>
         <div className='container mx-auto flex flex-col items-center gap-6 px-4 py-14 text-center md:flex-row md:justify-between md:text-left'>
           <div className='max-w-xl'>
@@ -93,6 +94,7 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY }: 
           </div>
         </div>
       </div>
+      )}
 
       <div className='border-b border-white/10'>
         <div className='container mx-auto grid gap-10 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4'>
@@ -103,12 +105,12 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY }: 
             <ul className='mt-4 space-y-2 text-sm'>
               {footerNav.product.map((item) => (
                 <li key={item.name}>
-                  <a
+                  <Link
                     href={item.href}
                     className='text-zinc-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-sm'
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -120,21 +122,12 @@ export default function Footer({ settings, brandColor = PUBLIC_BRAND_PRIMARY }: 
             <ul className='mt-4 space-y-2 text-sm'>
               {footerNav.company.map((item) => (
                 <li key={item.name}>
-                  {item.href.includes('#') ? (
-                    <a
-                      href={item.href}
-                      className='text-zinc-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-sm'
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className='text-zinc-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-sm'
-                    >
-                      {item.name}
-                    </Link>
-                  )}
+                  <Link
+                    href={item.href}
+                    className='text-zinc-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded-sm'
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>

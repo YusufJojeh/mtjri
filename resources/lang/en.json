@@ -3881,5 +3881,394 @@
     "Payment settings": "Payment settings",
     "Save details": "Save details",
     "Save preferences": "Save preferences",
-    "Shipping methods": "Shipping methods"
+    "Shipping methods": "Shipping methods",
+    "public": {
+        "nav": {
+            "label": "Main navigation",
+            "open": "Open navigation menu",
+            "close": "Close navigation menu",
+            "features": "Features",
+            "templates": "Templates",
+            "pricing": "Pricing",
+            "about": "About",
+            "faq": "FAQ"
+        },
+        "landing": {
+            "allFeatures": "Explore all features",
+            "allQuestions": "Browse all questions"
+        },
+        "cta": {
+            "title": "Your store can be live this week",
+            "subtitle": "Create a workspace, pick a template, connect payments and publish — then grow with analytics and AI by your side.",
+            "primary": "Start free",
+            "secondary": "See pricing",
+            "talkToUs": "Talk to us"
+        },
+        "features": {
+            "hero": {
+                "eyebrow": "Product",
+                "title": "Everything you need to sell, run and grow",
+                "subtitle": "Storefronts, checkout, operations, marketing and an AI copilot — one platform for every store you run.",
+                "secondary": "Browse templates"
+            },
+            "gridTitle": "All features",
+            "filters": {
+                "label": "Filter features",
+                "all": "All",
+                "sell": "Sell",
+                "operate": "Operate",
+                "grow": "Grow",
+                "ai": "AI"
+            },
+            "items": {
+                "storefronts": {
+                    "title": "Ready-made storefronts",
+                    "description": "Industry templates for fashion, beauty, electronics, furniture and more — fully editable, fast on mobile."
+                },
+                "payments": {
+                    "title": "Payments your customers trust",
+                    "description": "Connect cards, wallets, bank transfer and cash on delivery through dozens of local and global gateways."
+                },
+                "expressCheckout": {
+                    "title": "Express checkout",
+                    "description": "Shorter paths to purchase with one-page and buy-now flows that cut abandoned carts."
+                },
+                "pos": {
+                    "title": "Point of sale",
+                    "description": "Sell in person from the same catalog and keep stock in sync between your shop and your site."
+                },
+                "domains": {
+                    "title": "Custom domains",
+                    "description": "Launch on a free subdomain, then move to your own domain whenever you're ready."
+                },
+                "multiStore": {
+                    "title": "Multi-store control",
+                    "description": "Run several brands or regions from one account, each with its own theme, catalog and settings."
+                },
+                "orders": {
+                    "title": "Order management",
+                    "description": "Track every order from payment to delivery with clear statuses, notes and customer updates."
+                },
+                "inventory": {
+                    "title": "Inventory",
+                    "description": "Variants, stock levels and low-stock alerts so you never sell what you don't have."
+                },
+                "shipping": {
+                    "title": "Shipping & tax",
+                    "description": "Zones, rates and tax rules per country, state or city — configured once, applied at checkout."
+                },
+                "customers": {
+                    "title": "Customers",
+                    "description": "Profiles, addresses, order history and reviews in one place for every buyer."
+                },
+                "roles": {
+                    "title": "Team roles",
+                    "description": "Invite staff with granular permissions so everyone sees exactly what they need."
+                },
+                "analytics": {
+                    "title": "Analytics",
+                    "description": "Revenue, conversion and top products at a glance, with trends you can act on."
+                },
+                "coupons": {
+                    "title": "Coupons & discounts",
+                    "description": "Percentage, fixed and free-shipping offers with limits, schedules and minimum spend."
+                },
+                "seo": {
+                    "title": "SEO built in",
+                    "description": "Clean URLs, editable meta tags and fast pages that help customers find you."
+                },
+                "newsletter": {
+                    "title": "Email & newsletter",
+                    "description": "Collect subscribers and send branded transactional emails from editable templates."
+                },
+                "referrals": {
+                    "title": "Referral program",
+                    "description": "Reward people who bring you new merchants and track payouts automatically."
+                },
+                "blog": {
+                    "title": "Blog",
+                    "description": "Publish guides and stories alongside your store to earn traffic and trust."
+                },
+                "copilot": {
+                    "title": "Tijraa Copilot",
+                    "description": "Ask about sales, stock or customers in plain language and get answers from your own store data."
+                },
+                "studio": {
+                    "title": "AI content studio",
+                    "description": "Draft product descriptions, page copy and SEO text in Arabic and English in seconds."
+                },
+                "actions": {
+                    "title": "Approve before it changes",
+                    "description": "AI suggests changes; nothing goes live until you review and approve it in the Action Center."
+                },
+                "knowledge": {
+                    "title": "Store knowledge",
+                    "description": "Teach the assistant your policies and products so its answers sound like your brand."
+                }
+            },
+            "local": {
+                "eyebrow": "Made for the region",
+                "title": "Arabic-first, without compromises",
+                "subtitle": "Right-to-left layouts, local payment methods and WhatsApp are part of the platform — not plugins you bolt on later.",
+                "previewLabel": "Storefront preview",
+                "points": {
+                    "rtl": {
+                        "title": "True RTL",
+                        "description": "Every storefront and dashboard mirrors correctly in Arabic."
+                    },
+                    "whatsapp": {
+                        "title": "WhatsApp ordering",
+                        "description": "Let customers reach you or order where they already chat."
+                    },
+                    "gateways": {
+                        "title": "Local gateways",
+                        "description": "Accept the payment methods your market actually uses."
+                    },
+                    "pwa": {
+                        "title": "Installable stores",
+                        "description": "Progressive web app support for an app-like mobile experience."
+                    }
+                }
+            }
+        },
+        "pricing": {
+            "hero": {
+                "eyebrow": "Pricing",
+                "title": "Simple plans that grow with you",
+                "subtitle": "Start small and upgrade as you scale. No setup fees, and you can switch plans at any time."
+            },
+            "included": {
+                "title": "Included in every plan",
+                "subtitle": "The essentials come standard, whichever plan you choose.",
+                "items": {
+                    "storefront": "A mobile-ready storefront with a professional template",
+                    "checkout": "Secure checkout with multiple payment gateways",
+                    "ssl": "SSL certificate and secure hosting",
+                    "languages": "Arabic and English with full RTL support",
+                    "orders": "Order, customer and inventory management",
+                    "analytics": "Sales analytics dashboard",
+                    "support": "Help center and email support",
+                    "updates": "Continuous platform updates at no extra cost"
+                }
+            },
+            "faq": {
+                "title": "Billing questions",
+                "subtitle": "Quick answers about plans and payments.",
+                "link": "See all FAQs",
+                "items": {
+                    "trial": {
+                        "question": "Can I try Tijraa before paying?",
+                        "answer": "Yes. Plans that offer a trial let you build and preview your store before you're charged, so you can see how everything works first."
+                    },
+                    "switch": {
+                        "question": "Can I change plans later?",
+                        "answer": "Anytime. Upgrade from your dashboard as you grow, or move to a smaller plan if your needs change."
+                    },
+                    "fees": {
+                        "question": "Are there setup or hidden fees?",
+                        "answer": "No setup fees and no surprises. You pay the plan price; your payment gateway may charge its own standard processing fees."
+                    },
+                    "payment": {
+                        "question": "How can I pay for my plan?",
+                        "answer": "Pay by card or any of the payment methods enabled for your region. Yearly billing is available on plans that support it."
+                    },
+                    "cancel": {
+                        "question": "What happens if I cancel?",
+                        "answer": "Your store stays active until the end of the paid period. You can export your data and come back whenever you like."
+                    }
+                }
+            }
+        },
+        "templates": {
+            "hero": {
+                "eyebrow": "{{count}} storefront templates",
+                "title": "Start from a store that already looks finished",
+                "subtitle": "Professionally designed templates for your industry. Pick one, add your products and brand, and launch."
+            },
+            "filters": {
+                "label": "Filter templates",
+                "all": "All",
+                "style": "Fashion & beauty",
+                "home": "Home & living",
+                "tech": "Tech & auto",
+                "family": "Kids & family"
+            },
+            "previewAlt": "Preview of the {{name}} template",
+            "useTemplate": "Start with this template",
+            "note": "Every template is fully customizable — colors, fonts, sections and layout.",
+            "themes": {
+                "home-accessories": {
+                    "name": "Home Accessories",
+                    "description": "Clean, modern design for home accessories and décor."
+                },
+                "fashion": {
+                    "name": "Fashion",
+                    "description": "Elegant, editorial layout for fashion and apparel brands."
+                },
+                "electronics": {
+                    "name": "Electronics & Gadgets",
+                    "description": "Spec-forward design for electronics and gadget stores."
+                },
+                "beauty-cosmetics": {
+                    "name": "Beauty & Cosmetics",
+                    "description": "Soft, polished look for beauty and skincare brands."
+                },
+                "jewelry": {
+                    "name": "Jewelry",
+                    "description": "Luxurious detail for jewelry and accessories."
+                },
+                "watches": {
+                    "name": "Watches",
+                    "description": "Premium presentation for timepieces and collections."
+                },
+                "furniture-interior": {
+                    "name": "Furniture & Interior",
+                    "description": "Spacious layouts for furniture and interior design."
+                },
+                "cars-automotive": {
+                    "name": "Cars & Automotive",
+                    "description": "Bold, dynamic design for automotive and dealerships."
+                },
+                "baby-kids": {
+                    "name": "Baby & Kids",
+                    "description": "Playful, colorful design for children's products."
+                },
+                "perfume-fragrances": {
+                    "name": "Perfume & Fragrances",
+                    "description": "Rich, refined design for perfume and oud houses."
+                }
+            },
+            "cta": {
+                "title": "Found the one? Make it yours.",
+                "subtitle": "Create your store with any template and change it later — your products and settings come with you.",
+                "secondary": "See all features"
+            }
+        },
+        "about": {
+            "hero": {
+                "eyebrow": "About Tijraa",
+                "title": "Commerce tools built for the way the region sells",
+                "subtitle": "We help merchants launch and grow online stores — in Arabic and English, with the payments, delivery and support their customers expect."
+            },
+            "story": {
+                "eyebrow": "Our story",
+                "title": "Selling online shouldn't need a technical team",
+                "p1": "Tijraa started with a simple observation: great local businesses were held back by platforms that weren't built for their language, their payment methods or the way their customers shop.",
+                "p2": "So we built one platform that handles the storefront, checkout and operations, and added an AI copilot that works from your own data — so merchants can spend their time on products and customers, not configuration."
+            },
+            "principles": {
+                "local": {
+                    "title": "Local by default",
+                    "description": "Arabic, RTL, regional gateways and WhatsApp are core features, not afterthoughts."
+                },
+                "simple": {
+                    "title": "Simple beats clever",
+                    "description": "If a merchant needs a manual to do something common, we haven't finished designing it."
+                },
+                "owned": {
+                    "title": "Your store, your data",
+                    "description": "You own your customers, your content and your brand — and you can take them with you."
+                },
+                "ai": {
+                    "title": "AI with a human in the loop",
+                    "description": "Our assistant proposes; you decide. Nothing changes in your store without your approval."
+                }
+            },
+            "values": {
+                "title": "What guides us",
+                "subtitle": "The commitments behind every feature we ship."
+            }
+        },
+        "faq": {
+            "hero": {
+                "eyebrow": "Help center",
+                "title": "Frequently asked questions",
+                "subtitle": "Answers about getting started, running your store, billing and our AI features."
+            },
+            "searchPlaceholder": "Search questions…",
+            "clearSearch": "Clear search",
+            "resultCount_one": "{{count}} question shown",
+            "resultCount_other": "{{count}} questions shown",
+            "contactSubtitle": "Our team usually replies within one business day.",
+            "filters": {
+                "label": "Filter by topic",
+                "all": "All",
+                "general": "Getting started",
+                "stores": "Your store",
+                "billing": "Billing",
+                "ai": "AI"
+            },
+            "empty": {
+                "title": "No matching questions",
+                "subtitle": "Try different words, or ask us directly.",
+                "reset": "Clear filters"
+            },
+            "items": {
+                "how": {
+                    "question": "How does Tijraa work?",
+                    "answer": "Create an account, choose a template, add your products and connect a payment method. Your store is then live on a free subdomain, and you can manage everything — orders, stock, marketing — from one dashboard."
+                },
+                "skills": {
+                    "question": "Do I need technical skills?",
+                    "answer": "No. Everything is configured through forms and visual editors. If you can use social media, you can run a Tijraa store."
+                },
+                "security": {
+                    "question": "Is my data secure?",
+                    "answer": "Yes. Stores run over SSL, payments are handled by certified gateways, and access to your dashboard is controlled by roles and permissions."
+                },
+                "languages": {
+                    "question": "Which languages are supported?",
+                    "answer": "Arabic and English are fully supported with right-to-left layouts, and the dashboard is available in many more languages."
+                },
+                "customize": {
+                    "question": "Can I customize my store's design?",
+                    "answer": "Yes. Change colors, fonts, logo, sections and layout from the theme editor — no code required."
+                },
+                "multiple": {
+                    "question": "Can I run more than one store?",
+                    "answer": "Yes. Depending on your plan you can create several stores under one account, each with its own catalog, theme and domain."
+                },
+                "domain": {
+                    "question": "Can I use my own domain?",
+                    "answer": "Yes. Every store gets a free subdomain, and plans with custom domains let you connect a domain you already own."
+                },
+                "payments": {
+                    "question": "Which payment methods can I accept?",
+                    "answer": "Cards, wallets, bank transfer and cash on delivery through a wide range of local and international gateways. You choose which to enable."
+                },
+                "analytics": {
+                    "question": "Can I track my store's performance?",
+                    "answer": "Yes. The analytics dashboard shows revenue, orders, conversion and best-selling products over any date range."
+                },
+                "trial": {
+                    "question": "Is there a free trial?",
+                    "answer": "Plans that include a trial let you build and preview your store before you're charged."
+                },
+                "switch": {
+                    "question": "Can I upgrade or downgrade later?",
+                    "answer": "Yes, at any time from your dashboard."
+                },
+                "fees": {
+                    "question": "Do you take a cut of my sales?",
+                    "answer": "No. You pay your plan price; payment gateways charge their own standard processing fees."
+                },
+                "cancel": {
+                    "question": "Can I cancel anytime?",
+                    "answer": "Yes. Your store stays active until the end of the period you've paid for."
+                },
+                "copilot": {
+                    "question": "What can Tijraa Copilot do?",
+                    "answer": "Ask questions about sales, products or customers, draft descriptions and SEO text, and get suggestions to improve your store — all from your own data."
+                },
+                "approval": {
+                    "question": "Will the AI change my store on its own?",
+                    "answer": "No. AI suggestions wait in the Action Center until you review and approve them."
+                },
+                "aiData": {
+                    "question": "How is my data used by the AI?",
+                    "answer": "The assistant only reads the data of the store you're working in to answer your questions. Your store data isn't shared with other merchants."
+                }
+            }
+        }
+    }
 }

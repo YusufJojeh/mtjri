@@ -239,6 +239,12 @@ Route::get('/privacy', [LandingPageController::class, 'privacy'])->name('privacy
 Route::get('/terms', [LandingPageController::class, 'terms'])->name('terms');
 Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact');
 
+Route::get('/features', [LandingPageController::class, 'features'])->name('features');
+Route::get('/pricing', [LandingPageController::class, 'pricing'])->name('pricing');
+Route::get('/templates', [LandingPageController::class, 'templates'])->name('templates');
+Route::get('/about', [LandingPageController::class, 'about'])->name('about');
+Route::get('/faq', [LandingPageController::class, 'faq'])->name('faq');
+
 Route::get('/translations/{locale}', [TranslationController::class, 'getTranslations'])->name('translations');
 
 // Documentation routes

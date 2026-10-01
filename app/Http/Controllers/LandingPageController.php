@@ -45,6 +45,25 @@ class LandingPageController extends Controller
         
         $landingSettings = LandingPageSetting::getSettings();
         
+        $plans = $this->publicPlans();
+
+        $featuredStores = $this->featuredStores();
+
+        return Inertia::render('landing-page/index', [
+            'plans' => $plans,
+            'testimonials' => [],
+            'faqs' => [],
+            'customPages' => LandingPageCustomPage::active()->ordered()->get() ?? [],
+            'settings' => $landingSettings,
+            'featuredStores' => $featuredStores
+        ]);
+    }
+
+    /**
+     * Enabled plans shaped for the public pricing cards.
+     */
+    private function publicPlans()
+    {
         $plans = Plan::where('is_plan_enable', 'on')->get()->map(function ($plan) {
             $features = [];
             if ($plan->features) {
@@ -61,7 +80,7 @@ class LandingPageController extends Controller
                         $features[] = $featureLabels[$feature];
                     }
                 }
-                
+            
                 // Add template sections with count
                 $templateSections = $plan->getAllowedTemplateSections();
                 if (!empty($templateSections)) {
@@ -75,10 +94,10 @@ class LandingPageController extends Controller
                 if ($plan->enable_custsubdomain === 'on') $features[] = __('Subdomain');
                 if ($plan->pwa_business === 'on') $features[] = __('PWA');
                 if ($plan->enable_chatgpt === 'on') $features[] = __('AI Integration');
-                  $templateSections = [];
-    $features[] = __('Template Sections ( :count )', ['count' => count($templateSections)]);
+                $templateSections = [];
+                $features[] = __('Template Sections ( :count )', ['count' => count($templateSections)]);
             }
-            
+        
             return [
                 'id' => $plan->id,
                 'name' => $plan->name,
@@ -106,7 +125,7 @@ class LandingPageController extends Controller
             $mostSubscribedPlanId = $planSubscriberCounts->keys()->sortByDesc(function($planId) use ($planSubscriberCounts) {
                 return $planSubscriberCounts[$planId];
             })->first();
-            
+        
             $plans = $plans->map(function($plan) use ($mostSubscribedPlanId) {
                 if ($plan['id'] == $mostSubscribedPlanId && $plan['price'] != '0') {
                     $plan['is_popular'] = true;
@@ -114,9 +133,16 @@ class LandingPageController extends Controller
                 return $plan;
             });
         }
-        
-        // Get featured stores instead of campaigns
-        $featuredStores = Store::where('is_active', true)
+
+        return $plans;
+    }
+
+    /**
+     * Active, featured storefronts shown as social proof on public pages.
+     */
+    private function featuredStores()
+    {
+        return Store::where('is_active', true)
             ->where('is_featured', true)
             ->limit(6)
             ->get()
@@ -129,15 +155,59 @@ class LandingPageController extends Controller
                     'logo' => $store->logo,
                 ];
             });
-        
-        return Inertia::render('landing-page/index', [
-            'plans' => $plans,
-            'testimonials' => [],
-            'faqs' => [],
+    }
+
+    /**
+     * Props every public marketing page needs for the shared header and footer.
+     */
+    private function publicPageProps(array $extra = []): array
+    {
+        return array_merge([
+            'settings' => LandingPageSetting::getSettings(),
             'customPages' => LandingPageCustomPage::active()->ordered()->get() ?? [],
-            'settings' => $landingSettings,
-            'featuredStores' => $featuredStores
+        ], $extra);
+    }
+
+    /**
+     * Marketing pages follow the landing toggle: when the public site is off,
+     * visitors go straight to login instead.
+     */
+    private function renderPublicPage(string $component, array $extra = [])
+    {
+        if (!isLandingPageEnabled()) {
+            return redirect()->route('login');
+        }
+
+        return Inertia::render($component, $this->publicPageProps($extra));
+    }
+
+    public function features()
+    {
+        return $this->renderPublicPage('landing-page/features');
+    }
+
+    public function pricing()
+    {
+        return $this->renderPublicPage('landing-page/pricing', [
+            'plans' => fn () => $this->publicPlans(),
         ]);
+    }
+
+    public function templates()
+    {
+        return $this->renderPublicPage('landing-page/templates', [
+            'featuredStores' => fn () => $this->featuredStores(),
+        ]);
+    }
+
+    public function about()
+    {
+        return $this->renderPublicPage('landing-page/about');
+    }
+
+    public function faq()
+    {
+        return $this->renderPublicPage('landing-page/faq');
     }
 
     public function submitContact(Request $request)
