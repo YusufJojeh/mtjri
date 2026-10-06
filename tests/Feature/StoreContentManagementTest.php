@@ -12,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Facades\Http;
+use Mockery;
 
 class StoreContentManagementTest extends TestCase
 {
@@ -177,21 +178,35 @@ class StoreContentManagementTest extends TestCase
         Setting::setGlobal('chatgptKey', 'test-key');
         Setting::setGlobal('chatgptModel', 'gpt-3.5-turbo');
 
+        $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
+        $mockOpenAI->shouldReceive('generateText')
+            ->andReturn(['title' => 'Generated Hero Title']);
+        $this->app->instance(OpenAIContentGenerator::class, $mockOpenAI);
+
+        Http::fake([
+            'api.unsplash.com/*' => Http::response([
+                'results' => [[
+                    'id' => 'photo-1',
+                    'urls' => ['regular' => 'https://images.unsplash.com/photo-1'],
+                    'links' => [
+                        'download_location' => 'https://api.unsplash.com/photos/photo-1/download',
+                        'html' => 'https://unsplash.com/photos/photo-1',
+                    ],
+                    'user' => [
+                        'name' => 'John Doe',
+                        'username' => 'johndoe',
+                        'links' => ['html' => 'https://unsplash.com/@johndoe'],
+                    ],
+                ]],
+            ], 200),
+            'images.unsplash.com/*' => Http::response('mock-image-content', 200),
+        ]);
+
         $service = app(StoreContentGenerationService::class);
 
-        $businessDescription = 'My awesome store';
-        $businessType = 'general e-commerce store';
-        $userLanguage = 'en';
-        $theme = 'default';
-        $sectionName = 'hero'; // Changed from 'about' to 'hero' as 'about' is not in default theme
+        $sectionName = 'hero'; // 'about' is not in the default theme
 
-        $generatedContent = $service->generateSpecificSection(
-            $businessDescription,
-            $businessType,
-            $userLanguage,
-            $theme,
-            $sectionName
-        );
+        $generatedContent = $service->generateSpecificSection($this->store, $sectionName);
 
         $this->assertNotNull($generatedContent);
         $this->assertArrayHasKey('title', $generatedContent);
@@ -201,8 +216,10 @@ class StoreContentManagementTest extends TestCase
     }
 
     #[Test]
-    public function regenerate_section_fails_without_openai_key()
+    public function regenerate_section_dispatches_job_even_without_openai_key()
     {
+        \Illuminate\Support\Facades\Queue::fake();
+
         $this->actingAs($this->user);
 
         // Bypass registration check
@@ -214,14 +231,20 @@ class StoreContentManagementTest extends TestCase
 
         // Do not set OpenAI keys (they are shared, so we need to clear them if they were set by other tests, but RefreshDatabase handles this)
 
+        // The controller dispatches the job asynchronously and returns
+        // immediately; missing OpenAI configuration is a failure that
+        // surfaces inside the queued job (see RegenerateSectionJobTest),
+        // not a synchronous 500 from this endpoint.
         $sectionName = 'hero';
         $response = $this->post(route('stores.content.regenerate-section', $this->store->id), [
             'section' => $sectionName,
             'theme' => 'default',
         ]);
 
-        $response->assertStatus(500);
-        $response->assertJsonFragment(['message' => 'An error occurred during content regeneration.']);
+        $response->assertOk();
+        $response->assertJsonPath('success', true);
+
+        \Illuminate\Support\Facades\Queue::assertPushed(\App\Jobs\RegenerateSectionJob::class);
     }
 
     #[Test]
@@ -435,7 +458,11 @@ class StoreContentManagementTest extends TestCase
             'jobId' => $jobId
         ]));
 
-        $response->assertStatus(403);
+        // The controller scopes the store lookup to the authenticated
+        // user's own stores and uses firstOrFail(), so a store owned by
+        // someone else is indistinguishable from a nonexistent one: 404,
+        // not 403 (this avoids leaking whether the store id exists at all).
+        $response->assertStatus(404);
     }
 
     #[Test]
@@ -449,7 +476,10 @@ class StoreContentManagementTest extends TestCase
             'registration_step_3_complete' => true,
         ]);
 
-        $response = $this->post(route('stores.content.regenerate-section', $this->store->id), [
+        // postJson so Laravel treats this as an AJAX/JSON request and
+        // returns a 422 JSON validation response instead of redirecting
+        // back with flashed errors.
+        $response = $this->postJson(route('stores.content.regenerate-section', $this->store->id), [
             'theme' => 'default',
             // Missing 'section' parameter
         ]);

@@ -202,3 +202,9 @@ export function MidtransPaymentForm({
     </Card>
   );
 }
+
+declare global {
+  interface Window {
+    snap?: any;
+  }
+}

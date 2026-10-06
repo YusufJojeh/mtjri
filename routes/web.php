@@ -770,7 +770,21 @@ Route::middleware(['auth'])->group(function () {
         // API routes for slug validation
         Route::post('api/landing-page/custom-pages/check-slug', [CustomPageController::class, 'checkSlug'])->name('api.custom-pages.check-slug');
         Route::post('api/landing-page/custom-pages/generate-slug', [CustomPageController::class, 'generateSlug'])->name('api.custom-pages.generate-slug');
-        
+
+        // Landing page contact submissions management
+        Route::get('landing-page/contacts', [\App\Http\Controllers\LandingPage\ContactController::class, 'index'])->name('landing-page.contacts.index');
+        Route::get('landing-page/contacts/{contact}', [\App\Http\Controllers\LandingPage\ContactController::class, 'show'])->name('landing-page.contacts.show');
+        Route::put('landing-page/contacts/{contact}', [\App\Http\Controllers\LandingPage\ContactController::class, 'update'])->name('landing-page.contacts.update');
+        Route::delete('landing-page/contacts/{contact}', [\App\Http\Controllers\LandingPage\ContactController::class, 'destroy'])->name('landing-page.contacts.destroy');
+        Route::post('landing-page/contacts/{contact}/reply', [\App\Http\Controllers\LandingPage\ContactController::class, 'reply'])->name('landing-page.contacts.reply');
+
+        // Landing page newsletter subscriptions management
+        Route::get('landing-page/newsletters', [\App\Http\Controllers\LandingPage\NewsletterController::class, 'index'])->name('landing-page.newsletters.index');
+        Route::get('landing-page/newsletters/{newsletter}', [\App\Http\Controllers\LandingPage\NewsletterController::class, 'show'])->name('landing-page.newsletters.show');
+        Route::put('landing-page/newsletters/{newsletter}', [\App\Http\Controllers\LandingPage\NewsletterController::class, 'update'])->name('landing-page.newsletters.update');
+        Route::delete('landing-page/newsletters/{newsletter}', [\App\Http\Controllers\LandingPage\NewsletterController::class, 'destroy'])->name('landing-page.newsletters.destroy');
+        Route::post('landing-page/newsletters/bulk-action', [\App\Http\Controllers\LandingPage\NewsletterController::class, 'bulkAction'])->name('landing-page.newsletters.bulk-action');
+
         // Location Management (Countries, States, Cities)
         Route::resource('countries', \App\Http\Controllers\CountryController::class);
         Route::resource('states', \App\Http\Controllers\StateController::class);

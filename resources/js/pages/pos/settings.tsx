@@ -50,7 +50,7 @@ export default function POSSettings() {
   };
   
   // Handle switch changes
-  const handleSwitchChange = (name: any) => {
+  const handleSwitchChange = (name: keyof typeof formData) => {
     setFormData({
       ...formData,
       [name]: !formData[name]

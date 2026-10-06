@@ -68,7 +68,9 @@ export default function OrderDetail({
   const actualTheme = store?.theme || theme;
   const components = getThemeComponents(actualTheme);
   const { OrderDetailPage } = components;
-  
+
+  const { props } = usePage();
+
   // If theme has a specific order detail page, use it
   if (OrderDetailPage && (actualTheme === 'fashion' || actualTheme === 'electronics' || actualTheme === 'beauty-cosmetics' || actualTheme === 'jewelry' || actualTheme === 'watches' || actualTheme === 'furniture-interior' || actualTheme === 'baby-kids' || actualTheme === 'cars-automotive' || actualTheme === 'perfume-fragrances')) {
     return (
@@ -83,8 +85,6 @@ export default function OrderDetail({
       />
     );
   }
-  
-  const { props } = usePage();
   const storeSettings = props.storeSettings || {};
   const currencies = getCurrencies(props.currencies);
   

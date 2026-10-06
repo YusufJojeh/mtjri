@@ -47,7 +47,7 @@ class GenerateStoreContentJobTest extends TestCase
         $mockService = Mockery::mock(StoreContentGenerationService::class);
         $mockService->shouldReceive('generateContent')
             ->once()
-            ->with($store, 'default')
+            ->with(Mockery::on(fn ($arg) => $arg instanceof Store && $arg->id === $store->id), 'default')
             ->andReturn([
                 'hero' => ['title' => 'Test Hero'],
                 'features' => ['items' => []],
@@ -97,7 +97,11 @@ class GenerateStoreContentJobTest extends TestCase
         $mockService = Mockery::mock(StoreContentGenerationService::class);
         $mockService->shouldReceive('generateContent')
             ->once()
-            ->andReturn(['hero' => ['title' => 'Test']]);
+            ->andReturn(['hero' => [
+                'title' => 'Transform Your Space Today',
+                'subtitle' => 'Discover our curated collection of home accessories.',
+                'button_text' => 'Shop Now',
+            ]]);
 
         $this->app->instance(StoreContentGenerationService::class, $mockService);
 
@@ -237,7 +241,7 @@ class GenerateStoreContentJobTest extends TestCase
         $mockService = Mockery::mock(StoreContentGenerationService::class);
         $mockService->shouldReceive('generateContent')
             ->once()
-            ->with($store, 'unknown_theme')
+            ->with(Mockery::on(fn ($arg) => $arg instanceof Store && $arg->id === $store->id), 'unknown_theme')
             ->andReturn([]);
 
         $this->app->instance(StoreContentGenerationService::class, $mockService);

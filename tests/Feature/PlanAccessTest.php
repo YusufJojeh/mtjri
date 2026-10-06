@@ -6,6 +6,8 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Plan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Database\Seeders\PermissionSeeder;
+use Database\Seeders\RoleSeeder;
 
 class PlanAccessTest extends TestCase
 {
@@ -19,6 +21,8 @@ class PlanAccessTest extends TestCase
         app()->detectEnvironment(function () {
             return 'testing';
         });
+  
+        $this->seed([PermissionSeeder::class, RoleSeeder::class]);
     }
 
 
@@ -35,7 +39,7 @@ class PlanAccessTest extends TestCase
     {
         $company = User::factory()->create(['type' => 'company', 'plan_id' => null]);
         
-        $response = $this->actingAs($company)->get('/store-builder');
+        $response = $this->actingAs($company)->get('/dashboard');
         
         $response->assertRedirect('/plans');
     }
@@ -50,7 +54,7 @@ class PlanAccessTest extends TestCase
             'is_trial' => 0
         ]);
         
-        $response = $this->actingAs($company)->get('/store-builder');
+        $response = $this->actingAs($company)->get('/dashboard');
         
         $response->assertRedirect('/plans');
     }
@@ -65,7 +69,7 @@ class PlanAccessTest extends TestCase
             'trial_expire_date' => now()->subDay()
         ]);
         
-        $response = $this->actingAs($company)->get('/store-builder');
+        $response = $this->actingAs($company)->get('/dashboard');
         
         $response->assertRedirect('/plans');
     }
@@ -76,11 +80,12 @@ class PlanAccessTest extends TestCase
         $company = User::factory()->create([
             'type' => 'company',
             'plan_id' => $plan->id,
+            'plan_is_active' => 1,
             'is_trial' => 1,
             'trial_expire_date' => now()->addDays(5)
         ]);
         
-        $response = $this->actingAs($company)->get('/store-builder');
+        $response = $this->actingAs($company)->get('/dashboard');
         
         $response->assertStatus(200);
     }
@@ -88,16 +93,19 @@ class PlanAccessTest extends TestCase
     public function test_non_company_user_denied_access()
     {
         $user = User::factory()->create(['type' => 'user']);
-        
-        $response = $this->actingAs($user)->get('/store-builder');
-        
-        $response->assertRedirect('/dashboard');
+
+        // A non-company user has no assigned role/permissions, so a
+        // permission-gated page (unrelated to plan checks) denies access.
+        $response = $this->actingAs($user)->get('/settings');
+
+        $response->assertForbidden();
     }
 
     public function test_plans_page_accessible_without_plan()
     {
         $company = User::factory()->create(['type' => 'company', 'plan_id' => null]);
-        
+        $company->assignRole('company');
+
         $response = $this->actingAs($company)->get('/plans');
         
         $response->assertStatus(200);

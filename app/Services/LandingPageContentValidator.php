@@ -7,7 +7,7 @@ class LandingPageContentValidator
     /**
      * Validate a section's content
      */
-    public function validateSection(string $section, array $content, array $defaults): array
+    public function validateSection(string $section, mixed $content, array $defaults): array
     {
         $errors = [];
         $warnings = [];

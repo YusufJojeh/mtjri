@@ -86,7 +86,7 @@ class LandingPageContextBuilderTest extends TestCase
         $voice = $this->builder->getBrandVoice('fashion', 'A fashion store');
 
         $this->assertIsString($voice);
-        $this->assertStringContainsString('style', $voice);
+        $this->assertStringContainsString('stylish', $voice);
     }
 
     public function test_context_includes_cultural_adaptations(): void

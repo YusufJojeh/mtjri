@@ -41,10 +41,11 @@ function Header({
   theme = 'default'
 }: HeaderProps) {
   const { props } = usePage();
-  const storeSlug = (props.store as any)?.slug || props.theme || 'home-accessories';
-  
+  const storeProps = props.store as any;
+  const storeSlug = storeProps?.slug || props.theme || 'home-accessories';
+
   // Get custom pages from store data if not provided via props
-  const storeCustomPages = props.store?.custom_pages || [];
+  const storeCustomPages = storeProps?.custom_pages || [];
   const { count } = useCart();
   const { count: wishlistCountFromContext } = useWishlist();
   

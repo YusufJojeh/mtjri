@@ -57,8 +57,8 @@ export default function EditCategory() {
     setFormData(prev => ({ ...prev, image: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (e?: FormEvent | React.MouseEvent) => {
+    e?.preventDefault();
     router.put(route('categories.update', category.id), formData);
   };
 

@@ -27,6 +27,7 @@ class ContentGenerationErrorHandlingTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -48,10 +49,16 @@ class ContentGenerationErrorHandlingTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
+        // OpenAIContentGenerator::generateText() is contractually typed to
+        // return array; a real implementation that receives malformed JSON
+        // from the OpenAI API must translate that into an error-shaped array
+        // before returning, not a raw string. Simulate that translated
+        // failure at this boundary.
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
-            ->andReturn('invalid json string');
+            ->andReturn(['error' => 'Invalid JSON response from OpenAI']);
 
         $this->app->instance(OpenAIContentGenerator::class, $mockOpenAI);
 
@@ -87,6 +94,7 @@ class ContentGenerationErrorHandlingTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -112,6 +120,7 @@ class ContentGenerationErrorHandlingTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')

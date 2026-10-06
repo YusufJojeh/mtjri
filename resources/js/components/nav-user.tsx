@@ -9,9 +9,9 @@ import { ChevronsUpDown } from 'lucide-react';
 
 export function NavUser({ position }: { position: 'left' | 'right' }) {
     const { auth } = usePage<SharedData>().props;
-    if (!auth.user) return null;
     const { state } = useSidebar();
     const isMobile = useIsMobile();
+    if (!auth.user) return null;
 
     return (
         <SidebarMenu>
@@ -40,7 +40,7 @@ export function NavUser({ position }: { position: 'left' | 'right' }) {
                         align='end'
                         side={isMobile ? 'bottom' : state === 'collapsed' ? 'left' : 'bottom'}
                     >
-                        <UserMenuContent user={auth.user} />
+                        <UserMenuContent user={auth.user} position={position} />
                     </DropdownMenuContent>
                 </DropdownMenu>
             </SidebarMenuItem>

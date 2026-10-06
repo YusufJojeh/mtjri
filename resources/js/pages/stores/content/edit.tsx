@@ -15,7 +15,6 @@ import { useTranslation } from 'react-i18next';
 import { router } from '@inertiajs/react';
 import MediaLibraryButton from '@/components/MediaLibraryButton';
 import { getImageUrl } from '@/utils/image-helper';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import axios from 'axios';
 import { getThemeComponents } from '@/config/theme-registry';
 import { CartProvider } from '@/contexts/CartContext';
@@ -171,7 +170,7 @@ export default function StoreContentEdit({
             if (newSettings && Object.keys(newSettings).length > 0) {
               setData('content', {
                 ...newSettings,
-                preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                   use_custom_image: false,
                   custom_preview_image: ''
                 }
@@ -186,7 +185,7 @@ export default function StoreContentEdit({
                 if (newSettings && Object.keys(newSettings).length > 0) {
                   setData('content', {
                     ...newSettings,
-                    preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                    preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                       use_custom_image: false,
                       custom_preview_image: ''
                     }
@@ -212,7 +211,7 @@ export default function StoreContentEdit({
 
       return () => clearInterval(interval);
     }
-  }, [contentGenerationStatus, data.content.preview_settings]);
+  }, [contentGenerationStatus, data.content?.preview_settings]);
 
   const updateNestedField = (path: string[], value: any) => {
     const newContent = { ...data.content };
@@ -767,8 +766,8 @@ export default function StoreContentEdit({
 
   // Render preview using real React components
   const renderPreview = () => {
-    const contentToPreview: Record<string, any> = data.content as Record<string, any>;
-    if (!contentToPreview) {
+    const rawContent = data.content as Record<string, any> | null;
+    if (!rawContent) {
       return (
         <div className='flex items-center justify-center min-h-[400px] text-muted-foreground'>
           <p>{t('No content to preview')}</p>
@@ -777,13 +776,13 @@ export default function StoreContentEdit({
     }
 
     // Ensure header and footer are always included in contentToPreview for StoreLayout
-    // StoreLayout will use content.header and content.footer automatically
-    if (!contentToPreview.header) {
-      contentToPreview.header = {};
-    }
-    if (!contentToPreview.footer) {
-      contentToPreview.footer = {};
-    }
+    // StoreLayout will use content.header and content.footer automatically.
+    // Build a local copy rather than mutating `data.content` (React state) in place.
+    const contentToPreview: Record<string, any> = {
+      ...rawContent,
+      header: rawContent.header || {},
+      footer: rawContent.footer || {},
+    };
 
     // Check for custom preview image
     if (contentToPreview.preview_settings?.use_custom_image && contentToPreview.preview_settings?.custom_preview_image) {
@@ -1102,7 +1101,7 @@ export default function StoreContentEdit({
                             if (newSettings && Object.keys(newSettings).length > 0) {
                               setData('content', {
                                 ...newSettings,
-                                preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                                preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                                   use_custom_image: false,
                                   custom_preview_image: ''
                                 }
@@ -1161,7 +1160,7 @@ export default function StoreContentEdit({
                                     if (newSettings && Object.keys(newSettings).length > 0) {
                                       setData('content', {
                                         ...newSettings,
-                                        preview_settings: newSettings.preview_settings || data.content.preview_settings || {
+                                        preview_settings: newSettings.preview_settings || data.content?.preview_settings || {
                                           use_custom_image: false,
                                           custom_preview_image: ''
                                         }
@@ -1181,7 +1180,7 @@ export default function StoreContentEdit({
                   )}
                   <div className='space-y-4 sm:space-y-6 order-2 lg:order-1'>
                     {tab.sections.map(sectionKey => {
-                      const content = data.content as Record<string, any>;
+                      const content = (data.content ?? {}) as Record<string, any>;
                       return content[sectionKey] ? renderSection(sectionKey, content[sectionKey]) : null;
                     })}
                   </div>
@@ -1211,7 +1210,7 @@ export default function StoreContentEdit({
                           </Button>
                         </div>
                       </div>
-                      {data.content.preview_settings?.use_custom_image && (
+                      {data.content?.preview_settings?.use_custom_image && (
                         <Badge variant='outline' className='text-primary border-primary text-xs'>
                           {t('Custom Image')}
                         </Badge>

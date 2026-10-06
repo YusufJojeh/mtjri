@@ -23,6 +23,7 @@ export default function DefaultDashboard({ message, availableActions }: Props) {
   // Get dynamic theme color value
   const getThemeColorValue = () => {
     const THEME_COLORS = {
+      tijraa: '#0B6B5A',
       blue: '#3b82f6',
       green: '#10b981',
       purple: '#8b5cf6',

@@ -27,6 +27,7 @@ class ContentGenerationPerformanceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -56,6 +57,7 @@ class ContentGenerationPerformanceTest extends TestCase
         ]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = Mockery::mock(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')

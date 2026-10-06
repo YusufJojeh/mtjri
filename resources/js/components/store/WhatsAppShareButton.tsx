@@ -7,7 +7,7 @@ interface WhatsAppShareButtonProps {
   message: string;
   className?: string;
   variant?: 'default' | 'outline' | 'ghost';
-  size?: 'default' | 'm' | 'lg' | 'icon';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
 }
 
 /**

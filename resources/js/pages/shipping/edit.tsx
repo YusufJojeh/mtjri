@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PageTemplate } from '@/components/page-template';
+import { PageTemplate, type PageAction } from '@/components/page-template';
 import { ArrowLeft, Save } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -67,11 +67,11 @@ export default function EditShipping() {
     router.put(route('shipping.update', shipping.id), formData);
   };
 
-  const pageActions = [
+  const pageActions: PageAction[] = [
     {
       label: t('Back'),
       icon: <ArrowLeft className='h-4 w-4' />,
-      variant: 'outline' as const,
+      variant: 'outline',
       onClick: () => router.visit(route('shipping.index'))
     }
   ];
@@ -80,7 +80,7 @@ export default function EditShipping() {
     pageActions.push({
       label: t('Update Shipping'),
       icon: <Save className='h-4 w-4' />,
-      variant: 'default' as const,
+      variant: 'default',
       onClick: () => handleSubmit()
     });
   }

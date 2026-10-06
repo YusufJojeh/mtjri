@@ -50,7 +50,7 @@ export const WishlistProvider: React.FC<WishlistProviderProps> = ({ children }) 
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   
-  const storeId = props.store?.id;
+  const storeId = (props.store as { id?: number } | undefined)?.id;
 
   const fetchWishlist = async () => {
     if (!storeId) return;

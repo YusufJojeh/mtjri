@@ -1,5 +1,14 @@
 import '@testing-library/jest-dom';
 
+// jsdom doesn't implement ResizeObserver, which Radix UI primitives (e.g.
+// Switch) use internally to measure themselves on mount.
+// eslint-disable-next-line no-undef
+global.ResizeObserver = class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+};
+
 // Mock Inertia.js global functions
 // eslint-disable-next-line no-undef
 global.route = (name, params = {}) => {

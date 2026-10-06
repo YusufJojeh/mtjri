@@ -192,15 +192,9 @@ export default function DocumentationShow({
 
   return (
     <>
-      <Head 
-        title={`${article.title} - ${t('documentation.title', 'Documentation')}`}
-        meta={[
-          {
-            name: 'description',
-            content: article.meta_description || article.title,
-          },
-        ]}
-      />
+      <Head title={`${article.title} - ${t('documentation.title', 'Documentation')}`}>
+        <meta name='description' content={article.meta_description || article.title} />
+      </Head>
       
       <DocumentationLayout
         categories={categories}

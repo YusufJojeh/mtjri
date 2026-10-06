@@ -2,6 +2,8 @@
 
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\Store;
+use Illuminate\Support\Facades\Auth;
 
 beforeEach(function () {
     // Create a superadmin user and ensure landingPageEnabled is true
@@ -15,20 +17,30 @@ beforeEach(function () {
     );
 });
 
-test('registration screen can be rendered', function () {
+test('legacy registration route redirects to the registration stepper', function () {
     $response = $this->get('/register');
+
+    $response->assertRedirect(route('register.stepper.index'));
+});
+
+test('registration stepper screen can be rendered', function () {
+    $response = $this->get(route('register.stepper.index'));
 
     $response->assertStatus(200);
 });
 
-test('new users can register', function () {
-    $response = $this->post('/register', [
+test('new users can register via the registration stepper', function () {
+    $response = $this->postJson(route('register.stepper.step1'), [
         'name' => 'Test User',
         'email' => 'test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
+        'terms' => true,
     ]);
 
+    $response->assertOk()->assertJsonPath('success', true);
+
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
+    expect(Store::where('user_id', Auth::id())->exists())->toBeTrue();
 });

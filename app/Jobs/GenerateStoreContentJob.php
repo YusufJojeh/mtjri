@@ -16,8 +16,8 @@ class GenerateStoreContentJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $storeId;
-    protected $theme;
+    public $storeId;
+    public $theme;
 
     /**
      * Create a new job instance.
@@ -42,9 +42,13 @@ class GenerateStoreContentJob implements ShouldQueue
     {
         Log::info('Starting GenerateStoreContentJob for store ' . $this->storeId . ' with theme ' . $this->theme);
 
-        try {
-            $store = Store::findOrFail($this->storeId);
+        // Let a missing store throw immediately: it is a job configuration
+        // error, not a recoverable generation failure, and the broad catch
+        // below writes a failed status keyed on $this->storeId, which would
+        // violate the store_settings FK constraint for a nonexistent store.
+        $store = Store::findOrFail($this->storeId);
 
+        try {
             // Update status to processing
             StoreSetting::updateOrCreate(
                 ['store_id' => $this->storeId, 'theme' => $this->theme],

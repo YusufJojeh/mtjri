@@ -37,7 +37,7 @@ class StripePaymentTest extends TestCase
         ]);
 
         // Test payment methods API
-        $response = $this->get(route('payment.methods'));
+        $response = $this->actingAs($superAdmin)->get(route('payment.methods'));
         
         $response->assertStatus(200);
         $data = $response->json();
@@ -77,6 +77,7 @@ class StripePaymentTest extends TestCase
         $response = $this->post(route('stripe.payment'), [
             'payment_method_id' => 'pm_test_123',
             'plan_id' => $plan->id,
+            'billing_cycle' => 'monthly',
             'coupon_code' => '',
             'cardholder_name' => 'Test User',
         ]);

@@ -134,7 +134,7 @@ export default function POSTransactions() {
               placeholder={t('Search transactions...')}
               className='ps-8'
               value={searchTerm}
-              onChange={(e) => setSearchTerm<any>(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <div className='flex gap-2'>

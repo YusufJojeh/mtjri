@@ -45,7 +45,7 @@ export function PageCrudWrapper({
   breadcrumbs
 }: PageCrudWrapperProps) {
   const { t } = useTranslation();
-  const { entity, table, filters = [], form, hooks } = config;
+  const { entity, table, filters = [], form = { fields: [] }, hooks } = config;
   const { auth, ...pageProps } = usePage().props as any;
   const permissions = auth?.permissions || [];
   
@@ -225,8 +225,8 @@ export function PageCrudWrapper({
     }
     // Fix permissions format for other entities
     else if (processedFormData.permissions && Array.isArray(processedFormData.permissions)) {
-      const permissionsObj = {};
-      processedFormData.permissions.forEach((id: any, index: any) => {
+      const permissionsObj: Record<number, string> = {};
+      processedFormData.permissions.forEach((id: any, index: number) => {
         permissionsObj[index] = String(id);
       });
       processedFormData.permissions = permissionsObj;
@@ -236,13 +236,21 @@ export function PageCrudWrapper({
     if (entity.name === 'permissions' && formMode === 'edit') {
       delete processedFormData.name;
     }
-    
-    // Check if this entity has file uploads
-    const hasFileFields = form.fields.some(field => field.type === 'file');
-    
+
+    // Give the page a last chance to default/normalize fields before submission
+    let finalFormData = processedFormData;
+    if (formMode === 'create' && hooks?.beforeCreate) {
+      finalFormData = hooks.beforeCreate(finalFormData) || finalFormData;
+    } else if (formMode === 'edit' && hooks?.beforeUpdate) {
+      finalFormData = hooks.beforeUpdate(finalFormData) || finalFormData;
+    }
+
+    // Check if this entity has file uploads (view/delete-only entities have no form)
+    const hasFileFields = form?.fields.some(field => field.type === 'file') ?? false;
+
     if (hasFileFields) {
       // Get file field names
-      const fileFields = form.fields
+      const fileFields = form!.fields
         .filter(field => field.type === 'file')
         .map(field => field.name);
       
@@ -250,17 +258,17 @@ export function PageCrudWrapper({
       const formDataObj = new FormData();
       
       // Add all fields to FormData
-      Object.keys(processedFormData).forEach(key => {
+      Object.keys(finalFormData).forEach(key => {
         // For file fields in edit mode
         if (fileFields.includes(key) && formMode === 'edit') {
           // Only include the file if a new one was selected
-          if (processedFormData[key] && typeof processedFormData[key] === 'object') {
-            formDataObj.append(key, processedFormData[key]);
+          if (finalFormData[key] && typeof finalFormData[key] === 'object') {
+            formDataObj.append(key, finalFormData[key]);
           }
           // Otherwise skip this field - don't send empty file fields
           return;
         }
-        formDataObj.append(key, processedFormData[key]);
+        formDataObj.append(key, finalFormData[key]);
       });
       
       if (formMode === 'create') {
@@ -305,7 +313,7 @@ export function PageCrudWrapper({
       // Show loading toast
       toast.loading(t('Creating...'));
       
-      router.post(entity.endpoint, processedFormData, {
+      router.post(entity.endpoint, finalFormData, {
         onSuccess: (page) => {
           setIsFormModalOpen(false);
           toast.dismiss();
@@ -322,7 +330,7 @@ export function PageCrudWrapper({
       // Show loading toast
       toast.loading(t('Updating...'));
       
-      router.put(`${entity.endpoint}/${currentItem.id}`, processedFormData, {
+      router.put(`${entity.endpoint}/${currentItem.id}`, finalFormData, {
         onSuccess: (page) => {
           setIsFormModalOpen(false);
           toast.dismiss();
@@ -499,7 +507,7 @@ export function PageCrudWrapper({
               <div className='w-full mt-3 p-3 sm:p-4 bg-gray-50 border rounded-md'>
                 <div className='flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 items-stretch sm:items-end'>
                   {filters.map((filter) => {
-                    const filterKey = filter.name || filter.key;
+                    const filterKey = filter.key;
                     return (
                       <div key={filterKey} className='space-y-2 flex-1 sm:flex-none min-w-0'>
                         <Label className='text-xs sm:text-sm'>{filter.label}</Label>

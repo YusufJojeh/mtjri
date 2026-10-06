@@ -122,7 +122,7 @@ export function RolePermissionCheckboxGroup({
   };
   
   const updateParent = (newSelected: string[]) => {
-    const idToNameMap = {};
+    const idToNameMap: Record<string, string> = {};
     
     Object.values(filteredPermissions).forEach(group => {
       group.forEach(permission => {

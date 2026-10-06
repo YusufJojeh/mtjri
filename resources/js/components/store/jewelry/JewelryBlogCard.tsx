@@ -62,7 +62,7 @@ function JewelryBlogCard({ post }: JewelryBlogCardProps) {
           <div className='flex items-center space-x-1'>
             <Calendar className='h-4 w-4' />
             <span>
-              {new Date(post.published_at || post.created_at).toLocaleDateString('en-US', {
+              {new Date(post.published_at || post.created_at || Date.now()).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'

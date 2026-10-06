@@ -17,10 +17,10 @@ class RegenerateSectionJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $storeId;
-    protected $sectionName;
-    protected $theme;
-    protected $jobId;
+    public $storeId;
+    public $sectionName;
+    public $theme;
+    public $jobId;
 
     /**
      * Create a new job instance.
@@ -48,7 +48,13 @@ class RegenerateSectionJob implements ShouldQueue
     public function handle(StoreContentGenerationService $contentGenerationService)
     {
         $cacheKey = "content_regeneration:job:{$this->jobId}";
-        
+
+        // Let a missing store throw immediately: it is a job configuration
+        // error, not a recoverable generation failure, and the broad catch
+        // below writes a failed status keyed on $this->storeId, which would
+        // violate the store_settings FK constraint for a nonexistent store.
+        $store = Store::findOrFail($this->storeId);
+
         try {
             // Update status to processing
             $this->updateProgress([
@@ -59,8 +65,6 @@ class RegenerateSectionJob implements ShouldQueue
                 'error_code' => null,
                 'error_message' => null,
             ]);
-
-            $store = Store::findOrFail($this->storeId);
 
             // Generate content with progress callback
             $generatedSectionContent = $contentGenerationService->generateSpecificSection(
@@ -90,7 +94,10 @@ class RegenerateSectionJob implements ShouldQueue
                 // Update StoreSetting with failed status
                 StoreSetting::updateOrCreate(
                     ['store_id' => $this->storeId, 'theme' => $this->theme],
-                    ['content_generation_status' => 'failed']
+                    [
+                        'content_generation_status' => 'failed',
+                        'content' => StoreSetting::getSettings($this->storeId, $this->theme),
+                    ]
                 );
 
                 return;
@@ -145,14 +152,15 @@ class RegenerateSectionJob implements ShouldQueue
             // Determine error code
             $errorCode = 'GENERATION_FAILED';
             $errorMessage = $e->getMessage();
+            $errorMessageLower = strtolower($errorMessage);
 
-            if (str_contains($errorMessage, 'API key') || str_contains($errorMessage, 'OpenAI')) {
+            if (str_contains($errorMessageLower, 'api key') || str_contains($errorMessageLower, 'openai')) {
                 $errorCode = 'OPENAI_KEY_MISSING';
                 $errorMessage = __('OpenAI API key is not configured. Please configure it in settings.');
-            } elseif (str_contains($errorMessage, 'rate limit') || str_contains($errorMessage, '429')) {
+            } elseif (str_contains($errorMessageLower, 'rate limit') || str_contains($errorMessage, '429')) {
                 $errorCode = 'OPENAI_RATE_LIMIT';
                 $errorMessage = __('Rate limit exceeded. Please wait a moment and try again.');
-            } elseif (str_contains($errorMessage, 'timeout')) {
+            } elseif (str_contains($errorMessageLower, 'timeout')) {
                 $errorCode = 'TIMEOUT';
                 $errorMessage = __('Generation timed out. Please try again.');
             }
@@ -170,7 +178,10 @@ class RegenerateSectionJob implements ShouldQueue
             // Update StoreSetting with failed status
             StoreSetting::updateOrCreate(
                 ['store_id' => $this->storeId, 'theme' => $this->theme],
-                ['content_generation_status' => 'failed']
+                [
+                    'content_generation_status' => 'failed',
+                    'content' => StoreSetting::getSettings($this->storeId, $this->theme),
+                ]
             );
         }
     }

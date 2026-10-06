@@ -55,6 +55,7 @@ class StoreContentGenerationServiceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id, 'description' => 'A test e-commerce store for vintage clothes']);
 
         Setting::setGlobal('chatgptKey', 'test-openai-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
         Setting::setGlobal('unsplashAccessKey', 'test-unsplash-key');
 
         // Configure mock for successful OpenAI response
@@ -125,6 +126,7 @@ class StoreContentGenerationServiceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id, 'description' => 'A test e-commerce store']);
 
         Setting::setGlobal('chatgptKey', 'test-openai-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
         Setting::setGlobal('unsplashAccessKey', 'test-unsplash-key');
 
         // Configure mock to throw an exception for OpenAI
@@ -181,6 +183,7 @@ class StoreContentGenerationServiceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id, 'description' => 'A test e-commerce store']);
 
         Setting::setGlobal('chatgptKey', 'test-openai-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
         Setting::setGlobal('unsplashAccessKey', 'test-unsplash-key');
 
         // Configure mock for successful OpenAI response
@@ -222,57 +225,25 @@ class StoreContentGenerationServiceTest extends TestCase
     }
 
     #[Test]
-    public function it_uses_default_theme_content_if_no_ai_key_set()
+    public function it_throws_when_no_ai_key_is_configured()
     {
         // Arrange
         $user = User::factory()->create(['lang' => 'en']);
         $store = Store::factory()->create(['user_id' => $user->id, 'description' => 'A test e-commerce store']);
 
-        // Do NOT set chatgptKey
+        // Do NOT set chatgptKey: generateContent() fails fast with a clear
+        // configuration error rather than silently serving generic default
+        // content mislabeled as AI-generated. Callers (the queued jobs) catch
+        // this and record a 'failed' content_generation_status.
         Setting::setGlobal('unsplashAccessKey', 'test-unsplash-key');
-
-        // Configure mock for OpenAI to return empty content (simulating no key/failure)
-        $mockOpenAIContentGenerator = $this->app->make(OpenAIContentGenerator::class);
-        $mockOpenAIContentGenerator->shouldReceive('generateText')
-            ->andReturnUsing(function ($prompt, $userLanguage) {
-                // If the key is not set, the service should eventually return empty for AI content
-                return ['error' => 'OpenAI API key not set in settings.'];
-            });
-
-        // Mock Unsplash API call
-        Http::fake([
-            'api.unsplash.com/*' => Http::response([
-                'results' => [
-                    [
-                        'id' => 'photo-1',
-                        'urls' => ['regular' => 'https://images.unsplash.com/photo-1'],
-                        'links' => [
-                            'download_location' => 'https://api.unsplash.com/photos/photo-1/download',
-                            'html' => 'https://unsplash.com/photos/photo-1'
-                        ],
-                        'user' => [
-                            'name' => 'John Doe',
-                            'username' => 'johndoe',
-                            'links' => ['html' => 'https://unsplash.com/@johndoe']
-                        ]
-                    ]
-                ]
-            ], 200),
-            'images.unsplash.com/*' => Http::response('mock-image-content', 200),
-        ]);
 
         $theme = 'fashion';
 
-        // Act
-        $generatedContent = $this->service->generateContent($store, $theme);
+        // Act & Assert
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('OpenAI API key is not configured.');
 
-        // Assert
-        $defaultContent = StoreSetting::getThemeDefaults($theme);
-
-        $this->assertIsArray($generatedContent);
-        $this->assertEquals($defaultContent['hero']['title'], $generatedContent['hero']['title']);
-        $this->assertArrayHasKey('image', $generatedContent['hero']); // Unsplash should still work
-        $this->assertArrayNotHasKey('error', $generatedContent['hero']); // No error displayed at the top level
+        $this->service->generateContent($store, $theme);
     }
 
     #[Test]
@@ -283,6 +254,7 @@ class StoreContentGenerationServiceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id, 'description' => 'A test e-commerce store']);
 
         Setting::setGlobal('chatgptKey', 'test-openai-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
         // Do NOT set unsplashAccessKey
 
         // Configure mock for successful OpenAI response
@@ -323,6 +295,7 @@ class StoreContentGenerationServiceTest extends TestCase
         ]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -350,6 +323,7 @@ class StoreContentGenerationServiceTest extends TestCase
         ]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -373,6 +347,7 @@ class StoreContentGenerationServiceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -394,6 +369,7 @@ class StoreContentGenerationServiceTest extends TestCase
         $store = Store::factory()->create(['user_id' => $user->id]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -422,6 +398,7 @@ class StoreContentGenerationServiceTest extends TestCase
         ]);
 
         Setting::setGlobal('chatgptKey', 'test-key');
+        Setting::setGlobal('chatgptModel', 'gpt-4');
 
         $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
         $mockOpenAI->shouldReceive('generateText')
@@ -447,6 +424,7 @@ class StoreContentGenerationServiceTest extends TestCase
             $store = Store::factory()->create(['user_id' => $user->id]);
 
             Setting::setGlobal('chatgptKey', 'test-key');
+            Setting::setGlobal('chatgptModel', 'gpt-4');
 
             $mockOpenAI = $this->app->make(OpenAIContentGenerator::class);
             $mockOpenAI->shouldReceive('generateText')

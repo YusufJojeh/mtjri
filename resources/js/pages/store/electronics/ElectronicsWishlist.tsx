@@ -196,7 +196,7 @@ function ElectronicsWishlistContent({
                             <div className='flex items-center gap-2 mb-4'>
                               {hasDiscount ? (
                                 <>
-                                  <span className='text-2xl font-bold text-blue-600'>{formatCurrency(product?.sale_price!, storeSettings, currencies)}</span>
+                                  <span className='text-2xl font-bold text-blue-600'>{formatCurrency(product?.sale_price ?? 0, storeSettings, currencies)}</span>
                                   <span className='text-lg text-gray-500 line-through'>{formatCurrency(product?.price, storeSettings, currencies)}</span>
                                 </>
                               ) : (

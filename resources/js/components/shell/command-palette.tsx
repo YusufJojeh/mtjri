@@ -207,6 +207,17 @@ export function CommandPalette({ groups, actions }: Props) {
                                 </Command.Group>
                             )}
 
+                            {canAsk && query.trim().length >= 3 && (
+                                <Command.Group heading={t('Ask Tijraa')} className="[&_[cmdk-group-heading]]:text-muted-foreground mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold">
+                                    <Command.Item value="ask-tijraa" onSelect={() => go(route('copilot.index', { q: query.trim() }))} className={itemCls}>
+                                        <Sparkles className="text-ai" />
+                                        <span className="min-w-0 flex-1 truncate">
+                                            {t('Ask Tijraa')}: <span className="font-medium">“{query.trim()}”</span>
+                                        </span>
+                                    </Command.Item>
+                                </Command.Group>
+                            )}
+
                             {matchedActions.length > 0 && (
                                 <Command.Group heading={t('Actions')} className="[&_[cmdk-group-heading]]:text-muted-foreground mb-1 [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-semibold">
                                     {matchedActions.map((a) => (

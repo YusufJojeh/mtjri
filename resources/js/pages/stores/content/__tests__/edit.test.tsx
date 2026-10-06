@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useForm, router } from '@inertiajs/react';
 import StoreContentEdit from '../edit';
@@ -110,10 +110,12 @@ jest.mock('@/config/theme-registry', () => ({
 // Mock Cart and Wishlist providers
 jest.mock('@/contexts/CartContext', () => ({
   CartProvider: ({ children }: any) => <div data-testid='cart-provider'>{children}</div>,
+  useCart: () => ({ count: 0, items: [], addItem: jest.fn(), removeItem: jest.fn(), updateQuantity: jest.fn(), clearCart: jest.fn() }),
 }));
 
 jest.mock('@/contexts/WishlistContext', () => ({
   WishlistProvider: ({ children }: any) => <div data-testid='wishlist-provider'>{children}</div>,
+  useWishlist: () => ({ count: 0, items: [], toggleItem: jest.fn(), isInWishlist: jest.fn(() => false) }),
 }));
 
 // Mock image helper
@@ -124,6 +126,7 @@ jest.mock('@/utils/image-helper', () => ({
 // Mock axios
 jest.mock('axios', () => ({
   post: jest.fn(() => Promise.resolve({ data: { success: true, content: {} } })),
+  get: jest.fn(() => Promise.resolve({ data: { status: 'completed', progress: 100, content: null } })),
 }));
 
 // Mock PageTemplate to avoid complex dependency chain
@@ -148,7 +151,14 @@ jest.mock('@/components/MediaLibraryButton', () => () => <button>Media Library</
 
 // Mock toast
 jest.mock('@/components/custom-toast', () => ({
-  toast: jest.fn(),
+  toast: Object.assign(jest.fn(), {
+    success: jest.fn(),
+    error: jest.fn(),
+    loading: jest.fn(() => 'toast-id'),
+    dismiss: jest.fn(),
+    info: jest.fn(),
+    warning: jest.fn(),
+  }),
 }));
 
 // Mock Dialog component to avoid provider issues
@@ -208,6 +218,8 @@ describe('StoreContentEdit', () => {
   });
 
   it("calls regenerate API and updates content on 'Regenerate' button click", async () => {
+    jest.useFakeTimers();
+
     const mockSetData = jest.fn();
     jest.mocked(useForm).mockReturnValue({
       data: { content: mockSettings, theme: 'default' },
@@ -217,10 +229,13 @@ describe('StoreContentEdit', () => {
       errors: {},
     } as any);
 
-    // Simulate a successful API response for regeneration
-    jest.mocked(router.post).mockImplementation((url: any, data: any, options: any) => {
-      options.onSuccess({ props: { settings: { content: { ...mockSettings, hero: { title: 'New Generated Hero Title' } } } } });
-      options.onFinish();
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const axios = require('axios');
+    // Kick off a background regeneration job...
+    jest.mocked(axios.post).mockResolvedValue({ data: { success: true, job_id: 'job-123' } });
+    // ...that has already completed by the time we poll its status.
+    jest.mocked(axios.get).mockResolvedValue({
+      data: { status: 'completed', progress: 100, content: { title: 'New Generated Hero Title' } },
     });
 
     // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -233,35 +248,53 @@ describe('StoreContentEdit', () => {
     );
 
     const regenerateButton = screen.getAllByRole('button', { name: /Regenerate/i })[0];
-    fireEvent.click(regenerateButton);
+    await fireEvent.click(regenerateButton);
 
-    expect(jest.mocked(router.post)).toHaveBeenCalledWith(
+    expect(axios.post).toHaveBeenCalledWith(
       expect.stringContaining('stores.content.regenerate-section'),
-      { section: 'hero', theme: 'default' },
-      expect.any(Object)
+      { section: 'hero', theme: 'default' }
     );
 
-    await waitFor(() => {
-      expect(toast).toHaveBeenCalledWith(expect.objectContaining({
-        title: 'Success',
-      }));
-    });
-    
+    // Advance past the poll's initial delay so it queries job status.
+    await jest.advanceTimersByTimeAsync(2000);
+
+    expect(axios.get).toHaveBeenCalledWith(expect.stringContaining('stores.content.regeneration-status'));
+    expect(toast.success).toHaveBeenCalledWith('Success', expect.any(Object));
+
     // Verify setData was called with the updated content
     expect(mockSetData).toHaveBeenCalledWith('content', { ...mockSettings, hero: { title: 'New Generated Hero Title' } });
+
+    jest.useRealTimers();
   });
 
-  it('opens and closes the preview iframe modal', async () => {
+  it('renders the live preview inline instead of behind a modal', async () => {
     render(<StoreContentEdit store={mockStore} settings={mockSettings} />);
 
-    const previewButton = screen.getAllByRole('button', { name: /Preview/i })[0];
-    fireEvent.click(previewButton);
-
-    expect(screen.getByRole('dialog', { name: /Live Preview/i })).toBeInTheDocument();
-    expect(screen.getByTitle('Live Preview')).toBeInTheDocument(); // iframe element
+    // The preview is now an always-visible inline panel with Tab
+    // View / Full Page toggles, not an iframe opened from a button.
+    expect(screen.getByText('Live Preview')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Tab View' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Full Page' })).toBeInTheDocument();
   });
 
-  it('hows content generation pending state', () => {
+  it('shows content generation pending state with no existing content', () => {
+    jest.mocked(useForm).mockReturnValue({
+      data: { content: {}, theme: 'default' },
+      setData: jest.fn(),
+      put: jest.fn(),
+      processing: false,
+      errors: {},
+    } as any);
+    render(<StoreContentEdit store={mockStore} settings={{}} contentGenerationStatus='pending' />);
+
+    expect(screen.getByText('Generating Content...')).toBeInTheDocument();
+    expect(screen.getByText('Your store content is being generated by AI. This may take a moment.')).toBeInTheDocument();
+
+    // In pending state, Save Changes button should be disabled
+    expect(screen.getByRole('button', { name: /Saving.../i })).toBeDisabled();
+  });
+
+  it('shows in-progress banner instead of blank state when regenerating existing content', () => {
     jest.mocked(useForm).mockReturnValue({
       data: { content: mockSettings, theme: 'default' },
       setData: jest.fn(),
@@ -271,9 +304,9 @@ describe('StoreContentEdit', () => {
     } as any);
     render(<StoreContentEdit store={mockStore} settings={mockSettings} contentGenerationStatus='pending' />);
 
-    expect(screen.getByText('Generating Content...')).toBeInTheDocument();
-    expect(screen.getByText('Your store content is being generated by AI. This may take a moment.')).toBeInTheDocument();
-    
+    expect(screen.getByText('Content Generation in Progress')).toBeInTheDocument();
+    expect(screen.getByText('Your content is being updated. Changes will appear automatically.')).toBeInTheDocument();
+
     // In pending state, Save Changes button should be disabled
     expect(screen.getByRole('button', { name: /Saving.../i })).toBeDisabled();
   });
@@ -298,11 +331,12 @@ describe('StoreContentEdit', () => {
 
       // Check that preview section is rendered
       expect(screen.getByText('Live Preview')).toBeInTheDocument();
-      
+
       // Check that real theme components are rendered
-      expect(screen.getByTestId('hero-section')).toBeInTheDocument();
-      expect(screen.getByText('Test Hero Title')).toBeInTheDocument();
-      expect(screen.getByText('Test Hero Subtitle')).toBeInTheDocument();
+      const heroSection = screen.getByTestId('hero-section');
+      expect(heroSection).toBeInTheDocument();
+      expect(within(heroSection).getByText('Test Hero Title')).toBeInTheDocument();
+      expect(within(heroSection).getByText('Test Hero Subtitle')).toBeInTheDocument();
     });
 
     it('renders preview with correct theme components based on theme prop', () => {
@@ -373,8 +407,10 @@ describe('StoreContentEdit', () => {
 
       render(<StoreContentEdit store={mockStore} settings={mockSettings} />);
 
-      // Switch to about tab
+      // Switch to about tab. Radix Tabs activates the tab on mousedown,
+      // not click, and fireEvent.click alone doesn't fire mousedown.
       const aboutTab = screen.getByRole('tab', { name: /About/i });
+      fireEvent.mouseDown(aboutTab, { button: 0 });
       fireEvent.click(aboutTab);
 
       // Check that about content is rendered in preview
@@ -411,7 +447,7 @@ describe('StoreContentEdit', () => {
       }
     });
 
-    it('hows empty state when no content to preview', () => {
+    it('shows empty state when no content to preview', () => {
       jest.mocked(useForm).mockReturnValue({
         data: { 
           content: null, 
@@ -428,7 +464,7 @@ describe('StoreContentEdit', () => {
       expect(screen.getByText('No content to preview')).toBeInTheDocument();
     });
 
-    it('hows custom preview image when enabled', () => {
+    it('shows custom preview image when enabled', () => {
       jest.mocked(useForm).mockReturnValue({
         data: { 
           content: { 
@@ -562,14 +598,13 @@ describe('StoreContentEdit', () => {
       expect(previewContainer).toBeInTheDocument();
     });
 
-    it('crolls to preview when preview button is clicked', () => {
+    it('scrolls the preview into view when the header tab is selected', () => {
+      const settingsWithHeader = {
+        ...mockSettings,
+        header: { show_welcome: true, welcome_text: 'Welcome' }
+      };
       jest.mocked(useForm).mockReturnValue({
-        data: { 
-          content: { 
-            hero: { title: 'Test Hero' }
-          }, 
-          theme: 'default' 
-        },
+        data: { content: settingsWithHeader, theme: 'default' },
         setData: jest.fn(),
         put: jest.fn(),
         processing: false,
@@ -579,13 +614,13 @@ describe('StoreContentEdit', () => {
       const scrollIntoViewMock = jest.fn();
       Element.prototype.scrollIntoView = scrollIntoViewMock;
 
-      render(<StoreContentEdit store={mockStore} settings={mockSettings} />);
+      render(<StoreContentEdit store={mockStore} settings={settingsWithHeader} />);
 
-      const previewButtons = screen.getAllByRole("button", { name: /Preview/i });
-      if (previewButtons.length > 0) {
-        fireEvent.click(previewButtons[0]);
-        // Note: scrollIntoView might be called, but it"'s" hard to test without actual DOM
-      }
+      const headerTab = screen.getByRole('tab', { name: /Header/i });
+      fireEvent.mouseDown(headerTab, { button: 0 });
+      fireEvent.click(headerTab);
+
+      expect(scrollIntoViewMock).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
     });
   });
 });

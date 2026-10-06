@@ -33,7 +33,7 @@ export default function CouponsPage() {
       },
       form: {
         ...couponsConfig.form,
-        fields: couponsConfig.form.fields.map(field => ({
+        fields: (couponsConfig.form?.fields ?? []).map(field => ({
           ...field,
           label: t(field.label),
           placeholder: field.placeholder ? t(field.placeholder) : undefined,

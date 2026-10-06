@@ -38,7 +38,7 @@ export default function ChatGptSettings({ settings = {} }: ChatGptSettingsProps)
   useEffect(() => {
     if (Object.keys(settingsData).length > 0) {
       const mergedSettings = Object.keys(defaultSettings).reduce((acc, key) => {
-        acc[key] = settingsData[key] || defaultSettings[key];
+        acc[key] = settingsData[key] || defaultSettings[key as keyof typeof defaultSettings];
         return acc;
       }, {} as Record<string, string>);
       

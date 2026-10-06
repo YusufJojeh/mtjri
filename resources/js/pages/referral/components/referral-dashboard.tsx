@@ -115,7 +115,7 @@ export default function ReferralDashboard({ userType, stats, referralLink }: Ref
                 <div>
                   <h4 className='font-medium mb-2'>{t('Referral Signups')}</h4>
                   <div className='text-2xl font-bold'>
-                    {Object.values(stats.monthlyReferrals || {}).reduce((a: any, b: any) => a + b, 0)}
+                    {Object.values(stats.monthlyReferrals || {}).reduce((a: number, b: any) => a + Number(b), 0)}
                   </div>
                   <p className='text-sm text-muted-foreground'>{t('This year')}</p>
                 </div>

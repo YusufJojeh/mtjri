@@ -87,19 +87,17 @@ export function CashfreePaymentForm({
       
       // Initialize Cashfree with mode
       const cashfreeMode = serverMode === 'production' ? 'PROD' : 'SANDBOX';
+      let cashfree: any;
       try {
-        const cashfree = (window as any).Cashfree({
+        cashfree = (window as any).Cashfree({
           mode: cashfreeMode
         });
       } catch (error) {
-        toast.error('Failed to initialize Cashfree: ' + error.message);
+        const message = error instanceof Error ? error.message : String(error);
+        toast.error('Failed to initialize Cashfree: ' + message);
         return;
       }
-      
-      const cashfree = (window as any).Cashfree({
-        mode: cashfreeMode
-      });
-      
+
       const checkoutOptions = {
         paymentSessionId: payment_session_id,
         returnUrl: window.location.origin + route('dashboard'),

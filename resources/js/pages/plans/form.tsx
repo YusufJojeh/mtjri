@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { getStoreThemes } from '@/data/storeThemes';
 
 
-interface Plan {
+export interface Plan {
   id: number;
   name: string;
   price: number;

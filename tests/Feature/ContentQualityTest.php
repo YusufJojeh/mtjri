@@ -69,9 +69,11 @@ class ContentQualityTest extends TestCase
 
         $validation = $this->validator->validateSection('hero', $content, []);
 
-        $consistency = $this->validator->checkBrandConsistency($content);
+        // checkBrandConsistency() is an internal implementation detail;
+        // exercise it through the validator's public API instead.
+        $metrics = $this->validator->checkContentQuality($content);
 
-        $this->assertTrue($consistency['consistent']);
+        $this->assertTrue($metrics['brand_consistent']);
     }
 
     public function test_generated_content_is_conversion_focused(): void

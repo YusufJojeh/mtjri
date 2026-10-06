@@ -1,12 +1,14 @@
-export const landingPageNewslettersConfig = {
+import { CrudConfig } from '@/types/crud';
+
+export const landingPageNewslettersConfig: CrudConfig = {
   entity: {
     name: 'newsletter',
+    endpoint: route('landing-page.newsletters.index'),
     permissions: {
       view: 'view-newsletters',
       create: 'create-newsletters',
       edit: 'edit-newsletters',
-      delete: 'delete-newsletters',
-      export: 'export-newsletters'
+      delete: 'delete-newsletters'
     }
   },
   table: {
@@ -36,10 +38,11 @@ export const landingPageNewslettersConfig = {
     {
       key: 'status',
       label: 'Status',
+      type: 'select',
       options: [
         { value: 'all', label: 'All' },
         { value: 'active', label: 'Active' },
-        { value: 'inactive', label: 'Inactive' }
+        { value: 'unsubscribed', label: 'Unsubscribed' }
       ]
     }
   ]

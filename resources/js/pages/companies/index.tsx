@@ -334,7 +334,7 @@ export default function Companies() {
     {
       label: 'Add Company',
       icon: <Plus className='h-4 w-4 mr-2' />,
-      variant: 'default',
+      variant: 'default' as const,
       onClick: () => handleAddNew()
     }
   ];

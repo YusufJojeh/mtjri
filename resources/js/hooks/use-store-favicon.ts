@@ -26,7 +26,8 @@ export function useStoreFavicon() {
     }
 
     // Convert relative path to full URL if needed
-    const baseUrl = props.base_url || props.globalSettings?.base_url || window.location.origin;
+    const sharedProps = props as { base_url?: string; globalSettings?: { base_url?: string } };
+    const baseUrl = sharedProps.base_url || sharedProps.globalSettings?.base_url || window.location.origin;
     let faviconUrl = favicon.startsWith('http') ? favicon : 
                      favicon.startsWith('/storage/') ? `${baseUrl}${favicon}` :
                      favicon.startsWith('/') ? `${baseUrl}${favicon}` : favicon;

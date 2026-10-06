@@ -104,10 +104,7 @@ export default function Footer({
               {/* Social Links */}
               <div className='flex space-x-4 mt-6'>
                 {Array.isArray(socialLinks) ? socialLinks.map((social, index) => {
-                  console.log('Social link:', social);
-                  // Temporarily show all social links for debugging
-                  // if (!social.url || social.url === null || social.url === '') return null;
-                  const IconComponent = {
+                  const socialIcons: Record<string, typeof Facebook> = {
                     facebook: Facebook,
                     twitter: Twitter,
                     instagram: Instagram,
@@ -115,7 +112,8 @@ export default function Footer({
                     youtube: Youtube,
                     whatsapp: MessageCircle,
                     pinterest: Instagram
-                  }[social.platform] || Facebook;
+                  };
+                  const IconComponent = socialIcons[social.platform] || Facebook;
                   
                   return (
                     <a 

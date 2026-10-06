@@ -43,8 +43,8 @@ export default function CreateCategory() {
     setFormData(prev => ({ ...prev, image: value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (e?: FormEvent | React.MouseEvent) => {
+    e?.preventDefault();
     router.post(route('categories.store'), formData);
   };
 

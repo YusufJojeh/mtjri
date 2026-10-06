@@ -87,6 +87,8 @@ export interface EntityConfig {
       endpoint: string;
       valueField: string;
       labelField: string;
+      /** Name of another field this option list is filtered by (e.g. state depends on country). */
+      dependsOn?: string;
     };
     validation?: {
       pattern?: string;
@@ -112,6 +114,10 @@ export interface EntityConfig {
   }
   
   export interface CrudHooks {
+    /** Runs before a create submission; return the (optionally mutated) data to send. */
+    beforeCreate?: (data: any) => any;
+    /** Runs before an update submission; return the (optionally mutated) data to send. */
+    beforeUpdate?: (data: any) => any;
     afterCreate?: (data: any, response: any) => void;
     afterUpdate?: (data: any, response: any) => void;
     afterDelete?: (id: any) => void;
@@ -122,7 +128,9 @@ export interface EntityConfig {
     search?: { enabled: boolean; placeholder?: string; fields?: string[] };
     table: TableConfig;
     filters: FilterField[];
-    form: FormConfig;
+    // Optional: entities that are view/delete-only (e.g. contact form submissions)
+    // never open a create/edit form and don't need one.
+    form?: FormConfig;
     hooks?: CrudHooks;
     modalSize?: 'm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | 'full';
     description?: string; // Description for accessibility in dialogs

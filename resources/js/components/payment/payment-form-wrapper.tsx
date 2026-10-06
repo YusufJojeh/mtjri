@@ -154,15 +154,17 @@ export function PaymentFormWrapper({
         return (
           <PayPalPaymentForm
             {...commonProps}
-            paypalConfig={method.config}
+            paypalClientId={method.config.client_id}
+            currency={method.config.currency || 'USD'}
           />
         );
-      
+
       case 'mercadopago':
         return (
           <MercadoPagoPaymentForm
             {...commonProps}
-            mercadopagoConfig={method.config}
+            accessToken={method.config.access_token}
+            currency={method.config.currency}
           />
         );
       

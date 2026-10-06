@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageTemplate } from '@/components/page-template';
+import { PageTemplate, type PageAction } from '@/components/page-template';
 import { ArrowLeft, Edit, MapPin, Clock, Package } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,11 +14,11 @@ export default function ShowShipping() {
   const formatCurrency = useCurrencyFormatter();
   const { hasPermission } = usePermissions();
 
-  const pageActions = [
+  const pageActions: PageAction[] = [
     {
       label: t('Back'),
       icon: <ArrowLeft className='h-4 w-4' />,
-      variant: 'outline' as const,
+      variant: 'outline',
       onClick: () => router.visit(route('shipping.index'))
     }
   ];
@@ -27,7 +27,7 @@ export default function ShowShipping() {
     pageActions.push({
       label: t('Edit Shipping'),
       icon: <Edit className='h-4 w-4' />,
-      variant: 'default' as const,
+      variant: 'default',
       onClick: () => router.visit(route('shipping.edit', shipping.id))
     });
   }

@@ -11,6 +11,10 @@ const executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined;
 export default defineConfig({
     testDir: 'e2e/flows',
     timeout: 90_000,
+    // The local dev server (php artisan serve) serves code-split JS chunks and
+    // uncached images one at a time; an Inertia visit that triggers a fresh
+    // dynamic import can take longer than Playwright's 5s assertion default.
+    expect: { timeout: 15_000 },
     fullyParallel: false,
     workers: 1,
     retries: process.env.CI ? 1 : 0,

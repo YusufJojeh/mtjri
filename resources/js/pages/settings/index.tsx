@@ -198,8 +198,6 @@ export default function Settings() {
         setActiveSection('storage-settings');
       } else if (scrollPosition >= paymentSettingsPosition) {
         setActiveSection('payment-settings');
-      } else if (scrollPosition >= emailNotificationSettingsPosition) {
-        setActiveSection('email-notification-settings');
       } else if (scrollPosition >= emailSettingsPosition) {
         setActiveSection('email-settings');
       } else if (scrollPosition >= currencySettingsPosition) {

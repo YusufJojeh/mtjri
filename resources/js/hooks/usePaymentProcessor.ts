@@ -7,7 +7,9 @@ interface PaymentData {
   planId: number;
   billingCycle: string;
   couponCode?: string;
-  paymentMethod: string;
+  // Callers pass the method separately as processPayment's first argument;
+  // it is never read off `data` itself, so it stays optional here.
+  paymentMethod?: string;
   [key: string]: any;
 }
 

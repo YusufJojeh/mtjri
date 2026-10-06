@@ -96,12 +96,14 @@ export default function OrderConfirmation({
   };
   
   const orderData = order || defaultOrder;
-  
+
   // Get theme-specific components
   const actualTheme = store?.theme || theme;
   const components = getThemeComponents(actualTheme);
   const { OrderConfirmationPage } = components;
-  
+
+  const { props } = usePage();
+
   // If theme has a specific order confirmation page, use it
   if (OrderConfirmationPage && (actualTheme === 'fashion' || actualTheme === 'electronics' || actualTheme === 'beauty-cosmetics' || actualTheme === 'jewelry' || actualTheme === 'watches' || actualTheme === 'furniture-interior' || actualTheme === 'baby-kids' || actualTheme === 'perfume-fragrances')) {
     return (
@@ -117,8 +119,6 @@ export default function OrderConfirmation({
       />
     );
   }
-  
-  const { props } = usePage();
   const storeSlug = (props.store as any)?.slug || props.theme || 'home-accessories';
   const storeSettings = props.storeSettings || {};
   const currencies = getCurrencies(props.currencies);

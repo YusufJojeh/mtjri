@@ -296,7 +296,6 @@ function CartContent({
         storeId={store.id || 1}
         theme={store.theme}
       >
-        {console.log('StoreLayout props - storeId:', store.id || 1, 'isLoggedIn:', isLoggedIn)}
         {/* Hero Section */}
         <div className='bg-primary text-white py-12'>
           <div className='container mx-auto px-4'>

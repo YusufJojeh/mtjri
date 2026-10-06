@@ -1,12 +1,14 @@
-export const landingPageContactsConfig = {
+import { CrudConfig } from '@/types/crud';
+
+export const landingPageContactsConfig: CrudConfig = {
   entity: {
     name: 'contact',
+    endpoint: route('landing-page.contacts.index'),
     permissions: {
       view: 'view-contacts',
       create: 'create-contacts',
       edit: 'edit-contacts',
-      delete: 'delete-contacts',
-      export: 'export-contacts'
+      delete: 'delete-contacts'
     }
   },
   table: {
@@ -51,10 +53,14 @@ export const landingPageContactsConfig = {
     {
       key: 'status',
       label: 'Status',
+      type: 'select',
       options: [
         { value: 'all', label: 'All' },
-        { value: 'read', label: 'Read' },
-        { value: 'unread', label: 'Unread' }
+        { value: 'new', label: 'New' },
+        { value: 'contacted', label: 'Contacted' },
+        { value: 'qualified', label: 'Qualified' },
+        { value: 'converted', label: 'Converted' },
+        { value: 'closed', label: 'Closed' }
       ]
     }
   ]

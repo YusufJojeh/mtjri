@@ -8,9 +8,10 @@ import { useTranslation } from 'react-i18next';
 
 interface UserMenuContentProps {
     user: User;
+    position: 'left' | 'right';
 }
 
-export function UserMenuContent({ user }: UserMenuContentProps) {
+export function UserMenuContent({ user, position }: UserMenuContentProps) {
     const { t } = useTranslation();
     const cleanup = useMobileNavigation();
 
@@ -18,7 +19,7 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
         <>
             <DropdownMenuLabel className='p-0 font-normal'>
                 <div className='flex items-center gap-2 px-1 py-1.5 text-start text-sm'>
-                    <UserInfo user={user} showEmail={true} />
+                    <UserInfo user={user} showEmail={true} position={position} />
                 </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

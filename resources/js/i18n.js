@@ -55,7 +55,7 @@ i18n
         // detector that would overwrite the merchant's saved choice.
         fallbackLng: 'en',
         partialBundledLanguages: true,
-        debug: typeof process !== 'undefined' && process.env?.NODE_ENV === 'development',
+        debug: typeof import.meta !== 'undefined' && import.meta.env?.DEV === true,
 
         // All supported languages (derived from resources/lang/language.json)
         supportedLngs: languageData.map(lang => lang.code),

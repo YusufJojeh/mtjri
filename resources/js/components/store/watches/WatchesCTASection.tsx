@@ -8,7 +8,7 @@ interface WatchesCTASectionProps {
 }
 
 const getIcon = (iconName: string) => {
-  const icons = {
+  const icons: Record<string, React.ReactNode> = {
     settings: <Settings className='w-8 h-8 text-slate-900' />,
     star: <Star className='w-8 h-8 text-slate-900' />,
     gift: <Gift className='w-8 h-8 text-slate-900' />,

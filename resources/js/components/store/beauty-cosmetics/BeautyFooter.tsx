@@ -11,8 +11,8 @@ interface BeautyFooterProps {
 
 export default function BeautyFooter({ storeName = 'Beauty Store', logo, content }: BeautyFooterProps) {
   const currentYear = new Date().getFullYear();
-  const { props } = usePage();
-  
+  const { props } = usePage() as { props: { storeContent?: { footer?: any } } };
+
   // Get footer content from page props, passed content, or fallback to theme JSON
   const footerContent = props.storeContent?.footer || content || beautyTheme.footer;
   

@@ -117,9 +117,7 @@ export default function DocumentationSidebar({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-0 focus:outline-none text-sm"
-            style={{
-              focusRingColor: primaryColor,
-            }}
+            style={{ '--tw-ring-color': primaryColor } as React.CSSProperties}
           />
         </div>
       </div>

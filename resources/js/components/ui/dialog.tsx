@@ -5,10 +5,10 @@ import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useModalStack } from '@/contexts/ModalStackContext'
 
-const Dialog = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root>
->(({ onOpenChange, ...props }, ref) => {
+function Dialog({
+  onOpenChange,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root>) {
   const handleOpenChange = (open: boolean) => {
     // Only allow manual close, not auto-close from focus loss
     if (!open && onOpenChange) {
@@ -20,11 +20,11 @@ const Dialog = React.forwardRef<
       onOpenChange(open);
     }
   };
-  
+
   return (
     <DialogPrimitive.Root {...props} modal={false} onOpenChange={handleOpenChange} />
   );
-})
+}
 Dialog.displayName = 'Dialog'
 
 const DialogTrigger = DialogPrimitive.Trigger

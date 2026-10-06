@@ -74,7 +74,7 @@ class RegenerateSectionJobTest extends TestCase
 
         $mockService->shouldReceive('generateSpecificSection')
             ->once()
-            ->with($store, 'hero', Mockery::type('Closure'))
+            ->with(Mockery::on(fn ($arg) => $arg instanceof Store && $arg->id === $store->id), 'hero', Mockery::type('Closure'))
             ->andReturn($expectedContent);
 
         $this->app->instance(StoreContentGenerationService::class, $mockService);
@@ -123,7 +123,7 @@ class RegenerateSectionJobTest extends TestCase
         $progressUpdates = [];
         $mockService->shouldReceive('generateSpecificSection')
             ->once()
-            ->with($store, 'hero', Mockery::on(function ($callback) use (&$progressUpdates) {
+            ->with(Mockery::on(fn ($arg) => $arg instanceof Store && $arg->id === $store->id), 'hero', Mockery::on(function ($callback) use (&$progressUpdates) {
                 // Simulate progress updates
                 $callback(30, 'Building prompt...');
                 $callback(50, 'Generating content...');

@@ -36,7 +36,7 @@ export default function RolesPage() {
         form: {
           ...rolesConfig.form,
           fields: [
-            ...rolesConfig.form.fields.filter(field => field.name !== 'permissions'),
+            ...(rolesConfig.form?.fields ?? []).filter(field => field.name !== 'permissions'),
             {
               name: 'permissions',
               label: t('Role Permissions'),

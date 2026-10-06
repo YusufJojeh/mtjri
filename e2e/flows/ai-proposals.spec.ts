@@ -14,7 +14,7 @@ async function openFirstProductEditor(page: import('@playwright/test').Page) {
 test.describe('AI proposals never overwrite merchant content', () => {
     test('description proposal: review diff, accept fills form, nothing saved until Save', async ({ page }) => {
         const { assertNoErrors } = await prepare(page);
-        const calls = await mockAi(page, { success: true, content: PROPOSAL });
+        const calls = await mockAi(page, { success: true, fields: { text: PROPOSAL } });
         await openFirstProductEditor(page);
         const editor = page.locator('.ProseMirror').first();
         const before = (await editor.innerText()).trim();
@@ -25,7 +25,7 @@ test.describe('AI proposals never overwrite merchant content', () => {
         await expect(region.getByText('AI proposal')).toBeVisible();
         // Current content untouched while the proposal is pending review.
         expect((await editor.innerText()).trim()).toBe(before);
-        expect(calls[0].prompt).toBeTruthy();
+        expect(calls[0].instructions).toBeTruthy();
 
         await region.getByRole('button', { name: 'Side by side' }).click().catch(() => {});
         await region.getByRole('button', { name: 'Accept' }).click();
@@ -40,7 +40,7 @@ test.describe('AI proposals never overwrite merchant content', () => {
 
     test('edit then use: merchant edits the proposal before it is applied', async ({ page }) => {
         const { assertNoErrors } = await prepare(page);
-        await mockAi(page, { success: true, content: PROPOSAL });
+        await mockAi(page, { success: true, fields: { text: PROPOSAL } });
         await openFirstProductEditor(page);
         await page.getByRole('button', { name: /(Improve|Write) with AI/ }).first().click();
         const region = page.getByRole('region', { name: /AI proposal for/ }).first();
@@ -53,7 +53,7 @@ test.describe('AI proposals never overwrite merchant content', () => {
 
     test('reject leaves content unchanged', async ({ page }) => {
         await prepare(page);
-        await mockAi(page, { success: true, content: PROPOSAL });
+        await mockAi(page, { success: true, fields: { text: PROPOSAL } });
         await openFirstProductEditor(page);
         const editor = page.locator('.ProseMirror').first();
         const before = (await editor.innerText()).trim();
@@ -82,7 +82,7 @@ test.describe('AI proposals never overwrite merchant content', () => {
 
     test('blog SEO: proposals per field, accepting fills only that field', async ({ page }) => {
         const { assertNoErrors } = await prepare(page);
-        await mockAi(page, { success: true, content: 'Title: Spring Home Refresh Guide\nDescription: Simple ideas to refresh every room this spring.' });
+        await mockAi(page, { success: true, fields: { title: 'Spring Home Refresh Guide', description: 'Simple ideas to refresh every room this spring.' } });
         await page.goto('/blog');
         // Inertia embeds the initial page props in #app[data-page].
         const id = await page.evaluate(() => {

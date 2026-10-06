@@ -244,7 +244,6 @@ export function PaymentProcessor({
           <CoinGatePaymentForm
             {...commonProps}
             planPrice={Number(plan.price)}
-            coingateApiToken={plan.paymentMethods?.coingate_api_token || ''}
             currency={plan.paymentMethods?.currency || 'USD'}
           />
         );

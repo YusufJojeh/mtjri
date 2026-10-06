@@ -2,11 +2,7 @@ import React from 'react';
 import { getImageUrl } from '@/utils/image-helper';
 
 interface FashionBrandLogoSliderProps {
-  content?: {
-    logos?: Array<{
-      image: string;
-    }>;
-  };
+  content?: any;
 }
 
 export default function FashionBrandLogoSlider({ content }: FashionBrandLogoSliderProps) {

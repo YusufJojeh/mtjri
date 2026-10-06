@@ -118,7 +118,7 @@ export function NavMain({ items = [], position }: { items: NavItem[]; position: 
         return active;
     };
     
-    const isChildActive = (children?: NavItem[]) => {
+    const isChildActive = (children?: NavItem[]): boolean => {
         if (!children || !Array.isArray(children)) return false;
         return children.some(child => isActive(child.href) || (Array.isArray(child.children) && isChildActive(child.children)));
     };
