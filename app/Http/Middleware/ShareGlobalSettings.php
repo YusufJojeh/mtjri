@@ -13,15 +13,17 @@ class ShareGlobalSettings
      */
     public function handle(Request $request, Closure $next)
     {
+        $frontendBaseUrl = $request->getSchemeAndHttpHost();
+
         // Skip during installation
         if (!$request->is('install/*') && !$request->is('update/*') && file_exists(storage_path('installed'))) {
             // Share settings with all Inertia responses
             Inertia::share([
-                'globalSettings' => function () {
+                'globalSettings' => function () use ($frontendBaseUrl) {
                     $settings = settings(); // Use our helper function
                     // Ensure base_url is always available
                     if (!isset($settings['base_url'])) {
-                        $settings['base_url'] = config('app.url');
+                        $settings['base_url'] = $frontendBaseUrl;
                     }
                     return $settings;
                 }

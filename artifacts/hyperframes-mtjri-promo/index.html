@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>MTJRii Product Promo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Instrument Sans";
+        src: url("assets/fonts/instrument-sans-latin-wght-normal.woff2") format("woff2");
+        font-weight: 400 800;
+        font-display: block;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #081223;
+        color: #ffffff;
+        font-family: "Instrument Sans", Arial, sans-serif;
+      }
+
+      [data-composition-id="main"] {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #081223;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      .scene-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 92px 104px;
+        gap: 30px;
+        overflow: hidden;
+        background: #081223;
+      }
+
+      .scene-content::before,
+      .scene-content::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+      }
+
+      .scene-content::before {
+        width: 640px;
+        height: 640px;
+        right: -170px;
+        top: -160px;
+        background: radial-gradient(circle, rgba(21, 120, 216, 0.42), rgba(21, 120, 216, 0));
+      }
+
+      .scene-content::after {
+        width: 420px;
+        height: 420px;
+        left: 150px;
+        bottom: -170px;
+        background: radial-gradient(circle, rgba(255, 193, 7, 0.18), rgba(255, 193, 7, 0));
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.16;
+        background-image:
+          radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px),
+          radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px);
+        background-size: 34px 34px, 46px 46px;
+      }
+
+      .layer {
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 12px 18px;
+        color: #ffc107;
+        font-size: 18px;
+        font-weight: 760;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ffc107;
+        box-shadow: 0 0 22px rgba(255, 193, 7, 0.7);
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      .hero-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 700px 1fr;
+        align-items: center;
+        gap: 74px;
+        width: 100%;
+      }
+
+      .title-xl {
+        max-width: 720px;
+        color: #ffffff;
+        font-size: 96px;
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .title-lg {
+        max-width: 860px;
+        color: #ffffff;
+        font-size: 72px;
+        font-weight: 790;
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .body-copy {
+        max-width: 650px;
+        color: #d8e4f8;
+        font-size: 31px;
+        font-weight: 510;
+        line-height: 1.28;
+        letter-spacing: 0;
+      }
+
+      .hero-frame {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 34px;
+        background: #050b16;
+        box-shadow: 0 46px 120px rgba(0, 0, 0, 0.44);
+      }
+
+      .hero-frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-shot {
+        width: 880px;
+        height: 568px;
+      }
+
+      .floating-logo {
+        position: absolute;
+        z-index: 4;
+        left: 56px;
+        top: 54px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 26px;
+        background: rgba(5, 11, 22, 0.78);
+        padding: 16px 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+      }
+
+      .floating-logo img {
+        width: 116px;
+        height: auto;
+      }
+
+      .floating-logo span {
+        color: #d8e4f8;
+        font-size: 18px;
+        font-weight: 720;
+      }
+
+      .proof-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        max-width: 660px;
+      }
+
+      .proof-card,
+      .metric-chip,
+      .proof-chip {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+      }
+
+      .proof-card {
+        padding: 20px;
+      }
+
+      .proof-number {
+        display: block;
+        color: #ffffff;
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .proof-label {
+        display: block;
+        margin-top: 10px;
+        color: #d8e4f8;
+        font-size: 18px;
+        line-height: 1.25;
+      }
+
+      .browser-frame {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 34px;
+        background: #f8fafc;
+        box-shadow: 0 50px 120px rgba(0, 0, 0, 0.46);
+      }
+
+      .browser-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+        padding: 0 24px;
+        border-bottom: 1px solid rgba(8, 18, 35, 0.1);
+        color: #081223;
+        font-size: 19px;
+        font-weight: 760;
+      }
+
+      .traffic {
+        display: flex;
+        gap: 9px;
+      }
+
+      .traffic span {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #10b981;
+      }
+
+      .traffic span:nth-child(2) {
+        background: #ffc107;
+      }
+
+      .traffic span:nth-child(3) {
+        background: #1578d8;
+      }
+
+      .screen-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top left;
+      }
+
+      .dash-layout {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+        gap: 44px;
+        width: 100%;
+      }
+
+      .dashboard-frame {
+        width: 1060px;
+        height: 650px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 34px;
+        max-width: 580px;
+      }
+
+      .metric-chip {
+        padding: 24px;
+      }
+
+      .metric-value {
+        color: #ffffff;
+        font-size: 54px;
+        font-weight: 800;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .metric-label {
+        margin-top: 10px;
+        color: #d8e4f8;
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .accent-line {
+        position: absolute;
+        z-index: 4;
+        left: 58px;
+        right: 58px;
+        top: 204px;
+        height: 5px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(16, 185, 129, 0), #10b981, rgba(16, 185, 129, 0));
+        opacity: 0.88;
+      }
+
+      .theme-layout {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 590px 1fr;
+        align-items: center;
+        gap: 62px;
+        width: 100%;
+      }
+
+      .theme-layout > .layer {
+        min-width: 0;
+      }
+
+      .theme-title {
+        max-width: 560px;
+        font-size: 66px;
+      }
+
+      .theme-copy {
+        max-width: 540px;
+      }
+
+      .theme-bg-frame {
+        position: absolute;
+        inset: 86px 88px 82px 650px;
+        z-index: 1;
+        opacity: 0.42;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .theme-card-stack {
+        position: relative;
+        z-index: 3;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: end;
+        gap: 18px;
+      }
+
+      .theme-card {
+        overflow: hidden;
+        min-height: 430px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 28px;
+        background: #f8fafc;
+        box-shadow: 0 36px 90px rgba(0, 0, 0, 0.36);
+      }
+
+      .theme-card img {
+        display: block;
+        width: 100%;
+        height: 338px;
+        object-fit: cover;
+        object-position: top left;
+      }
+
+      .theme-card p {
+        padding: 18px 20px 22px;
+        color: #081223;
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .gold-badge {
+        display: inline-flex;
+        width: fit-content;
+        border-radius: 999px;
+        background: #ffc107;
+        padding: 14px 20px;
+        color: #081223;
+        font-size: 22px;
+        font-weight: 820;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .ops-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.82fr 1fr 0.82fr;
+        align-items: center;
+        gap: 26px;
+        width: 100%;
+      }
+
+      .ops-card {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 30px;
+        background: #f8fafc;
+        box-shadow: 0 34px 90px rgba(0, 0, 0, 0.4);
+      }
+
+      .ops-card img {
+        display: block;
+        width: 100%;
+        height: 438px;
+        object-fit: cover;
+        object-position: top left;
+      }
+
+      .ops-card-center img {
+        height: 532px;
+      }
+
+      .ops-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 22px;
+        color: #081223;
+        font-size: 23px;
+        font-weight: 820;
+      }
+
+      .pulse-dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #10b981;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.85);
+      }
+
+      .ops-title {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .ops-title .body-copy {
+        max-width: 720px;
+      }
+
+      .cta-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        gap: 28px;
+        text-align: center;
+      }
+
+      .cta-logo {
+        width: 210px;
+        height: auto;
+      }
+
+      .cta-title {
+        max-width: 980px;
+        color: #ffffff;
+        font-size: 94px;
+        font-weight: 820;
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 230px;
+        border-radius: 999px;
+        background: #0d8bff;
+        padding: 20px 32px;
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 820;
+        box-shadow: 0 26px 80px rgba(13, 139, 255, 0.38);
+      }
+
+      .cta-proofs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        width: 930px;
+        margin-top: 16px;
+      }
+
+      .proof-chip {
+        padding: 20px 24px;
+        color: #d8e4f8;
+        font-size: 22px;
+        font-weight: 670;
+      }
+
+      .transition-bars {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        pointer-events: none;
+      }
+
+      .bar {
+        background: #1578d8;
+      }
+
+      .bar:nth-child(2) {
+        background: #ffc107;
+      }
+
+      .bar:nth-child(3) {
+        background: #0d8bff;
+      }
+
+      .final-dim {
+        position: absolute;
+        inset: 0;
+        z-index: 30;
+        background: #081223;
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="main"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20"
+      data-width="1920"
+      data-height="1080"
+    >
+      <audio
+        id="music-bed"
+        src="assets/audio/music-bed.wav"
+        data-start="0"
+        data-duration="20"
+        data-track-index="8"
+        data-volume="0.2"
+      ></audio>
+      <audio
+        id="narration"
+        src="assets/audio/narration.wav"
+        data-start="0.35"
+        data-duration="18.2"
+        data-track-index="9"
+        data-volume="1"
+      ></audio>
+
+      <section id="scene-hook" class="scene">
+        <div class="scene-content">
+          <div class="grain"></div>
+          <div class="floating-logo hook-logo">
+            <img src="assets/site/logos/logo-dark.png" alt="MTJRii" />
+            <span>Commerce control center</span>
+          </div>
+          <div class="hero-grid">
+            <div class="layer">
+              <div class="eyebrow hook-eyebrow"><span class="eyebrow-dot"></span> Product promo</div>
+              <h1 class="title-xl hook-title">Run every storefront from one commerce control center.</h1>
+              <p class="body-copy hook-copy">
+                MTJRii brings setup, themes, orders, customers, and checkout into one focused workspace.
+              </p>
+              <div class="proof-row">
+                <div class="proof-card">
+                  <span class="proof-number">10</span>
+                  <span class="proof-label">ready storefront directions</span>
+                </div>
+                <div class="proof-card">
+                  <span class="proof-number">30+</span>
+                  <span class="proof-label">payment gateway options</span>
+                </div>
+                <div class="proof-card">
+                  <span class="proof-number">1</span>
+                  <span class="proof-label">workspace for operations</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-frame hero-shot hook-frame">
+              <img src="assets/site/mtjrii-hero-frame.png" alt="MTJRii hero frame" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-dashboard" class="scene">
+        <div class="scene-content">
+          <div class="grain"></div>
+          <div class="dash-layout">
+            <div class="browser-frame dashboard-frame dashboard-screen">
+              <div class="browser-bar">
+                <div class="traffic"><span></span><span></span><span></span></div>
+                <span>Home Decor Haven - live store dashboard</span>
+              </div>
+              <img class="screen-img" src="assets/site/landing-page/multi-store-dashboard.png" alt="StoreGo dashboard" />
+              <div class="accent-line"></div>
+            </div>
+            <div class="layer">
+              <div class="eyebrow dashboard-eyebrow"><span class="eyebrow-dot"></span> Control center</div>
+              <h2 class="title-lg dashboard-title">Stores, orders, customers, and revenue stay visible.</h2>
+              <p class="body-copy dashboard-copy">
+                Operators can switch from overview to action without leaving the platform.
+              </p>
+              <div class="metrics">
+                <div class="metric-chip">
+                  <div class="metric-value" data-count="23">0</div>
+                  <div class="metric-label">orders tracked</div>
+                </div>
+                <div class="metric-chip">
+                  <div class="metric-value" data-count="25">0</div>
+                  <div class="metric-label">active products</div>
+                </div>
+                <div class="metric-chip">
+                  <div class="metric-value" data-count="8">0</div>
+                  <div class="metric-label">customers</div>
+                </div>
+                <div class="metric-chip">
+                  <div class="metric-value" data-count="20035">$0</div>
+                  <div class="metric-label">total revenue</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-themes" class="scene">
+        <div class="scene-content">
+          <div class="grain"></div>
+          <div class="theme-bg-frame">
+            <img class="screen-img" src="assets/site/landing-page/theme-selection.png" alt="Theme selection grid" />
+          </div>
+          <div class="theme-layout">
+            <div class="layer">
+              <div class="eyebrow theme-eyebrow"><span class="eyebrow-dot"></span> Theme launch</div>
+              <h2 class="title-lg theme-title">Choose a storefront direction before the first sale.</h2>
+              <p class="body-copy theme-copy">
+                Home, fashion, electronics, beauty, jewelry, watches, and more are built into setup.
+              </p>
+              <div class="gold-badge theme-badge">10 storefront themes</div>
+            </div>
+            <div class="theme-card-stack">
+              <article class="theme-card theme-one">
+                <img src="assets/site/themes/home-accessories.png" alt="Home accessories storefront theme" />
+                <p>Home and decor</p>
+              </article>
+              <article class="theme-card theme-two">
+                <img src="assets/site/themes/fashion.png" alt="Fashion storefront theme" />
+                <p>Fashion launch</p>
+              </article>
+              <article class="theme-card theme-three">
+                <img src="assets/site/themes/electronics.png" alt="Electronics storefront theme" />
+                <p>Electronics store</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-ops" class="scene">
+        <div class="scene-content">
+          <div class="grain"></div>
+          <div class="ops-title">
+            <div>
+              <div class="eyebrow ops-eyebrow"><span class="eyebrow-dot"></span> Operate and sell</div>
+              <h2 class="title-lg ops-heading">Real selling surfaces, connected.</h2>
+            </div>
+            <p class="body-copy ops-copy">Catalog, orders, and payment readiness move as one operating system.</p>
+          </div>
+          <div class="ops-grid">
+            <article class="ops-card ops-left">
+              <img src="assets/site/landing-page/product-management.png" alt="Product management screen" />
+              <div class="ops-label"><span>Catalog</span><span class="pulse-dot"></span></div>
+            </article>
+            <article class="ops-card ops-card-center ops-center">
+              <img src="assets/site/landing-page/order-management.png" alt="Order management screen" />
+              <div class="ops-label"><span>Orders</span><span class="pulse-dot"></span></div>
+            </article>
+            <article class="ops-card ops-right">
+              <img src="assets/site/landing-page/payment-integration.png" alt="Payment integration screen" />
+              <div class="ops-label"><span>Payments</span><span class="pulse-dot"></span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene-cta" class="scene">
+        <div class="scene-content">
+          <div class="grain"></div>
+          <div class="cta-content">
+            <img class="cta-logo" src="assets/site/logos/logo-dark-cta.png" alt="MTJRii" />
+            <div class="eyebrow cta-eyebrow"><span class="eyebrow-dot"></span> Start setup</div>
+            <h2 class="cta-title">From idea to live store, faster.</h2>
+            <p class="body-copy cta-copy">
+              Choose a theme, publish your catalog, and run commerce from one place.
+            </p>
+            <div class="cta-button">Start Setup</div>
+            <div class="cta-proofs">
+              <div class="proof-chip">Multi-store workspace</div>
+              <div class="proof-chip">Themes and content</div>
+              <div class="proof-chip">Checkout ready</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="transition-bars" aria-hidden="true">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="final-dim" aria-hidden="true"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+
+      const tl = gsap.timeline({ paused: true });
+      const bars = ".bar";
+      const transitions = [3.72, 7.72, 11.72, 15.72];
+
+      gsap.set(bars, { x: 1920 });
+      gsap.set("#scene-hook", { opacity: 1 });
+
+      function wipe(at, nextScene) {
+        tl.to(bars, { x: 0, duration: 0.34, stagger: 0.045, ease: "power3.in" }, at);
+        tl.set(".scene", { opacity: 0 }, at + 0.42);
+        tl.set(nextScene, { opacity: 1 }, at + 0.42);
+        tl.to(bars, { x: -1920, duration: 0.46, stagger: 0.035, ease: "power3.out" }, at + 0.46);
+        tl.set(bars, { x: 1920 }, at + 0.98);
+      }
+
+      function countMetric(selector, value, prefix, at) {
+        const target = document.querySelector(selector);
+        const state = { n: 0 };
+        tl.to(
+          state,
+          {
+            n: value,
+            duration: 1.25,
+            ease: "power2.out",
+            onUpdate: () => {
+              const formatted = Math.round(state.n).toLocaleString("en-US");
+              target.textContent = `${prefix}${formatted}`;
+            },
+          },
+          at,
+        );
+      }
+
+      tl.from(".hook-logo", { y: -28, opacity: 0, duration: 0.58, ease: "back.out(1.7)" }, 0.18);
+      tl.from(".hook-eyebrow", { x: -34, opacity: 0, duration: 0.45, ease: "power2.out" }, 0.32);
+      tl.from(".hook-title", { y: 70, opacity: 0, duration: 0.72, ease: "expo.out" }, 0.52);
+      tl.from(".hook-copy", { x: -44, opacity: 0, duration: 0.58, ease: "power3.out" }, 0.98);
+      tl.from(".hook-frame", { x: 94, opacity: 0, scale: 0.94, duration: 0.84, ease: "circ.out" }, 0.62);
+      tl.from(".proof-card", { y: 54, opacity: 0, scale: 0.96, duration: 0.55, stagger: 0.08, ease: "back.out(1.35)" }, 1.36);
+      tl.to(".hook-frame", { scale: 1.035, duration: 2.15, ease: "sine.inOut" }, 1.48);
+      tl.to(".proof-card", { y: -8, duration: 1.2, stagger: 0.09, repeat: 1, yoyo: true, ease: "sine.inOut" }, 2.05);
+      wipe(transitions[0], "#scene-dashboard");
+
+      tl.from(".dashboard-screen", { x: -90, opacity: 0, scale: 0.96, duration: 0.74, ease: "expo.out" }, 4.28);
+      tl.from(".dashboard-eyebrow", { y: 26, opacity: 0, duration: 0.44, ease: "power2.out" }, 4.42);
+      tl.from(".dashboard-title", { y: 64, opacity: 0, duration: 0.68, ease: "circ.out" }, 4.62);
+      tl.from(".dashboard-copy", { x: 40, opacity: 0, duration: 0.52, ease: "power3.out" }, 5.0);
+      tl.from(".metric-chip", { y: 44, opacity: 0, scale: 0.96, duration: 0.46, stagger: 0.06, ease: "back.out(1.4)" }, 5.18);
+      countMetric(".metric-chip:nth-child(1) .metric-value", 23, "", 5.5);
+      countMetric(".metric-chip:nth-child(2) .metric-value", 25, "", 5.62);
+      countMetric(".metric-chip:nth-child(3) .metric-value", 8, "", 5.74);
+      countMetric(".metric-chip:nth-child(4) .metric-value", 20035, "$", 5.86);
+      tl.from(".accent-line", { x: -780, opacity: 0, duration: 0.72, ease: "power2.out" }, 5.6);
+      tl.to(".dashboard-screen", { scale: 1.028, duration: 2.44, ease: "sine.inOut" }, 5.04);
+      tl.to(".metric-chip", { y: -7, duration: 1.15, stagger: 0.07, repeat: 1, yoyo: true, ease: "sine.inOut" }, 6.28);
+      wipe(transitions[1], "#scene-themes");
+
+      tl.from(".theme-bg-frame", { opacity: 0, scale: 0.92, duration: 0.72, ease: "circ.out" }, 8.28);
+      tl.from(".theme-eyebrow", { x: -34, opacity: 0, duration: 0.42, ease: "power2.out" }, 8.38);
+      tl.from(".theme-title", { y: 62, opacity: 0, duration: 0.66, ease: "expo.out" }, 8.56);
+      tl.from(".theme-copy", { y: 34, opacity: 0, duration: 0.54, ease: "power3.out" }, 8.98);
+      tl.from(".theme-badge", { scale: 0.78, opacity: 0, duration: 0.48, ease: "back.out(1.8)" }, 9.22);
+      tl.from(".theme-card", { y: 96, opacity: 0, scale: 0.9, duration: 0.72, stagger: 0.12, ease: "back.out(1.35)" }, 8.72);
+      tl.to(".theme-card img", { scale: 1.045, duration: 3.0, stagger: 0.08, ease: "sine.inOut" }, 9.2);
+      tl.to(".theme-card", { y: -10, duration: 1.08, stagger: 0.08, repeat: 1, yoyo: true, ease: "sine.inOut" }, 10.35);
+      wipe(transitions[2], "#scene-ops");
+
+      tl.from(".ops-eyebrow", { y: 28, opacity: 0, duration: 0.4, ease: "power2.out" }, 12.28);
+      tl.from(".ops-heading", { x: -58, opacity: 0, duration: 0.62, ease: "expo.out" }, 12.46);
+      tl.from(".ops-copy", { x: 58, opacity: 0, duration: 0.58, ease: "circ.out" }, 12.62);
+      tl.from(".ops-left", { x: -110, opacity: 0, scale: 0.94, duration: 0.62, ease: "back.out(1.25)" }, 12.88);
+      tl.from(".ops-center", { y: 88, opacity: 0, scale: 0.9, duration: 0.72, ease: "expo.out" }, 13.02);
+      tl.from(".ops-right", { x: 110, opacity: 0, scale: 0.94, duration: 0.62, ease: "back.out(1.25)" }, 13.18);
+      tl.from(".pulse-dot", { scale: 0.2, opacity: 0, duration: 0.36, stagger: 0.09, ease: "back.out(2)" }, 13.6);
+      tl.to(".ops-card img", { scale: 1.04, duration: 2.7, stagger: 0.08, ease: "sine.inOut" }, 13.2);
+      tl.to(".pulse-dot", { scale: 1.28, duration: 0.5, repeat: 4, yoyo: true, stagger: 0.07, ease: "sine.inOut" }, 14.0);
+      wipe(transitions[3], "#scene-cta");
+
+      tl.from(".cta-logo", { y: -34, opacity: 0, scale: 0.86, duration: 0.56, ease: "back.out(1.7)" }, 16.3);
+      tl.from(".cta-eyebrow", { y: 26, opacity: 0, duration: 0.42, ease: "power2.out" }, 16.56);
+      tl.from(".cta-title", { y: 76, opacity: 0, duration: 0.76, ease: "expo.out" }, 16.78);
+      tl.from(".cta-copy", { y: 36, opacity: 0, duration: 0.52, ease: "circ.out" }, 17.16);
+      tl.from(".cta-button", { scale: 0.82, opacity: 0, duration: 0.48, ease: "back.out(1.8)" }, 17.52);
+      tl.from(".proof-chip", { y: 36, opacity: 0, duration: 0.42, stagger: 0.07, ease: "power3.out" }, 17.78);
+      tl.to(".cta-button", { scale: 1.045, duration: 0.56, repeat: 2, yoyo: true, ease: "sine.inOut" }, 18.36);
+      tl.to(".final-dim", { opacity: 1, duration: 0.45, ease: "power2.in" }, 19.55);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

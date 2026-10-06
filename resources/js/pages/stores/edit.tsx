@@ -83,7 +83,7 @@ export default function EditStore({ store, availableThemes = [], planPermissions
           <TabsList className='grid w-full grid-cols-3'>
             <TabsTrigger value='info'>{t('Store Information')}</TabsTrigger>
             <TabsTrigger value='settings'>{t('Store Settings')}</TabsTrigger>
-            <TabsTrigger value='content'>{t('Store Content')}</TabsTrigger>
+            <TabsTrigger value='theme'>{t('Store Theme')}</TabsTrigger>
           </TabsList>
           
           <TabsContent value='info' className='space-y-4 pt-4'>

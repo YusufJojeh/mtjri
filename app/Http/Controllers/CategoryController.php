@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Support\MediaReference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CategoryRequest;
@@ -72,9 +73,12 @@ class CategoryController extends BaseController
         
         return \DB::transaction(function () use ($request, $currentStoreId) {
             $validatedData = $request->validated();
+            $validatedData['image'] = MediaReference::normalizeForStorage($validatedData['image'] ?? null, $request);
 
             // Generate a unique slug for this store
-            $slug = Category::generateUniqueSlug($validatedData['name'], $currentStoreId);
+            $slug = !empty($validatedData['slug'])
+                ? $validatedData['slug']
+                : Category::generateUniqueSlug($validatedData['name'], $currentStoreId);
             
             $category = new Category();
             $category->fill($validatedData);
@@ -174,9 +178,12 @@ class CategoryController extends BaseController
         
         return \DB::transaction(function () use ($request, $id, $category, $currentStoreId) {
             $validatedData = $request->validated();
+            $validatedData['image'] = MediaReference::normalizeForStorage($validatedData['image'] ?? null, $request);
             
-            // Check if name changed, if so, update slug
-            if ($category->name !== $validatedData['name']) {
+            if (!empty($validatedData['slug'])) {
+                $category->slug = $validatedData['slug'];
+            } elseif ($category->name !== $validatedData['name']) {
+                // Regenerate slug only when no explicit slug was provided.
                 $category->slug = Category::generateUniqueSlug($validatedData['name'], $currentStoreId);
             }
             $category->fill($validatedData);
@@ -203,7 +210,9 @@ class CategoryController extends BaseController
         
         return \DB::transaction(function () use ($id, $category) {
             // Check if category has subcategories
-            $hasSubcategories = Category::where('parent_id', $id)->exists();
+            $hasSubcategories = Category::where('parent_id', $id)
+                ->where('store_id', $category->store_id)
+                ->exists();
             
             if ($hasSubcategories) {
                 return redirect()->back()->with('error', __('Cannot delete category with subcategories'));

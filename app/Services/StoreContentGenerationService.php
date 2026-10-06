@@ -12,17 +12,20 @@ use App\Contracts\OpenAIContentGenerator;
 class StoreContentGenerationService
 {
     protected OpenAIContentGenerator $openAIContentGenerator;
+    protected AIProviderManager $aiProviderManager;
     protected LandingPagePromptService $promptService;
     protected LandingPageContentValidator $validator;
     protected LandingPageContextBuilder $contextBuilder;
 
     public function __construct(
         OpenAIContentGenerator $openAIContentGenerator,
+        AIProviderManager $aiProviderManager,
         LandingPagePromptService $promptService,
         LandingPageContentValidator $validator,
         LandingPageContextBuilder $contextBuilder
     ) {
         $this->openAIContentGenerator = $openAIContentGenerator;
+        $this->aiProviderManager = $aiProviderManager;
         $this->promptService = $promptService;
         $this->validator = $validator;
         $this->contextBuilder = $contextBuilder;
@@ -37,10 +40,10 @@ class StoreContentGenerationService
      */
     public function generateContent(Store $store, string $theme): array
     {
-        // Check OpenAI configuration first
+        // Check AI provider configuration first
         $configCheck = $this->checkOpenAIConfig();
         if (!$configCheck['success']) {
-            Log::error('OpenAI config error: ' . $configCheck['message']);
+            Log::error('AI config error: ' . $configCheck['message']);
             throw new \Exception($configCheck['message']);
         }
 
@@ -129,8 +132,24 @@ class StoreContentGenerationService
                     $progressCallback($attemptProgress);
                 }
 
-                // Generate content
-                $content = $this->openAIContentGenerator->generateText($prompt, $userLanguage);
+                // Generate content through provider-aware orchestrator adapter
+                $content = $this->openAIContentGenerator->generateText($prompt, $userLanguage, [
+                    'defaults' => $defaults,
+                    'provider' => $this->aiProviderManager->defaultProvider(),
+                    'agentic' => null,
+                    'fetch_supporting_image' => function () use ($section, $store) {
+                        if (!in_array($section, ['hero', 'about'], true)) {
+                            return [];
+                        }
+
+                        $context = $this->contextBuilder->buildStoreContext($store);
+                        $storeColor = $this->mapHexToUnsplashColor($store->color);
+                        $imageQuery = "{$context['business_type']} {$context['store_description']} {$section} image";
+                        $image = $this->fetchImageFromUnsplash($imageQuery, $storeColor);
+
+                        return $image ? ['image' => $image] : [];
+                    },
+                ]);
 
                 if (isset($content['error'])) {
                     if ($attempt < $maxRetries) {
@@ -178,10 +197,10 @@ class StoreContentGenerationService
      */
     public function generateSpecificSection(Store $store, string $sectionName, ?callable $progressCallback = null): ?array
     {
-        // Check OpenAI configuration first
+        // Check AI provider configuration first
         $configCheck = $this->checkOpenAIConfig();
         if (!$configCheck['success']) {
-            Log::error('OpenAI config error: ' . $configCheck['message']);
+            Log::error('AI config error: ' . $configCheck['message']);
             if ($progressCallback) {
                 $progressCallback(0, $configCheck['message']);
             }
@@ -266,24 +285,13 @@ class StoreContentGenerationService
     }
 
     /**
-     * Check if OpenAI is configured correctly.
+     * Check if active AI provider is configured correctly.
      *
      * @return array Returns an array with 'success' => true|false and 'message'.
      */
     public function checkOpenAIConfig(): array
     {
-        $chatgptKey = Setting::getGlobal('chatgptKey');
-        $chatgptModel = Setting::getGlobal('chatgptModel');
-
-        if (empty($chatgptKey)) {
-            return ['success' => false, 'message' => 'OpenAI API key is not configured.'];
-        }
-
-        if (empty($chatgptModel)) {
-            return ['success' => false, 'message' => 'OpenAI model is not configured.'];
-        }
-
-        return ['success' => true, 'message' => 'OpenAI is configured correctly.'];
+        return $this->aiProviderManager->checkProviderConfiguration($this->aiProviderManager->defaultProvider());
     }
 
 

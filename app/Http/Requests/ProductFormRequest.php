@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\LocalImageReference;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProductFormRequest extends FormRequest
 {
@@ -21,6 +24,8 @@ class ProductFormRequest extends FormRequest
      */
     public function rules(): array
     {
+        $currentStoreId = getCurrentStoreId(Auth::user());
+
         return [
             'name' => 'required|string|max:255',
             'sku' => 'nullable|string|max:100',
@@ -30,10 +35,16 @@ class ProductFormRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'cover_image' => 'nullable|string',
-            'images' => 'nullable|string',
-            'category_id' => 'nullable|exists:categories,id',
-            'tax_id' => 'nullable|exists:taxes,id',
+            'cover_image' => ['nullable', 'string', new LocalImageReference()],
+            'images' => ['nullable', 'string', new LocalImageReference(true)],
+            'category_id' => [
+                'nullable',
+                Rule::exists('categories', 'id')->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
+            'tax_id' => [
+                'nullable',
+                Rule::exists('taxes', 'id')->where(fn ($query) => $query->where('store_id', $currentStoreId)),
+            ],
             'is_active' => 'nullable|boolean',
             'is_downloadable' => 'nullable|boolean',
             'downloadable_file' => 'nullable|string',

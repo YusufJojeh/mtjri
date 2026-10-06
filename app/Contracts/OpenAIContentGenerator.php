@@ -4,6 +4,5 @@ namespace App\Contracts;
 
 interface OpenAIContentGenerator
 {
-    public function generateText(string $prompt, string $userLanguage): array;
+    public function generateText(string $prompt, string $userLanguage, array $options = []): array;
 }
-
