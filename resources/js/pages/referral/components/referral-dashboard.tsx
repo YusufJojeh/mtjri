@@ -91,7 +91,7 @@ export default function ReferralDashboard({ userType, stats, referralLink }: Ref
                           <p className='text-sm text-muted-foreground'>{company.email}</p>
                         </div>
                       </div>
-                      <div className='text-right'>
+                      <div className='text-end'>
                         <p className='font-medium'>{company.referral_count} {t('referrals')}</p>
                         <p className='text-sm text-green-600 font-medium'>${company.total_earned}</p>
                       </div>

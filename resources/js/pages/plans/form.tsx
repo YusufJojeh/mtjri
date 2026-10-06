@@ -111,7 +111,7 @@ export default function PlanForm({ plan, hasDefaultPlan = false, otherDefaultPla
         { title: t(isEdit ? 'Edit Plan' : 'Create Plan') }
       ]}
     >
-      <div className='bg-white rounded-lg shadow p-6'>
+      <div className='rounded-xl border bg-card text-card-foreground shadow-card p-6'>
         <form onSubmit={handleSubmit} className='space-y-6'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <div className='space-y-4'>

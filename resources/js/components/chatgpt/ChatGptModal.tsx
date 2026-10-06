@@ -120,7 +120,7 @@ export function ChatGptModal({
   const modalContent = (
     <div className='fixed inset-0 flex items-center justify-center' style={{ zIndex }}>
       <div className='fixed inset-0 bg-black/50' />
-      <div className='bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4 pointer-events-auto border' style={{ zIndex: zIndex + 1 }}>
+      <div className='rounded-xl border bg-popover text-popover-foreground shadow-pop max-w-2xl w-full mx-4 pointer-events-auto' style={{ zIndex: zIndex + 1 }}>
         <div className='p-6 border-b flex items-center justify-between'>
           <h2 className='text-lg font-semibold flex items-center gap-2'>
             <Sparkles className='h-5 w-5 text-blue-500' />
@@ -213,12 +213,12 @@ export function ChatGptModal({
           >
             {isLoading ? (
               <>
-                <Loader2 className='h-4 w-4 mr-2 animate-spin' />
+                <Loader2 className='h-4 w-4 me-2 animate-spin' />
                 {t('Generating...')}
               </>
             ) : (
               <>
-                <Sparkles className='h-4 w-4 mr-2' />
+                <Sparkles className='h-4 w-4 me-2' />
                 {t('Generate')}
               </>
             )}

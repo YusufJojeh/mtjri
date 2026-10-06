@@ -125,7 +125,7 @@ export default function CurrencySettings() {
             description={t("Configure how currency values are displayed throughout the application")}
             action={
                 <Button type="submit" form="currency-settings-form" size="sm">
-                    <Save className="h-4 w-4 mr-2" />
+                    <Save className="h-4 w-4 me-2" />
                     {t("Save Changes")}
                 </Button>
             }
@@ -159,7 +159,7 @@ export default function CurrencySettings() {
                                             <div className="flex items-center gap-2">
                                                 <Input
                                                     type="number"
-                                                    className="text-right h-8 text-sm"
+                                                    className="text-end h-8 text-sm"
                                                     value={previewAmount}
                                                     onChange={(e) => setPreviewAmount(parseFloat(e.target.value) || 0)}
                                                     placeholder="Test amount"
@@ -202,7 +202,7 @@ export default function CurrencySettings() {
                                                                         <span className="w-8 text-center">{currency.symbol}</span>
                                                                         <span>{currency.code} - {currency.name}</span>
                                                                         {currency.is_default && (
-                                                                            <span className="ml-2 text-xs text-primary">(Default)</span>
+                                                                            <span className="ms-2 text-xs text-primary">(Default)</span>
                                                                         )}
                                                                     </div>
                                                                 </SelectItem>
@@ -269,9 +269,9 @@ export default function CurrencySettings() {
                                                     className="justify-center"
                                                     onClick={() => handleCurrencySettingsChange('currencySymbolPosition', 'before')}
                                                 >
-                                                    <span className="mr-2">$</span>100
+                                                    <span className="me-2">$</span>100
                                                     {currencySettings.currencySymbolPosition === 'before' && (
-                                                        <Check className="h-4 w-4 ml-2" />
+                                                        <Check className="h-4 w-4 ms-2" />
                                                     )}
                                                 </Button>
                                                 <Button
@@ -280,9 +280,9 @@ export default function CurrencySettings() {
                                                     className="justify-center"
                                                     onClick={() => handleCurrencySettingsChange('currencySymbolPosition', 'after')}
                                                 >
-                                                    100<span className="ml-2">$</span>
+                                                    100<span className="ms-2">$</span>
                                                     {currencySettings.currencySymbolPosition === 'after' && (
-                                                        <Check className="h-4 w-4 ml-2" />
+                                                        <Check className="h-4 w-4 ms-2" />
                                                     )}
                                                 </Button>
                                             </div>
@@ -311,7 +311,7 @@ export default function CurrencySettings() {
                                                 >
                                                     {t("Dot")} (123.45)
                                                     {currencySettings.decimalSeparator === '.' && (
-                                                        <Check className="h-4 w-4 ml-2" />
+                                                        <Check className="h-4 w-4 ms-2" />
                                                     )}
                                                 </Button>
                                                 <Button
@@ -322,7 +322,7 @@ export default function CurrencySettings() {
                                                 >
                                                     {t("Comma")} (123,45)
                                                     {currencySettings.decimalSeparator === ',' && (
-                                                        <Check className="h-4 w-4 ml-2" />
+                                                        <Check className="h-4 w-4 ms-2" />
                                                     )}
                                                 </Button>
                                             </div>

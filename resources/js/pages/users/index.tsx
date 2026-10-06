@@ -355,7 +355,7 @@ export default function Users() {
       breadcrumbs={breadcrumbs}
     >
       {/* Search and filters section */}
-      <div className='bg-white rounded-lg shadow mb-4'>
+      <div className='rounded-xl border bg-card text-card-foreground shadow-card mb-4'>
         <div className='p-4'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-2'>
@@ -483,7 +483,7 @@ export default function Users() {
 
       {/* Content section */}
       {activeView === 'list' ? (
-        <div className='bg-white rounded-lg shadow overflow-hidden'>
+        <div className='overflow-hidden rounded-xl border bg-card shadow-card'>
           <CrudTable
             columns={columns}
             actions={actions}

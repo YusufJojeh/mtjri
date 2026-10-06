@@ -120,13 +120,13 @@ export default function ShowReview() {
             <CardContent className='space-y-3'>
               {review.status !== 'Approved' && (
                 <Button className='w-full' onClick={() => router.post(route('reviews.approve', review.id))}>
-                  <CheckCircle className='h-4 w-4 mr-2' />
+                  <CheckCircle className='h-4 w-4 me-2' />
                   {t('Approve Review')}
                 </Button>
               )}
               {review.status === 'Approved' && (
                 <Button variant='destructive' className='w-full' onClick={() => router.post(route('reviews.reject', review.id))}>
-                  <XCircle className='h-4 w-4 mr-2' />
+                  <XCircle className='h-4 w-4 me-2' />
                   {t('Reject Review')}
                 </Button>
               )}
@@ -239,7 +239,7 @@ export default function ShowReview() {
                       }}
                       disabled={processing || !data.store_response.trim()}
                     >
-                      <Send className='h-4 w-4 mr-2' />
+                      <Send className='h-4 w-4 me-2' />
                       {processing ? t('Sending...') : t('Send Response')}
                     </Button>
                     <Button 

@@ -69,7 +69,7 @@ export function BankTransferForm({
                 size='sm'
                 onClick={() => copyToClipboard(planPrice.toString())}
               >
-                <Copy className='h-3 w-3 mr-1' />
+                <Copy className='h-3 w-3 me-1' />
                 {t('Copy')}
               </Button>
             </div>

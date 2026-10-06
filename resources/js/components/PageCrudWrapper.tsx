@@ -421,7 +421,7 @@ export function PageCrudWrapper({
       noPadding
     >
       {/* Search and filters section */}
-      <div className='bg-white rounded-lg shadow mb-4'>
+      <div className='rounded-xl border bg-card text-card-foreground shadow-card mb-4'>
         <div className='p-3 sm:p-4'>
           <div className='flex flex-col gap-3 sm:gap-4'>
             <div className='flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4'>
@@ -541,7 +541,7 @@ export function PageCrudWrapper({
       </div>
 
       {/* Table section */}
-      <div className='bg-white rounded-lg shadow overflow-hidden'>
+      <div className='overflow-hidden rounded-xl border bg-card shadow-card'>
         <CrudTable
           columns={table.columns}
           actions={table.actions}

@@ -304,7 +304,7 @@ export default function CustomPagesIndex() {
       noPadding
     >
       {/* Search section */}
-      <div className='bg-white dark:bg-gray-900 rounded-lg shadow mb-4 p-4'>
+      <div className='rounded-xl border bg-card text-card-foreground shadow-card mb-4 p-4'>
         <form onSubmit={handleSearch} className='flex gap-2'>
           <div className='flex-1'>
             <Input
@@ -323,7 +323,7 @@ export default function CustomPagesIndex() {
       </div>
 
       {/* Table section */}
-      <div className='bg-white dark:bg-gray-900 rounded-lg shadow overflow-hidden'>
+      <div className='overflow-hidden rounded-xl border bg-card shadow-card'>
         <CrudTable
           columns={columns}
           actions={actions}

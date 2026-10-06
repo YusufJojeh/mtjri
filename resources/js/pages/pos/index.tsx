@@ -230,10 +230,10 @@ export default function POS() {
         <div className='lg:w-2/3 space-y-4'>
           <div className='flex flex-col md:flex-row gap-2 md:items-center'>
             <div className='relative flex-1'>
-              <Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
+              <Search className='absolute start-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
               <Input
                 placeholder={t('Search products...')}
-                className='pl-8'
+                className='ps-8'
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -254,7 +254,7 @@ export default function POS() {
               <Dialog open={showInventory} onOpenChange={setShowInventory}>
                 <DialogTrigger asChild>
                   <Button variant='outline'>
-                    <Package className='h-4 w-4 mr-2' />
+                    <Package className='h-4 w-4 me-2' />
                     {t('Inventory')}
                   </Button>
                 </DialogTrigger>
@@ -267,9 +267,9 @@ export default function POS() {
                       <table className='w-full'>
                         <thead className='sticky top-0 bg-background border-b'>
                           <tr>
-                            <th className='text-left py-2 px-2'>{t('Product')}</th>
+                            <th className='text-start py-2 px-2'>{t('Product')}</th>
                             <th className='text-center py-2 px-2'>{t('In Stock')}</th>
-                            <th className='text-right py-2 px-2'>{t('Status')}</th>
+                            <th className='text-end py-2 px-2'>{t('Status')}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -277,7 +277,7 @@ export default function POS() {
                             <tr key={product.id} className='border-b hover:bg-muted/50'>
                               <td className='py-2 px-2'>{product.name}</td>
                               <td className='text-center py-2 px-2'>{product.stock}</td>
-                              <td className='text-right py-2 px-2'>
+                              <td className='text-end py-2 px-2'>
                                 <Badge variant='outline' className={product.stock > 0 ? 'bg-green-50 text-green-700 hover:bg-green-50' : 'bg-red-50 text-red-700 hover:bg-red-50'}>
                                   {product.stock > 0 ? t('In Stock') : t('Out of Stock')}
                                 </Badge>
@@ -295,7 +295,7 @@ export default function POS() {
                 <Dialog open={showSavedCarts} onOpenChange={setShowSavedCarts}>
                   <DialogTrigger asChild>
                     <Button variant='outline'>
-                      <Receipt className='h-4 w-4 mr-2' />
+                      <Receipt className='h-4 w-4 me-2' />
                       {t('Saved')} ({savedCarts.length})
                     </Button>
                   </DialogTrigger>
@@ -304,7 +304,7 @@ export default function POS() {
                       <DialogTitle>{t('Saved Carts')}</DialogTitle>
                     </DialogHeader>
                     <div className='flex-1 overflow-hidden'>
-                      <div className='space-y-2 max-h-[60vh] overflow-y-auto pr-2'>
+                      <div className='space-y-2 max-h-[60vh] overflow-y-auto pe-2'>
                         {savedCarts.map((savedCart) => (
                           <div key={savedCart.id} className='flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50 transition-colors'>
                             <div className='flex-1 min-w-0'>
@@ -327,7 +327,7 @@ export default function POS() {
               )}
               <Permission permission='manage-settings-pos'>
                 <Button variant='outline' onClick={() => router.visit(route('pos.settings'))}>
-                  <Settings className='h-4 w-4 mr-2' />
+                  <Settings className='h-4 w-4 me-2' />
                   {t('Settings')}
                 </Button>
               </Permission>
@@ -388,15 +388,15 @@ export default function POS() {
           <Card className='sticky top-4'>
             <CardHeader className='pb-3'>
               <CardTitle className='flex items-center'>
-                <ShoppingCart className='mr-2 h-5 w-5' />
+                <ShoppingCart className='me-2 h-5 w-5' />
                 {t('Current Sale')}
               </CardTitle>
               {selectedCustomerData && selectedCustomerData.id !== 'walk-in' && (
                 <div className='flex items-center mt-2 text-sm'>
-                  <User className='h-3 w-3 mr-1' />
+                  <User className='h-3 w-3 me-1' />
                   <span className='font-medium'>{selectedCustomerData.name}</span>
                   {selectedCustomerData.phone && (
-                    <span className='text-muted-foreground ml-2'>{selectedCustomerData.phone}</span>
+                    <span className='text-muted-foreground ms-2'>{selectedCustomerData.phone}</span>
                   )}
                 </div>
               )}
@@ -486,7 +486,7 @@ export default function POS() {
                       disabled={cart.length === 0}
                       onClick={() => router.visit(route('pos.checkout'))}
                     >
-                      <CreditCard className='mr-2 h-4 w-4' />
+                      <CreditCard className='me-2 h-4 w-4' />
                       {t('Checkout ({{amount}})', { amount: formatCurrency(calculateTotal()) })}
                     </Button>
                   </Permission>
@@ -496,7 +496,7 @@ export default function POS() {
                       disabled={cart.length === 0}
                       onClick={saveCart}
                     >
-                      <Receipt className='mr-2 h-4 w-4' />
+                      <Receipt className='me-2 h-4 w-4' />
                       {t('Save')}
                     </Button>
                     <Permission permission='view-transactions-pos'>
@@ -504,7 +504,7 @@ export default function POS() {
                         variant='outline' 
                         onClick={() => router.visit(route('pos.transactions'))}
                       >
-                        <Receipt className='mr-2 h-4 w-4' />
+                        <Receipt className='me-2 h-4 w-4' />
                         {t('Transactions')}
                       </Button>
                     </Permission>
@@ -514,7 +514,7 @@ export default function POS() {
                       onClick={clearCart}
                       className='text-red-500 hover:text-red-700'
                     >
-                      <Trash2 className='mr-2 h-4 w-4' />
+                      <Trash2 className='me-2 h-4 w-4' />
                       {t('Empty')}
                     </Button>
                   </div>

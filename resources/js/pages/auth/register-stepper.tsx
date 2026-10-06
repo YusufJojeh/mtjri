@@ -198,6 +198,7 @@ export default function RegisterStepper({
         <AuthLayout
             title={t('Complete Your Registration')}
             description={t('Follow these steps to set up your store')}
+            size='wide'
         >
             <div className='w-full max-w-4xl mx-auto'>
                 <div className='mb-8'>

@@ -327,7 +327,7 @@ export default function Step2EditStore({ store, planPermissions, onSuccess }: St
                     <Button type='submit' disabled={processing}>
                         {processing ? (
                             <>
-                                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                                <Loader2 className='me-2 h-4 w-4 animate-spin' />
                                 {t('Saving...')}
                             </>
                         ) : (

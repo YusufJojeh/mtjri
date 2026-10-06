@@ -246,12 +246,12 @@ export default function MediaLibraryDemo() {
               {/* Search Section */}
               <div className='flex-1'>
                 <div className='relative max-w-sm'>
-                  <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
+                  <Search className='absolute start-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4' />
                   <Input
                     placeholder={t('Search media files...')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className='pl-10'
+                    className='ps-10'
                   />
                 </div>
                 {searchTerm && (
@@ -314,7 +314,7 @@ export default function MediaLibraryDemo() {
                     onClick={() => setIsUploadModalOpen(true)}
                     size='lg'
                   >
-                    <Plus className='h-4 w-4 mr-2' />
+                    <Plus className='h-4 w-4 me-2' />
                     {t('Upload Media')}
                   </Button>
                 )}
@@ -342,7 +342,7 @@ export default function MediaLibraryDemo() {
                         <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-200' />
                         
                         {/* Action Dropdown */}
-                        <div className='absolute top-2 right-2'>
+                        <div className='absolute top-2 end-2'>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                               <Button
@@ -355,15 +355,15 @@ export default function MediaLibraryDemo() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align='end' className='w-40'>
                               <DropdownMenuItem onClick={() => handleShowInfo(item)}>
-                                <Info className='h-4 w-4 mr-2' />
+                                <Info className='h-4 w-4 me-2' />
                                 {t('View Info')}
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={() => handleCopyLink(item.url)}>
-                                <Copy className='h-4 w-4 mr-2' />
+                                <Copy className='h-4 w-4 me-2' />
                                 {t('Copy Link')}
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={() => handleDownload(item.id, item.file_name)}>
-                                <Download className='h-4 w-4 mr-2' />
+                                <Download className='h-4 w-4 me-2' />
                                 {t('Download')}
                               </DropdownMenuItem>
                               <DropdownMenuSeparator />
@@ -371,7 +371,7 @@ export default function MediaLibraryDemo() {
                                 onClick={() => deleteMedia(item.id)}
                                 className='text-destructive focus:text-destructive'
                               >
-                                <X className='h-4 w-4 mr-2' />
+                                <X className='h-4 w-4 me-2' />
                                 {t('Delete')}
                               </DropdownMenuItem>
                             </DropdownMenuContent>
@@ -379,7 +379,7 @@ export default function MediaLibraryDemo() {
                         </div>
                         
                         {/* File Type Badge */}
-                        <div className='absolute top-2 left-2'>
+                        <div className='absolute top-2 start-2'>
                           <Badge variant='secondary' className='text-xs bg-background/95'>
                             {item.mime_type.split('/')[1].toUpperCase()}
                           </Badge>
@@ -522,12 +522,12 @@ export default function MediaLibraryDemo() {
                   >
                     {uploading ? (
                       <>
-                        <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2'></div>
+                        <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-white me-2'></div>
                         {t('Uploading...')}
                       </>
                     ) : (
                       <>
-                        <Plus className='h-4 w-4 mr-2' />
+                        <Plus className='h-4 w-4 me-2' />
                         {t('Choose Files')}
                       </>
                     )}
@@ -571,7 +571,7 @@ export default function MediaLibraryDemo() {
                   <div className='space-y-3'>
                     <div className='flex justify-between items-start'>
                       <span className='text-sm font-medium text-muted-foreground'>{t('File Name')}</span>
-                      <span className='text-sm text-right max-w-xs truncate' title={selectedMediaInfo.file_name}>
+                      <span className='text-sm text-end max-w-xs truncate' title={selectedMediaInfo.file_name}>
                         {selectedMediaInfo.file_name}
                       </span>
                     </div>
@@ -617,7 +617,7 @@ export default function MediaLibraryDemo() {
                     onClick={() => handleCopyLink(selectedMediaInfo.url)}
                     className='flex-1'
                   >
-                    <Copy className='h-4 w-4 mr-2' />
+                    <Copy className='h-4 w-4 me-2' />
                     {t('Copy Link')}
                   </Button>
                   <Button 
@@ -625,7 +625,7 @@ export default function MediaLibraryDemo() {
                     onClick={() => handleDownload(selectedMediaInfo.id, selectedMediaInfo.file_name)}
                     className='flex-1'
                   >
-                    <Download className='h-4 w-4 mr-2' />
+                    <Download className='h-4 w-4 me-2' />
                     {t('Download')}
                   </Button>
                 </div>

@@ -29,7 +29,7 @@ export default function AuthButton({
             disabled={processing || disabled}
             style={{ backgroundColor: primaryColor }}
         >
-            {processing && <LoaderCircle className='h-4 w-4 animate-spin mr-2 inline' />}
+            {processing && <LoaderCircle className='h-4 w-4 animate-spin me-2 inline' />}
             {children}
         </button>
     );

@@ -1,4 +1,5 @@
 import '@fontsource-variable/instrument-sans/index.css';
+import '@fontsource-variable/noto-sans-arabic/wght.css';
 import '../css/app.css';
 import '../css/dark-mode.css';
 

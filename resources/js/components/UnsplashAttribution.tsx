@@ -28,7 +28,7 @@ export const UnsplashAttribution: React.FC<UnsplashAttributionProps> = ({
   const unsplashWebsiteUrl = `https://unsplash.com/?${utmParams}`;
 
   return (
-    <div className={`absolute bottom-2 right-2 z-30 text-xs text-white/80 p-1 rounded bg-black/50 ${className}`}>
+    <div className={`absolute bottom-2 end-2 z-30 text-xs text-white/80 p-1 rounded bg-black/50 ${className}`}>
       Photo by{' '}
       <a
         href={unsplashProfileUrl}

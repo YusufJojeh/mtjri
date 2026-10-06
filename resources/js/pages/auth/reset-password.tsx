@@ -53,7 +53,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                     <div className='relative'>
                         <Label htmlFor='email' className='text-gray-700 dark:text-gray-300 font-medium mb-1 block'>{t('Email')}</Label>
                         <div className='relative'>
-                            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                            <div className='absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none'>
                                 <Mail className='h-5 w-5 text-gray-400' />
                             </div>
                             <Input
@@ -61,7 +61,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 type='email'
                                 readOnly
                                 value={data.email}
-                                className='pl-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
+                                className='ps-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
                                 style={{ '--tw-ring-color': primaryColor } as React.CSSProperties}
                             />
                         </div>
@@ -71,7 +71,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                     <div className='relative'>
                         <Label htmlFor='password' className='text-gray-700 dark:text-gray-300 font-medium mb-1 block'>{t('Password')}</Label>
                         <div className='relative'>
-                            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                            <div className='absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none'>
                                 <Lock className='h-5 w-5 text-gray-400' />
                             </div>
                             <Input
@@ -84,7 +84,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
                                 placeholder='••••••••'
-                                className='pl-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
+                                className='ps-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
                                 style={{ '--tw-ring-color': primaryColor } as React.CSSProperties}
                             />
                         </div>
@@ -94,7 +94,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                     <div className='relative'>
                         <Label htmlFor='password_confirmation' className='text-gray-700 dark:text-gray-300 font-medium mb-1 block'>{t('Confirm password')}</Label>
                         <div className='relative'>
-                            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                            <div className='absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none'>
                                 <Lock className='h-5 w-5 text-gray-400' />
                             </div>
                             <Input
@@ -106,7 +106,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                                 value={data.password_confirmation}
                                 onChange={(e) => setData('password_confirmation', e.target.value)}
                                 placeholder='••••••••'
-                                className='pl-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
+                                className='ps-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
                                 style={{ '--tw-ring-color': primaryColor } as React.CSSProperties}
                             />
                         </div>

@@ -165,7 +165,7 @@ export default function StoreManagement({ stores: storesProp = [], aggregatedSta
                 <p className='text-muted-foreground mb-4'>{t('Create your first store to get started')}</p>
                 <Permission permission='create-stores'>
                   <Button onClick={() => router.visit(route('stores.create'))}>
-                    <Plus className='h-4 w-4 mr-2' /> {t('Create Store')}
+                    <Plus className='h-4 w-4 me-2' /> {t('Create Store')}
                   </Button>
                 </Permission>
               </div>

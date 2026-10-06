@@ -168,7 +168,7 @@ function VariantButton({
       onClick={onClick}
     >
       {isActive && (
-        <span className='absolute top-1 right-1'>
+        <span className='absolute top-1 end-1'>
           <Check className='h-3 w-3' />
         </span>
       )}
@@ -196,7 +196,7 @@ function CollapsibleButton({
       onClick={onClick}
     >
       {isActive && (
-        <span className='absolute top-1 right-1'>
+        <span className='absolute top-1 end-1'>
           <Check className='h-3 w-3' />
         </span>
       )}

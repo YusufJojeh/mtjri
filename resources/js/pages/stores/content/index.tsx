@@ -82,7 +82,7 @@ export default function StoreContentIndex({ stores }: Props) {
                         size='sm' 
                         onClick={() => router.visit(route('stores.content.show', store.id))}
                       >
-                        <Settings className='h-4 w-4 mr-2' />
+                        <Settings className='h-4 w-4 me-2' />
                         {t('Manage Content')}
                       </Button>
                     </Permission>

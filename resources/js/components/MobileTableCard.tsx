@@ -236,7 +236,7 @@ export function MobileTableCard({
                     className='w-full sm:w-auto min-h-[44px] sm:min-h-0'
                   >
                     {IconComponent && <IconComponent size={iconSize} />}
-                    <span className='ml-2'>{action.label}</span>
+                    <span className='ms-2'>{action.label}</span>
                   </Button>
                 </Link>
               );
@@ -265,7 +265,7 @@ export function MobileTableCard({
                 onClick={() => onAction(action.action!, row)}
               >
                 {IconComponent && <IconComponent size={iconSize} />}
-                <span className='ml-2'>{action.label}</span>
+                <span className='ms-2'>{action.label}</span>
               </Button>
             );
           })}

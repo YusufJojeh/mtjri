@@ -124,7 +124,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                     <div className='relative'>
                         <Label htmlFor='email' className='text-gray-700 dark:text-gray-300 font-medium mb-1 block'>{t('Email address')}</Label>
                         <div className='relative'>
-                            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                            <div className='absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none'>
                                 <Mail className='h-5 w-5 text-gray-400' />
                             </div>
                             <Input
@@ -137,7 +137,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                                 value={data.email}
                                 onChange={(e) => setData('email', e.target.value)}
                                 placeholder='email@example.com'
-                                className='pl-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
+                                className='ps-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
                                 style={{ '--tw-ring-color': primaryColor } as React.CSSProperties}
                             />
                         </div>
@@ -159,7 +159,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                             )}
                         </div>
                         <div className='relative'>
-                            <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                            <div className='absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none'>
                                 <Lock className='h-5 w-5 text-gray-400' />
                             </div>
                             <Input
@@ -171,7 +171,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
                                 placeholder='••••••••'
-                                className='pl-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
+                                className='ps-10 w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg transition-all duration-200'
                                 style={{ '--tw-ring-color': primaryColor } as React.CSSProperties}
                             />
                         </div>
@@ -188,7 +188,7 @@ export default function Login({ status, canResetPassword, demoStores = [] }: Log
                             className='border-gray-300 rounded'
                             style={{ '--tw-ring-color': primaryColor, color: primaryColor } as React.CSSProperties}
                         />
-                        <Label htmlFor='remember' className='ml-2 text-gray-600 dark:text-gray-400'>{t('Remember me')}</Label>
+                        <Label htmlFor='remember' className='ms-2 text-gray-600 dark:text-gray-400'>{t('Remember me')}</Label>
                     </div>
                 </div>
 

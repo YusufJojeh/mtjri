@@ -46,80 +46,80 @@ export default function Settings() {
     {
       title: t('System Settings'),
       href: '#system-settings',
-      icon: <SettingsIcon className="h-4 w-4 mr-2" />,
+      icon: <SettingsIcon className="h-4 w-4 me-2" />,
       permission: 'manage-system-settings'
     },
     {
       title: t('Brand Settings'),
       href: '#brand-settings',
-      icon: <Palette className="h-4 w-4 mr-2" />,
+      icon: <Palette className="h-4 w-4 me-2" />,
       permission: 'manage-brand-settings'
     },
     {
       title: t('Currency Settings'),
       href: '#currency-settings',
-      icon: <DollarSign className="h-4 w-4 mr-2" />,
+      icon: <DollarSign className="h-4 w-4 me-2" />,
       permission: 'manage-currency-settings'
     },
     {
       title: t('Email Settings'),
       href: '#email-settings',
-      icon: <Mail className="h-4 w-4 mr-2" />,
+      icon: <Mail className="h-4 w-4 me-2" />,
       permission: 'manage-email-settings'
     },
     {
       title: t('Email Notification Settings'),
       href: '#email-notification-settings',
-      icon: <Bell className="h-4 w-4 mr-2" />,
+      icon: <Bell className="h-4 w-4 me-2" />,
       permission: 'manage-email-notification-settings'
     },
     {
       title: t('Payment Settings'),
       href: '#payment-settings',
-      icon: <CreditCard className="h-4 w-4 mr-2" />,
+      icon: <CreditCard className="h-4 w-4 me-2" />,
       permission: 'manage-payment-settings'
     },
     {
       title: t('Storage Settings'),
       href: '#storage-settings',
-      icon: <HardDrive className="h-4 w-4 mr-2" />,
+      icon: <HardDrive className="h-4 w-4 me-2" />,
       permission: 'manage-storage-settings'
     },
     {
       title: t('ReCaptcha Settings'),
       href: '#recaptcha-settings',
-      icon: <Shield className="h-4 w-4 mr-2" />,
+      icon: <Shield className="h-4 w-4 me-2" />,
       permission: 'manage-recaptcha-settings'
     },
     {
       title: t('Chat GPT Settings'),
       href: '#chatgpt-settings',
-      icon: <Bot className="h-4 w-4 mr-2" />,
+      icon: <Bot className="h-4 w-4 me-2" />,
       permission: 'manage-chatgpt-settings'
     },
     {
       title: t('Cookie Settings'),
       href: '#cookie-settings',
-      icon: <Cookie className="h-4 w-4 mr-2" />,
+      icon: <Cookie className="h-4 w-4 me-2" />,
       permission: 'manage-cookie-settings'
     },
     {
       title: t('SEO Settings'),
       href: '#seo-settings',
-      icon: <Search className="h-4 w-4 mr-2" />,
+      icon: <Search className="h-4 w-4 me-2" />,
       permission: 'manage-seo-settings'
     },
     {
       title: t('Cache Settings'),
       href: '#cache-settings',
-      icon: <HardDrive className="h-4 w-4 mr-2" />,
+      icon: <HardDrive className="h-4 w-4 me-2" />,
       permission: 'manage-cache-settings'
     },
 
     {
       title: t('Webhook Settings'),
       href: '#webhook-settings',
-      icon: <Webhook className="h-4 w-4 mr-2" />,
+      icon: <Webhook className="h-4 w-4 me-2" />,
       permission: 'manage-webhook-settings'
     },
 
@@ -250,7 +250,7 @@ export default function Settings() {
         <div className="md:w-64 flex-shrink-0">
           <div className="sticky top-20">
             <ScrollArea className="h-[calc(100vh-5rem)]">
-              <div className="pr-4 space-y-1">
+              <div className="pe-4 space-y-1">
                 {sidebarNavItems.map((item) => (
                   <Button
                     key={item.href}

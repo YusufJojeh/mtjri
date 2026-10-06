@@ -51,7 +51,7 @@ export function StoreSwitcher({
   if (!canSwitchStores) {
     return (
       <div className={cn('w-[180px] px-3 py-2 text-sm font-medium text-muted-foreground border rounded-md', className)}>
-        <Store className='mr-2 h-4 w-4 inline' />
+        <Store className='me-2 h-4 w-4 inline' />
         <span className='truncate'>{currentStoreItem?.name || 'No Store'}</span>
       </div>
     );
@@ -97,18 +97,18 @@ export function StoreSwitcher({
           disabled={isLoading}
         >
           {isLoading ? (
-            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            <Loader2 className='me-2 h-4 w-4 animate-spin' />
           ) : (
-            <Store className='mr-2 h-4 w-4' />
+            <Store className='me-2 h-4 w-4' />
           )}
           <span className='truncate'>{currentStoreItem?.name || t('Select store')}</span>
-          <ChevronsUpDown className='ml-auto h-4 w-4 shrink-0 opacity-50' />
+          <ChevronsUpDown className='ms-auto h-4 w-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-[250px] p-2 shadow-lg border-gray-200' align='end'>
         {/* Search input */}
         <div className='flex items-center border-b border-gray-200 dark:border-gray-700 pb-2 mb-2'>
-          <Store className='mr-2 h-4 w-4 opacity-50' />
+          <Store className='me-2 h-4 w-4 opacity-50' />
           <input
             type='text'
             placeholder={t('Search store...')}
@@ -134,10 +134,10 @@ export function StoreSwitcher({
                   onClick={() => onStoreSelect(store)}
                   className='flex w-full items-center text-sm cursor-pointer rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-2 my-1'
                 >
-                  <Store className='mr-2 h-4 w-4' />
-                  <span className='flex-grow text-left'>{store.name}</span>
+                  <Store className='me-2 h-4 w-4' />
+                  <span className='flex-grow text-start'>{store.name}</span>
                   {String(currentStoreItem?.id) === String(store.id) && (
-                    <Check className='ml-2 h-4 w-4' />
+                    <Check className='ms-2 h-4 w-4' />
                   )}
                 </button>
               ))}
@@ -152,7 +152,7 @@ export function StoreSwitcher({
               href={route('stores.create')} 
               className='flex w-full items-center px-2 py-2 text-sm cursor-pointer rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400'
             >
-              <PlusCircle className='mr-2 h-4 w-4' />
+              <PlusCircle className='me-2 h-4 w-4' />
               {t('Create New Store')}
             </Link>
           </div>

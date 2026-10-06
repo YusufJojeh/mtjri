@@ -79,7 +79,7 @@ export default function MediaPicker({
           variant='outline'
           onClick={() => setIsModalOpen(true)}
         >
-          <ImageIcon className='h-4 w-4 mr-2' />
+          <ImageIcon className='h-4 w-4 me-2' />
           Browse
         </Button>
         {value && (
