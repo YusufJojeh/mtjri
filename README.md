@@ -100,3 +100,31 @@ After running the seeders, you can log in with the following credentials:
 
 The Tijraa platform is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # mtjri
+
+## Portfolio summary
+
+### Problem
+Small businesses need to create and operate multiple branded online stores from one commerce platform.
+
+### Architecture
+```mermaid
+flowchart LR
+  Storefront["Storefronts"] --> App["Laravel application"]
+  Admin["Store administration"] --> App
+  App --> DB["Configured database"]
+  App --> Payments["Payment integrations"]
+```
+
+### Key decisions
+- Support multiple store themes within one application.
+- Provide a web installer for initial setup.
+- Keep commerce workflows and payment integrations in the Laravel backend.
+
+### How to run
+Follow [Setup Instructions](#setup-instructions). The README does not document a Docker setup.
+
+### Tests
+No test command or verified test total is documented in this README.
+
+### Status
+Public repo / local build.
