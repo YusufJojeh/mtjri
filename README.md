@@ -1,4 +1,59 @@
-# Tijraa - Multi-Store E-commerce Platform
+# Mtjri (Tijraa)
+
+## Status
+
+Public repo / local build — Run the Laravel application locally with seeded or configured data.
+
+## Problem
+
+Store operators need catalog, inventory and order workflows across multiple storefronts. Store-scoped access and validated generated content keep one store's data and content changes within its boundary.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  StoreUser --> UI["React and Inertia UI"]
+  UI --> Laravel["Laravel routes and controllers"]
+  Laravel --> DB["Eloquent and relational database"]
+  Laravel --> Queue["Queued content jobs"]
+  Queue --> Validator["Content validation before save"]
+```
+
+## Key decisions
+
+- The web installer guides first-time setup, trading a smoother setup path for an additional installation surface.
+- Store context is applied to business data, requiring tenant-aware reads and writes across modules.
+- AI content is queued and validated before saving, which adds latency but keeps generated text out of persisted state until checks pass.
+
+## Run locally
+
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan serve
+# In another terminal:
+npm run dev
+```
+
+## Tests
+
+```bash
+php artisan test
+npm run test
+```
+
+Count omitted: PHP is not installed in this session, and JavaScript test dependencies were not installed.
+
+## Limitations
+
+- Payment gateways and external integrations require configuration and are not verified by a local README review.
+- The interface and seeded data represent a local build; no hosted availability is claimed.
+
+---
+
+## Existing project documentation
 
 A powerful SaaS application for creating and managing multiple online stores built with Laravel and React.
 
