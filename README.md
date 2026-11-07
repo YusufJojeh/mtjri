@@ -1,3 +1,21 @@
+# Multi Store Commerce
+
+## Problem
+
+Storefront and administration need consistent catalog, order, inventory, and store context.
+
+## Architecture
+
+Laravel 12 handles business workflows, authorization, and persistence. React.js through Inertia.js provides storefront and administrative interactions. Queue workers support asynchronous processing, including generated-content workflows.
+
+## Stack
+
+PHP 8.2+, Laravel 12, React.js, Inertia.js, TypeScript, relational database, queues, Spatie permissions.
+
+> This overview describes the repository scope. See the existing documentation below for setup, configuration, and verification requirements.
+
+---
+
 # Mtjri (Tijraa)
 
 ## Status
